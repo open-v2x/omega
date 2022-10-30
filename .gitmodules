@@ -1,0 +1,3 @@
+[submodule "src/modules/centerview"]
+	path = src/modules/centerview
+	url = git@github.com:open-v2x/centerview.git
