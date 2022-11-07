@@ -4,7 +4,7 @@ const variable = require('./utils/variable');
 const resolveConfig = require('./utils/resolve');
 const plugins = require('./utils/plugins');
 
-const { SRC_PATH, DIST_PATH, IS_DEV, IS_PRO, getCDNPath } = variable;
+const { SRC_PATH, DIST_PATH, IS_DEV, IS_PRO, getCDNPath, getRootPath } = variable;
 
 const config = {
   entry: {
@@ -24,7 +24,7 @@ const config = {
     rules: [
       {
         test: /\.(tsx?|js)$/,
-        include: [SRC_PATH],
+        include: [SRC_PATH, getRootPath('node_modules')],
         use: [
           {
             // 可以使用缓存进行优化
@@ -37,24 +37,63 @@ const config = {
         exclude: [/node_modules/, /public/, /(.|_)min\.js$/],
       },
       {
-        test: /\.css$|\.less$/i,
-        include: [SRC_PATH],
-        exclude: /node_modules/,
+        test: /\.css$/,
         use: [
-          IS_DEV ? 'style-loader' : MiniCssExtractPlugin.loader,
+          {
+            loader: 'style-loader',
+          },
+          'thread-loader',
           {
             loader: 'css-loader',
+          },
+        ],
+      },
+      {
+        test: /\.(css|less)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'style-loader', // creates style nodes from JS strings
+          },
+          {
+            loader: 'css-loader', // translates CSS into CommonJS
             options: {
-              modules: false,
-              sourceMap: !IS_PRO,
+              modules: {
+                mode: 'global',
+                localIdentName: '[name]__[local]--[hash:base64:5]',
+              },
             },
           },
           'postcss-loader',
-          'less-loader',
           {
-            loader: 'style-resources-loader',
+            loader: 'less-loader', // compiles Less to CSS
             options: {
-              patterns: path.resolve(SRC_PATH, 'assets', 'css', 'core.less'),
+              lessOptions: {
+                importLoaders: true,
+                javascriptEnabled: true,
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(less)$/,
+        include: /node_modules/,
+        use: [
+          {
+            loader: 'style-loader', // creates style nodes from JS strings
+          },
+          'thread-loader',
+          {
+            loader: 'css-loader', // translates CSS into CommonJS
+          },
+          {
+            loader: 'less-loader', // compiles Less to CSS
+            options: {
+              lessOptions: {
+                javascriptEnabled: true,
+                // modifyVars: theme,
+              },
             },
           },
         ],

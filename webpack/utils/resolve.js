@@ -6,9 +6,8 @@ module.exports = {
   extensions: ['.tsx', '.ts', '.js', '.json'],
   modules: [path.resolve(ROOT_PATH, 'node_modules')],
   // 查找 package.json main
-  mainFields: ['main'],
+  // mainFields: ['main'],
   alias: {
-    src: SRC_PATH,
-    images: path.resolve(SRC_PATH, 'assets/images'),
+    '#': SRC_PATH,
   },
 };

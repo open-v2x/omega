@@ -1,12 +1,12 @@
 import React from 'react';
-import { render } from 'react-dom';
-import './index.less';
+import ReactDOM from 'react-dom/client';
+import '#/assets/css/init.less';
+import App from './App';
 
 try {
   const rootElement = document.getElementById('root');
-  const App = () => <div className="hello">hello</div>;
 
-  render(<App />, rootElement);
+  ReactDOM.createRoot(rootElement).render(<App />);
 } catch (error) {
   console.log('e', error);
 }

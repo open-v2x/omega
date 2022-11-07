@@ -1,5 +1,5 @@
 var isDev = false;
-if (process.env.NODE_ENV === "dev") {
+if (process.env.NODE_ENV === 'dev') {
   isDev = true;
 }
 
@@ -7,21 +7,21 @@ module.exports = function (api) {
   api.cache(true);
   const presets = [
     [
-      "@babel/preset-react",
+      '@babel/preset-react',
       {
         development: isDev,
       },
     ],
     [
-      "@babel/preset-env",
+      '@babel/preset-env',
       {
         targets: {
-          browsers: [">0.25%", "not ie 11", "not op_mini all"],
+          browsers: ['>0.25%', 'not ie 11', 'not op_mini all'],
         },
       },
     ],
     [
-      "@babel/preset-typescript",
+      '@babel/preset-typescript',
       {
         isTSX: true,
         allExtensions: true,
@@ -30,13 +30,13 @@ module.exports = function (api) {
   ];
   const plugins = [
     [
-      "@babel/plugin-proposal-decorators",
+      '@babel/plugin-proposal-decorators',
       {
         legacy: true,
       },
     ],
     [
-      "@babel/plugin-transform-runtime",
+      '@babel/plugin-transform-runtime',
       {
         corejs: 3,
         regenerator: true,
