@@ -1,8 +1,10 @@
 import BaseComponent from '#/components/BaseComponent';
 import { IRouterPage } from '#/types/service/IRouterPage';
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { Route, Routes, BrowserRouter, HashRouter } from 'react-router-dom';
 import NoMatch from '#/components/NoMatch';
 import React from 'react';
+import Home from '#/pages/Home';
+import Login from '#/pages/Login';
 
 interface IRouterUIProps {
   routers: IRouterPage[];

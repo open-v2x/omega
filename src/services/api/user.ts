@@ -11,5 +11,5 @@ export async function login(body: LoginParams) {
 
 // 获取登录用户信息
 export async function getUserInfo() {
-  apiService.get<IResponseData<IUserInfo>>('/v1/users/me');
+  return apiService.get<IResponseData<IUserInfo>>('/v1/users/me');
 }

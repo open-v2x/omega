@@ -8,7 +8,7 @@ const { SRC_PATH, DIST_PATH, IS_DEV, IS_PRO, getCDNPath, getRootPath } = variabl
 
 const config = {
   entry: {
-    index: path.join(SRC_PATH, 'index.tsx'),
+    index: path.join(SRC_PATH, 'core/index.tsx'),
   },
   output: {
     path: DIST_PATH,

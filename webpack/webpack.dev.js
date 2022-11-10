@@ -23,6 +23,9 @@ const config = {
     compress: true, //是否启用gzip压缩
     host: 'localhost',
     port: 2333,
+    historyApiFallback: {
+      disableDotRule: true,
+    },
     allowedHosts: 'all',
     hot: true,
     proxy: {
