@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@ant-design/icons': ^4.7.0
   '@ant-design/pro-components': ^2.3.28
   '@babel/cli': ^7.19.3
   '@babel/core': ^7.19.6
@@ -74,6 +75,7 @@ specifiers:
   zustand: ^4.1.4
 
 dependencies:
+  '@ant-design/icons': 4.7.0_biqbaboplfbrettd7655fr4n2y
   '@ant-design/pro-components': 2.3.28_6nwhhda7mddhbr67q5guv5qsze
   antd: 4.23.6_biqbaboplfbrettd7655fr4n2y
   axios: 1.1.3
