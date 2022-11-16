@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import AppContext from '#/common/AppContext';
 import { IAppContext } from '#/types/IAppContext';
-import RouterUI from '#/router';
-import routerConfig from '#/router/routes';
 import i18n from '#/utils/i18n';
+import { getRouteConfigs } from '#/router';
+import { BrowserRouter, useRoutes } from 'react-router-dom';
 window.t = i18n.t;
 
 const App = () => {
@@ -11,10 +11,19 @@ const App = () => {
     token: '',
   });
 
+  const RenderRouter = () => {
+    const routes = useRoutes(getRouteConfigs());
+    return routes;
+  };
+
   return (
     <>
       <AppContext.Provider value={getLiveContextValue()}>
-        <RouterUI routers={routerConfig.routes} />
+        <BrowserRouter>
+          <Suspense fallback={<p> Loading...</p>}>
+            <RenderRouter />
+          </Suspense>
+        </BrowserRouter>
       </AppContext.Provider>
     </>
   );

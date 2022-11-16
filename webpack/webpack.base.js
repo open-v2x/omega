@@ -38,61 +38,44 @@ const config = {
       },
       {
         test: /\.css$/,
+        exclude: /node_modules/,
+        use: [
+          IS_DEV ? 'style-loader' : MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: false,
+              sourceMap: !IS_PRO,
+            },
+          },
+          'postcss-loader',
+        ],
+      },
+      {
+        test: /\.css$/,
+        exclude: [SRC_PATH],
+        use: ['style-loader', { loader: 'css-loader', options: { importLoaders: 1 } }],
+      },
+      {
+        test: /\.less$/,
         use: [
           {
             loader: 'style-loader',
           },
-          'thread-loader',
           {
             loader: 'css-loader',
-          },
-        ],
-      },
-      {
-        test: /\.(css|less)$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'style-loader', // creates style nodes from JS strings
-          },
-          {
-            loader: 'css-loader', // translates CSS into CommonJS
             options: {
               modules: {
-                mode: 'global',
-                localIdentName: '[name]__[local]--[hash:base64:5]',
+                localIdentName: '[local]___[hash:base64:5]',
               },
+              sourceMap: !IS_PRO,
             },
           },
-          'postcss-loader',
           {
-            loader: 'less-loader', // compiles Less to CSS
-            options: {
-              lessOptions: {
-                importLoaders: true,
-                javascriptEnabled: true,
-              },
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(less)$/,
-        include: /node_modules/,
-        use: [
-          {
-            loader: 'style-loader', // creates style nodes from JS strings
-          },
-          'thread-loader',
-          {
-            loader: 'css-loader', // translates CSS into CommonJS
-          },
-          {
-            loader: 'less-loader', // compiles Less to CSS
+            loader: 'less-loader',
             options: {
               lessOptions: {
                 javascriptEnabled: true,
-                // modifyVars: theme,
               },
             },
           },

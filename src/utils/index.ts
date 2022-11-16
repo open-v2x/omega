@@ -1,3 +1,5 @@
+import queryString from 'query-string';
+
 // 表格 select 选项格式化
 export const statusOptionFormat = (
   data: Record<string, string> | string[],
@@ -26,3 +28,10 @@ export const dataFormat = (data: number, unit?: string | React.ReactNode) => {
   }
   return '-';
 };
+
+/**
+ * @description: 根据 url 的 search，转化为对象
+ * @param {*} query
+ * @return {*}
+ */
+export const getUrlSearch = (query: any): any => queryString.parse(query);

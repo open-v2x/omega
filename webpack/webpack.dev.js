@@ -29,9 +29,11 @@ const config = {
     allowedHosts: 'all',
     hot: true,
     proxy: {
-      // "/service": {
-      //     target: "http://localhost:3000"
-      // }
+      '/api': {
+        target: 'http://47.100.126.13:28300/api',
+        changeOrigin: true,
+        pathRewrite: { '^/api': '' },
+      },
     },
     devMiddleware: {
       publicPath: '/',

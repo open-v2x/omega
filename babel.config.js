@@ -42,6 +42,14 @@ module.exports = function (api) {
         regenerator: true,
       },
     ],
+    [
+      'import',
+      {
+        libraryName: 'antd',
+        libraryDirectory: 'es', // 这条加了可以再少20k左右
+        style: true, // 也可以配置为'css'。配置true可以减少30k
+      },
+    ],
   ];
 
   return {

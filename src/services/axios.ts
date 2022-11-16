@@ -31,18 +31,13 @@ axiosInstance.interceptors.request.use(
 );
 
 axiosInstance.interceptors.response.use(
-  (response: AxiosResponse) => {
-    if (response.data.code === 200) {
-      return response;
-    }
+  (response: AxiosResponse) =>
     // 针对请求成功：返回的 code 码做不同的响应
-    serverResponseSuccessManager.codeParser(response);
-    return Promise.reject(false);
-  },
+    serverResponseSuccessManager.codeParser(response),
   (error: AxiosError) => {
     // 针对请求失败：应该提示的错误信息
     serverResponseFailedManager.getErrorMessage(error);
-    return Promise.reject(error.response);
+    return Promise.reject(error);
   },
 );
 
@@ -52,11 +47,11 @@ export function setAuthorization(token) {
 }
 
 export function get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
-  return axiosInstance.get<T>(url, config).then((res: AxiosResponse) => res && res.data);
+  return axiosInstance.get<T>(url, config).then((res: any) => res);
 }
 
 export function post<T>(url: string, data: any, config?: AxiosRequestConfig): Promise<T> {
-  return axiosInstance.post<T>(url, data, config).then((res: AxiosResponse) => res.data);
+  return axiosInstance.post<T>(url, data, config).then((res: any) => res);
 }
 
 export function getBlob(url: string): Promise<Blob> {

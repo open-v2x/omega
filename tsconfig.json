@@ -50,7 +50,8 @@
     "strictNullChecks": false,
     "paths": {
       //别名
-      "#/*": ["src/*"]
+      "#/*": ["src/*"],
+      "#images/*": ["src/assets/images/*"],
     }
   },
   "include": ["src", "packages"],

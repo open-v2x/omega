@@ -8,16 +8,15 @@ import { message } from 'antd';
 
 class ServerResponseSuccessManager {
   /**
-   * 状态码解析器
+   * 状态码解析器，用于代码里有自定义的 code 和错误展示
    * @param response
    */
   codeParser(response: AxiosResponse) {
     const code = response?.status;
     const resData = response?.data;
     const parser = {
-      '401': () => {
-        this.handleCodeIs401(resData);
-      },
+      '401': () => this.handleCodeIs401(resData),
+      '200': () => Promise.resolve(resData),
       default: () => this.handleCodeIsDefault(response),
     };
     return parser[code] ? parser[code]() : parser.default;
@@ -59,8 +58,9 @@ class ServerResponseFailedManager {
    * 请求失败时，需要提示的信息
    */
   getErrorMessage(error: AxiosError) {
-    message.error(error.message);
-    console.error('error.response==', error.response);
+    const { detail } = error.response.data;
+    message.error(detail?.msg || error.message);
+    console.error('error.response==', detail || error.message);
   }
 }
 

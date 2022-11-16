@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Menu, Dropdown } from 'antd';
 import type { DropDownProps } from 'antd/es/dropdown';
 
-import styles from './index.less';
+import styles from './index.module.less';
 import { getLocale, setLocale } from '#/utils/storage';
 
 interface HeaderDropdownProps extends DropDownProps {
