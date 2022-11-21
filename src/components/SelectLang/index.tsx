@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Menu, Dropdown } from 'antd';
-import type { DropDownProps } from 'antd/es/dropdown';
+import { Dropdown, MenuProps, DropdownProps } from 'antd';
 
 import styles from './index.module.less';
 import { getLocale, setLocale } from '#/utils/storage';
 
-interface HeaderDropdownProps extends DropDownProps {
+interface HeaderDropdownProps extends DropdownProps {
   overlayClassName?: string;
+  menu: MenuProps;
   placement?: 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topCenter' | 'topRight' | 'bottomCenter';
 }
 interface DefaultLangConfigType {
@@ -27,30 +27,29 @@ const HeaderDropdown: React.FC<HeaderDropdownProps> = ({ overlayClassName: cls, 
 );
 
 export const SelectLang: React.FC = () => {
-  const [selectedLang, setSelectedLang] = useState(() => getLocale());
   const { i18n } = useTranslation();
 
   const changeLang = ({ key }: { key: string }): void => {
     setLocale(key);
-    setSelectedLang(getLocale());
     i18n.changeLanguage(key);
   };
 
-  const langMenu = (
-    <Menu selectedKeys={[selectedLang]} onClick={changeLang}>
-      {defaultLangConfig.map(localeObj => (
-        <Menu.Item key={localeObj.lang} style={{ minWidth: '160px' }}>
-          <span role="img" aria-label={localeObj.label} style={{ marginRight: '8px' }}>
-            {localeObj.icon || '🌐'}
-          </span>
-          {localeObj.label}
-        </Menu.Item>
-      ))}
-    </Menu>
-  );
+  useEffect(() => {
+    console.log('语言改变');
+  }, [getLocale()]);
+
+  const items: MenuProps['items'] = defaultLangConfig.map(localeObj => ({
+    label: localeObj.label,
+    key: localeObj.lang,
+    icon: (
+      <span role="img" aria-label={localeObj.label} style={{ marginRight: '8px' }}>
+        {localeObj.icon || '🌐'}
+      </span>
+    ),
+  }));
 
   return (
-    <HeaderDropdown overlay={langMenu} placement="bottomRight">
+    <HeaderDropdown menu={{ items, onClick: changeLang }} placement="bottomRight">
       <span className={styles.dropdown_icon}>
         <i className="anticon">
           <svg

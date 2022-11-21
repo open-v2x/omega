@@ -1,8 +1,11 @@
+import i18n from '#/utils/i18n';
+
+const t = i18n.t;
+
 const menuList = [
   {
     path: '/',
-    name: '主页',
-    locale: 'menu.dashboard',
+    name: t('menu.dashboard'),
     icon: 'heart',
   },
 ];

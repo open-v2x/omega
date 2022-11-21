@@ -1,4 +1,6 @@
 {
+  "menu.dashboard" : "菜单",
+  "OpenV2X": "OpenV2X",
   "OpenV2X Edge Portal": "OpenV2X 路侧设备管理平台",
   "Platform Login": "平台登录",
   "Username": "用户名",

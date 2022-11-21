@@ -76,6 +76,9 @@ const config = {
             options: {
               lessOptions: {
                 javascriptEnabled: true,
+                globalVars: {
+                  'header-height': '56px',
+                },
               },
             },
           },

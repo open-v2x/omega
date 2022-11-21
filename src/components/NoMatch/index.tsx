@@ -1,6 +1,4 @@
 import React from 'react';
-import { Button, Result } from 'antd';
-
 const NoFoundPage: React.FC = () => (
   //   <Result
   //     status="404"

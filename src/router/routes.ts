@@ -1,10 +1,19 @@
 import React from 'react';
 const routes = [
   {
-    path: '/login',
+    path: '/user',
     component: React.lazy(
-      () => import(/* webpackChunkName: "login",webpackPrefetch: true */ '#/pages/Login'),
+      () => import(/* webpackChunkName: "login",webpackPrefetch: true */ '#/layouts/BlankLayout'),
     ),
+    children: [
+      {
+        path: '/user/login',
+        name: 'login',
+        component: React.lazy(
+          () => import(/* webpackChunkName: "login",webpackPrefetch: true */ '#/pages/Login'),
+        ),
+      },
+    ],
   },
   {
     path: '/',

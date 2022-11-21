@@ -1,13 +1,11 @@
 import create from 'zustand';
 
 interface IRootStore {
-  name: string;
-  changeName: (name: string) => void;
+  showHeader: boolean;
 }
 
 const useRootStore = create<IRootStore>(set => ({
-  name: '123',
-  changeName: (names: string) => set(() => ({ name: names })),
+  showHeader: true,
 }));
 
 export { useRootStore };

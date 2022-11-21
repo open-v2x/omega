@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  position: relative;
+  z-index: 200;
+  flex-grow: 1;
+  height: 100%;
+  overflow: hidden;
+  //   color: @title-color;
+  background-color: #fff;
+  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 9%);
+
+  &-left {
+    display: flex;
+    width: 224px;
+    .title {
+      text-overflow: ellipsis;
+      font-size: 16px;
+      font-weight: 500;
+      margin-left: 5px;
+      flex: 1;
+    }
+  }
+
+  &-right {
+    flex: 1;
+  }
+}
+
+.logo {
+  .logo-image {
+    width: 36px;
+  }
+}

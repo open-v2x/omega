@@ -5,6 +5,7 @@ interface IUserStore {
   userInfo: any;
   logged: boolean;
   fetchUserInfo: () => void;
+  logout: () => void;
 }
 
 const useUserStore = create<IUserStore>(set => ({
@@ -15,6 +16,12 @@ const useUserStore = create<IUserStore>(set => ({
     if (response) {
       set({ userInfo: response, logged: true });
     }
+  },
+  logout: () => {
+    set({
+      userInfo: {},
+      logged: false,
+    });
   },
 }));
 
