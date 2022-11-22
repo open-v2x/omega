@@ -1,18 +1,27 @@
 import { IRouteConfig } from '#/types/router';
 import React from 'react';
-import { RouteObject } from 'react-router-dom';
+import { Navigate, RouteObject } from 'react-router-dom';
 import routes from './routes';
 import WrapperRouteComponent from './WrapperRoute';
 
 const getRouteConfig = (routeConfig: IRouteConfig): RouteObject => {
-  const { path, layout, component: Comp, children, auth } = routeConfig;
+  const { path, layout, component: Comp, children, auth, redirect } = routeConfig;
+
+  if (redirect) {
+    return {
+      path,
+      element: <Navigate to={redirect} />,
+    };
+  }
 
   const element = <WrapperRouteComponent auth={auth} children={<Comp />} />;
 
   let childrenRoutes: any[] = [];
 
   if (children) {
-    childrenRoutes = children.map((it: IRouteConfig) => getRouteConfig(it));
+    childrenRoutes = children.map((it: IRouteConfig) =>
+      getRouteConfig({ ...it, path: it.path.startsWith('/') ? it.path : `${path}/${it.path}` }),
+    );
   }
 
   return layout
@@ -21,7 +30,7 @@ const getRouteConfig = (routeConfig: IRouteConfig): RouteObject => {
         children: childrenRoutes,
       }
     : {
-        path,
+        path: path,
         element,
         children: childrenRoutes,
       };

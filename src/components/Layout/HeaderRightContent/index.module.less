@@ -1,7 +1,25 @@
+@import (reference) '~antd/es/style/variable.less';
+
 .header-content {
   margin: 0 20px;
   background: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  .header-right {
+    display: flex;
+    margin-left: auto;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: @screen-md) {
+  .header-right {
+    position: absolute;
+    top: 0;
+    right: 12px;
+  }
 }

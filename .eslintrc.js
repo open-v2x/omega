@@ -57,6 +57,7 @@ module.exports = {
     'object-shorthand': [0, 'never'],
     //单引号
     quotes: 'off',
+    "jsx-a11y/anchor-is-valid": 0,
     '@typescript-eslint/quotes': 'off',
     '@typescript-eslint/no-var-requires': 0,
     'member-ordering': 0,

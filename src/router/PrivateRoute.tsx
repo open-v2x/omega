@@ -2,19 +2,18 @@ import React, { FC, useEffect } from 'react';
 import { Navigate, RouteProps } from 'react-router';
 import { useUserStore } from '#/store/user';
 import { useMenuStore } from '#/store/menu';
+import { getToken } from '#/utils/storage';
 
 const PrivateRoute: FC<RouteProps> = ({ children }) => {
-  const userStore = useUserStore();
-  const menuStore = useMenuStore();
+  const { fetchUserInfo } = useUserStore();
+  const { fetchMenus } = useMenuStore();
 
-  const logged = userStore.userInfo?.username ? true : false;
   useEffect(() => {
-    userStore.fetchUserInfo();
-    menuStore.fetchMenus();
-  }, [userStore.userInfo]);
+    fetchUserInfo();
+    fetchMenus();
+  }, [getToken()]);
 
-  return <div>{children}</div>;
-  // return logged ? <div>{children}</div> : <Navigate to="/login" />;
+  return getToken() ? <div>{children}</div> : <Navigate to="/user/login" />;
 };
 
 export default PrivateRoute;

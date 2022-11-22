@@ -21,7 +21,7 @@ const Login: React.FC = () => {
     const { access_token: accessToken, token_type: tokenType } = await login(values);
     const token = `${tokenType} ${accessToken}`;
     setToken(token);
-    fetchUserInfo();
+    await fetchUserInfo();
     if (!navigate) return;
     const { redirect } = getUrlSearch(location.search);
     navigate(redirect || '/', { replace: true });
@@ -53,6 +53,7 @@ const Login: React.FC = () => {
           fieldProps={{
             size: 'large',
             prefix: <img src={imgLoginPwd} alt="" />,
+            autoComplete: 'off',
           }}
           placeholder={t('Password')}
           rules={[{ required: true, message: t('Please input your password') }]}

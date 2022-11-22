@@ -3,7 +3,6 @@ import create from 'zustand';
 
 interface IUserStore {
   userInfo: any;
-  logged: boolean;
   fetchUserInfo: () => void;
   logout: () => void;
 }
@@ -14,13 +13,12 @@ const useUserStore = create<IUserStore>(set => ({
   fetchUserInfo: async () => {
     const response = await getUserInfo();
     if (response) {
-      set({ userInfo: response, logged: true });
+      set({ userInfo: response });
     }
   },
   logout: () => {
     set({
       userInfo: {},
-      logged: false,
     });
   },
 }));

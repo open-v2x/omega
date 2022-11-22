@@ -16,13 +16,17 @@ const routes = [
     ],
   },
   {
-    path: '/',
+    path: '/device',
     component: React.lazy(() => import('#/layouts/SiderLayout')),
     layout: true,
     auth: true,
     children: [
       {
-        path: '/',
+        path: 'rsu',
+        component: React.lazy(() => import('#/pages/Edge/DeviceManagement/RSU/DeviceList')),
+      },
+      {
+        path: 'model',
         component: React.lazy(
           () => import(/* webpackChunkName: "home",webpackPrefetch: true */ '#/pages/Home'),
         ),
@@ -32,6 +36,10 @@ const routes = [
   {
     path: '*',
     component: React.lazy(() => import('#/components/NoMatch')),
+  },
+  {
+    path: '/',
+    redirect: '/device/rsu',
   },
 ];
 

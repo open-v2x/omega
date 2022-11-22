@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { get, post } from './axios';
+import { get, post, patch } from './axios';
 import getConfig from './serviceConfig';
 
 const apiConfig = getConfig();
@@ -41,6 +41,9 @@ export default class BaseService {
 
   post = <T>(path: string, data: any = {}, config?: AxiosRequestConfig): Promise<T> =>
     post<T>(this.getFullPath(path), data, config);
+
+  patch = <T>(path: string, data: any, config?: AxiosRequestConfig): Promise<T> =>
+    patch<T>(this.getFullPath(path), data, config);
 }
 
 export const apiService = new BaseService(apiConfig.API_SERVER);

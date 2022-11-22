@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Dropdown, MenuProps, DropdownProps } from 'antd';
 
 import styles from './index.module.less';
-import { getLocale, setLocale } from '#/utils/storage';
+import { setLocale } from '#/utils/storage';
 
 interface HeaderDropdownProps extends DropdownProps {
   overlayClassName?: string;
@@ -33,10 +33,6 @@ export const SelectLang: React.FC = () => {
     setLocale(key);
     i18n.changeLanguage(key);
   };
-
-  useEffect(() => {
-    console.log('语言改变');
-  }, [getLocale()]);
 
   const items: MenuProps['items'] = defaultLangConfig.map(localeObj => ({
     label: localeObj.label,

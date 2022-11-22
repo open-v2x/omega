@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import { Spin } from 'antd';
 import styles from './index.module.less';
 
-import { defaultNavInLeft } from '#/layouts/console-nav';
-import { defaultNavInLeft as defaultNavInLeftAdmin } from '#/layouts/admin-nav';
+import { defaultNavInLeft } from '#/layouts/SiderLayout/console-nav';
+import { defaultNavInLeft as defaultNavInLeftAdmin } from '#/layouts/SiderLayout/admin-nav';
 import { useMenuStore } from '#/store/menu';
 
 interface LeftProps {

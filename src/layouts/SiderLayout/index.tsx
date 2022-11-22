@@ -2,19 +2,11 @@ import { useMenuStore } from '#/store/menu';
 import { MenuDataItem, ProLayout } from '@ant-design/pro-components';
 import React, { FC, useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { SmileOutlined, HeartOutlined, FrownOutlined } from '@ant-design/icons';
 import { useRootStore } from '#/store/root';
-import GlobalNav from '#/components/Layout/GlobalNav';
-import styles from './sider.module.less';
+import styles from './index.module.less';
 import layoutSettings from '#/config/proLayoutSetting';
-import HeaderRightContent from '#/components/Layout/HeaderRightContent';
 import GlobalHeader from '#/components/Layout/GlobalHeader';
-
-const IconMap: { [key: string]: React.ReactNode } = {
-  smile: <SmileOutlined />,
-  heart: <HeartOutlined />,
-  frown: <FrownOutlined />,
-};
+import BaseContainer from '#/components/BaseContainer';
 
 const SiderLayout: FC = ({ children }) => {
   const location = useLocation();
@@ -31,14 +23,15 @@ const SiderLayout: FC = ({ children }) => {
 
     const menu = menus.map(({ icon, children: childrens, ...item }) => ({
       ...item,
-      icon: icon && IconMap[icon as string],
+      name: t(item.name),
+      icon: icon,
       children: childrens && formatMenus(childrens),
     }));
     return menu;
   };
 
   const init = async () => {
-    await menuStore.fetchFavoriteMenus();
+    menuStore.fetchFavoriteMenus();
   };
 
   useEffect(() => {
@@ -54,18 +47,10 @@ const SiderLayout: FC = ({ children }) => {
       className={styles['layout-content']}
       onCollapse={toggle}
       siderWidth={216}
-      menuHeaderRender={false}
-      menuItemRender={(menuItemProps, defaultDom) => {
-        if (
-          menuItemProps.isUrl ||
-          !menuItemProps.path ||
-          location.pathname === menuItemProps.path
-        ) {
-          return defaultDom;
-        }
-        return <Link to={menuItemProps.path}>{defaultDom}</Link>;
+      menuDataRender={() => {
+        const menus = formatMenus(menuStore.menus);
+        return menus;
       }}
-      menuDataRender={() => formatMenus(menuStore.menus)}
       menuFooterRender={props => {
         if (props?.collapsed) return undefined;
         return menuStore.relatedMenus.length ? (
@@ -73,13 +58,12 @@ const SiderLayout: FC = ({ children }) => {
         ) : undefined;
       }}
       headerRender={() => <GlobalHeader navItems={[]} isAdminPage={false} />}
-      breadcrumbRender={(routers = []) => [
-        {
-          path: '/',
-          breadcrumbName: '主页',
-        },
-        ...routers,
-      ]}
+      breadcrumbRender={(routers = []) =>
+        routers.map(router => ({
+          ...router,
+          breadcrumbName: t(router.breadcrumbName),
+        }))
+      }
       itemRender={(route, params, routes, paths) => {
         const first = routes.indexOf(route) === 0;
         return first ? (
@@ -89,7 +73,6 @@ const SiderLayout: FC = ({ children }) => {
         );
       }}
     >
-      {showHeader && <div> Header</div>}
       <Outlet />
     </ProLayout>
   );

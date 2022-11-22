@@ -54,6 +54,10 @@ export function post<T>(url: string, data: any, config?: AxiosRequestConfig): Pr
   return axiosInstance.post<T>(url, data, config).then((res: any) => res);
 }
 
+export function patch<T>(url: string, data: any, config?: AxiosRequestConfig): Promise<T> {
+  return axiosInstance.patch<T>(url, data, config).then((res: any) => res);
+}
+
 export function getBlob(url: string): Promise<Blob> {
   return axios
     .get(url, {

@@ -54,6 +54,6 @@
       "#images/*": ["src/assets/images/*"],
     }
   },
-  "include": ["src", "packages"],
+  "include": ["src", "packages", "public/assets/font", "public/assets/font"],
   "exclude": ["node_modules", "dist"]
 }

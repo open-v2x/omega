@@ -1,12 +1,22 @@
-import i18n from '#/utils/i18n';
-
-const t = i18n.t;
-
 const menuList = [
   {
-    path: '/',
-    name: t('menu.dashboard'),
-    icon: 'heart',
+    path: '/device',
+    name: 'Device',
+    icon: 'icon-deviceshare',
+    children: [
+      {
+        path: 'rsu',
+        name: 'RSU Device',
+      },
+      {
+        path: 'model',
+        name: 'model',
+      },
+    ],
+  },
+  {
+    path: '/manage',
+    name: 'Manage',
   },
 ];
 

@@ -20,6 +20,6 @@ export const setLocale = (locale: string) => {
   localStorage.setItem(LOCALE, locale);
 };
 
-const token = `${V2X}token`;
+const token = `${V2X}_token`;
 export const getToken = () => localStorage.getItem(token);
 export const setToken = (data: string) => localStorage.setItem(token, data);
