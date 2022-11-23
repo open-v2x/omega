@@ -1,12 +1,10 @@
-declare module '@ant-design/pro-table' {
-  export declare type ProColumns<T = any, ValueType = 'text'> = Omit<
-    ProColumnGroupType<T, ValueType>,
-    'search'
-  > & {
-    search?: boolean | SearchConfig;
-    hidden?: boolean;
-  };
-}
+export declare type ProColumns<T = any, ValueType = 'text'> = Omit<
+  ProColumnGroupType<T, ValueType>,
+  'search'
+> & {
+  search?: boolean | SearchConfig;
+  hidden?: boolean;
+};
 
 import type { FieldType } from './FormField';
 
@@ -55,4 +53,23 @@ type CreateModalProps = {
   >; // 编辑信息
   isDetails?: boolean; // 是否详情
   success: () => void; // 创建或编辑成功回调
+};
+
+type InfoMapType = {
+  key: string;
+  label: string;
+  block?: boolean;
+  render?: (data: any) => void;
+  span?: number;
+  unit?: string;
+};
+
+type RouterMatchTypes = {
+  location: {
+    query: Record<string, string>;
+    state: unknown;
+  };
+  match: {
+    params: Record<string, string>;
+  };
 };

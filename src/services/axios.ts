@@ -58,6 +58,10 @@ export function patch<T>(url: string, data: any, config?: AxiosRequestConfig): P
   return axiosInstance.patch<T>(url, data, config).then((res: any) => res);
 }
 
+export function deletE<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+  return axiosInstance.delete<T>(url, config).then((res: any) => res);
+}
+
 export function getBlob(url: string): Promise<Blob> {
   return axios
     .get(url, {

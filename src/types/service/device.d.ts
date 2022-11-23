@@ -59,4 +59,32 @@ declare namespace Device {
     rsuIP?: string; // RSU IP
     enabled?: boolean; // RSU 状态
   };
+
+  type CPURunningInfo = {
+    load: number;
+    uti: number;
+    time: string;
+  };
+  type DiskRunningInfo = {
+    rxByte: number;
+    wxByte: number;
+    time: string;
+  };
+  type MemRunningInfo = {
+    total: number;
+    used: number;
+    time: string;
+  };
+  type NetRunningInfo = {
+    read: number;
+    write: number;
+    time: string;
+  };
+
+  type DeviceRunningInfo = {
+    cpu: CPURunningInfo[];
+    disk: DiskRunningInfo[];
+    mem: MemRunningInfo[];
+    net: NetRunningInfo[];
+  };
 }

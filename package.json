@@ -44,6 +44,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.1",
     "less": "^4.1.3",
@@ -62,6 +63,7 @@
     "style-resources-loader": "^1.5.0",
     "thread-loader": "^3.0.4",
     "typescript": "^4.8.4",
+    "url-loader": "^4.1.1",
     "use-sync-external-store": "^1.2.0",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
@@ -69,6 +71,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "@ant-design/charts": "^1.4.2",
     "@ant-design/icons": "^4.7.0",
     "@ant-design/pro-components": "^2.3.34",
     "antd": "4.24.3",

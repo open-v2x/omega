@@ -85,13 +85,16 @@ const config = {
         ],
       },
       {
-        test: /\.(png|jpg|gif|jpeg|webp|svg)$/,
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
-        generator: {
-          publicPath: '../',
-          filename: './assets/images/[hash][ext][query]',
-        },
       },
+      // {
+      //   test: /\.(png|jpg|jpeg|gif|bmp)$/,
+      //   loader: 'url-loader',
+      //   // options: {
+      //   // limit: 14 * 1024,
+      //   // },
+      // },
     ],
   },
   resolve: resolveConfig,

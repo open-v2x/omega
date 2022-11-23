@@ -3,13 +3,14 @@ import { confirmModal } from '#/components/ConfirmModal';
 import { renderAreaFormatName, renderAreaFormItem } from '#/components/Country/renderHelper';
 import OnlineStatus from '#/components/OnlineStatus';
 import { DeviceOnlineStatusOptions, DeviceStatusOptions } from '#/constants/edge';
-import { deviceList, updateDevice } from '#/services/api/device/device';
+import { deleteDevice, deviceList, updateDevice } from '#/services/api/device/device';
 import { statusOptionFormat } from '#/utils';
-import type { ActionType, ProColumns } from '@ant-design/pro-table';
-import { Divider } from 'antd';
+import type { ActionType } from '@ant-design/pro-table';
+import { Button, Divider } from 'antd';
 import React, { FC, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CreateDeviceModal from '../CreateDeviceModal';
+import { ProColumns } from '#/typings/pro-component';
 
 const RegisteredList: FC = () => {
   const navigate = useNavigate();
@@ -64,7 +65,6 @@ const RegisteredList: FC = () => {
       title: t('Operate'),
       width: 260,
       fixed: 'right',
-      valueType: 'option',
       render: (_, row) => [
         <CreateDeviceModal
           key="edit"
@@ -72,17 +72,21 @@ const RegisteredList: FC = () => {
           success={() => actionRef.current?.reload()}
         />,
         <Divider key="edit-divider" type="vertical" />,
-        <a
+        <Button
+          type="link"
           id="detailButton"
           key="details"
+          size="small"
           onClick={() => navigate(`/device/rsu/details/${row.id}`)}
         >
           {t('Details')}
-        </a>,
+        </Button>,
         <Divider key="details-divider" type="vertical" />,
-        <a
+        <Button
           id="enableDisableButton"
           key="disabled"
+          type="link"
+          size="small"
           style={{ color: row.enabled ? '#E74040' : '' }}
           onClick={() =>
             confirmModal({
@@ -99,9 +103,11 @@ const RegisteredList: FC = () => {
           }
         >
           {row.enabled ? t('Disable') : t('Enable')}
-        </a>,
+        </Button>,
         <Divider key="disabled-divider" type="vertical" />,
-        <a
+        <Button
+          type="link"
+          size="small"
           id="deleteButton"
           key="delete"
           onClick={() =>
@@ -114,7 +120,7 @@ const RegisteredList: FC = () => {
           }
         >
           {t('Delete')}
-        </a>,
+        </Button>,
       ],
     },
   ];

@@ -1,18 +1,15 @@
 import { useMenuStore } from '#/store/menu';
 import { MenuDataItem, ProLayout } from '@ant-design/pro-components';
 import React, { FC, useEffect } from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
-import { useRootStore } from '#/store/root';
+import { Link, Outlet } from 'react-router-dom';
 import styles from './index.module.less';
 import layoutSettings from '#/config/proLayoutSetting';
 import GlobalHeader from '#/components/Layout/GlobalHeader';
-import BaseContainer from '#/components/BaseContainer';
+import { createBrowserHistory } from 'history';
 
 const SiderLayout: FC = ({ children }) => {
-  const location = useLocation();
-
-  const showHeader = useRootStore(state => state.showHeader);
   const menuStore = useMenuStore();
+  const history = createBrowserHistory();
 
   const toggle = () => {
     menuStore.toggle = !menuStore.toggle;
@@ -41,9 +38,6 @@ const SiderLayout: FC = ({ children }) => {
   return (
     <ProLayout
       {...layoutSettings}
-      location={{
-        pathname: location.pathname,
-      }}
       className={styles['layout-content']}
       onCollapse={toggle}
       siderWidth={216}
@@ -71,6 +65,11 @@ const SiderLayout: FC = ({ children }) => {
         ) : (
           <span>{route.breadcrumbName}</span>
         );
+      }}
+      onPageChange={location => {
+        if (location.pathname) {
+          history.push(location.pathname);
+        }
       }}
     >
       <Outlet />

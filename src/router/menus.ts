@@ -9,6 +9,11 @@ const menuList = [
         name: 'RSU Device',
       },
       {
+        path: 'rsu/details/:id',
+        name: 'Device Details',
+        hideInMenu: true,
+      },
+      {
         path: 'model',
         name: 'model',
       },

@@ -26,6 +26,10 @@ const routes = [
         component: React.lazy(() => import('#/pages/Edge/DeviceManagement/RSU/DeviceList')),
       },
       {
+        path: 'rsu/details/:id',
+        component: React.lazy(() => import('#/pages/Edge/DeviceManagement/RSU/DeviceDetail')),
+      },
+      {
         path: 'model',
         component: React.lazy(
           () => import(/* webpackChunkName: "home",webpackPrefetch: true */ '#/pages/Home'),

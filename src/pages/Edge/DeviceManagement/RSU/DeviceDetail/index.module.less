@@ -1,0 +1,29 @@
+.parameter-chart {
+  position: relative;
+  height: 160px;
+}
+
+.parameter-title {
+  text-align: center;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.parameter-info {
+  :global {
+    .ant-pro-card-body {
+      flex-flow: row wrap;
+
+      .ant-pro-card {
+        height: 100%;
+
+        .ant-pro-card-body {
+          flex-flow: unset;
+          padding: 18px 20px 10px;
+        }
+      }
+    }
+  }
+}

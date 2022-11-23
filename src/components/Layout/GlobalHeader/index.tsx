@@ -22,7 +22,7 @@ export default function GlobalHeader(props: GlobalHeaderProps) {
   };
 
   const renderLogo = () => {
-    const homeUrl = getRoutePath('overview');
+    const homeUrl = getRoutePath('/');
     return (
       <div className={classnames(styles.logo)}>
         <Link to={homeUrl}>

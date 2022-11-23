@@ -1,9 +1,10 @@
 import React from 'react';
-import type { ActionType, ProColumns } from '@ant-design/pro-table';
+import type { ActionType } from '@ant-design/pro-table';
 import type { TableProps } from 'antd';
 import type { OptionConfig, ToolBarProps } from '@ant-design/pro-table/es/components/ToolBar';
 import type { ExpandableConfig } from 'antd/lib/table/interface';
 import { ProTable } from '@ant-design/pro-components';
+import { ProColumns } from '#/typings/pro-component';
 
 type BaseProTableType = {
   columns: ProColumns[];
