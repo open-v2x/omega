@@ -42,6 +42,7 @@ const SiderLayout: FC = ({ children }) => {
       siderWidth={216}
       menuDataRender={() => {
         const menus = formatMenus(menuStore.menus);
+        console.log('menu', menus);
         return menus;
       }}
       menuFooterRender={props => {
@@ -66,10 +67,10 @@ const SiderLayout: FC = ({ children }) => {
         );
       }}
       // onPageChange={location => {
-      //   if (location.pathname) {
-      //     navigate(location.pathname);
-      //     // history.push(location.pathname);
-      //   }
+      // if (location.pathname && ) {
+      // navigate(location.pathname);
+      // history.push(location.pathname);
+      // }
       // }}
     >
       <Outlet />

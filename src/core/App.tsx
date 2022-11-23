@@ -7,6 +7,7 @@ import { BrowserRouter, useRoutes } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import { getLocale } from '#/utils/storage';
 import { useTranslation } from 'react-i18next';
+import { PageLoading } from '@ant-design/pro-components';
 window.t = i18n.t;
 
 const App = () => {
@@ -26,7 +27,7 @@ const App = () => {
       <AppContext.Provider value={getLiveContextValue()}>
         <ConfigProvider locale={{ locale: getLocale() }}>
           <BrowserRouter>
-            <Suspense fallback={<p> Loading...</p>}>
+            <Suspense fallback={<PageLoading />}>
               <RenderRouter />
             </Suspense>
           </BrowserRouter>

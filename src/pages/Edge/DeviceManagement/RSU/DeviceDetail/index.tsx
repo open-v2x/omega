@@ -158,12 +158,12 @@ const DeviceDetails: React.FC<RouterMatchTypes> = () => {
 
   const fetchDeviceInfo = async () => {
     const result = await deviceInfo(+params.id);
-    // setData(result || undefined);
+    setData(result || undefined);
   };
 
   const fetchRunningInfo = async () => {
     const result = await runningInfo(+params.id);
-    // setRunningData(result || undefined);
+    setRunningData(result || undefined);
   };
 
   useEffect(() => {
