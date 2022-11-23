@@ -1,13 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+
+import ReactDOM from 'react-dom';
 import './index.less';
 import 'antd/dist/antd.css';
+import App from './App';
 
 try {
   const rootElement = document.getElementById('root');
 
-  ReactDOM.createRoot(rootElement).render(<App />);
+  ReactDOM.render(<App />, rootElement);
 } catch (error) {
   console.log('e', error);
 }

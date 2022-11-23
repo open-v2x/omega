@@ -1,3 +1,4 @@
+import { useRootStore } from '#/store/root';
 import { PageContainer } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import React, { FC } from 'react';
@@ -13,21 +14,16 @@ type BaseContainerType = {
  * @description: you can use the page container by default or do everything by yourself.
  */
 const BaseContainer: FC<BaseContainerType> = ({ children, back = false, disablePage = false }) => {
-  const navigate = useNavigate();
-
+  const { history } = useRootStore();
   const onBack = () => {
-    if (window.history.state && window.history.state.idx > 0) {
-      navigate(-1);
-    } else {
-      navigate('/', { replace: true }); // the current entry in the history stack will be replaced with the new one with { replace: true }
-    }
+    history.back();
   };
 
   return disablePage ? (
     <>{children}</>
   ) : (
     <PageContainer
-      header={{ breadcrumb: undefined, style: { background: 'white' }}}
+      header={{ breadcrumb: undefined, style: { background: 'white' } }}
       extra={
         back
           ? [
