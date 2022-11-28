@@ -4,7 +4,7 @@ import React from 'react';
 import AvatarDropdown from './AvatarDropDown';
 import styles from './index.module.less';
 
-export default function RightContent(props: { isAdminPage: boolean }) {
+export default function RightContent() {
   return (
     <div className={styles['header-content']}>
       <ProBreadcrumb />
