@@ -16,4 +16,4 @@ jobs:
       - name: Install modules
         run: pnpm install
       - name: Run ESLint
-        run: pnpm lint:js && pnpm lint:style
+        run: pnpm lint:js
