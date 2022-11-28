@@ -1,29 +1,18 @@
 import FormItem from '#/components/FormItem';
 import Modal from '#/components/Modal';
-import { IPReg, LatReg, LngReg } from '#/constants/edge';
+import { LatReg, LngReg } from '#/constants/edge';
 import { createCamera, updateCamera } from '#/services/api/device/camera';
-import { deviceList } from '#/services/api/device/device';
+import { useRequestStore } from '#/store/request';
 import { CreateModalProps, FormGroupType } from '#/typings/pro-component';
 import React from 'react';
 
-const fetchDeviceList = async () => {
-  const { data } = await deviceList({ pageNum: 1, pageSize: -1 });
-  return data.map(({ id, rsuName, rsuEsn }: Device.DeviceListItem) => ({
-    label: `${rsuName}（Esn: ${rsuEsn}）`,
-    value: id,
-  }));
-};
-
-type CreateCameraProps = CreateModalProps & {
-  type: 'camera' | 'radar';
-};
-
-const CreateCameraModal: React.FC<CreateCameraProps> = ({
-  type,
+const CreateCameraModal: React.FC<CreateModalProps> = ({
   editInfo,
   isDetails = false,
   success,
 }) => {
+  const { fetchDeviceListInModal } = useRequestStore();
+
   const lowerType = t('camera');
   const upperType = t('Camera');
 
@@ -77,7 +66,6 @@ const CreateCameraModal: React.FC<CreateCameraProps> = ({
           ],
         },
       ],
-      hidden: type !== 'camera',
     },
     {
       key: 'lng',
@@ -137,15 +125,8 @@ const CreateCameraModal: React.FC<CreateCameraProps> = ({
           name: 'rsuId',
           label: t('Associate RSU'),
           disabled: isDetails,
-          request: fetchDeviceList,
+          request: fetchDeviceListInModal,
           rules: [{ required: true, message: t('Please select an associated RSU') }],
-        },
-        {
-          name: 'radarIP',
-          label: t('Radar IP'),
-          disabled: isDetails,
-          rules: [{ pattern: IPReg, message: t('Incorrect radar IP format') }],
-          hidden: type !== 'radar',
         },
       ],
     },
@@ -188,9 +169,8 @@ const CreateCameraModal: React.FC<CreateCameraProps> = ({
       editId={editInfo?.id}
       isDetails={isDetails}
       request={async () => {
-        const { name, sn, streamUrl, radarIP, lng, lat, elevation, towards, rsuId, desc } =
-          editInfo!;
-        return { name, sn, streamUrl, radarIP, lng, lat, elevation, towards, rsuId, desc };
+        const { name, sn, streamUrl, lng, lat, elevation, towards, rsuId, desc } = editInfo!;
+        return { name, sn, streamUrl, lng, lat, elevation, towards, rsuId, desc };
       }}
     >
       <FormItem items={formItems} />

@@ -1,0 +1,5 @@
+/scripts
+/config
+public
+dist
+/src/components/Layout/GlobalNav/common.tsx
