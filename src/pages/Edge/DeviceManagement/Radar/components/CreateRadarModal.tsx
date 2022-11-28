@@ -1,20 +1,20 @@
-import FormItem from '#/components/FormItem';
+import React, { FC, useEffect } from 'react';
+import { IPReg, LatReg, LngReg } from '#/constants/edge';
 import Modal from '#/components/Modal';
-import { LatReg, LngReg } from '#/constants/edge';
-import { createCamera, updateCamera } from '#/services/api/device/camera';
-import { useRequestStore } from '#/store/request';
+import FormItem from '#/components/FormItem';
 import { CreateModalProps, FormGroupType } from '#/typings/pro-component';
-import React from 'react';
+import { createRadar, updateRadar } from '#/services/api/device/radar';
+import { useRequestStore } from '#/store/request';
 
-const CreateCameraModal: React.FC<CreateModalProps> = ({
-  editInfo,
-  isDetails = false,
-  success,
-}) => {
+const CreateRadarModal: FC<CreateModalProps> = ({ editInfo, isDetails = false, success }) => {
   const { fetchDeviceListInModal } = useRequestStore();
 
-  const lowerType = t('camera');
-  const upperType = t('Camera');
+  useEffect(() => {
+    fetchDeviceListInModal();
+  }, []);
+
+  const lowerType = t('radar');
+  const upperType = t('Radar');
 
   const formItems: FormGroupType[] = [
     {
@@ -128,6 +128,12 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
           request: fetchDeviceListInModal,
           rules: [{ required: true, message: t('Please select an associated RSU') }],
         },
+        {
+          name: 'radarIP',
+          label: t('Radar IP'),
+          disabled: isDetails,
+          rules: [{ pattern: IPReg, message: t('Incorrect radar IP format') }],
+        },
       ],
     },
     {
@@ -160,17 +166,17 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
       modalProps={{ className: 'overflow' }}
       submitForm={async values => {
         if (editInfo) {
-          await updateCamera(editInfo.id, values);
+          await updateRadar(editInfo.id, values);
         } else {
-          await createCamera(values);
+          await createRadar(values);
         }
         success();
       }}
       editId={editInfo?.id}
       isDetails={isDetails}
       request={async () => {
-        const { name, sn, streamUrl, lng, lat, elevation, towards, rsuId, desc } = editInfo!;
-        return { name, sn, streamUrl, lng, lat, elevation, towards, rsuId, desc };
+        const { name, sn, radarIP, lng, lat, elevation, towards, rsuId, desc } = editInfo!;
+        return { name, sn, radarIP, lng, lat, elevation, towards, rsuId, desc };
       }}
     >
       <FormItem items={formItems} />
@@ -178,4 +184,4 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
   );
 };
 
-export default CreateCameraModal;
+export default CreateRadarModal;

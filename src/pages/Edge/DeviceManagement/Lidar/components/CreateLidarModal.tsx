@@ -1,20 +1,16 @@
 import FormItem from '#/components/FormItem';
 import Modal from '#/components/Modal';
-import { LatReg, LngReg } from '#/constants/edge';
-import { createCamera, updateCamera } from '#/services/api/device/camera';
+import { IPReg, LatReg, LngReg } from '#/constants/edge';
+import { createLidar, updateLidar } from '#/services/api/device/lidar';
 import { useRequestStore } from '#/store/request';
 import { CreateModalProps, FormGroupType } from '#/typings/pro-component';
 import React from 'react';
 
-const CreateCameraModal: React.FC<CreateModalProps> = ({
-  editInfo,
-  isDetails = false,
-  success,
-}) => {
+const CreateLidarModal: React.FC<CreateModalProps> = ({ editInfo, isDetails = false, success }) => {
   const { fetchDeviceListInModal } = useRequestStore();
 
-  const lowerType = t('camera');
-  const upperType = t('Camera');
+  const lowerType = t('lidar');
+  const upperType = t('Lidar');
 
   const formItems: FormGroupType[] = [
     {
@@ -45,24 +41,6 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
               message: t('Please enter the {{type}} serial number', { type: lowerType }),
             },
             { pattern: /^[a-zA-Z0-9_]+$/, message: t('SERIAL_NUMBER_VALIDATE_MSG') },
-          ],
-        },
-      ],
-    },
-    {
-      key: 'streamUrl',
-      children: [
-        {
-          required: true,
-          width: 912,
-          name: 'streamUrl',
-          label: t('Video Stream URL'),
-          disabled: isDetails,
-          rules: [
-            {
-              required: true,
-              message: t('Please enter video stream URL'),
-            },
           ],
         },
       ],
@@ -128,6 +106,53 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
           request: fetchDeviceListInModal,
           rules: [{ required: true, message: t('Please select an associated RSU') }],
         },
+        {
+          name: 'lidarIP',
+          label: t('Lidar IP'),
+          required: true,
+          disabled: isDetails,
+          rules: [
+            { required: true, message: t('Please input an lidar IP') },
+            { pattern: IPReg, message: t('Incorrect lidar IP format') },
+          ],
+        },
+      ],
+    },
+    {
+      key: 'position',
+      children: [
+        {
+          name: 'point',
+          label: t('Point'),
+          required: true,
+          disabled: isDetails,
+          rules: [{ required: true, message: t('Please input an Point') }],
+        },
+        {
+          name: 'pole',
+          label: t('Pole'),
+          required: true,
+          disabled: isDetails,
+          rules: [{ required: true, message: t('Please input an Pole') }],
+        },
+      ],
+    },
+    {
+      key: 'wsUrl',
+      children: [
+        {
+          required: true,
+          width: 912,
+          name: 'wsUrl',
+          label: t('Lidar URL'),
+          disabled: isDetails,
+          rules: [
+            {
+              required: true,
+              message: t('Please enter lidar URL'),
+            },
+          ],
+        },
       ],
     },
     {
@@ -160,17 +185,18 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
       modalProps={{ className: 'overflow' }}
       submitForm={async values => {
         if (editInfo) {
-          await updateCamera(editInfo.id, values);
+          await updateLidar(editInfo.id, values);
         } else {
-          await createCamera(values);
+          await createLidar(values);
         }
         success();
       }}
       editId={editInfo?.id}
       isDetails={isDetails}
       request={async () => {
-        const { name, sn, streamUrl, lng, lat, elevation, towards, rsuId, desc } = editInfo!;
-        return { name, sn, streamUrl, lng, lat, elevation, towards, rsuId, desc };
+        const { name, sn, lng, lat, elevation, towards, rsuId, lidarIP, point, pole, desc, wsUrl } =
+          editInfo!;
+        return { name, sn, lng, lat, elevation, towards, rsuId, lidarIP, point, pole, desc, wsUrl };
       }}
     >
       <FormItem items={formItems} />
@@ -178,4 +204,4 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
   );
 };
 
-export default CreateCameraModal;
+export default CreateLidarModal;
