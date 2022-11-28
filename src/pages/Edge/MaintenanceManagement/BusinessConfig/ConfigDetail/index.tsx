@@ -1,0 +1,56 @@
+import BaseContainer from '#/components/BaseContainer';
+import CardList from '#/components/CardList';
+import ParameterDeviceList from '#/components/ParameterDeviceList';
+import ParameterInfo from '#/components/ParameterInfo';
+import { parameterConfigInfo } from '#/services/api/config/business';
+import { RouterMatchTypes } from '#/typings/pro-component';
+import { ProCard } from '@ant-design/pro-components';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+// 基本信息
+type BasicInfoType = {
+  name: string;
+};
+const BasicInfo: React.FC<{ basicInfo: BasicInfoType | undefined }> = ({ basicInfo = {} }) => {
+  const infoMap = [
+    {
+      key: 'name',
+      label: t('Configuration Name'),
+    },
+  ];
+  return (
+    <ProCard title={t('Basic Information')}>
+      <CardList infoMap={infoMap} info={basicInfo} />
+    </ProCard>
+  );
+};
+
+const ConfigDetails: React.FC<RouterMatchTypes> = ({ match: { params } }) => {
+  const navigate = useNavigate();
+  const [data, setData] = useState<Config.ParameterListItem>();
+  if (!+params.id) {
+    navigate(-1);
+  }
+
+  const fetchConfigInfo = async () => {
+    const result = await parameterConfigInfo(+params.id);
+    setData(result);
+  };
+
+  useEffect(() => {
+    fetchConfigInfo();
+  }, []);
+
+  return (
+    <BaseContainer back>
+      <BasicInfo basicInfo={data} />
+      <ParameterInfo parameterInfo={data} />
+      <ProCard title={t('Parameter Configuration Applicable RSU')}>
+        <ParameterDeviceList showDeliveryStatus dataSource={data?.rsus || []} />
+      </ProCard>
+    </BaseContainer>
+  );
+};
+
+export default ConfigDetails;

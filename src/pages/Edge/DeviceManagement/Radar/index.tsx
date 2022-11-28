@@ -2,24 +2,24 @@ import BaseContainer from '#/components/BaseContainer';
 import BaseProTable from '#/components/BaseProTable';
 import { confirmModal } from '#/components/ConfirmModal';
 import { renderAreaFormatName, renderAreaFormItem } from '#/components/Country/renderHelper';
-import { cameraList, deleteCamera } from '#/services/api/device/camera';
 import { deviceList } from '#/services/api/device/device';
+import { deleteRadar, radarList } from '#/services/api/device/radar';
 import { ProColumns } from '#/typings/pro-component';
 import { ActionType } from '@ant-design/pro-components';
 import { Button, Divider } from 'antd';
-import React, { useRef, FC } from 'react';
-import CreateCameraModal from './components/CreateCameraModal';
+import React, { FC, useRef } from 'react';
+import CreateRadarModal from './components/CreateRadarModal';
 
 const fetchDeviceList = async () => {
   const { data } = await deviceList({ pageNum: 1, pageSize: -1 });
   return data.map(({ id, rsuName }: Device.DeviceListItem) => ({ label: rsuName, value: id }));
 };
 
-const CameraManagement: FC = () => {
+const Radar: FC = () => {
   const actionRef = useRef<ActionType>();
   const columns: ProColumns<Device.CameraListItem>[] = [
     {
-      title: t('Camera Name'),
+      title: t('Radar Name'),
       dataIndex: 'name',
       search: true,
     },
@@ -29,8 +29,8 @@ const CameraManagement: FC = () => {
       search: true,
     },
     {
-      title: t('Video Stream URL'),
-      dataIndex: 'streamUrl',
+      title: t('Radar IP'),
+      dataIndex: 'radarIP',
     },
     {
       title: t('Installation Area'),
@@ -75,19 +75,13 @@ const CameraManagement: FC = () => {
     },
     {
       title: t('Operate'),
-      width: 220,
+      width: 200,
       fixed: 'right',
       render: (_, row) => [
-        <CreateCameraModal
-          key="edit"
-          type="camera"
-          editInfo={row}
-          success={() => actionRef.current?.reload()}
-        />,
+        <CreateRadarModal key="edit" editInfo={row} success={() => actionRef.current?.reload()} />,
         <Divider key="edit-divider" type="vertical" />,
-        <CreateCameraModal
+        <CreateRadarModal
           key="details"
-          type="camera"
           isDetails
           editInfo={row}
           success={() => actionRef.current?.reload()}
@@ -100,8 +94,8 @@ const CameraManagement: FC = () => {
           onClick={() =>
             confirmModal({
               id: row.id,
-              content: t('Are you sure you want to delete this camera?'),
-              modalFn: deleteCamera,
+              content: t('Are you sure you want to delete this radar?'),
+              modalFn: deleteRadar,
               actionRef,
             })
           }
@@ -111,19 +105,18 @@ const CameraManagement: FC = () => {
       ],
     },
   ];
-
   return (
     <BaseContainer>
       <BaseProTable
         columns={columns}
         actionRef={actionRef}
-        request={cameraList}
+        request={radarList}
         toolBarRender={() => [
-          <CreateCameraModal key="create" success={() => actionRef.current?.reload()} />,
+          <CreateRadarModal key="create" success={() => actionRef.current?.reload()} />,
         ]}
       />
     </BaseContainer>
   );
 };
 
-export default CameraManagement;
+export default Radar;

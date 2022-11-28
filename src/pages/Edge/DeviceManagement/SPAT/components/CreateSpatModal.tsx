@@ -1,20 +1,16 @@
 import FormItem from '#/components/FormItem';
 import Modal from '#/components/Modal';
-import { LatReg, LngReg } from '#/constants/edge';
-import { createCamera, updateCamera } from '#/services/api/device/camera';
+import { IPReg, LightStateOptions } from '#/constants/edge';
+import { createSpat, updateSpat } from '#/services/api/device/spat';
 import { useRequestStore } from '#/store/request';
 import { CreateModalProps, FormGroupType } from '#/typings/pro-component';
 import React from 'react';
 
-const CreateCameraModal: React.FC<CreateModalProps> = ({
-  editInfo,
-  isDetails = false,
-  success,
-}) => {
+const CreateSpatModal: React.FC<CreateModalProps> = ({ editInfo, isDetails = false, success }) => {
   const { fetchDeviceListInModal } = useRequestStore();
 
-  const lowerType = t('camera');
-  const upperType = t('Camera');
+  const lowerType = t('spat');
+  const upperType = t('SPAT');
 
   const formItems: FormGroupType[] = [
     {
@@ -34,7 +30,7 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
         },
         {
           required: true,
-          name: 'sn',
+          name: 'intersectionId',
           label: t('{{type}} Serial Number', { type: upperType }),
           tooltip: t('SERIAL_NUMBER_TIP'),
           fieldProps: { maxLength: 64 },
@@ -50,69 +46,31 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
       ],
     },
     {
-      key: 'streamUrl',
+      key: 'phase',
       children: [
         {
+          type: 'digit',
           required: true,
-          width: 912,
-          name: 'streamUrl',
-          label: t('Video Stream URL'),
+          name: 'phaseId',
+          label: t('PhaseId'),
+          tooltip: t('SPAT_PHASE_ID_TIP'),
           disabled: isDetails,
           rules: [
+            { required: true, message: t('Please input an phase id') },
             {
-              required: true,
-              message: t('Please enter video stream URL'),
+              pattern: /^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])$/,
+              message: t('Please enter correct phase id'),
             },
           ],
         },
-      ],
-    },
-    {
-      key: 'lng',
-      children: [
         {
+          type: 'select',
           required: true,
-          name: 'lng',
-          label: t('Longitude'),
+          name: 'light',
+          label: t('Light State'),
           disabled: isDetails,
-          rules: [
-            { required: true, message: t('Please enter longitude') },
-            { pattern: LngReg, message: t('Incorrect longitude format') },
-          ],
-        },
-        {
-          required: true,
-          name: 'lat',
-          label: t('Latitude'),
-          disabled: isDetails,
-          rules: [
-            { required: true, message: t('Please enter latitude') },
-            { pattern: LatReg, message: t('Incorrect latitude format') },
-          ],
-        },
-      ],
-    },
-    {
-      key: 'elevation',
-      children: [
-        {
-          type: 'digit',
-          required: true,
-          name: 'elevation',
-          label: t('Altitude (m)'),
-          disabled: isDetails,
-          min: Number.MIN_SAFE_INTEGER,
-          fieldProps: { precision: 2 },
-          rules: [{ required: true, message: t('Please enter altitude') }],
-        },
-        {
-          type: 'digit',
-          required: true,
-          name: 'towards',
-          label: t('Orientation (°)'),
-          disabled: isDetails,
-          fieldProps: { precision: 2, max: 359.99 },
-          rules: [{ required: true, message: t('Please enter an orientation') }],
+          options: LightStateOptions,
+          rules: [{ required: true, message: t('Please select a light state') }],
         },
       ],
     },
@@ -127,6 +85,24 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
           disabled: isDetails,
           request: fetchDeviceListInModal,
           rules: [{ required: true, message: t('Please select an associated RSU') }],
+        },
+        {
+          name: 'spatIP',
+          label: t('SPAT IP'),
+          disabled: isDetails,
+          rules: [{ pattern: IPReg, message: t('Incorrect SPAT IP format') }],
+        },
+      ],
+    },
+    {
+      key: 'position',
+      children: [
+        {
+          name: 'point',
+          label: t('Point'),
+          required: true,
+          disabled: isDetails,
+          rules: [{ required: true, message: t('Please input an Point') }],
         },
       ],
     },
@@ -160,22 +136,19 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
       modalProps={{ className: 'overflow' }}
       submitForm={async values => {
         if (editInfo) {
-          await updateCamera(editInfo.id, values);
+          await updateSpat(editInfo.id, values);
         } else {
-          await createCamera(values);
+          await createSpat(values);
         }
         success();
       }}
       editId={editInfo?.id}
       isDetails={isDetails}
-      request={async () => {
-        const { name, sn, streamUrl, lng, lat, elevation, towards, rsuId, desc } = editInfo!;
-        return { name, sn, streamUrl, lng, lat, elevation, towards, rsuId, desc };
-      }}
+      request={async () => editInfo}
     >
       <FormItem items={formItems} />
     </Modal>
   );
 };
 
-export default CreateCameraModal;
+export default CreateSpatModal;
