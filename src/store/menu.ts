@@ -55,7 +55,7 @@ const useMenuStore = create<IMenuStore>((set, get) => ({
       });
     }
   },
-  addFavoriteMenu: key => {},
+  addFavoriteMenu: () => {},
   deleteFavoriteMenu: () => {},
   fetchRightMenus: () => {
     const result = menuFilter(menuList);

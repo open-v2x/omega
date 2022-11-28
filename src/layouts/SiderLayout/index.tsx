@@ -6,7 +6,7 @@ import styles from './index.module.less';
 import layoutSettings from '#/config/proLayoutSetting';
 import GlobalHeader from '#/components/Layout/GlobalHeader';
 
-const SiderLayout: FC = ({ children }) => {
+const SiderLayout: FC = () => {
   const menuStore = useMenuStore();
   const navigate = useNavigate();
 
