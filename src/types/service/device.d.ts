@@ -87,4 +87,27 @@ declare namespace Device {
     mem: MemRunningInfo[];
     net: NetRunningInfo[];
   };
+
+  type CameraItem = {
+    name: string; // 摄像头、雷达名称
+    sn: string; // 摄像头序列号、雷达序列号
+    streamUrl?: string; // 摄像头视频流
+    lng: number; // 经度
+    lat: number; // 纬度
+    elevation: number; // 海拔
+    towards: number; // 朝向
+    desc: string; // 描述
+  };
+  type CreateCameraParams = CameraItem & {
+    rsuId: number; // 关联 RSU
+  };
+  type CameraListItem = CameraItem & {
+    id: number;
+    countryName: string;
+    provinceName: string;
+    cityName: string;
+    areaName: string;
+    rsuName: string; // RSU 名称
+    createTime: string; // 创建时间
+  };
 }

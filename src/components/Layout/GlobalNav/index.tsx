@@ -5,17 +5,20 @@ import Left from './Left';
 import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
 import Right from './Right';
 import { GlobalHeaderProps } from '../GlobalHeader';
+import { useMenuStore } from '#/store/menu';
 
 interface GlobalProps extends GlobalHeaderProps {
   logo?: React.ReactNode;
 }
 
 const GlobalNav: FC<GlobalProps> = props => {
-  const { logo = undefined, navItems = [], isAdminPage = false } = props;
+  const { logo = undefined, isAdminPage = false } = props;
 
   const [open, setOpen] = useState(false);
+  const { setMenus, favoriteMenu, rightMenus } = useMenuStore();
 
   const onClose = () => {
+    setMenus(favoriteMenu);
     setOpen(false);
   };
 
@@ -45,7 +48,7 @@ const GlobalNav: FC<GlobalProps> = props => {
         mask={false}
         destroyOnClose
       >
-        <Left onClose={onClose} isAdminPage={isAdminPage} navItems={navItems} />
+        <Left onClose={onClose} isAdminPage={isAdminPage} navItems={favoriteMenu} />
       </Drawer>
       <Drawer
         title={null}
@@ -64,7 +67,7 @@ const GlobalNav: FC<GlobalProps> = props => {
         closeIcon={<CloseOutlined style={{ fontSize: '20px' }} />}
       >
         <div className={styles.main}>
-          <Right items={navItems} onClose={onClose} isAdminPage={isAdminPage} />
+          <Right items={rightMenus} onClose={onClose} isAdminPage={isAdminPage} />
         </div>
       </Drawer>
     </>

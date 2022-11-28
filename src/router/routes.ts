@@ -31,9 +31,12 @@ const routes = [
       },
       {
         path: 'model',
-        component: React.lazy(
-          () => import(/* webpackChunkName: "home",webpackPrefetch: true */ '#/pages/Home'),
-        ),
+        component: React.lazy(() => import('#/pages/Edge/DeviceManagement/RSUModel')),
+      },
+
+      {
+        path: 'camera',
+        component: React.lazy(() => import('#/pages/Edge/DeviceManagement/Camera')),
       },
     ],
   },

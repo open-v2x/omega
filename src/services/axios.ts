@@ -62,6 +62,10 @@ export function deletE<T>(url: string, config?: AxiosRequestConfig): Promise<T> 
   return axiosInstance.delete<T>(url, config).then((res: any) => res);
 }
 
+export function put<T>(url: string, data: any, config?: AxiosRequestConfig): Promise<T> {
+  return axiosInstance.put<T>(url, data, config).then((res: any) => res);
+}
+
 export function getBlob(url: string): Promise<Blob> {
   return axios
     .get(url, {

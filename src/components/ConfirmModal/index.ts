@@ -24,6 +24,8 @@ export const confirmModal = async ({
     content,
     cancelButtonProps: { id: 'cancelButton' },
     okButtonProps: { id: 'okButton' },
+    okText: t('Sure'),
+    cancelText: t('Cancel'),
     onOk() {
       return new Promise(async resolve => {
         try {

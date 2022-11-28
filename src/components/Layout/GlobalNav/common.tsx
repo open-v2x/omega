@@ -52,6 +52,14 @@ export const favoriteMenuPropType = PropTypes.oneOfType([
   ),
 ]);
 
+export const getChildPath = (parentPath: string, childPath) => {
+  if (childPath.startsWith('/')) {
+    return childPath;
+  } else {
+    return `${parentPath}/${childPath}`;
+  }
+};
+
 export const getFirstLevelNavItemLink = item => {
   const { children = [] } = item;
   if (!children.length) {
@@ -86,4 +94,13 @@ export const getFavoriteMenuItems = (navItems, favoriteMenu, isAdminPage) => {
     });
   });
   return items;
+};
+
+export const menuFilter = menus => {
+  const result = menus.filter(menu => {
+    const { children = [] } = menu;
+    menu.children = menuFilter(children);
+    return !menu.hideInMenu;
+  });
+  return result;
 };

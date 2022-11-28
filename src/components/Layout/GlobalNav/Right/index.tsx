@@ -3,7 +3,7 @@ import { LinkOutlined, PushpinFilled, PushpinOutlined } from '@ant-design/icons'
 import { Divider, Input, Tooltip } from 'antd';
 import React, { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getSecondLevelNavItemLink } from '../common';
+import { getChildPath, getSecondLevelNavItemLink } from '../common';
 import styles from './index.module.less';
 
 interface RightProps {
@@ -19,7 +19,7 @@ const Right: FC<RightProps> = props => {
   const { onClose } = props;
 
   const [rightParams, setRightParams] = useState({
-    currentItems: [],
+    currentItems: props.items || [],
     enterList: [],
     searchInput: '',
   });
@@ -65,10 +65,13 @@ const Right: FC<RightProps> = props => {
         currentItems.push(item);
       } else {
         const { name, children = [] } = item;
-        if (name.toLowerCase().includes(checkWords)) {
+        if (t(name).toLowerCase().includes(checkWords)) {
           currentItems.push(item);
         } else {
-          const cItems = children.filter(c => c.name.toLowerCase().includes(checkWords));
+          const cItems = children.filter(c => {
+            const result = t(c.name).toLowerCase().includes(checkWords);
+            return result;
+          });
           if (cItems.length) {
             currentItems.push({
               ...item,
@@ -97,10 +100,10 @@ const Right: FC<RightProps> = props => {
 
   const renderNavItemTitle = item => {
     const { name } = item;
-    const nameRender = <span className={styles['link-name-detail']}>{name}</span>;
+    const nameRender = <span className={styles['link-name-detail']}>{t(name)}</span>;
     return (
       <span className={styles['link-name']}>
-        {name.length > nameMaxLength ? <Tooltip title={name}>{nameRender}</Tooltip> : nameRender}
+        {name.length > nameMaxLength ? <Tooltip title={t(name)}>{nameRender}</Tooltip> : nameRender}
       </span>
     );
   };
@@ -168,7 +171,7 @@ const Right: FC<RightProps> = props => {
 
     return (
       <div className={styles['nav-item']} key={name}>
-        <div className={styles.title}>{name}</div>
+        <div className={styles.title}>{t(name)}</div>
         <div className={styles.children}>{renderNavItemChildren(item)}</div>
       </div>
     );
@@ -185,12 +188,12 @@ const Right: FC<RightProps> = props => {
     const child = children[0] || null;
     const first = name;
     const second = child ? child.name : null;
-    const path = child ? child.path : enter.path;
+    const path = child ? getChildPath(enter.path, child.path) : enter.path;
     const title = child ? `${first} - ${second}` : first;
     return (
       <div key={path} className={styles['children-item']}>
         <Link onClick={onClose} to={path}>
-          <span className={styles['link-name']}>{title}</span>
+          <span className={styles['link-name']}>{t(title)}</span>
         </Link>
       </div>
     );
@@ -206,7 +209,7 @@ const Right: FC<RightProps> = props => {
     return (
       <div className={styles['enter-list']}>
         <Divider />
-        <div className={styles['enter-list-title']}>{title}</div>
+        <div className={styles['enter-list-title']}>{t(title)}</div>
         <div className={styles['enter-list-content']}>{items}</div>
       </div>
     );

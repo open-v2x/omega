@@ -28,11 +28,12 @@ const SiderLayout: FC = ({ children }) => {
 
   const init = async () => {
     menuStore.fetchFavoriteMenus();
+    menuStore.fetchRightMenus();
   };
 
   useEffect(() => {
     init();
-  }, []);
+  }, [menuStore.menus]);
 
   return (
     <ProLayout
@@ -42,9 +43,22 @@ const SiderLayout: FC = ({ children }) => {
       siderWidth={216}
       menuDataRender={() => {
         const menus = formatMenus(menuStore.menus);
-        console.log('menu', menus);
         return menus;
       }}
+      menuItemRender={(item, dom) => (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+          }}
+          onClick={() => {
+            navigate(item.path);
+          }}
+        >
+          {dom}
+        </div>
+      )}
       menuFooterRender={props => {
         if (props?.collapsed) return undefined;
         return menuStore.relatedMenus.length ? (

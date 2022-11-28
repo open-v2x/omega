@@ -66,7 +66,7 @@ const Left: FC<LeftProps> = props => {
           to={getSecondLevelNavItemLink(item)}
           className={styles['item-label']}
         >
-          {item.name}
+          {t(item.name)}
           {icon}
         </Link>
       </div>

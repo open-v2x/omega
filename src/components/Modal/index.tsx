@@ -67,7 +67,7 @@ const Modal: React.FC<ModalProps> = ({
       isDetails
         ? false
         : {
-            searchConfig: { submitText: t('Submit') },
+            searchConfig: { submitText: t('Submit'), resetText: t('Cancel') },
             resetButtonProps: {
               icon: <CloseCircleOutlined />,
               type: 'primary',

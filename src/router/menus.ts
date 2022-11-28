@@ -5,23 +5,23 @@ const menuList = [
     icon: 'icon-deviceshare',
     children: [
       {
-        path: 'rsu',
+        path: '/device/rsu',
         name: 'RSU Device',
       },
       {
-        path: 'rsu/details/:id',
+        path: '/device/rsu/details/:id',
         name: 'Device Details',
         hideInMenu: true,
       },
       {
-        path: 'model',
-        name: 'model',
+        path: '/device/model',
+        name: 'RSU Model',
+      },
+      {
+        path: '/device/camera',
+        name: 'Camera Device',
       },
     ],
-  },
-  {
-    path: '/manage',
-    name: 'Manage',
   },
 ];
 

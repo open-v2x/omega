@@ -2,8 +2,6 @@ import { useRootStore } from '#/store/root';
 import { PageContainer } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import React, { FC } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-
 type BaseContainerType = {
   children: React.ReactNode;
   back?: boolean;
