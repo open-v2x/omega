@@ -1,0 +1,13 @@
+name: 'check-eslint-stylelint-action'
+
+on: [pull_request]
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: pnpm
+      - name: Run ESLint
+        run: pnpm lint:js && pnpm lint:style
