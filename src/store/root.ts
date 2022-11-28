@@ -6,7 +6,7 @@ interface IRootStore {
   history: BrowserHistory;
 }
 
-const useRootStore = create<IRootStore>(set => ({
+const useRootStore = create<IRootStore>(() => ({
   showHeader: true,
   history: createBrowserHistory(),
 }));

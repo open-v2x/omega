@@ -2,7 +2,7 @@ import { IRouteConfig } from '#/types/router';
 import React from 'react';
 import { Navigate, RouteObject } from 'react-router-dom';
 import routes from './routes';
-import WrapperRouteComponent from './WrapperRoute';
+import WrapperRouteComponent from './component/WrapperRoute';
 
 const getRouteConfig = (routeConfig: IRouteConfig): RouteObject => {
   const { path, layout, component: Comp, children, auth, redirect } = routeConfig;

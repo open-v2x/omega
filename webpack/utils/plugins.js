@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const variable = require('./variable');
 const DotenvPlugin = require('dotenv-webpack');
@@ -39,7 +40,16 @@ function getPlugins() {
     path: ENV_CONFIG_PATH,
   });
 
-  return [...getHTMLPlugins(), dotenvPlugin, miniCssPlugin];
+  const copyPlugin = new CopyPlugin({
+    patterns: [
+      {
+        from: path.join(PUBLIC_PATH, 'assets'),
+        to: path.join(DIST_PATH, 'assets'),
+      },
+    ],
+  });
+
+  return [...getHTMLPlugins(), dotenvPlugin, miniCssPlugin, copyPlugin];
 }
 
 module.exports = {

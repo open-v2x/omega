@@ -119,11 +119,7 @@ const CameraManagement: FC = () => {
         actionRef={actionRef}
         request={cameraList}
         toolBarRender={() => [
-          <CreateCameraModal
-            key="create"
-            type="camera"
-            success={() => actionRef.current?.reload()}
-          />,
+          <CreateCameraModal key="create" success={() => actionRef.current?.reload()} />,
         ]}
       />
     </BaseContainer>

@@ -5,7 +5,7 @@ const proLayoutSetting: ProLayoutProps = {
   layout: 'mix',
   contentWidth: 'Fluid',
   fixSiderbar: true,
-  iconfontUrl: '//at.alicdn.com/t/c/font_3784786_5kwqyezio25.js',
+  iconfontUrl: '/assets/font/iconfont.js',
   token: {
     colorBgAppListIconHover: 'rgba(0,0,0,0.06)',
     colorTextAppListIconHover: 'rgba(255,255,255,0.95)',
