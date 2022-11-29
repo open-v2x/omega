@@ -82,6 +82,61 @@ const menuList = [
       },
     ],
   },
+  {
+    path: '/event',
+    name: 'Event',
+    icon: 'icon-event',
+    children: [
+      {
+        path: '/event/rsi',
+        name: 'Road Side Information',
+      },
+      {
+        path: '/event/rsi/details/:id',
+        name: 'RSI Details',
+        hideInMenu: true,
+      },
+      {
+        path: '/event/rsm',
+        name: 'Roadside Safety Message',
+      },
+      {
+        path: '/event/rsm/details/:id',
+        name: 'RSM Details',
+        hideInMenu: true,
+      },
+      {
+        path: '/event/icw',
+        name: 'Intersection Collision Warning',
+      },
+      {
+        path: '/event/icw/details/:id',
+        name: 'ICW Details',
+        hideInMenu: true,
+      },
+      {
+        path: '/event/vrucw',
+        name: 'Vulnerable Road User Collision Warning',
+      },
+      {
+        path: '/event/vrucw/details/:id',
+        name: 'VRUCW Details',
+        hideInMenu: true,
+      },
+      {
+        path: '/event/dnpw',
+        name: 'Do Not Pass Warning',
+      },
+      {
+        path: '/event/sds',
+        name: 'Sensor Data Sharing',
+      },
+      {
+        path: '/event/clc',
+        name: 'Cooperative Lane Change',
+      },
+    ],
+  },
 ];
 
 export default menuList;
