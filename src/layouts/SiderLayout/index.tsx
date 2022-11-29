@@ -40,23 +40,25 @@ const SiderLayout: FC = () => {
       {...layoutSettings}
       className={styles['layout-content']}
       onCollapse={toggle}
-      siderWidth={216}
+      siderWidth={246}
       menuDataRender={() => {
         const menus = formatMenus(menuStore.menus);
         return menus;
       }}
-      menuItemRender={(item, dom) => (
+      menuItemRender={item => (
         <div
           style={{
-            display: 'flex',
             alignItems: 'center',
             gap: 8,
+            overflowWrap: 'break-word',
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
           }}
           onClick={() => {
             navigate(item.path);
           }}
         >
-          {dom}
+          {item.name}
         </div>
       )}
       menuFooterRender={props => {

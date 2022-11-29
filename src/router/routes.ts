@@ -111,6 +111,74 @@ const routes = [
     ],
   },
   {
+    path: '/event',
+    component: React.lazy(() => import('#/layouts/SiderLayout')),
+    layout: true,
+    auth: true,
+    children: [
+      {
+        path: 'rsi',
+        component: React.lazy(
+          () => import('#/pages/Edge/EventManagement/RoadSideInfomation/RSIList'),
+        ),
+      },
+      {
+        path: 'rsi/details/:id',
+        component: React.lazy(
+          () => import('#/pages/Edge/EventManagement/RoadSideInfomation/RSIDetail'),
+        ),
+      },
+      {
+        path: 'rsm',
+        component: React.lazy(
+          () => import('#/pages/Edge/EventManagement/RoadSideSafetyMessage/RSMList'),
+        ),
+      },
+      {
+        path: 'rsm/details/:id',
+        component: React.lazy(
+          () => import('#/pages/Edge/EventManagement/RoadSideSafetyMessage/RSMDetail'),
+        ),
+      },
+      {
+        path: 'icw',
+        component: React.lazy(
+          () => import('#/pages/Edge/EventManagement/IntersectionCollisionWarning/ICWList'),
+        ),
+      },
+      {
+        path: 'icw/details/:id',
+        component: React.lazy(
+          () => import('#/pages/Edge/EventManagement/IntersectionCollisionWarning/ICWDetail'),
+        ),
+      },
+      {
+        path: 'vrucw',
+        component: React.lazy(
+          () => import('#/pages/Edge/EventManagement/ValnerableRoadMessage/VRUCWList'),
+        ),
+      },
+      {
+        path: 'vrucw/details/:id',
+        component: React.lazy(
+          () => import('#/pages/Edge/EventManagement/ValnerableRoadMessage/VRUCWDetail'),
+        ),
+      },
+      {
+        path: 'dnpw',
+        component: React.lazy(() => import('#/pages/Edge/EventManagement/DoNotPassWarning')),
+      },
+      {
+        path: 'sds',
+        component: React.lazy(() => import('#/pages/Edge/EventManagement/SensorDataSharing')),
+      },
+      {
+        path: 'clc',
+        component: React.lazy(() => import('#/pages/Edge/EventManagement/CooperativeLaneChange')),
+      },
+    ],
+  },
+  {
     path: '*',
     component: React.lazy(() => import('#/components/NoMatch')),
   },
