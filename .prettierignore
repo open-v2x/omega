@@ -1,7 +1,5 @@
 **/*.svg
 package.json
-.umi
-.umi-production
 /dist
 .dockerignore
 .DS_Store
@@ -16,8 +14,7 @@ Dockerfile*
 LICENSE
 .eslintcache
 *.lock
-yarn-error.log
-.history
+pnpm-lock.yaml
 CNAME
-/build
+/dist
 /public
