@@ -17,9 +17,9 @@ LABEL repo-url=$REPO_URL
 LABEL branch=$BRANCH
 LABEL commit-ref=$COMMIT_REF
 
-RUN mkdir /etc/nginx/omege
+RUN mkdir /etc/nginx/omeg
 
-COPY --from=builder /root/omege/dist /var/www/omege
+COPY --from=builder /root/omega/dist /var/www/omega
 COPY ./deploy/init_env.sh /init_env.sh
 WORKDIR /
 CMD ["sh", "init_env.sh"]
