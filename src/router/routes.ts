@@ -179,6 +179,18 @@ const routes = [
     ],
   },
   {
+    path: '/system',
+    component: React.lazy(() => import('#/layouts/SiderLayout')),
+    layout: true,
+    auth: true,
+    children: [
+      {
+        path: 'site',
+        component: React.lazy(() => import('#/pages/Edge/SystemConfiguration/EdgeSiteConfig')),
+      },
+    ],
+  },
+  {
     path: '*',
     component: React.lazy(() => import('#/components/NoMatch')),
   },

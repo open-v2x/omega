@@ -137,6 +137,12 @@ const menuList = [
       },
     ],
   },
+  {
+    path: '/system',
+    name: 'System',
+    icon: 'icon-system',
+    children: [{ path: '/system/site', name: 'Edge Site Config' }],
+  },
 ];
 
 export default menuList;
