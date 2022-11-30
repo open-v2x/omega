@@ -55,7 +55,7 @@ const EdgeSite: React.FC = () => {
                     type="link"
                     size="small"
                     key="cloud"
-                    onClick={() => navigate(`center/cloud?id=${id}`)}
+                    onClick={() => navigate(`/center/cloud?id=${id}`)}
                   >
                     {t('Go to [Regional Edge Portal]')}
                     <img src={imgNavigate} alt="" />
