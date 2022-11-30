@@ -16,6 +16,18 @@ const routes = [
     ],
   },
   {
+    path: '/center',
+    component: React.lazy(() => import('#/layouts/SiderLayout')),
+    layout: true,
+    auth: true,
+    children: [
+      {
+        path: 'site',
+        component: React.lazy(() => import('#/pages/Center/Site')),
+      },
+    ],
+  },
+  {
     path: '/device',
     component: React.lazy(() => import('#/layouts/SiderLayout')),
     layout: true,
