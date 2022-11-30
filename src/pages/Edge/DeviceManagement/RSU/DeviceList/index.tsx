@@ -12,7 +12,7 @@ const items = [
 
 const DeviceList: React.FC = () => (
   <BaseContainer>
-    <Tabs className={styles.rsu_tabs} destroyInactiveTabPane items={items} />
+    <Tabs className={styles['rsu-tabs']} destroyInactiveTabPane items={items} />
   </BaseContainer>
 );
 
