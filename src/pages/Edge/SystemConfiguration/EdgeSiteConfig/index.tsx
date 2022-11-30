@@ -35,7 +35,7 @@ const EdgeSiteConfig: React.FC = () => {
 
   return (
     <BaseContainer>
-      <ProCard className={styles.edge_site}>
+      <ProCard className={styles[`edge-site`]}>
         <div className={styles.site}>
           <img className={styles.site_icon} src={imgSiteMode} style={{ padding: '8px' }} alt="" />
           <div className={styles.site_info}>

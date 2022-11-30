@@ -46,7 +46,7 @@ export const SelectLang: React.FC = () => {
 
   return (
     <HeaderDropdown menu={{ items, onClick: changeLang }} placement="bottomRight">
-      <span className={styles.dropdown_icon}>
+      <span className={styles['dropdown-icon']}>
         <i className="anticon">
           <svg
             viewBox="0 0 24 24"
