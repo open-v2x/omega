@@ -1,5 +1,9 @@
 const menuList = [
   {
+    path: '/center/site',
+    name: 'Monitoring Overview',
+  },
+  {
     path: '/device',
     name: 'Device',
     icon: 'icon-device',
