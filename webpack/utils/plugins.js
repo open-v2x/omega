@@ -1,6 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+const webpack = require('webpack');
 
 const variable = require('./variable');
 const DotenvPlugin = require('dotenv-webpack');
@@ -49,7 +51,20 @@ function getPlugins() {
     ],
   });
 
-  return [...getHTMLPlugins(), dotenvPlugin, miniCssPlugin, copyPlugin];
+  const nodePolyfillPlugin = new NodePolyfillPlugin();
+
+  const providePlugin = new webpack.ProvidePlugin({
+    Buffer: ['buffer', 'Buffer'],
+  });
+
+  return [
+    ...getHTMLPlugins(),
+    dotenvPlugin,
+    miniCssPlugin,
+    copyPlugin,
+    nodePolyfillPlugin,
+    providePlugin,
+  ];
 }
 
 module.exports = {

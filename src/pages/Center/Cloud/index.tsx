@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import imgLocation from '#/assets/images/location.png';
 import styles from './index.module.less';
+import { Button, Card, Dropdown } from 'antd';
 
 type MarkerType = {
   type: number;
@@ -62,11 +63,20 @@ const CloudPlatform: React.FC = () => {
   return (
     <div className="cloud-platform">
       <PlatformHeader back position="relative">
-        <CountryCascader
-          nodeId={+id}
-          defaultValue={['CN', '320000', '320100', '320115']}
-          mapChange={mapLngLat}
-        />
+        <Dropdown
+          trigger={['click']}
+          dropdownRender={() => (
+            <Card className={styles['map-address']}>
+              <CountryCascader
+                nodeId={+id}
+                defaultValue={['CN', '320000', '320100', '320115']}
+                mapChange={mapLngLat}
+              />
+            </Card>
+          )}
+        >
+          <Button>选择</Button>
+        </Dropdown>
       </PlatformHeader>
       <div className={styles['map-container']}>
         <APILoader akay={process.env.AMAP_KEY}>

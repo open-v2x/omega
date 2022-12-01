@@ -85,6 +85,7 @@ const CountryCascader: React.FC<CountryCascaderProps> = ({ nodeId, defaultValue,
           const res = await countries();
           return res;
         }}
+        label={t('Address')}
       />
       <div style={{ marginLeft: '20px' }}>
         <ProFormSelect
@@ -106,6 +107,7 @@ const CountryCascader: React.FC<CountryCascaderProps> = ({ nodeId, defaultValue,
           }}
           params={{ code: areaCode }}
           options={deviceList}
+          label={t('RSU')}
         />
       </div>
     </div>
