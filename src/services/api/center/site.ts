@@ -20,3 +20,8 @@ export async function countries() {
     params: { cascade: true },
   });
 }
+
+// 下载 MAP 配置
+export async function downloadMapConfig(id: number) {
+  return apiService.get<any>(`v1/rsus/${id}/map`);
+}

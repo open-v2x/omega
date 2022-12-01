@@ -25,6 +25,14 @@ const routes = [
         path: 'site',
         component: React.lazy(() => import('#/pages/Center/Site')),
       },
+      {
+        path: 'cloud',
+        component: React.lazy(() => import('#/pages/Center/Cloud')),
+      },
+      {
+        path: 'map',
+        component: React.lazy(() => import('#/pages/Center/IntersectionMap')),
+      },
     ],
   },
   {
