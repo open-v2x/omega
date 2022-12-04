@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
     "rootDir": "./src", //源码目录
-    "target": "es5", // 指定输出 ECMAScript 目标版本
+    "target": "ESNext", // 指定输出 ECMAScript 目标版本
     "module": "ESNext", //面向未来的ESM模块化
     "strict": true, // 开启所有的严格检查配置
+    "useDefineForClassFields": true,
     "esModuleInterop": true, // 允许 export = xxx 导出 ，并使用 import xxx form "module-name" 导入
     "outDir": "dist",
     /* 指定要包含在编译中的库文件——引用类库——即申明文件，如果输出的模块方式是 es5，就会默认引入 "dom","es5","scripthost" 。如果在 TS 中想要使用一些 ES6 以上版本的语法，就需要引入相关的类库 */

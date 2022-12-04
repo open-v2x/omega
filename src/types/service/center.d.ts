@@ -32,4 +32,19 @@ declare namespace Center {
     name: string;
     streamUrl: string;
   };
+
+  type OnlineRateItem = {
+    rsu: OnlineType;
+    camera: OnlineType;
+    radar: OnlineType;
+    lidar: OnlineType;
+    spat: OnlineType;
+  };
+
+  type RouteInfoItem = {
+    vehicleTotal: number;
+    averageSpeed: number;
+    pedestrianTotal: number;
+    congestion: string;
+  };
 }
