@@ -1,0 +1,258 @@
+.rate-title {
+  height: 20px;
+  margin-bottom: 20px;
+  color: #52c0ff;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: Source Han Sans CN;
+  line-height: 20px;
+  background: linear-gradient(0deg, #0390ff 0%, #1afaff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rate-content {
+  height: 100%;
+  overflow: -moz-scrollbars-none;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
+}
+
+.online,
+.intersection {
+  position: absolute;
+  top: 78px;
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  padding: 28px 27px 10px;
+  color: #fff;
+  transition: transform 0.3s;
+  background: url('../../../../../assets/images/platform_online.png') no-repeat center/cover;
+  background-size: 100% 100%;
+
+  .wrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .left-icon,
+  .right-icon {
+    position: absolute;
+    top: 10px;
+    color: #2feeff;
+    font-size: 24px;
+  }
+
+  @media (max-width: 1600px) {
+    top: 100px;
+  }
+
+  @media (max-width: 1400px) {
+    width: 380px;
+    padding: 24px 20px 10px;
+  }
+
+  @media (max-width: 1200px) {
+    display: none;
+  }
+}
+
+.online {
+  left: 20px;
+  height: calc(70vh - 104px);
+
+  &-image {
+    width: 45px;
+    height: 50px;
+    margin-left: 23px;
+  }
+
+  &-statistics {
+    flex: 1;
+    height: 55px;
+    margin-right: 23px;
+    padding: 0 78px 0 10px;
+    color: #fff;
+    font-weight: 400;
+    font-size: 16px;
+    background: url('../../../../../assets/images/platform_rate.png') no-repeat center/cover;
+    background-size: 100% 100%;
+
+    &-value {
+      margin-left: auto;
+      font-weight: 400;
+      font-size: 34px;
+    }
+  }
+
+  .chart-wrapper {
+    height: 100px;
+
+    > div {
+      height: 100% !important;
+    }
+  }
+
+  .footer {
+    display: inline-block;
+    display: flex;
+    align-items: center;
+    margin: 0 10px 0 46px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .left-icon {
+    right: -26px;
+  }
+
+  &.show {
+    transform: translateX(0);
+  }
+
+  &.hide {
+    transform: translateX(calc(-100% - 20px));
+  }
+
+  @media (max-width: 1600px) {
+    height: calc(70vh - 104px);
+
+    &-image {
+      margin-left: 0;
+    }
+
+    &-statistics {
+      margin-right: 0;
+      padding-right: 50px;
+    }
+  }
+}
+
+.intersection {
+  right: 20px;
+  height: 530px;
+  padding-bottom: 40px;
+
+  .wrapper {
+    padding: 10px 27px 0 8px;
+
+    .information-item {
+      display: flex;
+      max-width: 416px;
+      height: 60px;
+      background: url('../../../../../assets/images/platform_intersection.png') no-repeat
+        center/cover;
+      background-size: 100% 100%;
+    }
+  }
+
+  &-icon {
+    width: 65px;
+    margin-left: 0;
+
+    &-image {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &-name {
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  &-number {
+    margin: 0 13% 0 auto;
+    font-weight: 400;
+    font-size: 30px;
+    font-family: Impact;
+  }
+
+  &-value {
+    margin: 0 2% 0 auto;
+    color: #25ffaf;
+    font-weight: 400;
+    font-size: 18px;
+  }
+
+  .right-icon {
+    left: -26px;
+  }
+
+  &.show {
+    transform: translateX(0);
+  }
+
+  &.hide {
+    transform: translateX(calc(100% + 20px));
+  }
+
+  @media (max-width: 1400px) {
+    height: 460px;
+
+    .wrapper .information-item {
+      height: 60px;
+    }
+
+    &-icon {
+      width: 70px;
+
+      &-image {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    &-name {
+      font-size: 12px;
+    }
+
+    &-number {
+      font-size: 26px;
+    }
+
+    &-value {
+      font-size: 16px;
+    }
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.font-change-name {
+  font-size: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.font-change-name-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  
+  svg {
+    font-size: 14px;
+  }
+}
+
+.f-middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
