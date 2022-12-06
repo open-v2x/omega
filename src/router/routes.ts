@@ -159,7 +159,7 @@ const routes = [
         ),
       },
       {
-        path: 'rsm/details/:id',
+        path: 'rsm/details',
         component: React.lazy(
           () => import('#/pages/Edge/EventManagement/RoadSideSafetyMessage/RSMDetail'),
         ),
@@ -171,7 +171,7 @@ const routes = [
         ),
       },
       {
-        path: 'icw/details/:id',
+        path: 'icw/details',
         component: React.lazy(
           () => import('#/pages/Edge/EventManagement/IntersectionCollisionWarning/ICWDetail'),
         ),

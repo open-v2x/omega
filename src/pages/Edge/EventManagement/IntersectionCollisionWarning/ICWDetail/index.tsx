@@ -1,11 +1,11 @@
 import BaseContainer from '#/components/BaseContainer';
-import { RouterMatchTypes } from '#/typings/pro-component';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import CollisionWarningDetails from '../../components/CollisionWarningDetails';
 
-const ICWDetails: React.FC<RouterMatchTypes> = ({ location: { state } }) => {
+const ICWDetails: React.FC = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
   if (!state) {
     navigate(-1);
   }

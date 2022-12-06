@@ -109,7 +109,7 @@ const menuList = [
         name: 'Roadside Safety Message',
       },
       {
-        path: '/event/rsm/details/:id',
+        path: '/event/rsm/details',
         name: 'RSM Details',
         hideInMenu: true,
       },
@@ -118,7 +118,7 @@ const menuList = [
         name: 'Intersection Collision Warning',
       },
       {
-        path: '/event/icw/details/:id',
+        path: '/event/icw/details',
         name: 'ICW Details',
         hideInMenu: true,
       },

@@ -1,11 +1,11 @@
 import BaseContainer from '#/components/BaseContainer';
-import { RouterMatchTypes } from '#/typings/pro-component';
 import React from 'react';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import BasicInfo from './components/BasicInfo';
 
-const RSMDetails: React.FC<RouterMatchTypes> = ({ location: { state } }) => {
+const RSMDetails: React.FC = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
   if (!state) {
     navigate(-1);
   }
