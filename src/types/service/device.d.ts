@@ -5,7 +5,8 @@ declare namespace Device {
   type DeviceItem = {
     rsuName: string; // RSU 名称
     rsuEsn: string; // 序列号
-    areaCode: string; // 安装位置-区
+    // areaCode: string; // 安装位置-区
+    intersectionCode: string; // 安装路口
     address: string; // 具体位置
   };
   type DeviceListItem = DeviceItem & {
@@ -58,6 +59,8 @@ declare namespace Device {
     desc?: string; // 描述
     rsuIP?: string; // RSU IP
     enabled?: boolean; // RSU 状态
+    lon: string;
+    lat: string;
   };
 
   type CPURunningInfo = {
