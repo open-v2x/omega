@@ -4,4 +4,9 @@ declare namespace API {
     pageNum?: number;
     pageSize?: number;
   };
+
+  type CountryParams = {
+    cascade: boolean;
+    needIntersection?: boolean;
+  };
 }

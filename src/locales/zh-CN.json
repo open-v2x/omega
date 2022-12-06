@@ -469,5 +469,14 @@
   "Free flow": "自由流",
   "Congestion": "拥堵",
   "Point Cloud": "展示点云图",
-  "Show Camera": "展示视频"
+  "Show Camera": "展示视频",
+  "Crossing Management": "路口管理",
+  "Crossing Name": "路口名称",
+  "Crossing Area": "路口区域",
+  "Add Crossing": "添加路口",
+  "Create Crossing": "创建路口配置",
+  "Edit Crossing": "编辑路口配置",
+  "Crossing Code": "路口编号",
+  "Are you sure you want to delete the crossing?": "你确定要删除这个路口吗?"
+
 }

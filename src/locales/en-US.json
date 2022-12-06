@@ -469,5 +469,13 @@
   "Free flow": "Free flow",
   "Congestion": "Congestion",
   "Point Cloud": "Point Cloud",
-  "Show Camera": "Camera"
+  "Show Camera": "Camera",
+  "Crossing Management": "Crossing Management",
+  "Crossing Name": "Crossing Name",
+  "Crossing Area": "Crossing Area",
+  "Add Crossing": "Add Crossing",
+  "Create Crossing": "Create Crossing",
+  "Edit Crossing": "Edit Crossing",
+  "Crossing Code": "Crossing Code",
+  "Are you sure you want to delete the crossing?": "Are you sure you want to delete the crossing?"
 }

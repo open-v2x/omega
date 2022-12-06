@@ -84,6 +84,10 @@ const menuList = [
         name: 'Query Details',
         hideInMenu: true,
       },
+      {
+        path: '/maintenance/crossing',
+        name: 'Crossing Management',
+      },
     ],
   },
   {

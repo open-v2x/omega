@@ -4,7 +4,7 @@ import React from 'react';
 
 export const renderAreaFormItem = (
   _: any,
-  { type, defaultRender, ...rest }: any,
+  { type, defaultRender, params, ...rest }: any,
   form: FormInstance,
 ) => {
   if (type === 'form') {
@@ -12,7 +12,7 @@ export const renderAreaFormItem = (
   }
   const status = form.getFieldValue('state');
   if (status !== 'open') {
-    return <Country {...rest} />;
+    return <Country {...rest} params={params || { cascade: true, needIntersection: false }} />;
   }
   return defaultRender(_);
 };
