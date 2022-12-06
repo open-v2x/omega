@@ -154,4 +154,24 @@ declare namespace Config {
     networkStatus?: string;
     data: QueryStatusDetails | QueryStatisticsDetails | QueryDeviceDetails[];
   };
+
+  type CreateCrossingParams = {
+    code: string;
+    name: string;
+    lat: string;
+    lng: string;
+    areaCode: string;
+    province?: string[];
+  };
+
+  type CrossingItem = CreateCrossingParams & {
+    id: number;
+    countryCode: string;
+    countryName: string;
+    provinceCode: string;
+    provinceName: string;
+    cityCode: string;
+    cityName: string;
+    areaName: string;
+  };
 }

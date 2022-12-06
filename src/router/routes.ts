@@ -128,6 +128,10 @@ const routes = [
           () => import('#/pages/Edge/MaintenanceManagement/RSUInfoQuery/InfoQueryDetail'),
         ),
       },
+      {
+        path: 'crossing',
+        component: React.lazy(() => import('#/pages/Edge/MaintenanceManagement/Crossing/List')),
+      },
     ],
   },
   {

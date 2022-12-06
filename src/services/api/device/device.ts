@@ -21,9 +21,9 @@ export async function notRegisterDeviceList(params: API.PageParams) {
   });
 }
 
-export async function fetchCountries() {
+export async function fetchCountries(params: API.CountryParams) {
   return apiService.get<any>(`v1/countries`, {
-    params: { cascade: true },
+    params,
   });
 }
 
