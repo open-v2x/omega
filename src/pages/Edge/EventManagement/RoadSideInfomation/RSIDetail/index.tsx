@@ -1,5 +1,4 @@
 import BaseContainer from '#/components/BaseContainer';
-import { RouterMatchTypes } from '#/typings/pro-component';
 import { ProCard } from '@ant-design/pro-components';
 import React, { useEffect, useState } from 'react';
 import BasicInfo from './components/BasicInfo';
@@ -11,9 +10,10 @@ import {
   ToolBarControl,
   Marker,
 } from '@uiw/react-amap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { eventInfoDetail } from '#/services/api/event/rsi';
-const RSIDetails: React.FC<RouterMatchTypes> = ({ match: { params } }) => {
+const RSIDetails: React.FC = () => {
+  const params = useParams();
   const navigate = useNavigate();
   const [data, setData] = useState<Event.RSIDetails>();
   if (!params.id) {

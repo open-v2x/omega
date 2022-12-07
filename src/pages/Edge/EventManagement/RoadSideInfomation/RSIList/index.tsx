@@ -67,7 +67,12 @@ const RSIList: React.FC = () => {
       width: 160,
       fixed: 'right',
       render: (_, row) => [
-        <Button key="details" onClick={() => navigate(`/event/rsi/details/${row.id}`)}>
+        <Button
+          type="link"
+          size="small"
+          key="details"
+          onClick={() => navigate(`/event/rsi/details/${row.id}`)}
+        >
           {t('Details')}
         </Button>,
       ],
