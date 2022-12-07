@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import BaseContainer from '#/components/BaseContainer';
 import { downloadMapConfig } from '#/services/api/config/map';
-import { RouterMatchTypes } from '#/typings/pro-component';
 import { ProCard } from '@ant-design/pro-components';
 import { Stage, Layer, Rect, Line, Group } from 'react-konva';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from './index.module.less';
 
 const canvasWidth = window.innerWidth - 256 - 40;
@@ -126,8 +125,9 @@ const LaneMap: React.FC<LaneMapProps> = ({ laneNumbers, laneWidths, stroke }) =>
   );
 };
 
-const ConfigPreview: React.FC<RouterMatchTypes> = ({ match: { params } }) => {
+const ConfigPreview: React.FC = () => {
   const naviagte = useNavigate();
+  const params = useParams();
   const [data, setData] = useState<any>();
 
   if (!params.id) {

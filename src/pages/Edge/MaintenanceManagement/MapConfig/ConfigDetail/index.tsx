@@ -1,14 +1,14 @@
 import React from 'react';
 import BaseContainer from '#/components/BaseContainer';
 import { mapConfigInfo } from '#/services/api/config/map';
-import { RouterMatchTypes } from '#/typings/pro-component';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import BasicInfo from './components/BasicInfo';
 import SendList from './components/SendList';
 
-const ConfigDetails: React.FC<RouterMatchTypes> = ({ match: { params } }) => {
+const ConfigDetails: React.FC = () => {
   const [data, setData] = useState<Config.MapListItem>();
+  const params = useParams();
   const navigate = useNavigate();
   const mapId = +params.id;
   if (!mapId) {
