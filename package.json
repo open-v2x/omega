@@ -43,7 +43,6 @@
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
     "@uiw/react-amap-label-marker": "^4.0.3",
-    "@uiw/react-amap-polygon-editor": "^4.1.0",
     "babel-loader": "^9.0.0",
     "babel-plugin-import": "^1.13.5",
     "buffer": "^6.0.3",
