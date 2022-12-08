@@ -4,7 +4,6 @@ import { renderAreaFormatName } from '#/components/Country/renderHelper';
 import ParameterInfo from '#/components/ParameterInfo';
 import { DeviceOnlineStatusOptions, DeviceStatusOptions } from '#/constants/edge';
 import { deviceInfo, runningInfo } from '#/services/api/device/device';
-import { RouterMatchTypes } from '#/typings/pro-component';
 import { ProCard } from '@ant-design/pro-components';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
@@ -149,7 +148,7 @@ const RunningInfo: React.FC<{ runningData: Device.DeviceRunningInfo | undefined 
   );
 };
 
-const DeviceDetails: React.FC<RouterMatchTypes> = () => {
+const DeviceDetails: React.FC = () => {
   const params = useParams<{ label: string; [key: string]: string }>();
 
   const [data, setData] = useState<Device.DeviceListItem>();

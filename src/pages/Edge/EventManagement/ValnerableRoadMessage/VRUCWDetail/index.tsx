@@ -1,10 +1,10 @@
 import BaseContainer from '#/components/BaseContainer';
-import { RouterMatchTypes } from '#/typings/pro-component';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import CollisionWarningDetails from '../../components/CollisionWarningDetails';
 
-const VRUCWDetails: React.FC<RouterMatchTypes> = ({ location: { state } }) => {
+const VRUCWDetails: React.FC = () => {
+  const { state } = useLocation();
   const navigate = useNavigate();
   if (!state) {
     navigate(-1);

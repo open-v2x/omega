@@ -2,6 +2,7 @@ import { useRootStore } from '#/store/root';
 import { PageContainer } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import React, { FC } from 'react';
+
 type BaseContainerType = {
   children: React.ReactNode;
   back?: boolean;
@@ -13,6 +14,7 @@ type BaseContainerType = {
  */
 const BaseContainer: FC<BaseContainerType> = ({ children, back = false, disablePage = false }) => {
   const { history } = useRootStore();
+
   const onBack = () => {
     history.back();
   };
@@ -21,7 +23,10 @@ const BaseContainer: FC<BaseContainerType> = ({ children, back = false, disableP
     <>{children}</>
   ) : (
     <PageContainer
-      header={{ breadcrumb: undefined, style: { background: 'white' } }}
+      header={{
+        breadcrumb: undefined,
+        style: { background: 'white' },
+      }}
       extra={
         back
           ? [

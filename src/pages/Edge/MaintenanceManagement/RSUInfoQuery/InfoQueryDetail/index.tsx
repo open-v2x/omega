@@ -1,6 +1,5 @@
 import BaseContainer from '#/components/BaseContainer';
 import { infoQueryDetails } from '#/services/api/config/query';
-import { RouterMatchTypes } from '#/typings/pro-component';
 import { ProCard } from '@ant-design/pro-components';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
@@ -8,7 +7,7 @@ import DataStatistics from './components/DataStatistics';
 import DeviceInfo from './components/DeviceInfo';
 import OperatingStatus from './components/OperatingStatus';
 
-const InfoQueryDetails: React.FC<RouterMatchTypes> = () => {
+const InfoQueryDetails: React.FC = () => {
   const navigate = useNavigate();
   const params = useParams<{ label: string; [key: string]: string }>();
   const [searchParams] = useSearchParams();

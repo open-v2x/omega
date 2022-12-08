@@ -8,6 +8,10 @@ do
   file=${FILE_PATH}/${file_name}
   sed -i "s#APISERVER#${API_SERVER}#g" "$file"
   sed -i "s#AMAPKEY#${MAP_KEY}#g" "$file"
+  sed -i "s#MQTTURL#${MQTT_URL}#g" "$file"
+  sed -i "s#MQTTPATH#${MQTT_PATH}#g" "$file"
+  sed -i "s#MQTTUSERNAME#${MQTT_USERNAME}#g" "$file"
+  sed -i "s#MQTTPASSWORD#${MQTT_PASSWORD}#g" "$file"
 done
 
 ./docker-entrypoint.sh

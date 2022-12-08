@@ -63,13 +63,3 @@ type InfoMapType = {
   span?: number;
   unit?: string;
 };
-
-type RouterMatchTypes = {
-  location: {
-    query: Record<string, string>;
-    state: unknown;
-  };
-  match: {
-    params: Record<string, string>;
-  };
-};
