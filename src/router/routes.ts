@@ -37,12 +37,14 @@ const routes = [
   },
   {
     path: '/device',
-    component: React.lazy(() => import('#/layouts/SiderLayout')),
+    component: React.lazy(() => import('#/layouts/ContainerLayout')),
     layout: true,
     auth: true,
     children: [
       {
         path: 'rsu',
+        name: 'Device',
+        key: 'Device',
         component: React.lazy(() => import('#/pages/Edge/DeviceManagement/RSU/DeviceList')),
       },
       {

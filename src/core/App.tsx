@@ -22,11 +22,13 @@ const App = () => {
     return routes;
   };
 
+  const basename = window.__POWERED_BY_QIANKUN__ ? '/omega' : undefined;
+
   return (
     <>
       <AppContext.Provider value={getLiveContextValue()}>
         <ConfigProvider locale={{ locale: getLocale() }}>
-          <BrowserRouter>
+          <BrowserRouter basename={basename}>
             <Suspense fallback={<PageLoading />}>
               <RenderRouter />
             </Suspense>

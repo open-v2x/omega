@@ -1,11 +1,18 @@
 const webpackMerge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
+const util = require('./utils/util');
+
+const { getPackageName } = util;
+console.log('packageName:', getPackageName());
 
 const config = {
   mode: 'production',
   cache: { type: 'filesystem', buildDependencies: { config: [__filename] } },
   output: {
     pathinfo: false, //优化
+    library: `${getPackageName()}`,
+    libraryTarget: 'umd',
+    chunkLoadingGlobal: `webpackJsonp_${getPackageName()}`,
   },
   optimization: {
     minimize: true, //开启压缩

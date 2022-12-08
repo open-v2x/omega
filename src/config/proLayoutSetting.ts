@@ -5,7 +5,10 @@ const proLayoutSetting: ProLayoutProps = {
   layout: 'mix',
   contentWidth: 'Fluid',
   fixSiderbar: true,
-  iconfontUrl: '/assets/font/iconfont.js',
+  iconfontUrl:
+    process.env.NODE_ENV === 'development'
+      ? '//localhost:2333/assets/font/iconfont.js'
+      : '/omega/assets/font/iconfont.js',
   token: {
     colorBgAppListIconHover: 'rgba(0,0,0,0.06)',
     colorTextAppListIconHover: 'rgba(255,255,255,0.95)',

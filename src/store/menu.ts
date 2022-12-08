@@ -2,9 +2,11 @@ import { menuFilter } from '#/components/Layout/GlobalNav/common';
 import { MenuDataItem } from '@ant-design/pro-components';
 import create from 'zustand';
 import menuList from '#/router/menus';
+import { treeToList } from '#/router/routerHelper';
 interface IMenuStore {
   toggle: boolean;
   menus: MenuDataItem[];
+  flatMenus: any[];
   rightMenus: [];
   relatedMenus: MenuDataItem[];
   favoriteMenu: any[];
@@ -36,6 +38,7 @@ const useMenuStore = create<IMenuStore>((set, get) => ({
       ],
     },
   ],
+  flatMenus: [],
   favoriteMenuInit: false,
   setMenus: menus => {
     set({
@@ -45,6 +48,7 @@ const useMenuStore = create<IMenuStore>((set, get) => ({
   fetchMenus: () => {
     set({
       menus: menuList,
+      flatMenus: treeToList(menuList, 'children', ['path', 'name']),
     });
   },
   fetchFavoriteMenus: () => {
