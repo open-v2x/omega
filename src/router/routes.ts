@@ -23,15 +23,30 @@ const routes = [
     children: [
       {
         path: 'site',
-        component: React.lazy(() => import('#/pages/Center/Site')),
+        component: React.lazy(
+          () =>
+            import(
+              /* webpackChunkName: "center_site",webpackPrefetch: true */ '#/pages/Center/Site'
+            ),
+        ),
       },
       {
         path: 'cloud',
-        component: React.lazy(() => import('#/pages/Center/Cloud')),
+        component: React.lazy(
+          () =>
+            import(
+              /* webpackChunkName: "center_cloud",webpackPrefetch: true */ '#/pages/Center/Cloud'
+            ),
+        ),
       },
       {
         path: 'map',
-        component: React.lazy(() => import('#/pages/Center/IntersectionMap')),
+        component: React.lazy(
+          () =>
+            import(
+              /* webpackChunkName: "center_map",webpackPrefetch: true */ '#/pages/Center/IntersectionMap'
+            ),
+        ),
       },
     ],
   },
@@ -43,32 +58,74 @@ const routes = [
     children: [
       {
         path: 'rsu',
-        component: React.lazy(() => import('#/pages/Edge/DeviceManagement/RSU/DeviceList')),
+        component: React.lazy(
+          () =>
+            import(
+              /* webpackChunkName: "edge_device_rsu",webpackPrefetch: true */
+              '#/pages/Edge/DeviceManagement/RSU/DeviceList'
+            ),
+        ),
       },
       {
         path: 'rsu/details/:id',
-        component: React.lazy(() => import('#/pages/Edge/DeviceManagement/RSU/DeviceDetail')),
+        component: React.lazy(
+          () =>
+            import(
+              /* webpackChunkName: "edge_device_rsu_detail",webpackPrefetch: true */
+              '#/pages/Edge/DeviceManagement/RSU/DeviceDetail'
+            ),
+        ),
       },
       {
         path: 'model',
-        component: React.lazy(() => import('#/pages/Edge/DeviceManagement/RSUModel')),
+        component: React.lazy(
+          () =>
+            import(
+              /* webpackChunkName: "edge_device_model",webpackPrefetch: true */
+              '#/pages/Edge/DeviceManagement/RSUModel'
+            ),
+        ),
       },
 
       {
         path: 'camera',
-        component: React.lazy(() => import('#/pages/Edge/DeviceManagement/Camera')),
+        component: React.lazy(
+          () =>
+            import(
+              /* webpackChunkName: "edge_device_camera",webpackPrefetch: true */
+              '#/pages/Edge/DeviceManagement/Camera'
+            ),
+        ),
       },
       {
         path: 'radar',
-        component: React.lazy(() => import('#/pages/Edge/DeviceManagement/Radar')),
+        component: React.lazy(
+          () =>
+            import(
+              /* webpackChunkName: "edge_device_radar",webpackPrefetch: true */
+              '#/pages/Edge/DeviceManagement/Radar'
+            ),
+        ),
       },
       {
         path: 'lidar',
-        component: React.lazy(() => import('#/pages/Edge/DeviceManagement/Lidar')),
+        component: React.lazy(
+          () =>
+            import(
+              /* webpackChunkName: "edge_device_lidar",webpackPrefetch: true */
+              '#/pages/Edge/DeviceManagement/Lidar'
+            ),
+        ),
       },
       {
         path: 'spat',
-        component: React.lazy(() => import('#/pages/Edge/DeviceManagement/SPAT')),
+        component: React.lazy(
+          () =>
+            import(
+              /* webpackChunkName: "edge_device_spat",webpackPrefetch: true */
+              '#/pages/Edge/DeviceManagement/SPAT'
+            ),
+        ),
       },
     ],
   },
@@ -81,19 +138,31 @@ const routes = [
       {
         path: 'map',
         component: React.lazy(
-          () => import('#/pages/Edge/MaintenanceManagement/MapConfig/ConfigList'),
+          () =>
+            import(
+              /* webpackChunkName: "edge_maintenance_map",webpackPrefetch: true */
+              '#/pages/Edge/MaintenanceManagement/MapConfig/ConfigList'
+            ),
         ),
       },
       {
         path: 'map/details/:id',
         component: React.lazy(
-          () => import('#/pages/Edge/MaintenanceManagement/MapConfig/ConfigDetail'),
+          () =>
+            import(
+              /* webpackChunkName: "edge_maintenance_map_detail",webpackPrefetch: true */
+              '#/pages/Edge/MaintenanceManagement/MapConfig/ConfigDetail'
+            ),
         ),
       },
       {
         path: 'map/preview/:id',
         component: React.lazy(
-          () => import('#/pages/Edge/MaintenanceManagement/MapConfig/ConfigPreview'),
+          () =>
+            import(
+              /* webpackChunkName: "edge_maintenance_map_preview",webpackPrefetch: true */
+              '#/pages/Edge/MaintenanceManagement/MapConfig/ConfigPreview'
+            ),
         ),
       },
       {
@@ -149,13 +218,21 @@ const routes = [
       {
         path: 'rsi/details/:id',
         component: React.lazy(
-          () => import('#/pages/Edge/EventManagement/RoadSideInfomation/RSIDetail'),
+          () =>
+            import(
+              /* webpackChunkName: "edge_event_rsi_detail",webpackPrefetch: true */
+              '#/pages/Edge/EventManagement/RoadSideInfomation/RSIDetail'
+            ),
         ),
       },
       {
         path: 'rsm',
         component: React.lazy(
-          () => import('#/pages/Edge/EventManagement/RoadSideSafetyMessage/RSMList'),
+          () =>
+            import(
+              /* webpackChunkName: "edge_event_rsm",webpackPrefetch: true */
+              '#/pages/Edge/EventManagement/RoadSideSafetyMessage/RSMList'
+            ),
         ),
       },
       {
