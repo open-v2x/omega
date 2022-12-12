@@ -22,7 +22,7 @@ const PlatformHeader: React.FC<PlatformHeaderProps> = ({
   position = 'absolute',
   children,
 }) => (
-  <div className={styles.header} style={{ position }}>
+  <div className={classNames(styles.header, styles[`header-${position}`])}>
     <img className={styles['header-image']} src={imgHead} alt="" />
     <div className={classNames(styles['f-middle'], styles['header-title'])}>
       {t('OpenV2X Central Portal')}

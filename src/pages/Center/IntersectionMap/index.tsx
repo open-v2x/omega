@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import RoadMapXml from './components/RoadMapXml';
 import RoadMap from './components/RoadMap';
 import IntersectionStatistics from './components/IntersectionStatistics';
-
+import BgContainer from '../components/BgContainer';
 const IntersectionMap: React.FC = () => {
   const [searchParams] = useSearchParams();
   const type = searchParams.get('type');
@@ -13,14 +13,14 @@ const IntersectionMap: React.FC = () => {
   const nodeId = searchParams.get('nodeId');
 
   return (
-    <div className="cloud-platform">
+    <BgContainer>
       <PlatformHeader back />
       <div>
         {type === '1' && <RoadMap esn={esn as string} nodeId={nodeId as string} />}
         {type === '2' && <RoadMapXml id={id as string} />}
         <IntersectionStatistics esn={esn as string} />
       </div>
-    </div>
+    </BgContainer>
   );
 };
 
