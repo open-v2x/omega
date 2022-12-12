@@ -6,11 +6,12 @@ import imgNavigate from '#/assets/images/navigate.png';
 import { useNavigate } from 'react-router-dom';
 import PlatformHeader from '#/components/PlatformHeader';
 import { edgeSiteList } from '#/services/api/center/site';
+import BgContainer from '../components/BgContainer';
 
 const EdgeSite: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <div className="cloud-platform f-column">
+    <BgContainer>
       <PlatformHeader position="relative" />
       <div className={styles['edge-site']}>
         <div className={styles.wrapper}>
@@ -67,7 +68,7 @@ const EdgeSite: React.FC = () => {
           />
         </div>
       </div>
-    </div>
+    </BgContainer>
   );
 };
 

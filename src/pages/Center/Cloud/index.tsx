@@ -14,6 +14,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import imgLocation from '#/assets/images/location.png';
 import styles from './index.module.less';
 import { Button, Card, Dropdown } from 'antd';
+import BgContainer from '../components/BgContainer';
 
 type MarkerType = {
   type: number;
@@ -61,7 +62,7 @@ const CloudPlatform: React.FC = () => {
   );
 
   return (
-    <div className="cloud-platform">
+    <BgContainer>
       <PlatformHeader back position="relative">
         <Dropdown
           trigger={['click']}
@@ -88,7 +89,7 @@ const CloudPlatform: React.FC = () => {
           />
         </APILoader>
       </div>
-    </div>
+    </BgContainer>
   );
 };
 
