@@ -52,4 +52,6 @@ export default class BaseService {
     put<T>(this.getFullPath(path), data, config);
 }
 
+console.log('打包后的 config', apiConfig.API_SERVER);
+
 export const apiService = new BaseService(apiConfig.API_SERVER);

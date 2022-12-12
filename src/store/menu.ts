@@ -46,8 +46,22 @@ const useMenuStore = create<IMenuStore>((set, get) => ({
     });
   },
   fetchMenus: () => {
+    const formatMenus = (menus?: MenuDataItem[]): MenuDataItem[] => {
+      if (!menus) return [];
+
+      const menu = menus.map(({ icon, children: childrens, ...item }) => ({
+        ...item,
+        name: t(item.name),
+        icon: icon,
+        children: childrens && formatMenus(childrens),
+      }));
+      return menu;
+    };
+
+    const menus = formatMenus(menuList);
+
     set({
-      menus: menuList,
+      menus,
       flatMenus: treeToList(menuList, 'children', ['path', 'name']),
     });
   },

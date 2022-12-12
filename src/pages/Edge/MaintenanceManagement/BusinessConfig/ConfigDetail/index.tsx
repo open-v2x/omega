@@ -3,10 +3,9 @@ import CardList from '#/components/CardList';
 import ParameterDeviceList from '#/components/ParameterDeviceList';
 import ParameterInfo from '#/components/ParameterInfo';
 import { parameterConfigInfo } from '#/services/api/config/business';
-import { RouterMatchTypes } from '#/typings/pro-component';
 import { ProCard } from '@ant-design/pro-components';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // 基本信息
 type BasicInfoType = {
@@ -26,8 +25,9 @@ const BasicInfo: React.FC<{ basicInfo: BasicInfoType | undefined }> = ({ basicIn
   );
 };
 
-const ConfigDetails: React.FC<RouterMatchTypes> = ({ match: { params } }) => {
+const ConfigDetails: React.FC = () => {
   const navigate = useNavigate();
+  const params = useParams();
   const [data, setData] = useState<Config.ParameterListItem>();
   if (!+params.id) {
     navigate(-1);

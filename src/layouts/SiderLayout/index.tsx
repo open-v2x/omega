@@ -1,5 +1,5 @@
 import { useMenuStore } from '#/store/menu';
-import { MenuDataItem, ProLayout } from '@ant-design/pro-components';
+import { ProLayout } from '@ant-design/pro-components';
 import React, { FC, useEffect } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import styles from './index.module.less';
@@ -12,18 +12,6 @@ const SiderLayout: FC = () => {
 
   const toggle = () => {
     menuStore.toggle = !menuStore.toggle;
-  };
-
-  const formatMenus = (menus?: MenuDataItem[]): MenuDataItem[] => {
-    if (!menuStore.menus) return [];
-
-    const menu = menus.map(({ icon, children: childrens, ...item }) => ({
-      ...item,
-      name: t(item.name),
-      icon: icon,
-      children: childrens && formatMenus(childrens),
-    }));
-    return menu;
   };
 
   const init = async () => {
@@ -41,10 +29,7 @@ const SiderLayout: FC = () => {
       className={styles['layout-content']}
       onCollapse={toggle}
       siderWidth={246}
-      menuDataRender={() => {
-        const menus = formatMenus(menuStore.menus);
-        return menus;
-      }}
+      menuDataRender={() => menuStore.menus}
       menuItemRender={item => (
         <div
           style={{
@@ -74,7 +59,7 @@ const SiderLayout: FC = () => {
           breadcrumbName: t(router.breadcrumbName),
         }))
       }
-      itemRender={(route, params, routes, paths) => {
+      itemRender={(route, _params, routes, paths) => {
         const first = routes.indexOf(route) === 0;
         return first ? (
           <Link to={paths.join('/')}>{route.breadcrumbName}</Link>
