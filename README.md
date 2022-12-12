@@ -6,4 +6,4 @@ War Greymon and the Metal Garurumon.
 
 # Important
 
-This project is test.
+This branch is only use in qiankunJS. so don`t use the common design. 
