@@ -1,3 +1,4 @@
+import { RequestData } from '@ant-design/pro-components';
 import { clearStorage } from '#/utils/storage';
 import { AxiosResponse, AxiosError } from 'axios';
 import { message } from 'antd';
@@ -14,6 +15,7 @@ class ServerResponseSuccessManager {
   codeParser(response: AxiosResponse) {
     const code = response?.status;
     const resData = response?.data;
+    console.log('状态解码', code, resData);
     const parser = {
       '401': () => this.handleCodeIs401(resData),
       '200': () => Promise.resolve(resData),
@@ -59,8 +61,24 @@ class ServerResponseFailedManager {
    */
   getErrorMessage(error: AxiosError) {
     const { detail } = error.response.data;
-    message.error(detail?.msg || error.message);
     console.error('error.response==', detail || error.message);
+    const { msg, code } = detail;
+    const parser = {
+      '403': () => this.handleCodeIs403(),
+      default: () => this.handleCodeIsDefault(msg || error.message),
+    };
+    return parser[code] ? parser[code]() : parser.default;
+  }
+
+  handleCodeIs403() {
+    clearStorage();
+    setTimeout(() => {
+      window.location.href = '/user/login';
+    }, 1000);
+  }
+
+  handleCodeIsDefault(msg: string) {
+    message.error(msg);
   }
 }
 
