@@ -1,4 +1,3 @@
-import { RequestData } from '@ant-design/pro-components';
 import { clearStorage } from '#/utils/storage';
 import { AxiosResponse, AxiosError } from 'axios';
 import { message } from 'antd';
