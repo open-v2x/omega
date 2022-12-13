@@ -3,7 +3,7 @@ name: ci
 on:
   push:
     branches:
-      - 'master'
+      - 'qiankun'
 
 jobs:
   docker:
@@ -27,7 +27,7 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: openv2x/omega:master
+          tags: openv2x/omega:qiankun
           build-args: |
             GIT_BRANCH=${{ github.ref_name }}
             REPO_URL=https://github.com/open-v2x/omega
@@ -48,9 +48,9 @@ jobs:
             set -e
 
             (docker images | grep none | awk '{print $3}' | xargs -I{} docker rmi -f {}) || true
-            docker pull openv2x/omega:master
-            docker tag openv2x/omega:master registry.cn-shanghai.aliyuncs.com/openv2x/omega:master
-            docker push registry.cn-shanghai.aliyuncs.com/openv2x/omega:master
+            docker pull openv2x/omega:qiankun
+            docker tag openv2x/omega:qiankun registry.cn-shanghai.aliyuncs.com/openv2x/omega:qiankun
+            docker push registry.cn-shanghai.aliyuncs.com/openv2x/omega:qiankun
 
   ssh:
     needs: acr
