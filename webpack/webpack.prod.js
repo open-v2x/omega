@@ -13,6 +13,7 @@ const config = {
     library: `${getPackageName()}`,
     libraryTarget: 'umd',
     chunkLoadingGlobal: `webpackJsonp_${getPackageName()}`,
+    publicPath: '/omega-portal/',
   },
   optimization: {
     minimize: true, //开启压缩

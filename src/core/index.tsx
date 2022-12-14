@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ReactDOM from 'react-dom';
+import './public-path.js';
 import './index.less';
 import 'antd/dist/antd.css';
 import App from './App';
@@ -22,9 +23,6 @@ console.log('是否是qiankun:', window.__POWERED_BY_QIANKUN__);
  */
 if (!window.__POWERED_BY_QIANKUN__) {
   render({});
-} else {
-  // @ts-ignore
-  __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
 }
 /**
  * bootstrap 只会在微应用初始化的时候调用一次，下次微应用重新进入时会直接调用 mount 钩子，不会再重复触发 bootstrap。
