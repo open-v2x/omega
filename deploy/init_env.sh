@@ -1,6 +1,6 @@
 #! /bin/bash
 
-FILE_PATH=/var/www/omega/js
+FILE_PATH=/var/www/omega/omega-portal/js
 
 # shellcheck disable=SC2010
 for file_name in $(ls $FILE_PATH |grep "index.*.js")
