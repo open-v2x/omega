@@ -19,7 +19,8 @@ LABEL commit-ref=$COMMIT_REF
 
 RUN mkdir /etc/nginx/omeg
 
-COPY --from=builder /root/omega/dist /var/www/omega
+COPY --from=builder /root/omega/dist /var/www/omega/omega-portal
+COPY /var/www/omega/omega-portal/index.html /var/www/omega/index.html
 COPY ./deploy/init_env.sh /init_env.sh
 WORKDIR /
 CMD ["sh", "init_env.sh"]
