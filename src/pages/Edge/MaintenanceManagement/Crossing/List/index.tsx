@@ -20,7 +20,8 @@ const Crossing: FC = () => {
     {
       title: t('Crossing Area'),
       dataIndex: 'countryName',
-      render: (_, row) => renderAreaFormatName(row),
+      fieldProps: { params: { cascade: true, needIntersection: false } },
+      render: (_, row) => renderAreaFormatName(row, true),
       renderFormItem: renderAreaFormItem,
       search: true,
     },
