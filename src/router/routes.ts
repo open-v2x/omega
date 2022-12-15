@@ -299,6 +299,19 @@ const routes = [
     path: '/',
     redirect: '/device/rsu',
   },
+  {
+    path: '/device',
+    redirect: '/device/rsu',
+  },
+  {
+    path: '/maintenance',
+    redirect: '/maintenance/map',
+  },
+  {
+    path: '/event',
+    redirect: '/event/rsi',
+  },
+  { path: '/system', redirect: 'site' },
 ];
 
 export default routes;

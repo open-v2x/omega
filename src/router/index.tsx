@@ -7,14 +7,18 @@ import WrapperRouteComponent from './component/WrapperRoute';
 const getRouteConfig = (routeConfig: IRouteConfig): RouteObject => {
   const { path, layout, component: Comp, children, auth, redirect } = routeConfig;
 
-  if (redirect) {
-    return {
-      path,
-      element: <Navigate to={redirect} />,
-    };
-  }
+  // if (redirect) {
+  //   return {
+  //     path,
+  //     element: <Navigate to={redirect} replace />,
+  //   };
+  // }
 
-  const element = <WrapperRouteComponent auth={auth} children={<Comp />} />;
+  const element = redirect ? (
+    <Navigate to={redirect} replace />
+  ) : (
+    <WrapperRouteComponent auth={auth} children={<Comp />} redirect={redirect} />
+  );
 
   let childrenRoutes: any[] = [];
 
