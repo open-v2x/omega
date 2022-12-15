@@ -14,7 +14,6 @@ class ServerResponseSuccessManager {
   codeParser(response: AxiosResponse) {
     const code = response?.status;
     const resData = response?.data;
-    console.log('状态解码', code, resData);
     const parser = {
       '401': () => this.handleCodeIs401(resData),
       '200': () => Promise.resolve(resData),
