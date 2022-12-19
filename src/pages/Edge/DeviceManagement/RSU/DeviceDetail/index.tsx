@@ -96,15 +96,31 @@ const BasicInfo: React.FC<{ basicInfo: Device.DeviceListItem | undefined }> = ({
       label: t('Organization'),
     },
     {
+      key: 'lon',
+      label: t('Longitude'),
+    },
+    {
+      key: 'lat',
+      label: t('Latitude'),
+    },
+    {
       key: 'desc',
       label: t('Describe'),
       block: true,
     },
   ];
 
+  const data = { ...basicInfo };
+  if (data.location) {
+    // @ts-ignore
+    data.lon = data.location.lon;
+    // @ts-ignore
+    data.lat = data.location.lat;
+  }
+
   return (
     <ProCard title={t('Basic Information')} className={styles.card}>
-      <CardList infoMap={infoMap} info={basicInfo} xl={12} />
+      <CardList infoMap={infoMap} info={data} xl={12} />
     </ProCard>
   );
 };
