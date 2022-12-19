@@ -477,5 +477,11 @@
   "Create Crossing": "Create Crossing",
   "Edit Crossing": "Edit Crossing",
   "Crossing Code": "Crossing Code",
-  "Are you sure you want to delete the crossing?": "Are you sure you want to delete the crossing?"
+  "Are you sure you want to delete the crossing?": "Are you sure you want to delete the crossing?",
+  "Lidar Connection URL": "lidar data stream",
+  "error.1062": "operation failed, {{msg}} repeat, please check it!",
+  "error.1406": "operation failed, {{msg}} is too long, please short-cut!",
+  "error.1116": "operation failed, intersectionId {{ intersectionId }} and phaseId {{ phaseId }} repeat, Check it please!",
+  "Lidar URL": "Lidar URL",
+  "Please enter lidar URL": "Please enter lidar URL"
 }

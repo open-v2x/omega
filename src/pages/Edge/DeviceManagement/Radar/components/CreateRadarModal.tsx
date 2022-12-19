@@ -50,24 +50,6 @@ const CreateRadarModal: FC<CreateModalProps> = ({ editInfo, isDetails = false, s
       ],
     },
     {
-      key: 'streamUrl',
-      children: [
-        {
-          required: true,
-          width: 912,
-          name: 'streamUrl',
-          label: t('Video Stream URL'),
-          disabled: isDetails,
-          rules: [
-            {
-              required: true,
-              message: t('Please enter video stream URL'),
-            },
-          ],
-        },
-      ],
-    },
-    {
       key: 'lng',
       children: [
         {
