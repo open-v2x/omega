@@ -39,6 +39,7 @@ declare namespace Device {
     depart: string; // 所属组织
     runningInfo: Config.QueryStatusDetails; // 运行信息
     config: Config.ParameterInfo[]; // 配置参数
+    location: { lat: number; lon: number };
   };
 
   type ModelListItem = {

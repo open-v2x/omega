@@ -15,7 +15,8 @@ function getHTMLPlugins() {
     template: path.join(PUBLIC_PATH, 'index.html'),
     // filename: path.join(DIST_PATH, 'index.html'),
     filename: 'index.html',
-    inject: 'body', //true 插入body底部，head:插入head标签，false:不生成js文件
+    inject: true, //true 插入body底部，head:插入head标签，false:不生成js文件
+    favicon: path.join(PUBLIC_PATH, 'favicon.ico'),
     // hash: true, // 会在打包好的bundle.js后面加上hash串
     title: '',
     minify: {
