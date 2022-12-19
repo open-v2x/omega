@@ -477,6 +477,11 @@
   "Create Crossing": "创建路口配置",
   "Edit Crossing": "编辑路口配置",
   "Crossing Code": "路口编号",
-  "Are you sure you want to delete the crossing?": "你确定要删除这个路口吗?"
-
+  "Are you sure you want to delete the crossing?": "你确定要删除这个路口吗?",
+  "Lidar Connection URL": "激光雷达数据流",
+  "error.1062": "操作失败, {{msg}} 重复, 请检查!",
+  "error.1406": "操作失败, {{msg}} 过长, 请检查!",
+  "error.1116": "操作失败, 序列号 {{ intersectionId }} 和相位 id {{ phaseId }} 重复, 请检查!",
+  "Lidar URL": "雷达 URL",
+  "Please enter lidar URL": "请输入雷达 URL"
 }

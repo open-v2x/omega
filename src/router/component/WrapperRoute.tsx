@@ -5,6 +5,7 @@ import PrivateRoute from './PrivateRoute';
 export type WrapperRouteProps = RouteProps & {
   /** authorization？ */
   auth?: boolean;
+  redirect?: string;
 };
 
 const WrapperRouteComponent: FC<WrapperRouteProps> = ({ auth, children }) => {
