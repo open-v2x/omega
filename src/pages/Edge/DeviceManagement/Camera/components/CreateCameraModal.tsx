@@ -1,3 +1,4 @@
+import Country from '#/components/Country';
 import FormItem from '#/components/FormItem';
 import Modal from '#/components/Modal';
 import { LatReg, LngReg } from '#/constants/edge';
@@ -121,12 +122,25 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
       children: [
         {
           type: 'select',
-          required: true,
           name: 'rsuId',
           label: t('Associate RSU'),
           disabled: isDetails,
           request: fetchDeviceListInModal,
-          rules: [{ required: true, message: t('Please select an associated RSU') }],
+        },
+        {
+          name: 'province',
+          required: true,
+          components: (
+            <Country
+              key="province"
+              required
+              width="lg"
+              label={t('Installation Area')}
+              name="province"
+              params={{ cascade: true, needIntersection: true }}
+              rules={[{ required: true, message: t('Please select an installation area') }]}
+            />
+          ),
         },
       ],
     },
@@ -158,7 +172,8 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
       createTrigger={t('Add {{type}}', { type: lowerType })}
       editTrigger={isDetails ? t('Details') : ''}
       modalProps={{ className: 'overflow' }}
-      submitForm={async values => {
+      submitForm={async ({ province, ...values }) => {
+        values.intersectionCode = province!.pop()!;
         if (editInfo) {
           await updateCamera(editInfo.id, values);
         } else {
@@ -170,7 +185,9 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
       isDetails={isDetails}
       request={async () => {
         const { name, sn, streamUrl, lng, lat, elevation, towards, rsuId, desc } = editInfo!;
-        return { name, sn, streamUrl, lng, lat, elevation, towards, rsuId, desc };
+        const { provinceCode, countryCode, cityCode, areaCode, intersectionCode } = editInfo;
+        const province = [countryCode!, provinceCode!, cityCode!, areaCode!, intersectionCode!];
+        return { name, sn, streamUrl, lng, lat, elevation, towards, rsuId, desc, province };
       }}
     >
       <FormItem items={formItems} />

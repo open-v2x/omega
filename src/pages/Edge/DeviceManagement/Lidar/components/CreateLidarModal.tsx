@@ -1,3 +1,4 @@
+import Country from '#/components/Country';
 import FormItem from '#/components/FormItem';
 import Modal from '#/components/Modal';
 import { IPReg, LatReg, LngReg } from '#/constants/edge';
@@ -99,12 +100,10 @@ const CreateLidarModal: React.FC<CreateModalProps> = ({ editInfo, isDetails = fa
       children: [
         {
           type: 'select',
-          required: true,
           name: 'rsuId',
           label: t('Associate RSU'),
           disabled: isDetails,
           request: fetchDeviceListInModal,
-          rules: [{ required: true, message: t('Please select an associated RSU') }],
         },
         {
           name: 'lidarIP',
@@ -156,6 +155,25 @@ const CreateLidarModal: React.FC<CreateModalProps> = ({ editInfo, isDetails = fa
       ],
     },
     {
+      key: 'province',
+      children: [
+        {
+          name: 'province',
+          components: (
+            <Country
+              key="province"
+              required
+              width="lg"
+              label={t('Installation Area')}
+              name="province"
+              params={{ cascade: true, needIntersection: true }}
+              rules={[{ required: true, message: t('Please select an installation area') }]}
+            />
+          ),
+        },
+      ],
+    },
+    {
       key: 'desc',
       children: [
         {
@@ -183,7 +201,8 @@ const CreateLidarModal: React.FC<CreateModalProps> = ({ editInfo, isDetails = fa
       createTrigger={t('Add {{type}}', { type: lowerType })}
       editTrigger={isDetails ? t('Details') : ''}
       modalProps={{ className: 'overflow' }}
-      submitForm={async values => {
+      submitForm={async ({ province, ...values }) => {
+        values.intersectionCode = province!.pop()!;
         if (editInfo) {
           await updateLidar(editInfo.id, values);
         } else {
@@ -194,9 +213,12 @@ const CreateLidarModal: React.FC<CreateModalProps> = ({ editInfo, isDetails = fa
       editId={editInfo?.id}
       isDetails={isDetails}
       request={async () => {
-        const { name, sn, lng, lat, elevation, towards, rsuId, lidarIP, point, pole, desc, wsUrl } =
-          editInfo!;
-        return { name, sn, lng, lat, elevation, towards, rsuId, lidarIP, point, pole, desc, wsUrl };
+        const { provinceCode, countryCode, cityCode, areaCode, intersectionCode } = editInfo;
+        const province = [countryCode!, provinceCode!, cityCode!, areaCode!, intersectionCode!];
+        return {
+          province,
+          ...editInfo,
+        };
       }}
     >
       <FormItem items={formItems} />

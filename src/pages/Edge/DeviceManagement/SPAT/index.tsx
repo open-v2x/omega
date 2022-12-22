@@ -39,7 +39,6 @@ const SpatManagement: React.FC = () => {
       render: (_, row) => renderAreaFormatName(row),
       renderFormItem: renderAreaFormItem,
       search: true,
-      hideInTable: true,
     },
     {
       title: t('Associate RSU'),
@@ -70,7 +69,7 @@ const SpatManagement: React.FC = () => {
     },
     {
       title: t('Operate'),
-      width: 200,
+      width: 280,
       fixed: 'right',
       render: (_, row) => [
         <CreateSpatModal key="edit" editInfo={row} success={() => actionRef.current?.reload()} />,
