@@ -51,44 +51,52 @@ const Lidar: React.FC = () => {
       render: (_, row) => renderAreaFormatName(row),
       renderFormItem: renderAreaFormItem,
       search: true,
-      width: 150,
+      width: 200,
       ellipsis: true,
     },
     {
       title: t('Longitude'),
       dataIndex: 'lng',
+      width: 60,
     },
     {
       title: t('Latitude'),
       dataIndex: 'lat',
+      width: 60,
     },
     {
       title: t('Altitude (m)'),
       dataIndex: 'elevation',
+      width: 80,
     },
     {
       title: t('Orientation (°)'),
       dataIndex: 'towards',
+      width: 80,
     },
     {
       title: t('Point'),
       dataIndex: 'point',
+      width: 60,
     },
     {
       title: t('Pole'),
       dataIndex: 'pole',
+      width: 60,
     },
     {
       title: t('Device Status'),
       dataIndex: 'enabled',
       valueType: 'select',
       valueEnum: statusOptionFormat(DeviceStatusOptions),
+      width: 80,
     },
     {
       title: t('Associate RSU'),
       dataIndex: 'rsuName',
       valueType: 'select',
       request: fetchDeviceList,
+      width: 80,
     },
     {
       title: t('Associate RSU'),
@@ -101,11 +109,11 @@ const Lidar: React.FC = () => {
     {
       title: t('Creation Time'),
       dataIndex: 'createTime',
-      width: 150,
+      width: 200,
     },
     {
       title: t('Operate'),
-      width: 220,
+      width: 280,
       fixed: 'right',
       render: (_, row) => [
         <CreateLidarModal key="edit" editInfo={row} success={() => actionRef.current?.reload()} />,

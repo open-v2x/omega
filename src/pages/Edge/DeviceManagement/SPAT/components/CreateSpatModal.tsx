@@ -1,3 +1,4 @@
+import Country from '#/components/Country';
 import FormItem from '#/components/FormItem';
 import Modal from '#/components/Modal';
 import { IPReg, LightStateOptions } from '#/constants/edge';
@@ -79,12 +80,10 @@ const CreateSpatModal: React.FC<CreateModalProps> = ({ editInfo, isDetails = fal
       children: [
         {
           type: 'select',
-          required: true,
           name: 'rsuId',
           label: t('Associate RSU'),
           disabled: isDetails,
           request: fetchDeviceListInModal,
-          rules: [{ required: true, message: t('Please select an associated RSU') }],
         },
         {
           name: 'spatIP',
@@ -103,6 +102,21 @@ const CreateSpatModal: React.FC<CreateModalProps> = ({ editInfo, isDetails = fal
           required: true,
           disabled: isDetails,
           rules: [{ required: true, message: t('Please input an Point') }],
+        },
+        {
+          name: 'province',
+          required: true,
+          components: (
+            <Country
+              key="province"
+              required
+              width="lg"
+              label={t('Installation Area')}
+              name="province"
+              params={{ cascade: true, needIntersection: true }}
+              rules={[{ required: true, message: t('Please select an installation area') }]}
+            />
+          ),
         },
       ],
     },
@@ -134,7 +148,8 @@ const CreateSpatModal: React.FC<CreateModalProps> = ({ editInfo, isDetails = fal
       createTrigger={t('Add {{type}}', { type: lowerType })}
       editTrigger={isDetails ? t('Details') : ''}
       modalProps={{ className: 'overflow' }}
-      submitForm={async values => {
+      submitForm={async ({ province, ...values }) => {
+        values.intersectionCode = province!.pop()!;
         if (editInfo) {
           await updateSpat(editInfo.id, values);
         } else {
@@ -144,7 +159,14 @@ const CreateSpatModal: React.FC<CreateModalProps> = ({ editInfo, isDetails = fal
       }}
       editId={editInfo?.id}
       isDetails={isDetails}
-      request={async () => editInfo}
+      request={async () => {
+        const { provinceCode, countryCode, cityCode, areaCode, intersectionCode } = editInfo;
+        const province = [countryCode!, provinceCode!, cityCode!, areaCode!, intersectionCode!];
+        return {
+          province,
+          ...editInfo,
+        };
+      }}
     >
       <FormItem items={formItems} />
     </Modal>

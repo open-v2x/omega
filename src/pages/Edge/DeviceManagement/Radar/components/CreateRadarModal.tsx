@@ -5,6 +5,7 @@ import FormItem from '#/components/FormItem';
 import { CreateModalProps, FormGroupType } from '#/typings/pro-component';
 import { createRadar, updateRadar } from '#/services/api/device/radar';
 import { useRequestStore } from '#/store/request';
+import Country from '#/components/Country';
 
 const CreateRadarModal: FC<CreateModalProps> = ({ editInfo, isDetails = false, success }) => {
   const { fetchDeviceListInModal } = useRequestStore();
@@ -103,18 +104,35 @@ const CreateRadarModal: FC<CreateModalProps> = ({ editInfo, isDetails = false, s
       children: [
         {
           type: 'select',
-          required: true,
           name: 'rsuId',
           label: t('Associate RSU'),
           disabled: isDetails,
           request: fetchDeviceListInModal,
-          rules: [{ required: true, message: t('Please select an associated RSU') }],
         },
         {
           name: 'radarIP',
           label: t('Radar IP'),
           disabled: isDetails,
           rules: [{ pattern: IPReg, message: t('Incorrect radar IP format') }],
+        },
+      ],
+    },
+    {
+      key: 'province',
+      children: [
+        {
+          name: 'province',
+          components: (
+            <Country
+              key="province"
+              required
+              width="lg"
+              label={t('Installation Area')}
+              name="province"
+              params={{ cascade: true, needIntersection: true }}
+              rules={[{ required: true, message: t('Please select an installation area') }]}
+            />
+          ),
         },
       ],
     },
@@ -146,7 +164,8 @@ const CreateRadarModal: FC<CreateModalProps> = ({ editInfo, isDetails = false, s
       createTrigger={t('Add {{type}}', { type: lowerType })}
       editTrigger={isDetails ? t('Details') : ''}
       modalProps={{ className: 'overflow' }}
-      submitForm={async values => {
+      submitForm={async ({ province, ...values }) => {
+        values.intersectionCode = province!.pop()!;
         if (editInfo) {
           await updateRadar(editInfo.id, values);
         } else {
@@ -158,7 +177,10 @@ const CreateRadarModal: FC<CreateModalProps> = ({ editInfo, isDetails = false, s
       isDetails={isDetails}
       request={async () => {
         const { name, sn, radarIP, lng, lat, elevation, towards, rsuId, desc } = editInfo!;
-        return { name, sn, radarIP, lng, lat, elevation, towards, rsuId, desc };
+        const { provinceCode, countryCode, cityCode, areaCode, intersectionCode } = editInfo;
+        const province = [countryCode!, provinceCode!, cityCode!, areaCode!, intersectionCode!];
+
+        return { name, sn, radarIP, lng, lat, elevation, towards, rsuId, desc, province };
       }}
     >
       <FormItem items={formItems} />
