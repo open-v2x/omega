@@ -88,7 +88,6 @@
   "Please enter latitude": "请输入纬度",
   "Please enter altitude": "请输入海拔(m)",
   "Please enter an orientation": "请输入朝向(°)",
-  "Please select an associated RSU": "请选择关联 RSU",
   "Please enter video stream URL": "请输入视频流地址",
   "Incorrect radar IP format": "雷达 IP 格式不正确",
   "Incorrect lidar IP format": "激光雷达 IP 格式不正确",

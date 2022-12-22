@@ -78,16 +78,10 @@ const CameraManagement: FC = () => {
       width: 220,
       fixed: 'right',
       render: (_, row) => [
-        <CreateCameraModal
-          key="edit"
-          type="camera"
-          editInfo={row}
-          success={() => actionRef.current?.reload()}
-        />,
+        <CreateCameraModal key="edit" editInfo={row} success={() => actionRef.current?.reload()} />,
         <Divider key="edit-divider" type="vertical" />,
         <CreateCameraModal
           key="details"
-          type="camera"
           isDetails
           editInfo={row}
           success={() => actionRef.current?.reload()}

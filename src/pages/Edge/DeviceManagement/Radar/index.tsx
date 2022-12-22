@@ -75,7 +75,7 @@ const Radar: FC = () => {
     },
     {
       title: t('Operate'),
-      width: 200,
+      width: 220,
       fixed: 'right',
       render: (_, row) => [
         <CreateRadarModal key="edit" editInfo={row} success={() => actionRef.current?.reload()} />,
