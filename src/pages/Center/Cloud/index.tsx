@@ -13,8 +13,9 @@ import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import imgLocation from '#/assets/images/location.png';
 import styles from './index.module.less';
-import { Button, Card, Dropdown } from 'antd';
+import { Card, Dropdown } from 'antd';
 import BgContainer from '../components/BgContainer';
+import classNames from 'classnames';
 
 type MarkerType = {
   type: number;
@@ -76,7 +77,7 @@ const CloudPlatform: React.FC = () => {
             </Card>
           )}
         >
-          <Button>选择</Button>
+          <div className={classNames(styles['left-button'], 'f-middle')}>选择</div>
         </Dropdown>
       </PlatformHeader>
       <div className={styles['map-container']}>
