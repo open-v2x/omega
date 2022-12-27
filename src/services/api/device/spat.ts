@@ -4,9 +4,9 @@ import { apiService } from '#/services/BaseService';
 export async function spatList({
   countryName,
   ...params
-}: API.PageParams & { countryName?: string[]; areaCode?: string }) {
+}: API.PageParams & { countryName?: string[]; intersectionCode?: string }) {
   if (countryName?.length) {
-    params.areaCode = countryName[countryName.length - 1];
+    params.intersectionCode = countryName[countryName.length - 1];
   }
   return apiService.get<IResponseListData<Device.SpatListItem>>(`v1/spats`, {
     params,
