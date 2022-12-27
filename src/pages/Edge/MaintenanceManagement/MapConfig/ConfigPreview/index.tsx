@@ -14,13 +14,12 @@ const halfHeight = canvasHeight / 2;
 type LineMapProps = {
   laneWidth: any[];
   laneNumber: number;
-  type: string;
+  type?: string;
   horizontal: boolean;
 };
 type LaneMapProps = {
   laneWidths: number[][];
   laneNumbers: number[];
-  stroke: string;
 };
 
 // type DirectionProps = {
@@ -62,14 +61,13 @@ const LineMap: React.FC<LineMapProps> = ({ laneWidth, type, horizontal }) => {
   let totalWidth = 0;
   return (
     <>
-      {lanes?.map((lane, i) => {
+      {lanes?.map(lane => {
         const width = Number(lane.laneWidth) * 2;
         // 画地标的宽度占据总的一半
         totalWidth = totalWidth + width;
-        const flagWidth = -startWidth + totalWidth - width / 2;
-        console.log('画多线', flagWidth);
-        const isLeft = Boolean(Number(lane.maneuvers[1]));
-        const isRight = Boolean(Number(lane.maneuvers[2]));
+        // const flagWidth = -startWidth + totalWidth - width / 2;
+        // const isLeft = Boolean(Number(lane.maneuvers[1]));
+        // const isRight = Boolean(Number(lane.maneuvers[2]));
         // 第6位表示是否可以向外侧变道
         const laneIsChange = Boolean(Number(lane.maneuvers[6]));
         const offset = -startWidth + totalWidth;
