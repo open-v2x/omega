@@ -131,7 +131,7 @@ const routes = [
   },
   {
     path: '/maintenance',
-    component: React.lazy(() => import('#/layouts/SiderLayout')),
+    component: React.lazy(() => import('#/layouts/ContainerLayout')),
     layout: true,
     auth: true,
     children: [
@@ -205,7 +205,7 @@ const routes = [
   },
   {
     path: '/event',
-    component: React.lazy(() => import('#/layouts/SiderLayout')),
+    component: React.lazy(() => import('#/layouts/ContainerLayout')),
     layout: true,
     auth: true,
     children: [
@@ -281,7 +281,7 @@ const routes = [
   },
   {
     path: '/system',
-    component: React.lazy(() => import('#/layouts/SiderLayout')),
+    component: React.lazy(() => import('#/layouts/ContainerLayout')),
     layout: true,
     auth: true,
     children: [
