@@ -19,7 +19,7 @@ class ServerResponseSuccessManager {
       '200': () => Promise.resolve(resData),
       default: () => this.handleCodeIsDefault(response),
     };
-    return parser[code] ? parser[code]() : parser.default;
+    return parser[code] ? parser[code]() : parser.default();
   }
 
   /**
@@ -63,9 +63,9 @@ class ServerResponseFailedManager {
     const { msg, code } = detail;
     const parser = {
       '403': () => this.handleCodeIs403(),
-      default: () => this.handleCodeIsDefault(msg || error.message),
+      default: () => this.handleCodeIsDefault(msg || detail || error.message),
     };
-    return parser[code] ? parser[code]() : parser.default;
+    return parser[code] ? parser[code]() : parser.default();
   }
 
   handleCodeIs403() {
