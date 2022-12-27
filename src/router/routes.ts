@@ -260,7 +260,7 @@ const routes = [
         ),
       },
       {
-        path: 'vrucw/details/:id',
+        path: 'vrucw/details',
         component: React.lazy(
           () => import('#/pages/Edge/EventManagement/ValnerableRoadMessage/VRUCWDetail'),
         ),
