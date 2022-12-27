@@ -12,15 +12,23 @@ const halfWidth = canvasWidth / 2;
 const halfHeight = canvasHeight / 2;
 
 type LineMapProps = {
-  laneWidth: number;
+  laneWidth: any[];
   laneNumber: number;
+  type: string;
   horizontal: boolean;
 };
 type LaneMapProps = {
-  laneWidths: number[];
+  laneWidths: number[][];
   laneNumbers: number[];
   stroke: string;
 };
+
+// type DirectionProps = {
+//   isLeft: boolean;
+//   isRight: boolean;
+//   width: number;
+//   type: string;
+// };
 
 const LaneLayer: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <Layer x={halfWidth} y={halfHeight} offset={{ x: halfWidth, y: halfHeight }}>
@@ -28,48 +36,72 @@ const LaneLayer: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </Layer>
 );
 
-const LineMap: React.FC<LineMapProps> = ({ laneNumber, laneWidth, horizontal }) => {
-  const line = (type: string, length: number, coefficient = 1) =>
-    Array.from({ length }, (_, index) => ({
-      key: type + index,
-      dash: [20, 20],
-      offsetX: horizontal ? 0 : laneWidth * (index + 1) * coefficient,
-      offsetY: horizontal ? laneWidth * (index + 1) * coefficient : 0,
-    }));
-  const lineMap = [
-    { key: 'mid', dash: [], offsetX: 0 },
-    ...line('left', laneNumber - 1),
-    ...line('right', laneNumber - 1, -1),
-  ];
+// const DrawDirectionMap: React.FC<DirectionProps> = ({ isLeft, isRight, width, type }) => {
+//   let points = [];
+//   if (type === 'west') {
+//     console.log('西边的线', width);
+//     points = [
+//       // halfWidth / 2 + 60,
+//       // width - 10,
+//       halfWidth / 2 + 25,
+//       width,
+//       halfWidth / 2 + 50,
+//       width,
+//       halfWidth / 2 + 60,
+//       width - 10,
+//       halfWidth / 2 + 55,
+//       width - 5,
+//     ];
+//   }
+//   return <Line points={points} stroke="red" strokeWidth={1} />;
+// };
+
+const LineMap: React.FC<LineMapProps> = ({ laneWidth, type, horizontal }) => {
+  const startWidth = Number(laneWidth?.[0]);
+  const lanes = laneWidth?.slice(1, -1);
+  let totalWidth = 0;
   return (
     <>
-      {lineMap.map(({ key, ...item }) => (
-        <Line
-          key={key}
-          points={horizontal ? [0, 0, halfWidth, 0] : [0, 0, 0, halfHeight]}
-          stroke="#566B85"
-          strokeWidth={2}
-          {...item}
-        />
-      ))}
+      {lanes?.map((lane, i) => {
+        const width = Number(lane.laneWidth) * 2;
+        // 画地标的宽度占据总的一半
+        totalWidth = totalWidth + width;
+        const flagWidth = -startWidth + totalWidth - width / 2;
+        console.log('画多线', flagWidth);
+        const isLeft = Boolean(Number(lane.maneuvers[1]));
+        const isRight = Boolean(Number(lane.maneuvers[2]));
+        // 第6位表示是否可以向外侧变道
+        const laneIsChange = Boolean(Number(lane.maneuvers[6]));
+        const offset = -startWidth + totalWidth;
+        return (
+          <>
+            <Line
+              key={`${type}_${lane.laneID}`}
+              points={horizontal ? [0, offset, halfWidth, offset] : [offset, 0, offset, halfHeight]}
+              dash={laneIsChange ? [20, 20] : []}
+              stroke="#566B85"
+              strokeWidth={2}
+            />
+            {/* <DrawDirectionMap isLeft={isLeft} isRight={isRight} width={flagWidth} type={type} /> */}
+          </>
+        );
+      })}
     </>
   );
 };
 
 const RectMap: React.FC<any> = props => <Rect {...props} />;
 
-const LaneMap: React.FC<LaneMapProps> = ({ laneNumbers, laneWidths, stroke }) => {
-  const strokeWidth = 2;
+const LaneMap: React.FC<LaneMapProps> = ({ laneNumbers, laneWidths }) => {
   const rectProps = (index: number, type: boolean = false) => {
-    const width = laneNumbers[index] * laneWidths[index];
+    // 总宽度
+    const width = laneWidths[index]?.[0];
     return {
-      x: type ? -width : -strokeWidth,
-      y: type ? -strokeWidth : -width,
-      width: type ? width * 2 : halfWidth + strokeWidth,
-      height: type ? halfHeight + strokeWidth : width * 2,
+      x: type ? -width : 0,
+      y: type ? 0 : -width,
+      width: type ? width * 2 : halfWidth,
+      height: type ? halfHeight : width * 2,
       fill: '#2C364E',
-      stroke: stroke,
-      strokeWidth,
     };
   };
   const lineProps = (index: number) => ({
@@ -82,30 +114,31 @@ const LaneMap: React.FC<LaneMapProps> = ({ laneNumbers, laneWidths, stroke }) =>
       x: halfWidth,
       y: 0,
       rect: rectProps(0, true),
-      line: { horizontal: false, ...lineProps(0) },
+      line: { horizontal: false, ...lineProps(0), key: 'north' },
     },
     {
       key: 'bottom',
       x: halfWidth,
       y: halfHeight,
       rect: rectProps(2, true),
-      line: { horizontal: false, ...lineProps(2) },
+      line: { horizontal: false, ...lineProps(2), key: 'south' },
     },
     {
       key: 'right',
       x: halfWidth,
       y: halfHeight,
       rect: rectProps(1),
-      line: { horizontal: true, ...lineProps(1) },
+      line: { horizontal: true, ...lineProps(1), type: 'east' },
     },
     {
       key: 'left',
       x: 0,
       y: halfHeight,
       rect: rectProps(3),
-      line: { horizontal: true, ...lineProps(3) },
+      line: { horizontal: true, ...lineProps(3), type: 'west' },
     },
   ];
+
   return (
     <LaneLayer>
       {groupMap.map(({ key, x, y, rect, line }) => (
@@ -115,10 +148,10 @@ const LaneMap: React.FC<LaneMapProps> = ({ laneNumbers, laneWidths, stroke }) =>
         </Group>
       ))}
       <RectMap
-        x={halfWidth - laneWidths[0] * laneNumbers[0] + 1}
-        y={halfHeight - laneWidths[1] * laneNumbers[1] - 2}
-        width={laneWidths[0] * laneNumbers[0] * 2 - 2}
-        height={laneWidths[1] * laneNumbers[1] * 2 + 4}
+        x={halfWidth - laneWidths[0]?.[0] + 1}
+        y={halfHeight - laneWidths[1]?.[0] - 2}
+        width={laneWidths[0]?.[0] * 2 - 2}
+        height={laneWidths[1]?.[0] * 2 + 2}
         fill="#2C364E"
       />
     </LaneLayer>
@@ -136,33 +169,44 @@ const ConfigPreview: React.FC = () => {
 
   const fetchMapConfig = async () => {
     const result = await downloadMapConfig(+params.id);
-    setData(result);
+    setData(result?.nodes);
   };
 
   useEffect(() => {
     fetchMapConfig();
   }, []);
 
+  // 车道数量
   const laneNumbers: number[] = [];
-  const laneWidths: number[] = [];
-  data?.inLinks?.map(({ linkWidth, lanes }: { linkWidth: number; lanes: [] }) => {
-    const multiple = 10;
-    laneNumbers.push(lanes.length);
-    laneWidths.push(Math.floor(Number(linkWidth) / lanes.length / multiple));
+  // 车道宽度, 0123分别表示北东南西
+  const laneWidths: number[][] = [];
+  /**
+   * @description:
+   * @params linkWidth 车道总宽度
+   * @return {*}
+   */
+  data?.Node?.map(n => {
+    n.inLinks?.Link.map(({ linkWidth, lanes }: { linkWidth: number; lanes: {} }, index) => {
+      const laneList = lanes?.Lane || [];
+      const multiple = 10;
+      laneNumbers.push(laneList.length);
+      const widths = laneList.map(l => {
+        const width = Math.floor(Number(l.laneWidth) / multiple);
+        return {
+          ...l,
+          laneWidth: width,
+        };
+      });
+      // 第一位放置总宽度, 后面放所有的数据
+      laneWidths[index] = [Math.floor(Number(linkWidth) / multiple), ...widths];
+    });
   });
-  if (laneWidths[0] != laneWidths[2]) {
-    laneWidths[2] = laneWidths[0];
-  }
-  if (laneWidths[1] != laneWidths[3]) {
-    laneWidths[3] = laneWidths[1];
-  }
-  const stroke = '#8FCCF2';
 
   return (
     <BaseContainer back>
       <ProCard className={styles.preview}>
         <Stage width={canvasWidth} height={canvasHeight}>
-          <LaneMap laneNumbers={laneNumbers} laneWidths={laneWidths} stroke={stroke} />
+          <LaneMap laneNumbers={laneNumbers} laneWidths={laneWidths} />
         </Stage>
       </ProCard>
     </BaseContainer>
