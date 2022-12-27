@@ -40,7 +40,7 @@ const ConfigList: React.FC = () => {
     },
     {
       title: t('Operate'),
-      width: 180,
+      width: 220,
       fixed: 'right',
       render: (_, row) => [
         <CreateMapConfigModal

@@ -59,14 +59,16 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
         },
         {
           name: 'province',
+          required: true,
           components: (
             <Country
               key="province"
               required
               width="lg"
-              label={t('MAP Area')}
+              label={t('Installation Area')}
               name="province"
-              rules={[{ required: true, message: t('Please select a MAP area') }]}
+              params={{ cascade: true, needIntersection: true }}
+              rules={[{ required: true, message: t('Please select an installation area') }]}
             />
           ),
         },
@@ -120,7 +122,7 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
       title={editId ? t('Edit MAP configuration') : t('Add MAP configuration')}
       createTrigger={t('Add MAP')}
       submitForm={async ({ province, ...values }) => {
-        values.areaCode = province!.pop()!;
+        values.intersectionCode = province!.pop()!;
         values.data = mapData;
         if (editId) {
           await updateMapConfig(editId, values);
@@ -132,14 +134,23 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
       editId={editId}
       request={async ({ id }) => {
         const data = await mapConfigInfo(id);
-        const { name, areaCode, address, desc, countryCode, provinceCode, cityCode } = data;
+        const {
+          name,
+          areaCode,
+          address,
+          desc,
+          countryCode,
+          provinceCode,
+          intersectionCode,
+          cityCode,
+        } = data;
         return {
           name,
           areaCode,
           address,
           desc,
           data: [true],
-          province: [countryCode, provinceCode, cityCode, areaCode],
+          province: [countryCode, provinceCode, cityCode, areaCode, intersectionCode],
         };
       }}
     >

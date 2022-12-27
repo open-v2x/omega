@@ -18,6 +18,8 @@ declare namespace Config {
     countryCode: string; //
     provinceName: string; // MAP 区域-省
     provinceCode: string;
+    intersectionCode: string;
+    intersectionName: string;
     areaName: string; // MAP 区域-市
     cityName: string; // MAP 区域-区
     cityCode: string;
