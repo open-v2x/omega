@@ -45,7 +45,6 @@ const SpatManagement: React.FC = () => {
       dataIndex: 'rsuId',
       valueType: 'select',
       request: fetchDeviceListInModal,
-      hideInTable: true,
       search: true,
     },
     {
