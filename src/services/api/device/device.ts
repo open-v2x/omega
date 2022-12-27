@@ -5,9 +5,9 @@ import { IResponseListData } from '#/types/service/responseData';
 export async function deviceList({
   countryName,
   ...params
-}: API.PageParams & { countryName?: string[]; areaCode?: string }) {
+}: API.PageParams & { countryName?: string[]; intersectionCode?: string }) {
   if (countryName?.length) {
-    params.areaCode = countryName[countryName.length - 1];
+    params.intersectionCode = countryName[countryName.length - 1];
   }
   return apiService.get<IResponseListData<Device.DeviceListItem>>(`v1/rsus`, {
     params,
