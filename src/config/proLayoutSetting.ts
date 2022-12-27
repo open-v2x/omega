@@ -8,7 +8,7 @@ const proLayoutSetting: ProLayoutProps = {
   iconfontUrl:
     process.env.NODE_ENV === 'development'
       ? '//localhost:2333/assets/font/iconfont.js'
-      : '/omega/assets/font/iconfont.js',
+      : '/omega-portal/assets/font/iconfont.js',
   token: {
     colorBgAppListIconHover: 'rgba(0,0,0,0.06)',
     colorTextAppListIconHover: 'rgba(255,255,255,0.95)',
