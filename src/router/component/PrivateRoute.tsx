@@ -1,25 +1,32 @@
 import React, { FC, useEffect } from 'react';
-import { Navigate, RouteProps } from 'react-router';
+import { RouteProps, useNavigate } from 'react-router';
 import { useUserStore } from '#/store/user';
 import { useMenuStore } from '#/store/menu';
 
 const PrivateRoute: FC<RouteProps> = ({ children }) => {
-  const { fetchUserInfo, fetchTokenByIam, logged } = useUserStore();
+  const { fetchUserInfo, fetchTokenByIam } = useUserStore();
+  const userInfo = useUserStore(state => state.userInfo);
   const { fetchMenus } = useMenuStore();
+  const navigate = useNavigate();
 
   const getUserInfo = async () => {
-    if (window.__POWERED_BY_QIANKUN__) {
-      await fetchTokenByIam();
+    if (!userInfo.username) {
+      if (window.__POWERED_BY_QIANKUN__) {
+        await fetchTokenByIam();
+      }
+      const res = await fetchUserInfo();
+      fetchMenus();
+      if (!res.username) {
+        navigate('/user/login', { replace: true });
+      }
     }
-    await fetchUserInfo();
-    fetchMenus();
   };
 
   useEffect(() => {
     getUserInfo();
-  }, [logged]);
+  }, []);
 
-  return logged ? <div>{children}</div> : <Navigate to="/user/login" />;
+  return <div>{children}</div>;
 };
 
 export default PrivateRoute;

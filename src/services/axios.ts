@@ -21,10 +21,11 @@ axiosInstance.interceptors.request.use(
         param.pageSize = pageSize;
       }
     }
+
     return {
       ...config,
       params: param,
-      headers: { Authorization: getToken() },
+      headers: { Authorization: getToken(), ...config.headers },
     };
   },
   (error: AxiosError) => Promise.reject(error),
