@@ -485,5 +485,10 @@
   "Please enter lidar URL": "Please enter lidar URL",
   "Algorithm Management": "Algorithm Management",
   "Algorithm Config": "Algorithm Config",
-  "Algorithm Version": "Algorithm Version"
+  "Algorithm Version": "Algorithm Version",
+  "Add Algorithm Version": "Add Algorithm Version",
+  "Edit Algorithm Version": "Edit Algorithm Version",
+  "Algorithm Module": "Algorithm Module",
+  "Algorithm Name": "Algorithm Name",
+  "Version Name": "Version Name"
 }

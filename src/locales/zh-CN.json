@@ -485,5 +485,11 @@
   "Please enter lidar URL": "请输入雷达 URL",
   "Algorithm Management": "算法管理",
   "Algorithm Config": "算法配置",
-  "Algorithm Version": "算法版本"
+  "Algorithm Version": "算法版本",
+  "Add Algorithm Version": "新增算法版本",
+  "Edit Algorithm Version": "编辑算法版本",
+  "Algorithm Module": "算法模块",
+  "Algorithm Name": "算法名称",
+  "Version Name": "版本名称",
+  "Update Time": "更新时间"
 }

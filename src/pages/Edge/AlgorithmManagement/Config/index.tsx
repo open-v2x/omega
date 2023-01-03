@@ -4,7 +4,7 @@ import { ProColumns } from '#/typings/pro-component';
 import { statusOptionFormat } from '#/utils';
 import { ActionType, EditableFormInstance, EditableProTable } from '@ant-design/pro-components';
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { fetchAlgorithmList } from '#/services/api/config/algorithm';
+import { fetchAlgorithmList } from '#/services/api/algorithm';
 import styles from './index.module.less';
 import { Button } from 'antd';
 
@@ -17,18 +17,18 @@ const AlgorithmConfig: FC = () => {
   const [data, setData] = useState<readonly Config.AlgorithmListItem[]>([]);
   const columns: ProColumns<Config.AlgorithmListItem>[] = [
     {
-      title: '算法模块',
+      title: t('Algorithm Module'),
       dataIndex: 'module',
       editable: false,
     },
     {
-      title: '算法名称',
+      title: t('Algorithm Name'),
       dataIndex: 'algo',
       editable: false,
       search: false,
     },
     {
-      title: '算法版本',
+      title: t('Version Name'),
       dataIndex: 'inUse',
       key: 'inUse',
       valueType: 'select',
@@ -43,7 +43,7 @@ const AlgorithmConfig: FC = () => {
       search: false,
     },
     {
-      title: '状态',
+      title: t('Device Enabled'),
       dataIndex: 'enable',
       key: 'enable',
       editable: true,
@@ -54,7 +54,7 @@ const AlgorithmConfig: FC = () => {
       renderFormItem: row => <div>{row.valueEnum[editStatus].text}</div>,
     },
     {
-      title: '修改时间',
+      title: t('Update Time'),
       dataIndex: 'updateTime',
       editable: false,
       search: false,
@@ -74,7 +74,7 @@ const AlgorithmConfig: FC = () => {
             setEditStatus(record.enable);
           }}
         >
-          编辑
+          {t('Edited')}
         </a>,
       ],
     },

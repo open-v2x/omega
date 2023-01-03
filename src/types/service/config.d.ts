@@ -192,4 +192,10 @@ declare namespace Config {
     updateTime: string;
     version: AlgorithmVersion[];
   };
+
+  type CreateAlgorithmVersion = {
+    algo: string;
+    module: string;
+    version: string;
+  };
 }

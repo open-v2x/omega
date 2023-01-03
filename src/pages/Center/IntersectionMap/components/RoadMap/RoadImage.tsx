@@ -145,7 +145,12 @@ const DataSharing: React.FC<{ egoPoint: Point; points: Point[] }> = ({ egoPoint,
   );
 };
 
-const RoadImage: React.FC<{ esn: string; nodeId: string }> = ({ esn, nodeId }) => {
+const RoadImage: React.FC<{ esn: string; nodeId: string; intersectionCode: string }> = ({
+  esn,
+  nodeId,
+  intersectionCode,
+}) => {
+  console.log(intersectionCode);
   // 参与者信息
   const [trackData, setTrackData] = useState<any[]>([]);
   const clearTrackData = debounce(() => setTrackData([]), 1000);
