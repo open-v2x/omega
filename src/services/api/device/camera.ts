@@ -8,7 +8,7 @@ export async function createCamera(data: Device.CreateCameraParams) {
 
 // 编辑摄像头
 export async function updateCamera(id: number, data: Device.CreateCameraParams) {
-  return apiService.put<Device.CameraListItem>(`v1/cameras/${id}`, data);
+  return apiService.patch<Device.CameraListItem>(`v1/cameras/${id}`, data);
 }
 
 // 删除摄像头

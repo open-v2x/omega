@@ -8,7 +8,7 @@ import { DeviceStatusOptions } from '#/constants/edge';
 import CreateLidarModal from './components/CreateLidarModal';
 import { Button, Divider } from 'antd';
 import { confirmModal } from '#/components/ConfirmModal';
-import { deleteLidar, enabledLidar, lidarList } from '#/services/api/device/lidar';
+import { deleteLidar, lidarList, updateLidar } from '#/services/api/device/lidar';
 import BaseContainer from '#/components/BaseContainer';
 import BaseProTable from '#/components/BaseProTable';
 const fetchDeviceList = async () => {
@@ -132,7 +132,7 @@ const Lidar: React.FC = () => {
                 ? t('Are you sure you want to disable this device?')
                 : t('Are you sure you want to enable this device?'),
               successMsg: t('{{value}} successfully', { value: t('Status updated') }),
-              modalFn: enabledLidar,
+              modalFn: updateLidar,
               actionRef,
             })
           }

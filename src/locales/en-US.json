@@ -482,5 +482,13 @@
   "error.1406": "operation failed, {{msg}} is too long, please short-cut!",
   "error.1116": "operation failed, intersectionId {{ intersectionId }} and phaseId {{ phaseId }} repeat, Check it please!",
   "Lidar URL": "Lidar URL",
-  "Please enter lidar URL": "Please enter lidar URL"
+  "Please enter lidar URL": "Please enter lidar URL",
+  "Algorithm Management": "Algorithm Management",
+  "Algorithm Config": "Algorithm Config",
+  "Algorithm Version": "Algorithm Version",
+  "Add Algorithm Version": "Add Algorithm Version",
+  "Edit Algorithm Version": "Edit Algorithm Version",
+  "Algorithm Module": "Algorithm Module",
+  "Algorithm Name": "Algorithm Name",
+  "Version Name": "Version Name"
 }

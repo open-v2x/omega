@@ -20,15 +20,10 @@ export async function createLidar(data: Device.CreateLidarItem) {
 
 // 编辑激光雷达
 export async function updateLidar(id: number, data: Device.CreateLidarItem) {
-  return apiService.put<Device.LidarListItem>(`v1/lidars/${id}`, data);
+  return apiService.patch<Device.LidarListItem>(`v1/lidars/${id}`, data);
 }
 
 // 删除雷达
 export async function deleteLidar(id: number) {
   return apiService.delete(`v1/lidars/${id}`);
-}
-
-// 启用激光雷达
-export async function enabledLidar(id: number, data: Device.CreateLidarItem) {
-  return apiService.post(`v1/lidars/${id}`, data);
 }

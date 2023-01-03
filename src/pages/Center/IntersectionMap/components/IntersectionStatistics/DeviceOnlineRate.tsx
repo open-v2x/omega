@@ -16,16 +16,19 @@ import imgCamera from '#/assets/images/platform_camera.png';
 import imgRadar from '#/assets/images/platform_radar.png';
 import imgSpat from '#/assets/images/platform_spat.png';
 import OnlineRatePie from './OnlineRatePie';
+import { deviceList } from '#/services/api/device/device';
 
 // 设备在线率
 const DeviceOnlineRate = forwardRef(
   (
     {
       esn,
+      intersectionCode,
       showLiveStream,
       showCloudPoint,
     }: {
       esn: string;
+      intersectionCode: string;
       showLiveStream: (url: string, title: string) => void;
       showCloudPoint: (wsUrl: string) => void;
     },
@@ -40,6 +43,9 @@ const DeviceOnlineRate = forwardRef(
       spat: { online: 0, offline: 0, notRegister: 0 },
     });
 
+    const [rsus, setRsus] = useState<any[]>([]);
+    const [rsuIndex, setRsuIndex] = useState(0);
+
     // 摄像头
     const [cameras, setCameras] = useState<Center.OnlineCameras[]>([]);
     const [cameraIndex, setCameraIndex] = useState(0);
@@ -48,6 +54,15 @@ const DeviceOnlineRate = forwardRef(
     const [lidars, setLidars] = useState<any>([]);
     const [lidarIndex, setLidarIndex] = useState(0);
     const lidarIndexRef = useRef(0);
+
+    const fetchRsus = useCallback(async () => {
+      const { data } = await deviceList({
+        pageNum: 1,
+        pageSize: -1,
+        intersectionCode: intersectionCode,
+      });
+      setRsus(data);
+    }, [intersectionCode]);
 
     const fetchOnlineRate = async () => {
       const { data } = await onlineRate();
@@ -65,15 +80,17 @@ const DeviceOnlineRate = forwardRef(
     }, [esn]);
 
     useEffect(() => {
+      fetchRsus();
       fetchOnlineRate();
       fetchCameras();
       fetchLidars();
-      const id = setInterval(() => {
-        fetchOnlineRate();
-        fetchCameras();
-        fetchLidars();
-      }, 5000);
-      return () => clearInterval(id);
+      // const id = setInterval(() => {
+      //   fetchRsus();
+      //   fetchOnlineRate();
+      //   fetchCameras();
+      //   fetchLidars();
+      // }, 5000);
+      // return () => clearInterval(id);
     }, [fetchCameras, fetchLidars]);
 
     const handleToLiveStream = () => {
@@ -143,6 +160,34 @@ const DeviceOnlineRate = forwardRef(
       lidars: lidars,
     }));
 
+    const footerRsu = () => (
+      <div className={styles['font-change-name']}>
+        <div className={styles.footer}>
+          <span>RSU：</span>
+          <span
+            className={classNames(styles['cursor-pointer'], styles['mr-10'])}
+            onClick={() => handleToLiveStream()}
+          >
+            {rsus[rsuIndex]?.name || '---'}
+          </span>
+        </div>
+        {cameras.length > 1 && (
+          <div className={styles['font-change-name-icon']}>
+            <CaretUpOutlined
+              onClick={() => {
+                setRsuIndex(rsuIndex - 1 >= 0 ? rsuIndex - 1 : rsus.length - 1);
+              }}
+            />
+            <CaretDownOutlined
+              onClick={() => {
+                setRsuIndex(rsuIndex + 1 >= rsus.length ? rsuIndex + 1 : 0);
+              }}
+            />
+          </div>
+        )}
+      </div>
+    );
+
     const footerCamera = () => (
       <div className={styles['font-change-name']}>
         <div className={styles.footer}>
@@ -183,18 +228,11 @@ const DeviceOnlineRate = forwardRef(
       </div>
     );
 
-    const rateMap = [
-      { icon: imgRsu, name: t('RSU online rate'), value: rateInfo.rsu },
-      {
-        icon: imgCamera,
-        name: t('Camera'),
-        value: rateInfo.camera,
-        footer: footerCamera,
-      },
-      { icon: imgRadar, name: t('Radar'), value: rateInfo.radar },
-      { icon: imgRadar, name: t('Lidar'), value: rateInfo.lidar, footer: footerLidar },
-      { icon: imgSpat, name: t('SPAT'), value: rateInfo.spat },
-    ];
+    const DivOnlineRate: React.FC<Center.OnlineType> = ({ online, offline }) => (
+      <div className={styles['online-statistics-value']}>
+        {online && Math.floor((online / (online + offline)) * 100)}%
+      </div>
+    );
 
     return (
       <div>
@@ -204,25 +242,69 @@ const DeviceOnlineRate = forwardRef(
           </a>
           <div className={styles['rate-title']}>{t('Device online rate')}</div>
           <div className={classNames(styles['rate-content'], styles.wrapper)}>
-            {rateMap.map(
-              ({ icon, name, value: { online = 0, offline = 0, notRegister = 0 }, footer }) => (
-                <div key={name as string} className={classNames(styles.wrapper, 'f-column')}>
-                  <div className="f f-a-center">
-                    <img className={styles['online-image']} src={icon} alt="" />
-                    <div className={classNames(styles['online-statistics'], 'f f-a-center')}>
-                      {name}:
-                      <div className={styles['online-statistics-value']}>
-                        {online && Math.floor((online / (online + offline)) * 100)}%
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles['chart-wrapper']}>
-                    <OnlineRatePie value={{ online, offline, notRegister }} />
-                  </div>
-                  {footer && footer()}
+            <div className={classNames(styles.wrapper, 'f-column')}>
+              <div className="f f-a-center">
+                <img className={styles['online-image']} src={imgRsu} alt="" />
+                <div className={classNames(styles['online-statistics'], 'f f-a-center')}>
+                  {t('RSU online rate')}:
+                  <DivOnlineRate {...rateInfo.rsu} />
                 </div>
-              ),
-            )}
+              </div>
+              <div className={styles['chart-wrapper']}>
+                <OnlineRatePie value={rateInfo.rsu} />
+              </div>
+              {footerRsu()}
+            </div>
+            <div className={classNames(styles.wrapper, 'f-column')}>
+              <div className="f f-a-center">
+                <img className={styles['online-image']} src={imgCamera} alt="" />
+                <div className={classNames(styles['online-statistics'], 'f f-a-center')}>
+                  {t('Camera')}:
+                  <DivOnlineRate {...rateInfo.camera} />
+                </div>
+              </div>
+              <div className={styles['chart-wrapper']}>
+                <OnlineRatePie value={rateInfo.camera} />
+              </div>
+              {footerCamera()}
+            </div>
+            <div className={classNames(styles.wrapper, 'f-column')}>
+              <div className="f f-a-center">
+                <img className={styles['online-image']} src={imgRadar} alt="" />
+                <div className={classNames(styles['online-statistics'], 'f f-a-center')}>
+                  {t('Radar')}:
+                  <DivOnlineRate {...rateInfo.radar} />
+                </div>
+              </div>
+              <div className={styles['chart-wrapper']}>
+                <OnlineRatePie value={rateInfo.radar} />
+              </div>
+            </div>
+            <div className={classNames(styles.wrapper, 'f-column')}>
+              <div className="f f-a-center">
+                <img className={styles['online-image']} src={imgRadar} alt="" />
+                <div className={classNames(styles['online-statistics'], 'f f-a-center')}>
+                  {t('Lidar')}:
+                  <DivOnlineRate {...rateInfo.lidar} />
+                </div>
+              </div>
+              <div className={styles['chart-wrapper']}>
+                <OnlineRatePie value={rateInfo.lidar} />
+              </div>
+              {footerLidar()}
+            </div>
+            <div className={classNames(styles.wrapper, 'f-column')}>
+              <div className="f f-a-center">
+                <img className={styles['online-image']} src={imgSpat} alt="" />
+                <div className={classNames(styles['online-statistics'], 'f f-a-center')}>
+                  {t('SPAT')}:
+                  <DivOnlineRate {...rateInfo.spat} />
+                </div>
+              </div>
+              <div className={styles['chart-wrapper']}>
+                <OnlineRatePie value={rateInfo.spat} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
