@@ -19,8 +19,8 @@ import classNames from 'classnames';
 
 type MarkerType = {
   type: number;
-  rsuId: number;
-  rsuEsn: string;
+  id: number;
+  code: string;
   lngLat: [number, number] | [];
 };
 
@@ -50,11 +50,11 @@ const CloudPlatform: React.FC = () => {
           }
           offset={new AMap.Pixel(-18, -36)}
           position={new AMap.LngLat(...markerList.lngLat)}
-          onClick={() =>
+          onClick={() => {
             navigate(
-              `/center/map?type=${markerList.type}&id=${markerList.rsuId}&esn=${markerList.rsuEsn}&nodeId=${id}`,
-            )
-          }
+              `/center/map?type=${markerList.type}&code=${markerList.code}&id=${markerList.id}&nodeId=${id}`,
+            );
+          }}
         />
       ) : (
         ''
@@ -69,11 +69,7 @@ const CloudPlatform: React.FC = () => {
           trigger={['click']}
           dropdownRender={() => (
             <Card className={styles['map-address']}>
-              <CountryCascader
-                nodeId={+id}
-                defaultValue={['CN', '320000', '320100', '320115']}
-                mapChange={mapLngLat}
-              />
+              <CountryCascader mapChange={mapLngLat} />
             </Card>
           )}
         >

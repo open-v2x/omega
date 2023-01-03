@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { MutableRefObject } from 'react';
 import type { ActionType } from '@ant-design/pro-table';
 import type { TableProps } from 'antd';
 import type { OptionConfig, ToolBarProps } from '@ant-design/pro-table/es/components/ToolBar';
 import type { ExpandableConfig } from 'antd/lib/table/interface';
-import { ProTable } from '@ant-design/pro-components';
+import { ProFormInstance, ProTable } from '@ant-design/pro-components';
 import { ProColumns } from '#/typings/pro-component';
 
 type BaseProTableType = {
@@ -26,6 +26,9 @@ type BaseProTableType = {
   toolBarRender?: ToolBarProps<any>['toolBarRender'] | false;
   options?: false | OptionConfig;
   expandable?: ExpandableConfig<any>;
+  editable?: any;
+  formRef?: MutableRefObject<ProFormInstance>;
+  onDataSourceChange?: (dataSource: any[]) => void;
 };
 
 const BaseProTable: React.FC<BaseProTableType> = props => {
@@ -45,6 +48,9 @@ const BaseProTable: React.FC<BaseProTableType> = props => {
     toolBarRender,
     options,
     expandable,
+    editable,
+    formRef,
+    onDataSourceChange,
   } = props;
 
   /**
@@ -95,6 +101,9 @@ const BaseProTable: React.FC<BaseProTableType> = props => {
       toolBarRender={toolBarRender}
       options={options}
       expandable={expandable}
+      editable={editable}
+      formRef={formRef}
+      onDataSourceChange={onDataSourceChange}
     />
   );
 };

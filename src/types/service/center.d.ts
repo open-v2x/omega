@@ -33,6 +33,12 @@ declare namespace Center {
     streamUrl: string;
   };
 
+  type OnlineType = {
+    online: number;
+    offline: number;
+    notRegister: number;
+  };
+
   type OnlineRateItem = {
     rsu: OnlineType;
     camera: OnlineType;

@@ -17,7 +17,7 @@ export async function rsuDeviceList(nodeId: number, areaCode: string) {
 // 区域
 export async function countries() {
   return apiService.get<Center.CountriesItem[]>(`v1/countries`, {
-    params: { cascade: true },
+    params: { cascade: true, needIntersection: true },
   });
 }
 

@@ -20,15 +20,10 @@ export async function createSpat(data: Device.CreateSpatItem) {
 
 // 编辑 spat
 export async function updateSpat(id: number, data: Device.CreateSpatItem) {
-  return apiService.put<Device.SpatListItem>(`v1/spats/${id}`, data);
+  return apiService.patch<Device.SpatListItem>(`v1/spats/${id}`, data);
 }
 
 // 删除 spat
 export async function deleteSpat(id: number) {
   return apiService.delete(`v1/spats/${id}`);
-}
-
-// 启用激光雷达
-export async function enabledSpat(id: number, data: Device.CreateSpatItem) {
-  return apiService.post(`v1/spats/${id}`, data);
 }

@@ -4,7 +4,7 @@ import { confirmModal } from '#/components/ConfirmModal';
 import { renderAreaFormatName, renderAreaFormItem } from '#/components/Country/renderHelper';
 import OnlineStatus from '#/components/OnlineStatus';
 import { DeviceOnlineStatusOptions, DeviceStatusOptions } from '#/constants/edge';
-import { enabledSpat, deleteSpat, spatList } from '#/services/api/device/spat';
+import { deleteSpat, spatList, updateSpat } from '#/services/api/device/spat';
 import { useRequestStore } from '#/store/request';
 import { ProColumns } from '#/typings/pro-component';
 import { statusOptionFormat } from '#/utils';
@@ -87,7 +87,7 @@ const SpatManagement: React.FC = () => {
                 ? t('Are you sure you want to disable this device?')
                 : t('Are you sure you want to enable this device?'),
               successMsg: t('{{value}} successfully', { value: t('Status updated') }),
-              modalFn: enabledSpat,
+              modalFn: updateSpat,
               actionRef,
             })
           }

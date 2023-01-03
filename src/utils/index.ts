@@ -6,9 +6,11 @@ export const statusOptionFormat = (
 ): Record<string, { text: string }> => {
   const result = {};
   if (Array.isArray(data)) {
-    data.map((value: string, index: number) => (result[index] = { text: value }));
+    data.map(
+      (value: string, index: number) => (result[index] = { text: value, status: 'Default' }),
+    );
   } else {
-    Object.keys(data).map(key => (result[key] = { text: data[key] }));
+    Object.keys(data).map(key => (result[key] = { text: data[key], status: 'Default' }));
   }
   return result;
 };

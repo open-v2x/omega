@@ -1,76 +1,53 @@
-import { countries, rsuDeviceList } from '#/services/api/center/site';
-import { ProFormCascader, ProFormSelect } from '@ant-design/pro-components';
-import { DefaultOptionType } from 'antd/lib/select';
+import { countries } from '#/services/api/center/site';
+import { fetchCrossingList } from '#/services/api/config/crossing';
+import { ProFormCascader } from '@ant-design/pro-components';
 import React from 'react';
 import { useEffect, useState } from 'react';
 
 type CountryCascaderProps = {
-  nodeId: number;
-  defaultValue: string[];
+  defaultValue?: string[];
   mapChange: (data?: {
     type: 1 | 2;
-    rsuId: number;
-    rsuEsn: string;
+    id: number;
+    code: string;
     lngLat: [number, number] | [];
   }) => void;
 };
 
-type DeviceListType = {
-  id: number;
-  name: string;
-  esn: string;
-  location: {
-    lon: number;
-    lat: number;
+const CountryCascader: React.FC<CountryCascaderProps> = ({ defaultValue, mapChange }) => {
+  const [areaCode, setAreaCode] = useState<string>();
+  const [crossing, setCrossing] = useState([]);
+  const fetchData = async () => {
+    const result = await fetchCrossingList({
+      pageNum: 1,
+      pageSize: -1,
+    });
+    setCrossing(result.data);
   };
-};
 
-type RSUSelectChangeType = {
-  extra: {
-    rsuEsn: string;
-    lng: number;
-    lat: number;
-  };
-};
-
-const CountryCascader: React.FC<CountryCascaderProps> = ({ nodeId, defaultValue, mapChange }) => {
-  const [areaCode, setAreaCode] = useState<string>(defaultValue[defaultValue.length - 1]);
-  const [deviceList, setDeviceList] = useState<DefaultOptionType[]>([]);
-  const [rsuId, setRsuId] = useState<number | null>();
-
-  const fetchDeviceList = async () => {
-    const res = await rsuDeviceList(nodeId, areaCode);
-    const data = res?.data.map(
-      ({ id, name, esn, location: { lon: lng, lat } }: DeviceListType) => ({
-        label: `${name} (Esn：${esn})`,
-        value: id,
-        extra: { rsuEsn: esn, lng, lat },
-      }),
-    );
-    if (data?.length) {
-      const [
-        {
-          value,
-          extra: { rsuEsn, lng, lat },
-        },
-      ] = data;
-      setRsuId(value);
-      mapChange({
-        type: 1,
-        rsuId: value,
-        rsuEsn: rsuEsn,
-        lngLat: lng && lat ? [lng, lat] : [],
-      });
+  const changeCode = () => {
+    if (areaCode?.length === 8) {
+      const result = crossing.find(c => c.code === areaCode);
+      if (result) {
+        mapChange({
+          type: 1,
+          id: result.id,
+          code: result.code,
+          lngLat: result.lng && result.lat ? [result.lng, result.lat] : [],
+        });
+      }
     } else {
-      setRsuId(null);
       mapChange(undefined);
     }
-    setDeviceList(data);
   };
 
   useEffect(() => {
-    fetchDeviceList();
+    changeCode();
   }, [areaCode]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="f">
@@ -79,7 +56,7 @@ const CountryCascader: React.FC<CountryCascaderProps> = ({ nodeId, defaultValue,
           allowClear: false,
           fieldNames: { label: 'name', value: 'code' },
           defaultValue,
-          onChange: ([, , , code]: (string | number)[]) => setAreaCode(code as string),
+          onChange: ([, , , , code]: (string | number)[]) => setAreaCode(code as string),
         }}
         request={async () => {
           const res = await countries();
@@ -87,29 +64,6 @@ const CountryCascader: React.FC<CountryCascaderProps> = ({ nodeId, defaultValue,
         }}
         label={t('Address')}
       />
-      <div style={{ marginLeft: '20px' }}>
-        <ProFormSelect
-          fieldProps={{
-            allowClear: false,
-            value: rsuId,
-            onChange: (value, option: unknown) => {
-              const {
-                extra: { rsuEsn, lng, lat },
-              } = option as RSUSelectChangeType;
-              setRsuId(value);
-              mapChange({
-                type: 1,
-                rsuId: value,
-                rsuEsn,
-                lngLat: lng && lat ? [lng, lat] : [],
-              });
-            },
-          }}
-          params={{ code: areaCode }}
-          options={deviceList}
-          label={t('RSU')}
-        />
-      </div>
     </div>
   );
 };

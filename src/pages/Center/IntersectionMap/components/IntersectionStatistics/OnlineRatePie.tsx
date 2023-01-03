@@ -7,7 +7,7 @@ type PieDataType = {
 };
 
 const OnlineRatePie: React.FC<{
-  value: { online: number; offline: number; notRegister: number };
+  value: Center.OnlineType;
 }> = ({ value: { online, offline, notRegister } }) => {
   const data: PieDataType[] = [
     { type: t('Online'), value: online },
