@@ -20,4 +20,11 @@ declare namespace Algorithm {
     module: string;
     version: string;
   };
+
+  type UpdateAlgorithmItem = {
+    module: string;
+    algo: string;
+    enable: boolean;
+    inUse: string;
+  };
 }
