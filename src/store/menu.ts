@@ -1,7 +1,9 @@
+import { DeviceMenu } from './../router/menus/index';
 import { menuFilter } from '#/components/Layout/GlobalNav/common';
 import { MenuDataItem } from '@ant-design/pro-components';
 import create from 'zustand';
-import menuList from '#/router/menus';
+import { menuList } from '#/router/menus/index';
+import { formatMenus } from '#/utils/path';
 interface IMenuStore {
   toggle: boolean;
   menus: MenuDataItem[];
@@ -10,6 +12,9 @@ interface IMenuStore {
   favoriteMenu: any[];
   favoriteMenuInit: boolean;
   setMenus: (menus: MenuDataItem[]) => void;
+  getMenus: () => MenuDataItem[];
+  setRelatedMenus: (menus: MenuDataItem[]) => void;
+  getRelatedMenus: () => MenuDataItem[];
   // you can hard-code or fetch the menus
   fetchMenus: () => void;
   fetchFavoriteMenus: () => void;
@@ -38,26 +43,23 @@ const useMenuStore = create<IMenuStore>((set, get) => ({
   ],
   favoriteMenuInit: false,
   setMenus: menus => {
+    const mList = formatMenus(menus);
+    localStorage.setItem('v2x_omega_menu', JSON.stringify(menus));
     set({
-      menus: menus,
+      menus: mList,
+    });
+  },
+  setRelatedMenus: menus => {
+    const mList = formatMenus(menus);
+    localStorage.setItem('v2x_omega_rmenu', JSON.stringify(menus));
+    set({
+      relatedMenus: mList,
     });
   },
   fetchMenus: () => {
-    const formatMenus = (menus?: MenuDataItem[]): MenuDataItem[] => {
-      if (!menus) return [];
-
-      const menu = menus.map(({ icon, children: childrens, ...item }) => ({
-        ...item,
-        name: t(item.name),
-        icon: icon,
-        children: childrens && formatMenus(childrens),
-      }));
-      return menu;
-    };
-
-    const menus = formatMenus(menuList);
-
-    set({ menus });
+    const menus = get().getMenus();
+    const related = get().getRelatedMenus();
+    set({ menus, relatedMenus: related });
   },
   fetchFavoriteMenus: () => {
     // TODO favorite menu, when you get the favoriteMenu
@@ -74,6 +76,26 @@ const useMenuStore = create<IMenuStore>((set, get) => ({
     set({
       rightMenus: result,
     });
+  },
+  getMenus: () => {
+    if (get().menus.length > 0) {
+      return get().menus;
+    }
+    const menus = localStorage.getItem('v2x_omega_menu');
+    if (menus) {
+      return formatMenus(JSON.parse(menus));
+    }
+    return DeviceMenu.children;
+  },
+  getRelatedMenus: () => {
+    if (get().relatedMenus.length > 0) {
+      return get().menus;
+    }
+    const menus = localStorage.getItem('v2x_omega_rmenu');
+    if (menus) {
+      return formatMenus(JSON.parse(menus));
+    }
+    return DeviceMenu.related;
   },
 }));
 

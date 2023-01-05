@@ -61,7 +61,6 @@ const IntersectionStatistics: React.FC<{ esn: string; intersectionCode: string }
   return (
     <>
       <DeviceOnlineRate
-        esn={esn}
         intersectionCode={intersectionCode}
         showLiveStream={showLiveStreamCallback}
         showCloudPoint={showLiveCloudPointCallback}
