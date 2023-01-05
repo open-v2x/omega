@@ -36,10 +36,7 @@ class ServerResponseFailedManager {
       '403': () => this.handleCodeIs403(),
       '1062': () => this.handleShowErrorWithDetailKey(code, detail.detail),
       '1406': () => this.handleShowErrorWithDetailKey(code, detail.detail),
-      '1116': () => {
-        const { intersection_id: intersectionId, phase_id: phaseId } = detail;
-        return message.error(t(`error.${code}`, { intersectionId, phaseId }));
-      },
+      '1116': () => this.handleShowErrorWithDetailKey(code, detail.detail),
       default: () => this.handleCodeIsDefault(msg || detail || error.message),
     };
     return parser[code] ? parser[code]() : parser.default();

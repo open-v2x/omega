@@ -19,6 +19,26 @@ const SiderLayout: FC = () => {
     menuStore.fetchRightMenus();
   };
 
+  const handleToRelated = item => {
+    menuStore.setMenus(item);
+    menuStore.setRelatedMenus(item.related || []);
+  };
+
+  const renderRelatedMenus = () => (
+    <div className={styles['related-container']}>
+      <div className={styles['related-container-title']}>关联菜单</div>
+      {menuStore.relatedMenus.map(related => (
+        <div
+          key={related.path}
+          className={styles['related-item']}
+          onClick={() => handleToRelated(related)}
+        >
+          {related.name}
+        </div>
+      ))}
+    </div>
+  );
+
   useEffect(() => {
     init();
   }, [menuStore.menus]);
@@ -29,7 +49,10 @@ const SiderLayout: FC = () => {
       className={styles['layout-content']}
       onCollapse={toggle}
       siderWidth={246}
-      menuDataRender={() => menuStore.menus}
+      menuDataRender={() => {
+        console.log('menuData', menuStore.menus);
+        return menuStore.menus;
+      }}
       menuItemRender={item => (
         <div
           style={{
@@ -48,9 +71,7 @@ const SiderLayout: FC = () => {
       )}
       menuFooterRender={props => {
         if (props?.collapsed) return undefined;
-        return menuStore.relatedMenus.length ? (
-          <div style={{ height: '100px' }}>关联菜单</div>
-        ) : undefined;
+        return menuStore.relatedMenus.length ? renderRelatedMenus() : undefined;
       }}
       headerRender={() => <GlobalHeader navItems={[]} isAdminPage={false} />}
       breadcrumbRender={(routers = []) =>

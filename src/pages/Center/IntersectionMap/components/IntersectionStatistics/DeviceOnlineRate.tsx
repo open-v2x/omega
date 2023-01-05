@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { getCamerasByRsuEsn, getLidarsByRsuEsn, onlineRate } from '#/services/api/center/site';
+import { onlineRate } from '#/services/api/center/site';
 import {
   CaretDownOutlined,
   CaretUpOutlined,
@@ -17,17 +17,17 @@ import imgRadar from '#/assets/images/platform_radar.png';
 import imgSpat from '#/assets/images/platform_spat.png';
 import OnlineRatePie from './OnlineRatePie';
 import { deviceList } from '#/services/api/device/device';
+import { cameraList } from '#/services/api/device/camera';
+import { lidarList } from '#/services/api/device/lidar';
 
 // 设备在线率
 const DeviceOnlineRate = forwardRef(
   (
     {
-      esn,
       intersectionCode,
       showLiveStream,
       showCloudPoint,
     }: {
-      esn: string;
       intersectionCode: string;
       showLiveStream: (url: string, title: string) => void;
       showCloudPoint: (wsUrl: string) => void;
@@ -70,27 +70,33 @@ const DeviceOnlineRate = forwardRef(
     };
 
     const fetchCameras = useCallback(async () => {
-      const { data } = await getCamerasByRsuEsn(esn);
-      setCameras(data);
-    }, [esn]);
+      const { data } = await cameraList({ intersectionCode });
+      const result = data.map(d => ({
+        id: d.id,
+        sn: d.sn,
+        name: d.name,
+        streamUrl: d.streamUrl,
+      }));
+      setCameras(result);
+    }, [intersectionCode]);
 
     const fetchLidars = useCallback(async () => {
-      const { data } = await getLidarsByRsuEsn(esn);
+      const { data } = await lidarList({ intersectionCode });
       setLidars(data);
-    }, [esn]);
+    }, [intersectionCode]);
 
     useEffect(() => {
       fetchRsus();
       fetchOnlineRate();
       fetchCameras();
       fetchLidars();
-      // const id = setInterval(() => {
-      //   fetchRsus();
-      //   fetchOnlineRate();
-      //   fetchCameras();
-      //   fetchLidars();
-      // }, 5000);
-      // return () => clearInterval(id);
+      const id = setInterval(() => {
+        fetchRsus();
+        fetchOnlineRate();
+        fetchCameras();
+        fetchLidars();
+      }, 5000);
+      return () => clearInterval(id);
     }, [fetchCameras, fetchLidars]);
 
     const handleToLiveStream = () => {

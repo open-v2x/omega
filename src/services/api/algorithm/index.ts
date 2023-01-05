@@ -2,8 +2,8 @@ import { IResponseListData } from '#/types/service/responseData';
 import { apiService } from '#/services/BaseService';
 
 // 获取算法配置
-export async function fetchAlgorithmList() {
-  return apiService.get<IResponseListData<Algorithm.AlgorithmListItem>>(`v1/algos`);
+export async function fetchAlgorithmList(params: API.PageParams & { algo?: string }) {
+  return apiService.get<IResponseListData<Algorithm.AlgorithmListItem>>(`v1/algos`, { params });
 }
 
 // 获取所有算法版本列表

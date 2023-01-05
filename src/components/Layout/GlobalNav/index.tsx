@@ -6,6 +6,7 @@ import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
 import Right from './Right';
 import { GlobalHeaderProps } from '../GlobalHeader';
 import { useMenuStore } from '#/store/menu';
+import { menuList } from '#/router/menus/index';
 
 interface GlobalProps extends GlobalHeaderProps {
   logo?: React.ReactNode;
@@ -15,10 +16,21 @@ const GlobalNav: FC<GlobalProps> = props => {
   const { logo = undefined, isAdminPage = false } = props;
 
   const [open, setOpen] = useState(false);
-  const { setMenus, favoriteMenu, rightMenus } = useMenuStore();
+  const { setMenus, favoriteMenu, rightMenus, setRelatedMenus } = useMenuStore();
 
-  const onClose = () => {
-    setMenus(favoriteMenu);
+  const onClose = menu => {
+    if (menu?.path) {
+      const parentPath = menu.path.split('/');
+      const pPath = `/${parentPath[1]}`;
+      const currentMenu = menuList.find(m => m.path === pPath);
+      if (currentMenu) {
+        setMenus(currentMenu?.children);
+        setRelatedMenus(currentMenu?.related || []);
+      } else {
+        setMenus([menu]);
+        setRelatedMenus([]);
+      }
+    }
     setOpen(false);
   };
 
