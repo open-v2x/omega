@@ -5,14 +5,12 @@ import { Link } from 'react-router-dom';
 import { Spin } from 'antd';
 import styles from './index.module.less';
 
-import { defaultNavInLeft } from '#/layouts/SiderLayout/console-nav';
-import { defaultNavInLeft as defaultNavInLeftAdmin } from '#/layouts/SiderLayout/admin-nav';
 import { useMenuStore } from '#/store/menu';
 
 interface LeftProps {
   isAdminPage: boolean;
   navItems: any[];
-  onClose: () => void;
+  onClose: (item) => void;
 }
 
 const Left: FC<LeftProps> = props => {
@@ -30,8 +28,7 @@ const Left: FC<LeftProps> = props => {
     if (favoriteMenuItems.length) {
       return favoriteMenuItems;
     }
-    const defaultMenu = isAdminPage ? defaultNavInLeftAdmin : defaultNavInLeft;
-    return defaultMenu;
+    return [];
   };
 
   const onChangeFavorite = (e, item) => {
@@ -62,7 +59,7 @@ const Left: FC<LeftProps> = props => {
     return (
       <div className={styles.item} key={item.key}>
         <Link
-          onClick={props.onClose}
+          onClick={() => props.onClose(item)}
           to={getSecondLevelNavItemLink(item)}
           className={styles['item-label']}
         >
