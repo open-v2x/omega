@@ -1,12 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { clickBackToListBtn } from '../../utils/detail';
 import { setQuerySelectValue } from '../../utils/form';
-import {
-  checkDetailUrl,
-  gotoPageAndExpectUrl,
-  useUserStorageState,
-  gotoRoadSimulator,
-} from '../../utils/global';
+import { checkDetailUrl, useUserStorageState, gotoRoadSimulator } from '../../utils/global';
 import { checkDataset, connectMqtt } from '../../utils/road_simulator';
 import { clickDetailTextBtn, getTableTotal } from '../../utils/table';
 test.describe('The Rsm Page', () => {
@@ -18,25 +13,32 @@ test.describe('The Rsm Page', () => {
     await page.goto(pageUrl);
   });
 
-  test('用路侧模拟器发送[路侧安全消息]数据并成功收到消息', async ({ page }) => {
+  test('用路侧模拟器发送[路侧安全消息]数据并成功收到消息', async ({ browser }) => {
+    const deviceContext = await browser.newContext();
+    const simulatorContext = await browser.newContext();
+
+    // Create pages and interact with contexts independently
+    const deviceContextPage = await deviceContext.newPage();
+    const simulatorPage = await simulatorContext.newPage();
     //先统计列表有多少数据再用模拟器发送消息
-    await page.goto(pageUrl);
-    const rows_init = await getTableTotal(page);
-    await gotoRoadSimulator(page);
-    await connectMqtt(page);
-    await checkDataset(page, 'video_track');
-    await checkDataset(page, 'radar_track');
+    await deviceContextPage.goto(pageUrl);
+    const rows_init = await getTableTotal(deviceContextPage);
+    await gotoRoadSimulator(simulatorPage);
+    await connectMqtt(simulatorPage);
+    await checkDataset(simulatorPage, 'video_track');
+    await checkDataset(simulatorPage, 'radar_track');
 
     // 直到loading结束再点击发送按钮
-    await page.locator('#loading-video_track').waitFor({ state: 'hidden' });
-    await page.locator('#loading-radar_track').waitFor({ state: 'hidden' });
-    await page.click('#publishDataSetButton');
-    await page.waitForTimeout(5000); // 发送5s数据后停止发送
-    await page.click('#connectButton');
+    await simulatorPage.locator('#loading-video_track').waitFor({ state: 'hidden' });
+    await simulatorPage.locator('#loading-radar_track').waitFor({ state: 'hidden' });
+    await simulatorPage.click('#publishDataSetButton');
+    await simulatorPage.waitForTimeout(15000);
 
-    await page.goto(pageUrl);
-    const rows_after = await getTableTotal(page); // 经过模拟器发送后表格数据应该比原来多
+    await deviceContextPage.reload();
+    const rows_after = await getTableTotal(deviceContextPage); // 经过模拟器发送后表格数据应该比原来多
     expect(Number(rows_init)).toBeLessThan(Number(rows_after));
+    await deviceContextPage.close();
+    await simulatorPage.close();
   });
 
   test('成功通过下拉框筛选数据', async ({ page }) => {
