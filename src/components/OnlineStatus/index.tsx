@@ -11,6 +11,8 @@ type OnlineStatusType = {
 const OnlineStatus: React.FC<OnlineStatusType> = ({ status, statusName }) => {
   const color = status ? '#52C41A' : 'rgba(0, 0, 0, 0.25)';
 
+  console.log('statusName', statusName);
+
   return (
     <Space>
       <span className={styles.dots} style={{ backgroundColor: color }} />

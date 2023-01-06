@@ -48,7 +48,7 @@ class ServerResponseFailedManager {
    * @param {any} detail
    */
   handleShowErrorWithDetailKey(code: number, detail: any) {
-    const keys = Object.keys(detail);
+    const keys = Object.keys(detail).map(k => t(k.toString()));
     const msg = keys.toString();
     message.error(t(`error.${code}`, { msg: msg }));
   }
