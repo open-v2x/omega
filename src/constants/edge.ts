@@ -242,5 +242,3 @@ export const LightStateOptions = [
   t('Yellow'),
   t('Yellow flashing'),
 ];
-
-export const AlgorithmModuleOptions = [t('pre_process_ai_algo'), t('scenario_algo')];

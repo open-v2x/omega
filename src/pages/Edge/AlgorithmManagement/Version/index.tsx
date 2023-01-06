@@ -1,10 +1,12 @@
 import BaseContainer from '#/components/BaseContainer';
 import BaseProTable from '#/components/BaseProTable';
-import { fetchAlgorithmVersionList } from '#/services/api/algorithm';
+import { deleteAlgorithm, fetchAlgorithmVersionList } from '#/services/api/algorithm';
 import { ActionType } from '@ant-design/pro-components';
 import React, { FC, useRef } from 'react';
 import CreateAlgoVersionModal from './components/CreateAlgoVersionModal';
 import { ProColumns } from '#/typings/pro-component';
+import { Button } from 'antd';
+import { confirmModal } from '#/components/ConfirmModal';
 
 const AlgorithmVersion: FC = () => {
   const actionRef = useRef<ActionType>();
@@ -22,6 +24,27 @@ const AlgorithmVersion: FC = () => {
       title: t('Version Name'),
       dataIndex: 'version',
       search: true,
+    },
+    {
+      title: t('Operate'),
+      render: (_, row) => [
+        <Button
+          type="link"
+          size="small"
+          key="delete"
+          disabled={!row.id}
+          onClick={() =>
+            confirmModal({
+              id: row.id,
+              content: t('Are you sure you want to delete this lidar?'),
+              modalFn: deleteAlgorithm,
+              actionRef,
+            })
+          }
+        >
+          {t('Delete')}
+        </Button>,
+      ],
     },
   ];
   return (
