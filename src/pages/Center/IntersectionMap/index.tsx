@@ -25,7 +25,7 @@ const IntersectionMap: React.FC = () => {
           />
         )}
         {type === '2' && <RoadMapXml id={id as string} />}
-        <IntersectionStatistics esn={esn as string} intersectionCode={intersectionCode} />
+        <IntersectionStatistics intersectionCode={intersectionCode} />
       </div>
     </BgContainer>
   );

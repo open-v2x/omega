@@ -169,7 +169,7 @@ const DeviceOnlineRate = forwardRef(
     const footerRsu = () => (
       <div className={styles['font-change-name']}>
         <div className={styles.footer}>
-          <span>RSU：</span>
+          <span>{t('RSU online rate')}</span>
           <span
             className={classNames(styles['cursor-pointer'], styles['mr-10'])}
             onClick={() => handleToLiveStream()}
@@ -197,7 +197,7 @@ const DeviceOnlineRate = forwardRef(
     const footerCamera = () => (
       <div className={styles['font-change-name']}>
         <div className={styles.footer}>
-          <span>摄像头：</span>
+          <span>{t('Camera')}：</span>
           <span
             className={classNames(styles['cursor-pointer'], styles['mr-10'])}
             onClick={() => handleToLiveStream()}
@@ -265,7 +265,7 @@ const DeviceOnlineRate = forwardRef(
               <div className="f f-a-center">
                 <img className={styles['online-image']} src={imgCamera} alt="" />
                 <div className={classNames(styles['online-statistics'], 'f f-a-center')}>
-                  {t('Camera')}:
+                  {t('Side Camera')}:
                   <DivOnlineRate {...rateInfo.camera} />
                 </div>
               </div>

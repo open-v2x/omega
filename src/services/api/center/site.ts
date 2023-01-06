@@ -25,7 +25,7 @@ export async function onlineRate() {
 }
 
 // 路口信息
-export async function routeInfo(params: { rsuEsn: string }) {
+export async function routeInfo(params: { intersectionCode: string }) {
   return apiService.get<Center.RouteInfoItem>(`v1/homes/route_info`, {
     params,
   });
