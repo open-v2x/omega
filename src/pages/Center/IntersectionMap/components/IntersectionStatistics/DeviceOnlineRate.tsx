@@ -169,7 +169,7 @@ const DeviceOnlineRate = forwardRef(
     const footerRsu = () => (
       <div className={styles['font-change-name']}>
         <div className={styles.footer}>
-          <span>RSU：</span>
+          <span>{t('RSU online rate')}</span>
           <span
             className={classNames(styles['cursor-pointer'], styles['mr-10'])}
             onClick={() => handleToLiveStream()}
