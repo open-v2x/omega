@@ -8,45 +8,16 @@ import { message } from 'antd';
 
 class ServerResponseSuccessManager {
   /**
-   * 状态码解析器，用于代码里有自定义的 code 和错误展示
+   * 状态码解析器，用于代码里有自定义的 code
    * @param response
    */
   codeParser(response: AxiosResponse) {
     const code = response?.status;
     const resData = response?.data;
     const parser = {
-      '401': () => this.handleCodeIs401(resData),
-      '200': () => Promise.resolve(resData),
-      default: () => this.handleCodeIsDefault(response),
+      default: () => Promise.resolve(resData),
     };
     return parser[code] ? parser[code]() : parser.default();
-  }
-
-  /**
-   * 状态码为 401 的响应处理
-   * @param resData
-   */
-  handleCodeIs401(resData) {
-    if (resData === 'TOKEN_INVALID') {
-      //appEventEmitter.emit("live-token-invalid");
-      clearStorage();
-      setTimeout(() => {
-        window.location.href = '/user/login';
-      }, 1000);
-    }
-  }
-
-  handleCodeIsDefault(response) {
-    if (response.headers.get('Content-Type').includes('application/json')) {
-      response.json().then((res: { detail: string }) => {
-        const { detail } = res || {};
-        if (detail) {
-          message.error(detail);
-        }
-      });
-    } else {
-      message.error(response.statusText);
-    }
   }
 }
 
@@ -59,13 +30,30 @@ class ServerResponseFailedManager {
    */
   getErrorMessage(error: AxiosError) {
     const { detail } = error.response.data;
-    console.error('error.response==', detail || error.message);
+    console.error('error.response==', detail);
     const { msg, code } = detail;
     const parser = {
       '403': () => this.handleCodeIs403(),
+      '1062': () => this.handleShowErrorWithDetailKey(code, detail.detail),
+      '1406': () => this.handleShowErrorWithDetailKey(code, detail.detail),
+      '1116': () => {
+        const { intersection_id: intersectionId, phase_id: phaseId } = detail;
+        return message.error(t(`error.${code}`, { intersectionId, phaseId }));
+      },
       default: () => this.handleCodeIsDefault(msg || detail || error.message),
     };
     return parser[code] ? parser[code]() : parser.default();
+  }
+
+  /**
+   * @description: 遍历报错 detail 里的 keys
+   * @param {number} code
+   * @param {any} detail
+   */
+  handleShowErrorWithDetailKey(code: number, detail: any) {
+    const keys = Object.keys(detail);
+    const msg = keys.toString();
+    message.error(t(`error.${code}`, { msg: msg }));
   }
 
   handleCodeIs403() {
