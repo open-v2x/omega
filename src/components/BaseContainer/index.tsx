@@ -18,7 +18,7 @@ const QIANKUN_PRE = 'omega';
  */
 const BaseContainer: FC<BaseContainerType> = ({ children, back = false, disablePage = false }) => {
   const { history } = useRootStore();
-  const { flatMenus } = useMenuStore();
+  const { menus } = useMenuStore();
   const onBack = () => {
     history.back();
   };
@@ -26,7 +26,7 @@ const BaseContainer: FC<BaseContainerType> = ({ children, back = false, disableP
     pathname.startsWith(`/${QIANKUN_PRE}/`)
       ? pathname.substring(QIANKUN_PRE.length + 1, pathname.length)
       : pathname;
-  const [{ route }] = matchRoutes(flatMenus, getCurrentMenuName(history.location.pathname));
+  const [{ route }] = matchRoutes(menus, getCurrentMenuName(history.location.pathname));
 
   return disablePage ? (
     <>{children}</>
