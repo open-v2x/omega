@@ -6,18 +6,14 @@ import { menuList } from '#/router/menus/index';
 import { formatMenus } from '#/utils/path';
 interface IMenuStore {
   toggle: boolean;
+  menuRouter: string;
   menus: MenuDataItem[];
   rightMenus: [];
   relatedMenus: MenuDataItem[];
   favoriteMenu: any[];
   favoriteMenuInit: boolean;
-  setMenus: (menus: MenuDataItem[]) => void;
-  getMenus: () => MenuDataItem[];
-  handleChangeMenu: (menus: MenuDataItem[]) => void;
-  setRelatedMenus: (menus: MenuDataItem[]) => void;
-  getRelatedMenus: () => MenuDataItem[];
   // you can hard-code or fetch the menus
-  fetchMenus: () => void;
+  fetchMenus: (path: string) => void;
   fetchFavoriteMenus: () => void;
   fetchRightMenus: () => void;
   addFavoriteMenu: (key: string) => void;
@@ -27,6 +23,7 @@ interface IMenuStore {
 const useMenuStore = create<IMenuStore>((set, get) => ({
   toggle: false,
   menus: [],
+  menuRouter: '',
   rightMenus: [],
   relatedMenus: [],
   favoriteMenu: [
@@ -43,24 +40,29 @@ const useMenuStore = create<IMenuStore>((set, get) => ({
     },
   ],
   favoriteMenuInit: false,
-  setMenus: menus => {
-    const mList = formatMenus(menus);
-    localStorage.setItem('v2x_omega_menu', JSON.stringify(menus));
+  fetchMenus: path => {
+    const parentPath = path.split('/');
+    const pPath = `/${parentPath[1]}`;
+    if (get().menuRouter === pPath) {
+      return;
+    }
+    const currentMenu = menuList.find(m => m.path === pPath);
+
+    let menu, related;
+
+    if (currentMenu) {
+      menu = formatMenus(currentMenu?.children);
+      related = formatMenus(currentMenu?.related || []);
+    } else {
+      const cMenu = menuList.find(c => c.path === path);
+      menu = formatMenus(cMenu);
+      related = formatMenus(cMenu?.related || []);
+    }
     set({
-      menus: mList,
+      menus: menu,
+      relatedMenus: related,
+      menuRouter: pPath,
     });
-  },
-  setRelatedMenus: menus => {
-    const mList = formatMenus(menus);
-    localStorage.setItem('v2x_omega_rmenu', JSON.stringify(menus));
-    set({
-      relatedMenus: mList,
-    });
-  },
-  fetchMenus: () => {
-    const menus = get().getMenus();
-    const related = get().getRelatedMenus();
-    set({ menus, relatedMenus: related });
   },
   fetchFavoriteMenus: () => {
     // TODO favorite menu, when you get the favoriteMenu
