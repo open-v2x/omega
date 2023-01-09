@@ -20,8 +20,8 @@ const SiderLayout: FC = () => {
   };
 
   const handleToRelated = item => {
-    menuStore.setMenus(item);
-    menuStore.setRelatedMenus(item.related || []);
+    menuStore.handleChangeMenu(item);
+    navigate(item?.path);
   };
 
   const renderRelatedMenus = () => (
@@ -49,10 +49,7 @@ const SiderLayout: FC = () => {
       className={styles['layout-content']}
       onCollapse={toggle}
       siderWidth={246}
-      menuDataRender={() => {
-        console.log('menuData', menuStore.menus);
-        return menuStore.menus;
-      }}
+      menuDataRender={() => menuStore.menus}
       menuItemRender={item => (
         <div
           style={{
