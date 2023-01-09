@@ -26,14 +26,26 @@ export const getPath = ({ key, params, query = {} }) => {
   return str ? `${path}?${str}` : path;
 };
 
-export const formatMenus = (menus?: MenuDataItem[]): MenuDataItem[] => {
+export const formatMenus = (menus?: MenuDataItem[] | MenuDataItem): MenuDataItem[] => {
   if (!menus) return [];
 
-  const menu = menus.map(({ icon, children: childrens, ...item }) => ({
-    ...item,
-    name: t(item.name),
-    icon: icon,
-    children: childrens && formatMenus(childrens),
-  }));
-  return menu;
+  if (Array.isArray(menus)) {
+    const menu = menus.map(({ icon, children: childrens, ...item }) => ({
+      ...item,
+      name: t(item.name),
+      icon: icon,
+      children: childrens && formatMenus(childrens),
+    }));
+    return menu;
+  } else {
+    const { icon, children: childrens, ...item } = menus;
+    return [
+      {
+        ...item,
+        name: t(item.name),
+        icon: icon,
+        children: childrens && formatMenus(childrens),
+      },
+    ];
+  }
 };

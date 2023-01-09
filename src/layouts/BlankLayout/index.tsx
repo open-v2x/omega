@@ -1,14 +1,11 @@
 import React, { FC } from 'react';
 import { Outlet } from 'react-router';
-import QiankunLayout from '../QiankunLayout';
+import styles from './index.module.less';
 
-const BlankLayout: FC = () =>
-  window.__POWERED_BY_QIANKUN__ ? (
-    <QiankunLayout />
-  ) : (
-    <div>
-      <Outlet />
-    </div>
-  );
+const BlankLayout: FC = () => (
+  <div className={styles['qiankun-container']}>
+    <Outlet />
+  </div>
+);
 
 export default BlankLayout;

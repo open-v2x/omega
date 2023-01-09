@@ -15,10 +15,9 @@ const GlobalNav: FC<GlobalProps> = props => {
   const { logo = undefined, isAdminPage = false } = props;
 
   const [open, setOpen] = useState(false);
-  const { handleChangeMenu, favoriteMenu, rightMenus } = useMenuStore();
+  const { favoriteMenu, rightMenus } = useMenuStore();
 
-  const onClose = menu => {
-    handleChangeMenu(menu);
+  const onClose = () => {
     setOpen(false);
   };
 

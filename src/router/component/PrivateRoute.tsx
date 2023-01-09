@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { RouteProps, useNavigate } from 'react-router';
+import { RouteProps, useLocation, useNavigate } from 'react-router';
 import { useUserStore } from '#/store/user';
 import { useMenuStore } from '#/store/menu';
 
@@ -8,6 +8,7 @@ const PrivateRoute: FC<RouteProps> = ({ children }) => {
   const userInfo = useUserStore(state => state.userInfo);
   const { fetchMenus } = useMenuStore();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const getUserInfo = async () => {
     if (!userInfo.username) {
@@ -15,7 +16,6 @@ const PrivateRoute: FC<RouteProps> = ({ children }) => {
         await fetchTokenByIam();
       }
       const res = await fetchUserInfo();
-      fetchMenus();
       if (!res.username) {
         navigate('/user/login', { replace: true });
       }
@@ -25,6 +25,8 @@ const PrivateRoute: FC<RouteProps> = ({ children }) => {
   useEffect(() => {
     getUserInfo();
   }, []);
+
+  fetchMenus(location.pathname);
 
   return <div>{children}</div>;
 };
