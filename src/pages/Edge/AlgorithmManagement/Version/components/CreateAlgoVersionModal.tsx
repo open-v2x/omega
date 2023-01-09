@@ -1,14 +1,18 @@
 import FormItem from '#/components/FormItem';
 import Modal from '#/components/Modal';
-import { AlgorithmModuleOptions } from '#/constants/edge';
+import { fetchCreateVersion, fetchModule } from '#/services/api/algorithm';
 import { CreateModalProps, FormGroupType } from '#/typings/pro-component';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 const CreateAlgoVersionModal: React.FC<CreateModalProps> = ({
   editInfo,
   isDetails = false,
   success,
 }) => {
+  const [data, setData] = useState<any[]>();
+  const [modules, setModules] = useState<string[]>([]);
+  const [algos, setAlgos] = useState<string[]>([]);
+
   const formItems: FormGroupType[] = [
     {
       key: 'module',
@@ -19,7 +23,13 @@ const CreateAlgoVersionModal: React.FC<CreateModalProps> = ({
           name: 'module',
           label: t('Algorithm Module'),
           disabled: isDetails,
-          options: AlgorithmModuleOptions,
+          options: modules,
+          fieldProps: {
+            onSelect: value => {
+              const ags = data.find(d => d.module === value);
+              setAlgos(ags?.algo || []);
+            },
+          },
           rules: [{ required: true, message: t('Please select a algorithm module') }],
         },
       ],
@@ -30,17 +40,10 @@ const CreateAlgoVersionModal: React.FC<CreateModalProps> = ({
         {
           type: 'select',
           required: true,
-          name: 'module',
+          name: 'algo',
           label: t('Algorithm Name'),
-          disabled: isDetails,
-          request: () => [
-            'complement',
-            'fusion',
-            'smooth',
-            'visual',
-            'collision_warning',
-            'cooperative_lane_change',
-          ],
+          disabled: isDetails && algos.length > 0,
+          options: algos,
           rules: [{ required: true, message: t('Please select a algorithm name') }],
         },
       ],
@@ -64,6 +67,17 @@ const CreateAlgoVersionModal: React.FC<CreateModalProps> = ({
     },
   ];
 
+  const getModule = useCallback(async () => {
+    const result = await fetchModule();
+    const ms = result.map(r => r.module);
+    setData(result);
+    setModules(ms);
+  }, []);
+
+  useEffect(() => {
+    getModule();
+  }, []);
+
   return (
     <Modal
       title={isDetails ? t('Edit Algorithm Version') : t('Add Algorithm Version')}
@@ -71,7 +85,7 @@ const CreateAlgoVersionModal: React.FC<CreateModalProps> = ({
       editTrigger={isDetails ? t('Details') : ''}
       modalProps={{ className: 'overflow' }}
       submitForm={async values => {
-        console.log('新增', values);
+        await fetchCreateVersion(values);
         success();
       }}
       editId={editInfo?.id}

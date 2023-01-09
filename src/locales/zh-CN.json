@@ -327,8 +327,8 @@
   "{{type}} details": "{{type}}详情",
   "Edit {{type}}": "编辑{{type}}",
   "Camera": "摄像头",
-  "Radar": "雷达",
-  "Lidar": "激光雷达传感器",
+  "Radar": "毫米波雷达",
+  "Lidar": "激光雷达",
   "Traffic police": "交通警察",
   "Government": "政府",
   "Meteorological department": "气象部门",
@@ -491,5 +491,6 @@
   "Algorithm Module": "算法模块",
   "Algorithm Name": "算法名称",
   "Version Name": "版本名称",
-  "Update Time": "更新时间"
+  "Update Time": "更新时间",
+  "Side Camera": "路侧摄像头"
 }

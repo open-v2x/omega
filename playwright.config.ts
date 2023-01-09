@@ -11,11 +11,12 @@ import { devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 const config: PlaywrightTestConfig = {
+  globalSetup: require.resolve('./e2e/utils/global'),
   testDir: './e2e/pages',
   // testDir: './tests-examples', // tests-examples directory
 
   /* Maximum time one test can run for. */
-  timeout: 30 * 10000,
+  timeout: 60 * 1000,
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
@@ -40,8 +41,8 @@ const config: PlaywrightTestConfig = {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://localhost:8000',
-    baseURL: 'http://47.100.126.13',
+    baseURL: 'http://localhost:2288',
+    //baseURL: 'http://47.100.126.13:2288',
     /* browserName - Name of the browser that will run the tests, one of chromium, firefox, or webkit. */
     browserName: 'chromium',
     // Tell all tests to load signed-in state from 'storageState.json'.

@@ -5,16 +5,20 @@ import { renderAreaFormatName, renderAreaFormItem } from '#/components/Country/r
 import OnlineStatus from '#/components/OnlineStatus';
 import { DeviceOnlineStatusOptions, DeviceStatusOptions } from '#/constants/edge';
 import { deleteSpat, spatList, updateSpat } from '#/services/api/device/spat';
-import { useRequestStore } from '#/store/request';
 import { ProColumns } from '#/typings/pro-component';
 import { statusOptionFormat } from '#/utils';
 import { ActionType } from '@ant-design/pro-components';
 import { Button, Divider } from 'antd';
 import React, { useRef } from 'react';
 import CreateSpatModal from './components/CreateSpatModal';
+import { deviceList } from '#/services/api/device/device';
+
+const fetchDeviceList = async () => {
+  const { data } = await deviceList({ pageNum: 1, pageSize: -1 });
+  return data.map(({ id, rsuName }: Device.DeviceListItem) => ({ label: rsuName, value: id }));
+};
 
 const SpatManagement: React.FC = () => {
-  const { fetchDeviceListInModal } = useRequestStore();
   const actionRef = useRef<ActionType>();
 
   const columns: ProColumns<Device.SpatListItem>[] = [
@@ -42,9 +46,9 @@ const SpatManagement: React.FC = () => {
     },
     {
       title: t('Associate RSU'),
-      dataIndex: 'rsuId',
+      dataIndex: 'rsuName',
       valueType: 'select',
-      request: fetchDeviceListInModal,
+      request: fetchDeviceList,
       search: true,
     },
     {

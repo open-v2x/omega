@@ -3,10 +3,10 @@ import { DeviceStatusOptions } from '#/constants/edge';
 import { ProColumns } from '#/typings/pro-component';
 import { statusOptionFormat } from '#/utils';
 import { ActionType, EditableFormInstance, EditableProTable } from '@ant-design/pro-components';
-import React, { FC, useEffect, useRef, useState } from 'react';
-import { fetchAlgorithmList } from '#/services/api/algorithm';
+import React, { FC, useRef, useState } from 'react';
+import { fetchAlgorithmList, updateAlgorithm } from '#/services/api/algorithm';
 import styles from './index.module.less';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 
 const AlgorithmConfig: FC = () => {
   const actionRef = useRef<ActionType>();
@@ -20,12 +20,12 @@ const AlgorithmConfig: FC = () => {
       title: t('Algorithm Module'),
       dataIndex: 'module',
       editable: false,
+      search: false,
     },
     {
       title: t('Algorithm Name'),
       dataIndex: 'algo',
       editable: false,
-      search: false,
     },
     {
       title: t('Version Name'),
@@ -34,8 +34,8 @@ const AlgorithmConfig: FC = () => {
       valueType: 'select',
       valueEnum: entity => {
         const result = {};
-        entity.version?.map(v => {
-          result[v.version] = { text: v.version };
+        entity.version?.map((v: string) => {
+          result[v] = { text: v };
         });
         return result;
       },
@@ -80,18 +80,16 @@ const AlgorithmConfig: FC = () => {
     },
   ];
 
-  const handleConfig = () => {
-    console.log('更新数据', data);
+  const handleConfig = async () => {
+    const params = data.map(d => ({
+      module: d.module,
+      algo: d.algo,
+      enable: d.enable,
+      inUse: d.inUse,
+    }));
+    await updateAlgorithm(params);
+    message.success('操作成功');
   };
-
-  const init = async () => {
-    const result = await fetchAlgorithmList();
-    setData(result.data);
-  };
-
-  useEffect(() => {
-    init();
-  }, []);
 
   return (
     <BaseContainer>
@@ -103,7 +101,7 @@ const AlgorithmConfig: FC = () => {
         value={data}
         onChange={setData}
         controlled
-        search={{ labelWidth: 0 }}
+        search={{ labelWidth: 0, filterType: 'query' }}
         editable={{
           type: 'single',
           editableKeys,
@@ -124,6 +122,11 @@ const AlgorithmConfig: FC = () => {
             </a>,
           ],
           onChange: setEditableRowKeys,
+        }}
+        request={async params => {
+          const result = await fetchAlgorithmList(params);
+          setData(result.data);
+          return result;
         }}
         recordCreatorProps={false}
         pagination={{ pageSize: 10 }}

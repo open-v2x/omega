@@ -7,10 +7,7 @@ import { useCallback, useRef, useState } from 'react';
 import DeviceOnlineRate from './DeviceOnlineRate';
 import IntersectionInformation from './IntersectionInformation';
 
-const IntersectionStatistics: React.FC<{ esn: string; intersectionCode: string }> = ({
-  esn,
-  intersectionCode,
-}) => {
+const IntersectionStatistics: React.FC<{ intersectionCode: string }> = ({ intersectionCode }) => {
   const cameraModalRef: any = useRef(null);
   const cloudPointModalRef: any = useRef(null);
   const deviceOnlineRateRef: any = useRef(null);
@@ -61,13 +58,12 @@ const IntersectionStatistics: React.FC<{ esn: string; intersectionCode: string }
   return (
     <>
       <DeviceOnlineRate
-        esn={esn}
         intersectionCode={intersectionCode}
         showLiveStream={showLiveStreamCallback}
         showCloudPoint={showLiveCloudPointCallback}
         ref={deviceOnlineRateRef}
       />
-      <IntersectionInformation esn={esn} />
+      <IntersectionInformation code={intersectionCode} />
 
       <DisplayModal
         ref={cameraModalRef}

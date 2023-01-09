@@ -8,7 +8,7 @@ import styles from './index.module.less';
 
 interface RightProps {
   items: any[];
-  onClose: () => void;
+  onClose: (item) => void;
   isAdminPage: boolean;
 }
 
@@ -146,7 +146,7 @@ const Right: FC<RightProps> = props => {
       const linkIcon = isExternal ? <LinkOutlined className={styles['external-icon']} /> : null;
       const favoriteIcon = renderFavoriteBtn(it);
       const link = !isExternal ? (
-        <Link onClick={onClose} to={path}>
+        <Link onClick={() => onClose(it)} to={path}>
           {title}
           {favoriteIcon}
         </Link>
@@ -192,7 +192,7 @@ const Right: FC<RightProps> = props => {
     const title = child ? `${first} - ${second}` : first;
     return (
       <div key={path} className={styles['children-item']}>
-        <Link onClick={onClose} to={path}>
+        <Link onClick={() => onClose(child)} to={path}>
           <span className={styles['link-name']}>{t(title)}</span>
         </Link>
       </div>
