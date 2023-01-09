@@ -13,6 +13,7 @@ interface IMenuStore {
   favoriteMenuInit: boolean;
   setMenus: (menus: MenuDataItem[]) => void;
   getMenus: () => MenuDataItem[];
+  handleChangeMenu: (menus: MenuDataItem[]) => void;
   setRelatedMenus: (menus: MenuDataItem[]) => void;
   getRelatedMenus: () => MenuDataItem[];
   // you can hard-code or fetch the menus
@@ -89,13 +90,29 @@ const useMenuStore = create<IMenuStore>((set, get) => ({
   },
   getRelatedMenus: () => {
     if (get().relatedMenus.length > 0) {
-      return get().menus;
+      return get().relatedMenus;
     }
     const menus = localStorage.getItem('v2x_omega_rmenu');
     if (menus) {
       return formatMenus(JSON.parse(menus));
     }
     return DeviceMenu.related;
+  },
+  handleChangeMenu: menu => {
+    if (menu?.path) {
+      const parentPath = menu.path.split('/');
+      const pPath = `/${parentPath[1]}`;
+      const currentMenu = menuList.find(m => m.path === pPath);
+
+      if (currentMenu) {
+        get().setMenus(currentMenu?.children);
+        get().setRelatedMenus(currentMenu?.related || []);
+      } else {
+        const cMenu = menuList.find(c => c.path === menu?.path);
+        get().setMenus([cMenu]);
+        get().setRelatedMenus(cMenu?.related || []);
+      }
+    }
   },
 }));
 
