@@ -20,7 +20,7 @@ export async function deleteCamera(id: number) {
 export async function cameraList({
   countryName,
   ...params
-}: API.PageParams & { countryName?: string[]; intersectionCode?: string }) {
+}: API.PageParams & { countryName?: string[]; intersectionCode?: string; rsuId?: number }) {
   if (countryName?.length) {
     params.intersectionCode = countryName[countryName.length - 1];
   }
