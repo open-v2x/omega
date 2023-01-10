@@ -37,6 +37,7 @@ class ServerResponseFailedManager {
       '1062': () => this.handleShowErrorWithDetailKey(code, detail.detail),
       '1406': () => this.handleShowErrorWithDetailKey(code, detail.detail),
       '1116': () => this.handleShowErrorWithDetailKey(code, detail.detail),
+      '404': () => this.handleCodeIs404(msg),
       default: () => this.handleCodeIsDefault(msg || detail || error.message),
     };
     return parser[code] ? parser[code]() : parser.default();
@@ -58,6 +59,13 @@ class ServerResponseFailedManager {
     setTimeout(() => {
       window.location.href = '/user/login';
     }, 1000);
+  }
+
+  handleCodeIs404(msg) {
+    message.error(msg);
+    if (msg === 'User not found.') {
+      this.handleCodeIs403();
+    }
   }
 
   handleCodeIsDefault(msg: string) {
