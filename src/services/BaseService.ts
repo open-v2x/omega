@@ -15,7 +15,7 @@ export default class BaseService {
     let curUrl = url;
     if (params) {
       const paramsArray: string[] = [];
-      Object.keys(params).forEach(key => {
+      Object.keys(params).forEach((key: any) => {
         if (params[key] !== undefined) {
           paramsArray.push(`${key}=${params[key]}`);
         }

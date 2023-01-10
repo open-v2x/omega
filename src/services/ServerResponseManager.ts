@@ -29,7 +29,7 @@ class ServerResponseFailedManager {
    * 请求失败时，需要提示的信息
    */
   getErrorMessage(error: AxiosError) {
-    const { detail } = error.response.data;
+    const { detail } = error.response.data as unknown as any;
     console.error('error.response==', detail);
     const { msg, code } = detail;
     const parser = {

@@ -53,7 +53,7 @@ const useMenuStore = create<IMenuStore>((set, get) => ({
       menu = formatMenus(currentMenu?.children);
       related = formatMenus(currentMenu?.related || []);
     } else {
-      const cMenu = menuList.find(c => c.path === path);
+      const cMenu = menuList.find(c => c.path.startsWith(`${pPath}/`));
       menu = formatMenus(cMenu);
       related = formatMenus(cMenu?.related || []);
     }
