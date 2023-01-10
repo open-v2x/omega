@@ -105,12 +105,20 @@ const DeviceOnlineRate = forwardRef(
         fetchCameras(id);
         fetchLidars(id);
         fetchOnlineRate(id);
+      } else {
+        fetchCameras();
+        fetchLidars();
+        fetchOnlineRate();
       }
     }, [curRsu]);
 
-    const handleChangeRSU = value => {
-      const findOne = rsus.find(rsu => rsu.rsuId === value);
-      setCurRsu(findOne);
+    const handleChangeRSU = (value?: number | string) => {
+      if (value) {
+        const findOne = rsus.find(rsu => rsu.rsuId === value);
+        setCurRsu(findOne);
+      } else {
+        setCurRsu(undefined);
+      }
     };
 
     const handleToLiveStream = () => {
@@ -184,7 +192,12 @@ const DeviceOnlineRate = forwardRef(
       <div className={styles['font-change-name']}>
         <div className={styles.footer}>
           <span>RSU：</span>
-          <Select style={{ width: 120 }} onChange={handleChangeRSU}>
+          <Select
+            style={{ width: 160 }}
+            allowClear
+            onChange={handleChangeRSU}
+            onClear={handleChangeRSU}
+          >
             {rsus.map(rsu => (
               <Select.Option key={rsu.rsuId} value={rsu.rsuId}>
                 {rsu.rsuName}
