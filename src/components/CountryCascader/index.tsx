@@ -26,16 +26,14 @@ const CountryCascader: React.FC<CountryCascaderProps> = ({ defaultValue, mapChan
   };
 
   const changeCode = () => {
-    if (areaCode?.length === 8) {
-      const result = crossing.find(c => c.code === areaCode);
-      if (result) {
-        mapChange({
-          type: 1,
-          id: result.id,
-          code: result.code,
-          lngLat: result.lng && result.lat ? [result.lng, result.lat] : [],
-        });
-      }
+    const result = crossing.find(c => c.code === areaCode);
+    if (result) {
+      mapChange({
+        type: 1,
+        id: result.id,
+        code: result.code,
+        lngLat: result.lng && result.lat ? [result.lng, result.lat] : [],
+      });
     } else {
       mapChange(undefined);
     }
