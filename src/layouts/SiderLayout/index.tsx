@@ -20,7 +20,6 @@ const SiderLayout: FC = () => {
   };
 
   const handleToRelated = item => {
-    menuStore.handleChangeMenu(item);
     navigate(item?.path);
   };
 
