@@ -492,5 +492,10 @@
   "Algorithm Name": "算法名称",
   "Version Name": "版本名称",
   "Update Time": "更新时间",
-  "Side Camera": "路侧摄像头"
+  "Side Camera": "路侧摄像头",
+  "Are you sure you want to delete this algorithm version": "确定要删除这个算法版本吗？",
+  "Please select a algorithm module": "请选择一个算法模块",
+  "Please select a algorithm name": "请选择一个算法名称",
+  "Please enter the intersection name": "请输入路口名",
+  "Please enter the intersection code": "请输入路口编号"
 }

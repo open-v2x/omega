@@ -491,5 +491,10 @@
   "Algorithm Module": "Algorithm Module",
   "Algorithm Name": "Algorithm Name",
   "Version Name": "Version Name",
-  "Side Camera": "Camera"
+  "Side Camera": "Camera",
+  "Are you sure you want to delete this algorithm version":"Are you sure you want to delete this algorithm version?",
+  "Please select a algorithm module": "Please select a algorithm module",
+  "Please select a algorithm name": "Please select a algorithm name",
+  "Please enter the intersection name": "Please enter the intersection name",
+  "Please enter the intersection code": "Please enter the intersection code"
 }
