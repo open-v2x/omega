@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import classNames from 'classnames';
 import React from 'react';
-import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import styles from './index.module.less';
 
 import imgRsu from '#/assets/images/platform_rsu.png';
@@ -55,22 +55,24 @@ const DeviceOnlineRate = forwardRef(
     const [lidarIndex, setLidarIndex] = useState(0);
     const lidarIndexRef = useRef(0);
 
-    const fetchRsus = useCallback(async () => {
+    const fetchRsus = async () => {
       const { data } = await deviceList({
         pageNum: 1,
         pageSize: -1,
         intersectionCode: intersectionCode,
       });
       setRsus(data);
-    }, [intersectionCode]);
+    };
 
     const fetchOnlineRate = async () => {
-      const { data } = await onlineRate();
+      const { data } = await onlineRate({
+        edgeRsuId: rsus[rsuIndex].rsuId,
+      });
       setRateInfo(data);
     };
 
-    const fetchCameras = useCallback(async () => {
-      const { data } = await cameraList({ intersectionCode });
+    const fetchCameras = async () => {
+      const { data } = await cameraList({ intersectionCode, rsuId: rsus[rsuIndex].rsuId });
       const result = data.map(d => ({
         id: d.id,
         sn: d.sn,
@@ -78,26 +80,20 @@ const DeviceOnlineRate = forwardRef(
         streamUrl: d.streamUrl,
       }));
       setCameras(result);
-    }, [intersectionCode]);
+    };
 
-    const fetchLidars = useCallback(async () => {
-      const { data } = await lidarList({ intersectionCode });
+    const fetchLidars = async () => {
+      const { data } = await lidarList({ intersectionCode, rsuId: rsus[rsuIndex].rsuId });
       setLidars(data);
-    }, [intersectionCode]);
+    };
 
     useEffect(() => {
       fetchRsus();
-      fetchOnlineRate();
-      fetchCameras();
-      fetchLidars();
       const id = setInterval(() => {
         fetchRsus();
-        fetchOnlineRate();
-        fetchCameras();
-        fetchLidars();
       }, 5000);
       return () => clearInterval(id);
-    }, [fetchCameras, fetchLidars]);
+    }, []);
 
     const handleToLiveStream = () => {
       if (cameras.length) {
@@ -166,18 +162,23 @@ const DeviceOnlineRate = forwardRef(
       lidars: lidars,
     }));
 
+    useEffect(() => {
+      if (rsuIndex !== -1) {
+        fetchOnlineRate();
+        fetchCameras();
+        fetchLidars();
+      }
+    }, [rsuIndex]);
+
     const footerRsu = () => (
       <div className={styles['font-change-name']}>
         <div className={styles.footer}>
-          <span>{t('RSU online rate')}</span>
-          <span
-            className={classNames(styles['cursor-pointer'], styles['mr-10'])}
-            onClick={() => handleToLiveStream()}
-          >
-            {rsus[rsuIndex]?.name || '---'}
+          <span>RSU：</span>
+          <span className={classNames(styles['cursor-pointer'], styles['mr-10'])}>
+            {rsus[rsuIndex]?.rsuName || '---'}
           </span>
         </div>
-        {cameras.length > 1 && (
+        {rsus.length > 1 && (
           <div className={styles['font-change-name-icon']}>
             <CaretUpOutlined
               onClick={() => {
@@ -186,7 +187,7 @@ const DeviceOnlineRate = forwardRef(
             />
             <CaretDownOutlined
               onClick={() => {
-                setRsuIndex(rsuIndex + 1 >= rsus.length ? rsuIndex + 1 : 0);
+                setRsuIndex(rsuIndex + 1 <= rsus.length ? rsuIndex + 1 : 0);
               }}
             />
           </div>

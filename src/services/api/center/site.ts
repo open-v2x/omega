@@ -20,8 +20,10 @@ export async function downloadMapConfig(id: number) {
 }
 
 // 设备在线率
-export async function onlineRate() {
-  return apiService.get<{ data: Center.OnlineRateItem }>(`v1/homes/online_rate`);
+export async function onlineRate(params: { edgeRsuId: number }) {
+  return apiService.get<{ data: Center.OnlineRateItem }>(`v1/homes/online_rate`, {
+    params,
+  });
 }
 
 // 路口信息
