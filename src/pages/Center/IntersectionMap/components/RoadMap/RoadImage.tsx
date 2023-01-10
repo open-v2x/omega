@@ -145,12 +145,10 @@ const DataSharing: React.FC<{ egoPoint: Point; points: Point[] }> = ({ egoPoint,
   );
 };
 
-const RoadImage: React.FC<{ esn: string; nodeId: string; intersectionCode: string }> = ({
-  esn,
+const RoadImage: React.FC<{ nodeId: string; intersectionCode: string }> = ({
   nodeId,
   intersectionCode,
 }) => {
-  console.log(intersectionCode);
   // 参与者信息
   const [trackData, setTrackData] = useState<any[]>([]);
   const clearTrackData = debounce(() => setTrackData([]), 1000);
@@ -181,8 +179,6 @@ const RoadImage: React.FC<{ esn: string; nodeId: string; intersectionCode: strin
   useEffect(() => {
     const mqtt = new MQTT(process.env.MQTT_URL!);
 
-    console.log('mqtt参数', process.env.MQTT_PASSWORD);
-
     mqtt.connect({
       path: process.env.MQTT_PATH,
       username: process.env.MQTT_USERNAME,
@@ -193,50 +189,65 @@ const RoadImage: React.FC<{ esn: string; nodeId: string; intersectionCode: strin
     });
 
     // 订阅主题-参与者信息
-    mqtt.subscribe(`V2X/DEVICE/${esn}/PARTICIPANT/NODE${nodeId}`, 0);
+    mqtt.subscribe(`V2X/DEVICE/${intersectionCode}/PARTICIPANT/NODE${nodeId}`, 0);
     const messageCallback = (topic: string, payload: unknown) => {
       const data = JSON.parse(payload as string);
       setTrackData(data || []);
       clearTrackData();
     };
-    mqtt.set_message_callback(`V2X/DEVICE/${esn}/PARTICIPANT/NODE${nodeId}`, messageCallback);
+    mqtt.set_message_callback(
+      `V2X/DEVICE/${intersectionCode}/PARTICIPANT/NODE${nodeId}`,
+      messageCallback,
+    );
 
     // 订阅主题-碰撞预警
-    mqtt.subscribe(`V2X/DEVICE/${esn}/APPLICATION/CW/NODE${nodeId}`, 0);
+    mqtt.subscribe(`V2X/DEVICE/${intersectionCode}/APPLICATION/CW/NODE${nodeId}`, 0);
     const CWCallback = (topic: string, payload: unknown) => {
       const data = JSON.parse(payload as string);
       setCWData(data || []);
       clearCWData();
     };
-    mqtt.set_message_callback(`V2X/DEVICE/${esn}/APPLICATION/CW/NODE${nodeId}`, CWCallback);
+    mqtt.set_message_callback(
+      `V2X/DEVICE/${intersectionCode}/APPLICATION/CW/NODE${nodeId}`,
+      CWCallback,
+    );
 
     // 订阅主题-协同换道
-    mqtt.subscribe(`V2X/DEVICE/${esn}/APPLICATION/CLC/NODE${nodeId}`, 0);
+    mqtt.subscribe(`V2X/DEVICE/${intersectionCode}/APPLICATION/CLC/NODE${nodeId}`, 0);
     const CLCCallback = (topic: string, payload: unknown) => {
       const data = JSON.parse(payload as string);
       setCLCData(data || []);
       clearCLCData();
     };
-    mqtt.set_message_callback(`V2X/DEVICE/${esn}/APPLICATION/CLC/NODE${nodeId}`, CLCCallback);
+    mqtt.set_message_callback(
+      `V2X/DEVICE/${intersectionCode}/APPLICATION/CLC/NODE${nodeId}`,
+      CLCCallback,
+    );
 
     // 订阅主题-逆向超车
-    mqtt.subscribe(`V2X/DEVICE/${esn}/APPLICATION/DNP/NODE${nodeId}`, 0);
+    mqtt.subscribe(`V2X/DEVICE/${intersectionCode}/APPLICATION/DNP/NODE${nodeId}`, 0);
     const DNPCallback = (topic: string, payload: unknown) => {
       const data = JSON.parse(payload as string);
       setDNPData(data || []);
       clearDNPData();
     };
-    mqtt.set_message_callback(`V2X/DEVICE/${esn}/APPLICATION/DNP/NODE${nodeId}`, DNPCallback);
+    mqtt.set_message_callback(
+      `V2X/DEVICE/${intersectionCode}/APPLICATION/DNP/NODE${nodeId}`,
+      DNPCallback,
+    );
 
     // 订阅主题-数据共享
-    mqtt.subscribe(`V2X/DEVICE/${esn}/APPLICATION/SDS/NODE${nodeId}`, 0);
+    mqtt.subscribe(`V2X/DEVICE/${intersectionCode}/APPLICATION/SDS/NODE${nodeId}`, 0);
     const SDSCallback = (topic: string, payload: unknown) => {
       const data = JSON.parse(payload as string);
       setSDSData(data || []);
       console.log('数据共享', data);
       clearSDSData();
     };
-    mqtt.set_message_callback(`V2X/DEVICE/${esn}/APPLICATION/SDS/NODE${nodeId}`, SDSCallback);
+    mqtt.set_message_callback(
+      `V2X/DEVICE/${intersectionCode}/APPLICATION/SDS/NODE${nodeId}`,
+      SDSCallback,
+    );
 
     return () => mqtt.disconnect();
   }, []);

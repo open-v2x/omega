@@ -2,7 +2,13 @@ import { IResponseListData } from '#/types/service/responseData';
 import { apiService } from '#/services/BaseService';
 
 // 获取路口列表
-export async function fetchCrossingList(params: API.PageParams) {
+export async function fetchCrossingList({
+  countryName,
+  ...params
+}: API.PageParams & { countryName?: string[]; areaCode?: string }) {
+  if (countryName?.length) {
+    params.areaCode = countryName[countryName.length - 1];
+  }
   return apiService.get<IResponseListData<Config.CrossingItem>>(`v1/intersections`, {
     params,
   });
