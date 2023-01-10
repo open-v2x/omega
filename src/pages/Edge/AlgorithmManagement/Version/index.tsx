@@ -36,7 +36,7 @@ const AlgorithmVersion: FC = () => {
           onClick={() =>
             confirmModal({
               id: row.id,
-              content: t('Are you sure you want to delete this lidar?'),
+              content: t('Are you sure you want to delete this algorithm version'),
               modalFn: deleteAlgorithm,
               actionRef,
             })

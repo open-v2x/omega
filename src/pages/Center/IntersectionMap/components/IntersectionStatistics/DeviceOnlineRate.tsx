@@ -19,6 +19,7 @@ import OnlineRatePie from './OnlineRatePie';
 import { deviceList } from '#/services/api/device/device';
 import { cameraList } from '#/services/api/device/camera';
 import { lidarList } from '#/services/api/device/lidar';
+import { Select } from 'antd';
 
 // 设备在线率
 const DeviceOnlineRate = forwardRef(
@@ -44,7 +45,7 @@ const DeviceOnlineRate = forwardRef(
     });
 
     const [rsus, setRsus] = useState<any[]>([]);
-    const [rsuIndex, setRsuIndex] = useState(0);
+    const [curRsu, setCurRsu] = useState();
 
     // 摄像头
     const [cameras, setCameras] = useState<Center.OnlineCameras[]>([]);
@@ -64,15 +65,15 @@ const DeviceOnlineRate = forwardRef(
       setRsus(data);
     };
 
-    const fetchOnlineRate = async () => {
+    const fetchOnlineRate = async (rsuId?: number) => {
       const { data } = await onlineRate({
-        edgeRsuId: rsus[rsuIndex].rsuId,
+        edgeRsuId: rsuId,
       });
       setRateInfo(data);
     };
 
-    const fetchCameras = async () => {
-      const { data } = await cameraList({ intersectionCode, rsuId: rsus[rsuIndex].rsuId });
+    const fetchCameras = async (rsuId?: number) => {
+      const { data } = await cameraList({ intersectionCode, rsuId });
       const result = data.map(d => ({
         id: d.id,
         sn: d.sn,
@@ -82,18 +83,43 @@ const DeviceOnlineRate = forwardRef(
       setCameras(result);
     };
 
-    const fetchLidars = async () => {
-      const { data } = await lidarList({ intersectionCode, rsuId: rsus[rsuIndex].rsuId });
+    const fetchLidars = async (rsuId?: number) => {
+      const { data } = await lidarList({ intersectionCode, rsuId });
       setLidars(data);
     };
 
     useEffect(() => {
       fetchRsus();
+      fetchCameras();
+      fetchLidars();
+      fetchOnlineRate();
       const id = setInterval(() => {
         fetchRsus();
       }, 5000);
       return () => clearInterval(id);
     }, []);
+
+    useEffect(() => {
+      if (curRsu) {
+        const { id } = curRsu;
+        fetchCameras(id);
+        fetchLidars(id);
+        fetchOnlineRate(id);
+      } else {
+        fetchCameras();
+        fetchLidars();
+        fetchOnlineRate();
+      }
+    }, [curRsu]);
+
+    const handleChangeRSU = (value?: number | string) => {
+      if (value) {
+        const findOne = rsus.find(rsu => rsu.rsuId === value);
+        setCurRsu(findOne);
+      } else {
+        setCurRsu(undefined);
+      }
+    };
 
     const handleToLiveStream = () => {
       if (cameras.length) {
@@ -162,36 +188,23 @@ const DeviceOnlineRate = forwardRef(
       lidars: lidars,
     }));
 
-    useEffect(() => {
-      if (rsuIndex !== -1) {
-        fetchOnlineRate();
-        fetchCameras();
-        fetchLidars();
-      }
-    }, [rsuIndex]);
-
     const footerRsu = () => (
       <div className={styles['font-change-name']}>
         <div className={styles.footer}>
           <span>RSU：</span>
-          <span className={classNames(styles['cursor-pointer'], styles['mr-10'])}>
-            {rsus[rsuIndex]?.rsuName || '---'}
-          </span>
+          <Select
+            style={{ width: 160 }}
+            allowClear
+            onChange={handleChangeRSU}
+            onClear={handleChangeRSU}
+          >
+            {rsus.map(rsu => (
+              <Select.Option key={rsu.rsuId} value={rsu.rsuId}>
+                {rsu.rsuName}
+              </Select.Option>
+            ))}
+          </Select>
         </div>
-        {rsus.length > 1 && (
-          <div className={styles['font-change-name-icon']}>
-            <CaretUpOutlined
-              onClick={() => {
-                setRsuIndex(rsuIndex - 1 >= 0 ? rsuIndex - 1 : rsus.length - 1);
-              }}
-            />
-            <CaretDownOutlined
-              onClick={() => {
-                setRsuIndex(rsuIndex + 1 <= rsus.length ? rsuIndex + 1 : 0);
-              }}
-            />
-          </div>
-        )}
       </div>
     );
 

@@ -9,7 +9,6 @@ const IntersectionMap: React.FC = () => {
   const [searchParams] = useSearchParams();
   const type = searchParams.get('type');
   const id = searchParams.get('id');
-  const esn = searchParams.get('esn');
   const intersectionCode = searchParams.get('code');
   const nodeId = searchParams.get('nodeId');
 
@@ -17,13 +16,7 @@ const IntersectionMap: React.FC = () => {
     <BgContainer>
       <PlatformHeader back />
       <div>
-        {type === '1' && (
-          <RoadMap
-            intersectionCode={intersectionCode}
-            esn={esn as string}
-            nodeId={nodeId as string}
-          />
-        )}
+        {type === '1' && <RoadMap intersectionCode={intersectionCode} nodeId={nodeId as string} />}
         {type === '2' && <RoadMapXml id={id as string} />}
         <IntersectionStatistics intersectionCode={intersectionCode} />
       </div>
