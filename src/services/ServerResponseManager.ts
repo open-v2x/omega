@@ -70,6 +70,9 @@ class ServerResponseFailedManager {
 
   handleCodeIsDefault(msg: string) {
     message.error(msg);
+    if (msg === 'Not authenticated') {
+      this.handleCodeIs403();
+    }
   }
 }
 
