@@ -47,10 +47,10 @@ const config = {
     },
     proxy: {
       '/api': {
-        target: 'http://47.100.126.13:28300',
+        target: 'http://47.100.126.13:28300/api',
         changeOrigin: true,
         logLevel: 'debug',
-        pathRewrite: { '^/api': '/api/omega' },
+        pathRewrite: { '^/api': '' },
       },
     },
     devMiddleware: {
