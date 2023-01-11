@@ -3,6 +3,7 @@ import axios, { AxiosRequestConfig, AxiosInstance, AxiosError, AxiosResponse } f
 import { serverResponseFailedManager, serverResponseSuccessManager } from './ServerResponseManager';
 
 const axiosInstance: AxiosInstance = axios.create({
+  baseURL: '/',
   timeout: 15000,
 });
 
