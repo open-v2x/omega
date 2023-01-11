@@ -48,7 +48,6 @@ export function setAuthorization(token) {
 }
 
 export function get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
-  console.log('请求url', url);
   return axiosInstance.get<T>(url, config).then((res: any) => res);
 }
 
