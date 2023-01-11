@@ -1,5 +1,4 @@
 import { menuList } from '#/router/menus';
-import { useMenuStore } from '#/store/menu';
 import { useRootStore } from '#/store/root';
 import { PageContainer } from '@ant-design/pro-components';
 import { Button } from 'antd';
@@ -19,7 +18,6 @@ const QIANKUN_PRE = 'omega';
  */
 const BaseContainer: FC<BaseContainerType> = ({ children, back = false, disablePage = false }) => {
   const { history } = useRootStore();
-  // const { menus } = useMenuStore();
   const onBack = () => {
     history.back();
   };
