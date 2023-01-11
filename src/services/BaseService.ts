@@ -29,7 +29,7 @@ export default class BaseService {
     return curUrl;
   }
 
-  getFullPath = (path: string) => `${this.baseUrl}/omega/${path}`;
+  getFullPath = (path: string) => `${this.baseUrl}/${path}`;
 
   getByQuery = <T>(path: string, data: any = {}, config?: AxiosRequestConfig): Promise<T> => {
     const curPath = this.handleGetUrl(path, data);
