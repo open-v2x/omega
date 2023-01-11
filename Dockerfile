@@ -11,11 +11,15 @@ RUN  pnpm config set network-timeout 300000 \
 FROM nginx:1.21.1-alpine
 
 ARG REPO_URL
-ARG BRANCH
-ARG COMMIT_REF
-LABEL repo-url=$REPO_URL
-LABEL branch=$BRANCH
-LABEL commit-ref=$COMMIT_REF
+ARG GIR_BRANCH
+ARG GIT_COMMIT
+ARG RELEASE_VERSION
+
+LABEL omega.build_branch=${GIT_BRANCH} \
+      omega.build_commit=${GIT_COMMIT} \
+      omega.repo_url=${REPO_URL} \
+      omega.release_version=${RELEASE_VERSION}
+
 
 RUN mkdir /etc/nginx/omega
 

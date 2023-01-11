@@ -46,10 +46,11 @@ const config = {
       'Access-Control-Allow-Origin': '*',
     },
     proxy: {
-      '/api': {
+      '/api/omega': {
         target: 'http://47.100.126.13:28300/api',
         changeOrigin: true,
-        pathRewrite: { '^/api': '' },
+        logLevel: 'debug',
+        pathRewrite: { '^/api/omega': '' },
       },
     },
     devMiddleware: {
