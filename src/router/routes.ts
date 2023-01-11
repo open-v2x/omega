@@ -292,6 +292,22 @@ const routes = [
     ],
   },
   {
+    path: '/algorithm',
+    component: React.lazy(() => import('#/layouts/SiderLayout')),
+    layout: true,
+    auth: true,
+    children: [
+      {
+        path: 'config',
+        component: React.lazy(() => import('#/pages/Edge/AlgorithmManagement/Config')),
+      },
+      {
+        path: 'version',
+        component: React.lazy(() => import('#/pages/Edge/AlgorithmManagement/Version')),
+      },
+    ],
+  },
+  {
     path: '*',
     component: React.lazy(() => import('#/components/NoMatch')),
   },
@@ -311,7 +327,11 @@ const routes = [
     path: '/event',
     redirect: '/event/rsi',
   },
-  { path: '/system', redirect: 'site' },
+  {
+    path: '/algorithm',
+    redirect: '/algorithm/config',
+  },
+  { path: '/system', redirect: '/system/site' },
 ];
 
 export default routes;

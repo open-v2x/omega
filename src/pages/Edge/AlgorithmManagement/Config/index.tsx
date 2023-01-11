@@ -12,10 +12,10 @@ const AlgorithmConfig: FC = () => {
   const actionRef = useRef<ActionType>();
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
   const [editStatus, setEditStatus] = useState(false);
-  const editorFormRef = useRef<EditableFormInstance<Config.AlgorithmListItem>>();
+  const editorFormRef = useRef<EditableFormInstance<Algorithm.AlgorithmListItem>>();
 
-  const [data, setData] = useState<readonly Config.AlgorithmListItem[]>([]);
-  const columns: ProColumns<Config.AlgorithmListItem>[] = [
+  const [data, setData] = useState<readonly Algorithm.AlgorithmListItem[]>([]);
+  const columns: ProColumns<Algorithm.AlgorithmListItem>[] = [
     {
       title: t('Algorithm Module'),
       dataIndex: 'module',
@@ -93,7 +93,7 @@ const AlgorithmConfig: FC = () => {
 
   return (
     <BaseContainer>
-      <EditableProTable<Config.AlgorithmListItem>
+      <EditableProTable<Algorithm.AlgorithmListItem>
         actionRef={actionRef}
         editableFormRef={editorFormRef}
         columns={columns}
