@@ -31,6 +31,20 @@ export const setQuerySelectValue = async (page: Page, selector: string, nthchild
   await page.waitForTimeout(1000);
   return res;
 };
+// 编辑算法配置：替换算法和禁用/启用算法
+export const editAlgoConfigSelectValue = async (
+  page: Page,
+  status: string,
+  nthchild: number = 1,
+) => {
+  await page.click('text="编辑"');
+  await page.click('.ant-select-selector');
+  await page.locator(`.rc-virtual-list-holder-inner > div:nth-child(${nthchild})`).click();
+  await page.waitForTimeout(500);
+  await page.click(`text="${status}"`);
+  await page.click('text="保存"');
+  await page.click('.ant-pro-table-list-toolbar-right button'); // 点击配置;
+};
 
 export const formItemCascader = (page: Page, selector: string) => {
   return page.locator(`.antd-form-item-${selector}`).locator('.ant-cascader');
@@ -79,7 +93,7 @@ export const setModalFormItemValue = async (page: Page, selector: string, value:
 
 export const globalModalFormItems = (page: Page, selectors: string[]) => {
   const list: any = [];
-  selectors.map((selector) => {
+  selectors.map(selector => {
     const item = globalModalFormItem(page, selector);
     list.push(item);
   });
