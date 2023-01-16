@@ -36,7 +36,7 @@ class ServerResponseFailedManager {
       '403': () => this.handleCodeIs403(),
       '1062': () => this.handleShowErrorWithDetailKey(code, detail.detail),
       '1406': () => this.handleShowErrorWithDetailKey(code, detail.detail),
-      '1116': () => this.handleShowErrorWithDetailKey(code, detail.detail),
+      '1116': () => this.handleCodeIs1116(detail.detail),
       '404': () => this.handleCodeIs404(msg),
       default: () => this.handleCodeIsDefault(msg || detail || error.message),
     };
@@ -51,7 +51,7 @@ class ServerResponseFailedManager {
   handleShowErrorWithDetailKey(code: number, detail: any) {
     const keys = Object.keys(detail).map(k => t(k.toString()));
     const msg = keys.toString();
-    message.error(t(`error.${code}`, { msg: msg }));
+    message.error(t(`error.${code}`, { msg: t(msg) }));
   }
 
   handleCodeIs403() {
@@ -66,6 +66,11 @@ class ServerResponseFailedManager {
     if (msg === 'User not found.') {
       this.handleCodeIs403();
     }
+  }
+
+  handleCodeIs1116(detail: any) {
+    const { phase_id: phaseId, intersection_id: intersectionId } = detail;
+    message.error(t(`error.1116`, { phaseId, intersectionId }));
   }
 
   handleCodeIsDefault(msg: string) {
