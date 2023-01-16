@@ -1,5 +1,6 @@
 import { IResponseListData } from '#/types/service/responseData';
 import { apiService } from '#/services/BaseService';
+import { RcFile } from 'antd/lib/upload';
 // MAP 配置列表
 export async function mapConfigList({
   countryName,
@@ -53,4 +54,17 @@ export async function deleteMapConfig(id: number) {
 // 下载 MAP 配置
 export async function downloadMapConfig(id: number) {
   return apiService.get(`v1/maps/${id}/data`);
+}
+
+// 上传 Bitmap 位图
+export async function uploadBitmap(bitmap: RcFile) {
+  return apiService.post<any>(
+    `v1/maps/bitmap`,
+    { bitmap },
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    },
+  );
 }

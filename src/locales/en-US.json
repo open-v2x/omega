@@ -496,5 +496,8 @@
   "Please select a algorithm module": "Please select a algorithm module",
   "Please select a algorithm name": "Please select a algorithm name",
   "Please enter the intersection name": "Please enter the intersection name",
-  "Please enter the intersection code": "Please enter the intersection code"
+  "Please enter the intersection code": "Please enter the intersection code",
+  "rsu_esn": "rsu esnumber",
+  "Upload Bitmap": "Upload Bitmap",
+  "Please upload a Bitmap image": "Please upload a Bitmap image"
 }

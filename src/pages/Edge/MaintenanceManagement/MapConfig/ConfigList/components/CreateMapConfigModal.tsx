@@ -1,13 +1,19 @@
 import { CreateModalProps, FormGroupType } from '#/typings/pro-component';
 import { downloadFile } from '#/utils';
-import { Button, message, Upload } from 'antd';
-import React from 'react';
-import type { RcFile } from 'antd/lib/upload';
+import { Button, Form, message, Upload } from 'antd';
+import React, { useState } from 'react';
+import { UploadChangeParam } from 'antd/lib/upload';
+import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
 import Country from '#/components/Country';
-import { CloudUploadOutlined } from '@ant-design/icons';
+import { CloudUploadOutlined, LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import Modal from '#/components/Modal';
 import FormItem from '#/components/FormItem';
-import { createMapConfig, mapConfigInfo, updateMapConfig } from '#/services/api/config/map';
+import {
+  createMapConfig,
+  mapConfigInfo,
+  updateMapConfig,
+  uploadBitmap,
+} from '#/services/api/config/map';
 
 // MAP 数据文件上传组件的 label 属性
 const UploadLabel: React.FC = () => (
@@ -46,6 +52,67 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
       return false;
     },
   };
+
+  const getBase64 = (img: RcFile, callback: (url: string) => void) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result as string));
+    reader.readAsDataURL(img);
+  };
+
+  const beforeUploadBitmap = (file: RcFile) => {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+      message.error('You can only upload JPG/PNG file!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error('Image must smaller than 2MB!');
+    }
+    return isJpgOrPng && isLt2M;
+  };
+
+  const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string>();
+  const [bitmapName, setBitmapName] = useState('');
+
+  const handleChange: UploadProps['onChange'] = (info: UploadChangeParam<UploadFile>) => {
+    if (info.file.status === 'uploading') {
+      setLoading(true);
+      return;
+    }
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+      getBase64(info.file.originFileObj as RcFile, url => {
+        setLoading(false);
+        setImageUrl(url);
+      });
+    }
+    console.log('文件状态', info.file.status);
+  };
+
+  const uploadButton = (
+    <div>
+      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+
+  const fetchUploadBitmap = async options => {
+    const file = options.file;
+    if (file) {
+      try {
+        const result = await uploadBitmap(file);
+        const { bitmapFilename = '' } = result;
+        getBase64(file, url => {
+          setBitmapName(bitmapFilename);
+          setImageUrl(url);
+        });
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
   const formItem: FormGroupType[] = [
     {
       key: 'name',
@@ -115,6 +182,37 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
         },
       ],
     },
+    {
+      key: 'map',
+      children: [
+        {
+          components: (
+            <Form.Item
+              required
+              name={'bitmapFilename'}
+              label={t('Upload Bitmap')}
+              rules={[{ required: true, message: t('Please upload a Bitmap image') }]}
+            >
+              <Upload
+                name="avatar"
+                listType="picture-card"
+                className="avatar-uploader"
+                showUploadList={false}
+                customRequest={fetchUploadBitmap}
+                beforeUpload={beforeUploadBitmap}
+                onChange={handleChange}
+              >
+                {imageUrl ? (
+                  <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
+                ) : (
+                  uploadButton
+                )}
+              </Upload>
+            </Form.Item>
+          ),
+        },
+      ],
+    },
   ];
 
   return (
@@ -124,6 +222,7 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
       submitForm={async ({ province, ...values }) => {
         values.intersectionCode = province!.pop()!;
         values.data = mapData;
+        values.bitmapFilename = bitmapName;
         if (editId) {
           await updateMapConfig(editId, values);
         } else {

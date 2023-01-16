@@ -497,5 +497,8 @@
   "Please select a algorithm module": "请选择一个算法模块",
   "Please select a algorithm name": "请选择一个算法名称",
   "Please enter the intersection name": "请输入路口名",
-  "Please enter the intersection code": "请输入路口编号"
+  "Please enter the intersection code": "请输入路口编号",
+  "rsu_esn": "rsu 序列号",
+  "Upload Bitmap": "上传位图",
+  "Please upload a Bitmap image": "请上传位图"
 }
