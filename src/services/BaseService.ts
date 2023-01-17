@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { get, post, patch, deletE, put } from './axios';
+import { get, post, patch, deletE, put, getBlob } from './axios';
 import getConfig from './serviceConfig';
 
 const apiConfig = getConfig();
@@ -50,6 +50,8 @@ export default class BaseService {
 
   put = <T>(path: string, data: any, config?: AxiosRequestConfig): Promise<T> =>
     put<T>(this.getFullPath(path), data, config);
+
+  getBlob = (path: string): Promise<Blob> => getBlob(this.getFullPath(path));
 }
 
 export const apiService = new BaseService(apiConfig.API_SERVER);
