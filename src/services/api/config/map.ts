@@ -43,7 +43,7 @@ export async function deleteMapRSU(id: number, rsuId: number) {
 
 // 编辑 MAP 配置
 export async function updateMapConfig(id: number, data: Config.CreateMapConfigParams) {
-  return apiService.put<Config.MapListItem>(`v1/maps/${id}`, data);
+  return apiService.patch<Config.MapListItem>(`v1/maps/${id}`, data);
 }
 
 // 删除 MAP 配置
@@ -67,4 +67,16 @@ export async function uploadBitmap(bitmap: RcFile) {
       },
     },
   );
+}
+
+// 获取 Bitmap 位图
+export async function getBitmap(id: number) {
+  return apiService.get<any>(`v1/maps/${id}/bitmap`, {
+    responseType: 'blob',
+  });
+}
+
+// 获取 Bit Data
+export async function getBitData(id: number) {
+  return apiService.get<any>(`v1/maps/${id}/data`);
 }
