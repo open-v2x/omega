@@ -10,6 +10,8 @@ import Modal from '#/components/Modal';
 import FormItem from '#/components/FormItem';
 import {
   createMapConfig,
+  getBitData,
+  getBitmap,
   mapConfigInfo,
   updateMapConfig,
   uploadBitmap,
@@ -31,7 +33,7 @@ const UploadLabel: React.FC = () => (
 );
 
 const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) => {
-  let mapData: Record<string, any> | null = null;
+  const [mapData, setMapData] = useState<Record<string, any> | null>(null);
 
   // MAP 数据文件上传的 upload 组件属性
   const UploadFieldProps = {
@@ -40,14 +42,14 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
     beforeUpload: (file: RcFile) => {
       if (file.type !== 'application/json') {
         message.warn(t('MAP data files only support .json format'));
-        mapData = null;
+        setMapData(null);
         // 返回 Upload.LIST_IGNORE，列表中将不展示此文件
         return Upload.LIST_IGNORE;
       }
       const reader = new FileReader();
       reader.readAsText(file);
       reader.onload = () => {
-        mapData = JSON.parse(reader.result as string);
+        setMapData(JSON.parse(reader.result as string));
       };
       return false;
     },
@@ -87,7 +89,6 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
         setImageUrl(url);
       });
     }
-    console.log('文件状态', info.file.status);
   };
 
   const uploadButton = (
@@ -111,6 +112,14 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
         setLoading(false);
       }
     }
+  };
+
+  const normFile = (e: any) => {
+    console.log('Upload event:', e);
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e?.fileList;
   };
 
   const formItem: FormGroupType[] = [
@@ -142,18 +151,6 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
       ],
     },
     {
-      key: 'address',
-      children: [
-        {
-          required: true,
-          name: 'address',
-          label: t('MAP Location'),
-          fieldProps: { maxLength: 64 },
-          rules: [{ required: true, message: t('Please enter a MAP location') }],
-        },
-      ],
-    },
-    {
       key: 'desc',
       children: [
         {
@@ -170,11 +167,11 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
       children: [
         {
           type: 'uploadButton',
-          required: true,
+          required: editId ? false : true,
           width: 912,
           name: 'data',
           label: <UploadLabel />,
-          rules: [{ required: true, message: t('Please upload a MAP data file') }],
+          rules: [{ required: editId ? false : true, message: t('Please upload a MAP data file') }],
           fieldProps: UploadFieldProps,
           title: t('Upload files'),
           icon: <CloudUploadOutlined />,
@@ -188,10 +185,15 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
         {
           components: (
             <Form.Item
-              required
+              key="bitmap"
+              required={editId ? false : true}
               name={'bitmapFilename'}
+              valuePropName="fileList"
+              getValueFromEvent={normFile}
               label={t('Upload Bitmap')}
-              rules={[{ required: true, message: t('Please upload a Bitmap image') }]}
+              rules={[
+                { required: editId ? false : true, message: t('Please upload a Bitmap image') },
+              ]}
             >
               <Upload
                 name="avatar"
@@ -221,8 +223,12 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
       createTrigger={t('Add MAP')}
       submitForm={async ({ province, ...values }) => {
         values.intersectionCode = province!.pop()!;
-        values.data = mapData;
-        values.bitmapFilename = bitmapName;
+        if (mapData) {
+          values.data = mapData;
+        }
+        if (bitmapName) {
+          values.bitmapFilename = bitmapName;
+        }
         if (editId) {
           await updateMapConfig(editId, values);
         } else {
@@ -233,6 +239,12 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
       editId={editId}
       request={async ({ id }) => {
         const data = await mapConfigInfo(id);
+        const bitmap = await getBitmap(id);
+        const bitData = await getBitData(id);
+        let blob = new Blob([bitmap], { type: 'image/jpeg' });
+        const bitmapUrl = window.URL.createObjectURL(blob);
+        setImageUrl(bitmapUrl);
+        setMapData(bitData);
         const {
           name,
           areaCode,
@@ -248,7 +260,7 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
           areaCode,
           address,
           desc,
-          data: [true],
+          data: bitData ? [{ uid: '1', name: 'map_data.json', status: 'done' }] : null,
           province: [countryCode, provinceCode, cityCode, areaCode, intersectionCode],
         };
       }}
