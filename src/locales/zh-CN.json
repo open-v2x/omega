@@ -500,5 +500,6 @@
   "Please enter the intersection code": "请输入路口编号",
   "rsu_esn": "rsu 序列号",
   "Upload Bitmap": "上传位图",
-  "Please upload a Bitmap image": "请上传位图"
+  "Please upload a Bitmap image": "请上传位图",
+  "Please enter a algorithm version name": "请输入算法版本名称"
 }
