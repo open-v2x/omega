@@ -15,6 +15,7 @@ const CreateCrossingModal: FC<CreateModalProps> = ({ editInfo, success }) => {
           required: true,
           name: 'name',
           label: t('Crossing Name'),
+          tooltip: t('RSU_NAME_TIP'),
           rules: [
             { required: true, message: t('Please enter the intersection name') },
             { pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_\-]+$/, message: t('RSU_NAME_VALIDATE_MSG') },
@@ -24,6 +25,7 @@ const CreateCrossingModal: FC<CreateModalProps> = ({ editInfo, success }) => {
           required: true,
           name: 'code',
           label: t('Crossing Code'),
+          tooltip: t('SERIAL_NUMBER_TIP'),
           rules: [
             { required: true, message: t('Please enter the intersection code') },
             { pattern: /^[a-zA-Z0-9_]+$/, message: t('SERIAL_NUMBER_VALIDATE_MSG') },
