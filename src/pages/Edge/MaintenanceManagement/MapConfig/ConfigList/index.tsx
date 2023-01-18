@@ -24,15 +24,10 @@ const ConfigList: React.FC = () => {
       title: t('MAP Area'),
       dataIndex: 'countryName',
       ellipsis: true,
-      fieldProps: { params: { cascade: true, needIntersection: false } },
-      render: (_, row) => renderAreaFormatName(row, true),
+      fieldProps: { params: { cascade: true, needIntersection: true } },
+      render: (_, row) => renderAreaFormatName(row),
       renderFormItem: renderAreaFormItem,
       search: true,
-    },
-    {
-      title: t('MAP Location'),
-      dataIndex: 'address',
-      ellipsis: true,
     },
     {
       title: t('Number Of Releases'),
