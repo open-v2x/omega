@@ -5,9 +5,9 @@ import { RcFile } from 'antd/lib/upload';
 export async function mapConfigList({
   countryName,
   ...params
-}: API.PageParams & { countryName?: string[]; areaCode?: string }) {
+}: API.PageParams & { countryName?: string[]; intersectionCode?: string }) {
   if (countryName?.length) {
-    params.areaCode = countryName[countryName.length - 1];
+    params.intersectionCode = countryName[countryName.length - 1];
   }
   return apiService.get<IResponseListData<Config.MapListItem>>(`v1/maps`, {
     params,
