@@ -13,8 +13,8 @@ import {
 import {
   checkDetailUrl,
   checkSuccessMsg,
-  gotoPageAndExpectUrl,
   useUserStorageState,
+  gotoRoadSimulator,
 } from '../../utils/global';
 import {
   checkTableItemContainValue,
@@ -26,7 +26,15 @@ import {
   clickEditBtn,
   clickEnableDisableBtn,
   searchItemAndQuery,
+  checkTableRowLength,
+  clickDeleteTextBtn,
 } from '../../utils/table';
+import {
+  checkDataset,
+  connectMqtt,
+  addListenTopic,
+  sendTopicPublic,
+} from '../../utils/road_simulator';
 
 test.describe('The Rsu Page', () => {
   const randomNumLetter = generateNumLetter();
@@ -47,6 +55,48 @@ test.describe('The Rsu Page', () => {
   const lat = generateIntNum({ max: 90 });
   const descVal = 'test description info';
   const pageUrl = '/device/rsu';
+  const topic = 'V2X/RSU/INFO/UP';
+  const rsuUpMessage = {
+    rsuId: 'ID01',
+    rsuEsn: 'ESN01',
+    rsuName: 'NAME01',
+    rsuStatus: true,
+    version: 'v1',
+    location: {
+      lon: 118.840897,
+      lat: 31.88335,
+    },
+    config: {
+      mapConfig: {
+        mapSlice: 'slice',
+        eTag: 'tag',
+      },
+      bsmConfig: {
+        sampleMode: 'ByAll',
+        sampleRate: 0,
+        actualSampleRate: 0,
+        upLimit: 0,
+      },
+      rsiConfig: {
+        maxRsiNum: 1,
+        curRsiNum: 1,
+        downRsis: [
+          {
+            alertID: 'EVENT01',
+            eTag: 'TAG01',
+          },
+        ],
+      },
+      spatConfig: {
+        upLimit: 0,
+        downLimit: 0,
+      },
+      rsmConfig: {
+        upLimit: 0,
+        downLimit: 0,
+      },
+    },
+  };
 
   // Use signed-in state of 'userStorageState.json'.
   useUserStorageState();
@@ -130,5 +180,21 @@ test.describe('The Rsu Page', () => {
     await clickDeleteBtn(page);
     await clickConfirmModalOkBtn(page);
     await checkSuccessMsg(page);
+  });
+
+  test('RSU 信息上报', async ({ page }) => {
+    await gotoRoadSimulator(page);
+    await connectMqtt(page);
+    await addListenTopic(page, topic);
+    await sendTopicPublic(page, topic, JSON.stringify(rsuUpMessage));
+    await page.goto(pageUrl);
+    await page.click('#rc-tabs-0-tab-2');
+    await checkTableRowLength(page, 1);
+  });
+  test('删除未注册 RSU 数据', async ({ page }) => {
+    await page.click('#rc-tabs-0-tab-2');
+    await clickDeleteTextBtn(page);
+    await clickConfirmModalOkBtn(page);
+    await await checkSuccessMsg(page);
   });
 });

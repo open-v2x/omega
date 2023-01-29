@@ -1,8 +1,8 @@
 import { expect, Page } from '@playwright/test';
 const clientId = 'R328328';
 const password = 'password';
+export {password};
 //   const rsu_simulator_Url = 'http://47.100.126.13:6688'
-
 export const connectMqtt = async (page: Page) => {
   await page.fill('#clientId', clientId);
   await page.fill('#password', password);
@@ -30,7 +30,12 @@ export const getseqNumForSendAck = async (page: Page, topic: string) => {
   const rExp: RegExp = /"seqNum": "(\d+)"/;
   const getdata = targetString.match(rExp);
   const ackNum = getdata[1];
+  const message = `{"seqNum": "${ackNum}", "errorCode": 0}`;
+  await sendTopicPublic(page, topic, message);
+};
+// 添加发送主题，点击发送
+export const sendTopicPublic = async (page: Page, topic: string, message: any) => {
   await page.fill('#publishTopic', topic);
-  await page.fill('#publishMessage', `{"seqNum": "${ackNum}", "errorCode": 0}`);
+  await page.fill('#publishMessage', message);
   await page.click('#publishButton');
 };
