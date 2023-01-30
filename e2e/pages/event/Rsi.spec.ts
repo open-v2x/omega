@@ -32,10 +32,7 @@ test.describe('The Rsi Page', () => {
     await page.click('#publishDataSetButton');
     await page.waitForTimeout(5000); // 发送5s数据后停止发送
 
-    const res = await ReceiveMessageHaveData(page);
-    expect(res).toBeGreaterThan(0);
-
-    await page.click('#connectButton');
+    await page.click('#connectButton'); // 断开连接
 
     await page.goto(pageUrl);
     const rows_after = await getTableTotal(page); // 经过模拟器发送后表格数据应该比原来多

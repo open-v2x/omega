@@ -41,7 +41,7 @@ omega 项目设备管理前端自动化测试用例覆盖度
 - [启用信号灯设备](./pages/device/Spat.spec.ts)
 - [删除信号灯设备](./pages/device/Spat.spec.ts)
 
-## 1.6. RSU 信息上报 暂无用例
+## 1.6. [RSU 信息上报](./pages/device/Rsu.spec.ts)
 
 - 登录 OpenV2X 边缘云控平台（OpenV2X Edge Portal）
 - 配置 RSE Simulator 建立监听
@@ -132,8 +132,27 @@ omega 项目设备管理前端自动化测试用例覆盖度
 - [RSE Simulator 发送应答数据](./pages/maintenance/Business.spec.ts)
 - [查看下发状态](./pages/maintenance/Business.spec.ts)
 
+## 3.9. [路口管理](./pages/maintenance/crossing.spec.ts)
+
+- 创建路口
+- 创建同编号的路口
+- 对路口名和路口编号进行校验,错误输入无法提交
+- 通过路口名称查询
+- 通过安装区域查询
+- 编辑路口
+- 删除路口
+
+## 3.10. [算法配置与算法版本](./pages/maintenance/algorithm.spec.ts)
+
+- 创建算法版本
+- 创建同名算法版本
+- 通过算法版本查询
+- 编辑算法配置
+- 无法删除正在使用中的算法版本
+- 成功删除算法版本
+
 # 4. 系统配置
 
 ## 4.1 添加边缘站点
 
-- 添加边缘站点 暂无用例
+- [添加边缘站点](./pages/system_site.spec.ts)

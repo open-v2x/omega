@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { generateIntNum } from '../../utils';
 import {
   globalModalSubmitBtn,
@@ -6,7 +6,7 @@ import {
   setCascaderValue,
   setQueryCascaderValue,
 } from '../../utils/form';
-import { checkSuccessMsg, gotoPageAndExpectUrl, useUserStorageState } from '../../utils/global';
+import { checkErrorMsg, checkSuccessMsg, useUserStorageState } from '../../utils/global';
 
 import {
   clickConfirmModalOkBtn,
@@ -45,6 +45,40 @@ test.describe('The Crossing Page', () => {
     await globalModalSubmitBtn(page);
     await checkSuccessMsg(page);
   });
+
+  test('预期无法创建同编号的路口', async ({ page }) => {
+    await clickCreateBtn(page);
+
+    await setModalFormItemValue(page, '#name', crossnNameVal);
+    await setModalFormItemValue(page, '#code', crossnNameVal);
+    await setCascaderValue(page, 'province', provinceNameVal);
+    await setModalFormItemValue(page, '#lng', String(lng));
+    await setModalFormItemValue(page, '#lat', String(lat));
+
+    await globalModalSubmitBtn(page);
+    await checkErrorMsg(page);
+  });
+
+  const crossNameID_correct = ['&', '-&-', '%#@&*（）']; // &前面是路口名，后面是路口编号
+  for (const name_id of crossNameID_correct) {
+    test(`testing with ${name_id},对路口名和路口编号进行校验,错误输入无法提交`, async ({
+      page,
+    }) => {
+      const nameVal = name_id.split('&')[0];
+      const idVal = name_id.split('&')[1];
+      await clickCreateBtn(page);
+
+      await setModalFormItemValue(page, '#name', nameVal);
+      await setModalFormItemValue(page, '#code', idVal);
+      await setCascaderValue(page, 'province', provinceNameVal);
+      await setModalFormItemValue(page, '#lng', String(lng));
+      await setModalFormItemValue(page, '#lat', String(lat));
+
+      await globalModalSubmitBtn(page);
+      const locator = page.locator('xpath=//input[@id="code"]/parent::span');
+      expect(locator).toHaveClass(/ant-input-affix-wrapper-status-error/);
+    });
+  }
 
   test('successfully query via cross name', async ({ page }) => {
     await searchItemAndQuery(page, '#name', crossnNameVal);
