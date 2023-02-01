@@ -492,7 +492,7 @@
   "Algorithm Name": "Algorithm Name",
   "Version Name": "Version Name",
   "Side Camera": "Camera",
-  "Are you sure you want to delete this algorithm version":"Are you sure you want to delete this algorithm version?",
+  "Are you sure you want to delete this algorithm version": "Are you sure you want to delete this algorithm version?",
   "Please select a algorithm module": "Please select a algorithm module",
   "Please select a algorithm name": "Please select a algorithm name",
   "Please enter the intersection name": "Please enter the intersection name",
@@ -500,5 +500,6 @@
   "rsu_esn": "rsu esnumber",
   "Upload Bitmap": "Upload Bitmap",
   "Please upload a Bitmap image": "Please upload a Bitmap image",
-  "Please enter a algorithm version name": "Please enter a algorithm version name"
+  "Please enter a algorithm version name": "Please enter a algorithm version name",
+  "Intersection [_name, _areaCode] already exist":"Operate failed, the area has existed the road name, please check it"
 }
