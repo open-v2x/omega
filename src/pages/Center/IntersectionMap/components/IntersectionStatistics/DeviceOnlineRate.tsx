@@ -68,6 +68,7 @@ const DeviceOnlineRate = forwardRef(
     const fetchOnlineRate = async (rsuId?: number) => {
       const { data } = await onlineRate({
         edgeRsuId: rsuId,
+        intersectionCode: intersectionCode,
       });
       setRateInfo(data);
     };

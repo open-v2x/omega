@@ -20,7 +20,7 @@ export async function downloadMapConfig(id: number) {
 }
 
 // 设备在线率
-export async function onlineRate(params: { edgeRsuId: number }) {
+export async function onlineRate(params: { edgeRsuId: number; intersectionCode: number | string }) {
   return apiService.get<{ data: Center.OnlineRateItem }>(`v1/homes/online_rate`, {
     params,
   });
