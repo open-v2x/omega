@@ -38,9 +38,22 @@ class ServerResponseFailedManager {
       '1406': () => this.handleShowErrorWithDetailKey(code, detail.detail),
       '1116': () => this.handleCodeIs1116(detail.detail),
       '404': () => this.handleCodeIs404(msg),
+      '499': () => this.handleShowErrorRepeat(msg, detail.detail),
       default: () => this.handleCodeIsDefault(msg || detail || error.message),
     };
     return parser[code] ? parser[code]() : parser.default();
+  }
+
+  /**
+   * @description: 499 重复报错
+   * @param {string} msg
+   * @param {any} detail
+   * @return {*}
+   */
+  handleShowErrorRepeat(msg: string, detail: any) {
+    const keys = Object.keys(detail).map(k => t(k.toString()));
+    const m = keys.toString();
+    message.error(t(msg, { m: m }));
   }
 
   /**
