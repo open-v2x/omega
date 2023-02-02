@@ -72,12 +72,13 @@ const RoadImage: React.FC<{ nodeId: string; intersectionCode: string }> = ({
     const mqtt = new MQTT(process.env.MQTT_URL!);
 
     mqtt.connect({
-      path: process.env.MQTT_PATH,
+      path: `/mqtt-proxy/${process.env.MQTT_PATH}`,
       username: process.env.MQTT_USERNAME,
       password: process.env.MQTT_PASSWORD,
       clientId: `v2x_mqtt_${new Date().getTime()}_nodeId_${nodeId}`,
       keepalive: 10,
       clean: true,
+      protocol: document.location.protocol === 'https' ? 'mqtts' : 'mqtt',
     });
 
     // 订阅主题-参与者信息
