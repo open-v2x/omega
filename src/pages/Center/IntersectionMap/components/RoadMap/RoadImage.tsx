@@ -78,6 +78,7 @@ const RoadImage: React.FC<{ nodeId: string; intersectionCode: string }> = ({
       clientId: `v2x_mqtt_${new Date().getTime()}_nodeId_${nodeId}`,
       keepalive: 10,
       clean: true,
+      protocol: document.location.protocol === 'https' ? 'mqtts' : 'mqtt',
     });
 
     // 订阅主题-参与者信息
