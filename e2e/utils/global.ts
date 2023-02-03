@@ -6,6 +6,9 @@ const username = 'admin';
 const password = 'dandelion';
 const basePort = '2288';
 const baseURL = config.use?.baseURL;
+const provinceNameVal = [0, 1, 2, 4, 5]; // 安装区域
+const queryprovinceNameVal = [0, 1, 2, 3, 5];
+export { provinceNameVal, queryprovinceNameVal };
 
 async function globalSetup(config: FullConfig) {
   const browser = await chromium.launch();

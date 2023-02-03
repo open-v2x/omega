@@ -13,8 +13,9 @@ import {
   checkDetaillWindow,
   checkSuccessMsg,
   closePopWindow,
-  gotoPageAndExpectUrl,
   useUserStorageState,
+  provinceNameVal,
+  queryprovinceNameVal,
 } from '../../utils/global';
 import {
   clickConfirmModalOkBtn,
@@ -33,8 +34,6 @@ test.describe('The Camera Page', () => {
   const cameraNameVal = `camera_name_${1}`;
   const camernSnVal = `C_${randomNumLetter}`;
   const videoUrl = generateNumLetter();
-  const provinceNameVal = [0, 1, 2, 4, 6];
-  const queryprovinceNameVal = [0, 1, 2, 5, 6];
   const lng = generateIntNum({ max: 180 });
   const lat = generateIntNum({ max: 90 });
   const descVal = 'test description info';

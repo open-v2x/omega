@@ -1,5 +1,15 @@
 omega 项目设备管理前端自动化测试用例覆盖度
 
+用例执行过程中可能存在的问题：
+
+1. 如果并行（--workers 大于 1 ）执行一个文件，官方文档说是按声明顺序执行的，但可能会先执行后面的，比如先执行删除，再执行创建，导致用例失败。所以最好使用 npx playwright
+   test --workers 1 命令执行。弊端是执行时间增加。
+2. 雷达的序列号 ladarnSnVal 是生成随机数，但是输入序列号查询时会重新生成一个随机数，导致查不到雷达，用例失败。解决办法是让 ladarnSnVal
+   成为一个固定值。暂时先把问题记录在这，用例在 e2e/pages/device/Ladar.spec.ts
+3. 无头模式运行，从测试报告录制的视频中看，输入关键词点击查询，列表无变化。但手动测试，查询功能是好的。使用有头模式运行，无法复现 bug。尝试在点击查询按钮后休息 500 毫秒。
+4. 无头模式运行，maintenance/Log.spec.ts, 编辑日志用例有时候不成功。提示需要选择 RSU ，但不需要选择 RSU
+   才对。多跑几遍用例能通过，不清楚问题如何复现，暂时记录在此。
+
 # 1. 设备管理
 
 ## 1.1. 操作 RSU 设备
@@ -104,13 +114,13 @@ omega 项目设备管理前端自动化测试用例覆盖度
 - [RSE Simulator 发送数据](./pages/road_simulator/RsuMapUp.spec.ts)
 - [查看 RSE Simulator 接收数据及 MAP 配置界面](./pages/road_simulator/RsuMapUp.spec.ts)
 
-## 3.5. MAP 下发至 RSU
+## 3.5. [MAP 下发至 RSU](./pages/maintenance/Map.spec.ts)
 
-- 配置 RSE Simulator 建立监听 暂无用例
-- [界面添加 Map 并下发 RSU](./pages/maintenance/Map.spec.ts)
-- 查看 RSE Simulator 接收数据 暂无用例
-- RSE Simulator 发送应答数据 暂无用例
-- 查看下发状态 暂无用例
+- 配置 RSE Simulator 建立监听
+- 界面添加 Map 并下发 RSU
+- 查看 RSE Simulator 接收数据
+- RSE Simulator 发送应答数据
+- 查看下发状态
 
 ## 3.6. RSI 上报云控中心
 

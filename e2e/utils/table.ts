@@ -59,11 +59,12 @@ export const checkTableItemEqualValue = async (page: Page, value: string, index:
 export const checkTableItemContainValue = async (page: Page, value: string, index: number) => {
   let rows = await getTableTotal(page);
   let initrow = 1;
-  if (rows != 0) {
-    const first_row = await getTabelVal(page, 1, index);
-    if (first_row === ' ') {
+  if (Number(rows) != 0) {
+    const first_row: any = await getTabelVal(page, 1, index);
+    let first_row_new = first_row.replace(/\s*/g, ''); // 去掉所有空格
+    if (first_row_new === '') {
       initrow = 2;
-      rows = rows + 1;
+      rows = Number(rows) + 1;
     }
     for (let i = initrow; i <= Number(rows); i++) {
       const item_value = await getTabelVal(page, i, index);
@@ -197,4 +198,5 @@ export const clickQuerySearchBtn = async (page: Page, delay = 1000) => {
 export const searchItemAndQuery = async (page: Page, selecor: string, value: string) => {
   await setSearchItemValue(page, selecor, value);
   await clickQuerySearchBtn(page);
+  await page.waitForTimeout(500);
 };

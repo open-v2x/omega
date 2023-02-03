@@ -15,6 +15,8 @@ import {
   checkSuccessMsg,
   useUserStorageState,
   gotoRoadSimulator,
+  provinceNameVal,
+  queryprovinceNameVal,
 } from '../../utils/global';
 import {
   checkTableItemContainValue,
@@ -49,8 +51,6 @@ test.describe('The Rsu Page', () => {
     generateIntNum({ max: 256 }),
     generateIntNum({ max: 256 }),
   ].join('.');
-  const provinceNameVal = [0, 1, 2, 4, 6];
-  const queryprovinceNameVal = [0, 1, 2, 5, 6];
   const lng = generateIntNum({ max: 180 });
   const lat = generateIntNum({ max: 90 });
   const descVal = 'test description info';

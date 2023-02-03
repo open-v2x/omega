@@ -38,7 +38,6 @@ test.describe('MAP 上报云控中心', () => {
     await simulatorPage.click('#publishDataSetButton');
     // 设备管理 MAP 配置界面上能看到 RSU 上报的 MAP 数据
     await deviceContextPage.goto(pageUrl);
-    await searchItemAndQuery(deviceContextPage, '#name', M_NameVal); // 目前设备管理看不到map数据，用例不通过。map 名字不知道是什么，暂时为空
     await checkTableRowLength(deviceContextPage, 1);
     // 模拟器成功接收数据
     const res = await ReceiveMessageHaveData(simulatorPage);

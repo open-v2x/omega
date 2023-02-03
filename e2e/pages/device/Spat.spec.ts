@@ -14,6 +14,8 @@ import {
   checkSuccessMsg,
   closePopWindow,
   useUserStorageState,
+  provinceNameVal,
+  queryprovinceNameVal,
 } from '../../utils/global';
 import {
   clickConfirmModalOkBtn,
@@ -32,8 +34,6 @@ test.describe('The Spat Page', () => {
   const spatNameVal = `spat_name_${1}`;
   const spatSnVal = `C_${randomNumLetter}`;
   const phaseId = generateIntNum({ max: 255 });
-  const provinceNameVal = [0, 1, 2, 4, 6];
-  const queryprovinceNameVal = [0, 1, 2, 5, 6];
   const descVal = 'test description info';
   const pageUrl = '/device/spat';
   const spatIPVal = [
@@ -85,7 +85,7 @@ test.describe('The Spat Page', () => {
 
   test('successfully query via associated rsu', async ({ page }) => {
     await clickUnfoldBtn(page);
-    const res_v: any = await setQuerySelectValue(page, '#rsuId');
+    const res_v: any = await setQuerySelectValue(page, '#rsuName');
     await checkTableItemContainValue(page, res_v, 5);
   });
 
