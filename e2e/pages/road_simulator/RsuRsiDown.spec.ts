@@ -8,7 +8,7 @@ import {
 } from '../../utils/road_simulator';
 import { gotoRoadSimulator, useUserStorageState } from '../../utils/global';
 test.describe('RSI 下发至 RSU', () => {
-  const topic = 'V2X/RSU/R328328/RSI/DOWN';
+  const topic = 'V2X/RSU/32011501/RSI/DOWN';
 
   // Use signed-in state of 'userStorageState.json'.
   useUserStorageState();

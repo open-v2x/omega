@@ -13,8 +13,9 @@ import {
   checkDetaillWindow,
   checkSuccessMsg,
   closePopWindow,
-  gotoPageAndExpectUrl,
   useUserStorageState,
+  provinceNameVal,
+  queryprovinceNameVal,
 } from '../../utils/global';
 import {
   clickConfirmModalOkBtn,
@@ -28,14 +29,11 @@ import {
 } from '../../utils/table';
 
 test.describe('The Ladar Page', () => {
-  const randomNumLetter = generateNumLetter();
   const randomNum = generatePureNumber();
   const ladarNameVal = `ladar_name_${1}`;
-  const ladarnSnVal = `C_${randomNumLetter}`;
+  const ladarnSnVal = `C_ladar_sn`;
   const lng = generateIntNum({ max: 180 });
   const lat = generateIntNum({ max: 90 });
-  const provinceNameVal = [0, 1, 2, 4, 6];
-  const queryprovinceNameVal = [0, 1, 2, 5, 6];
   const descVal = 'test description info';
   const pageUrl = '/device/radar';
   const ladarIPVal = [

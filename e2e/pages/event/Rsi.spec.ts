@@ -11,7 +11,7 @@ import {
 import { clickDetailTextBtn, getTableTotal } from '../../utils/table';
 test.describe('The Rsi Page', () => {
   const pageUrl = '/event/rsi';
-  const topic = 'V2X/RSU/R328328/RSI/UP';
+  const topic = 'V2X/RSU/32011501/RSI/UP';
   // Use signed-in state of 'userStorageState.json'.
   useUserStorageState();
   test.beforeEach(async ({ page }) => {
@@ -31,6 +31,8 @@ test.describe('The Rsi Page', () => {
     await page.locator('#loading-RSI_data').waitFor({ state: 'hidden' });
     await page.click('#publishDataSetButton');
     await page.waitForTimeout(5000); // 发送5s数据后停止发送
+    const res = await ReceiveMessageHaveData(page);
+    expect(res).toBeGreaterThan(0);
 
     await page.click('#connectButton'); // 断开连接
 

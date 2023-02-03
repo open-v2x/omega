@@ -13,8 +13,9 @@ import {
   checkDetaillWindow,
   checkSuccessMsg,
   closePopWindow,
-  gotoPageAndExpectUrl,
   useUserStorageState,
+  provinceNameVal,
+  queryprovinceNameVal,
 } from '../../utils/global';
 import {
   clickConfirmModalOkBtn,
@@ -32,11 +33,9 @@ test.describe('The Lidar Page', () => {
   const randomNumLetter = generateNumLetter();
   const randomNum = generatePureNumber();
   const lidarNameVal = `lidar_name_${1}`;
-  const lidarnSnVal = `C_${randomNumLetter}`;
+  const lidarnSnVal = `lidarsn_`;
   const lng = generateIntNum({ max: 180 });
   const lat = generateIntNum({ max: 90 });
-  const provinceNameVal = [0, 1, 2, 4, 6];
-  const queryprovinceNameVal = [0, 1, 2, 5, 6];
   const descVal = 'test description info';
   const pageUrl = '/device/lidar';
   const lidarIPVal = [
@@ -115,7 +114,7 @@ test.describe('The Lidar Page', () => {
 
   test('successfully enable and disable lidar', async ({ page }) => {
     await searchItemAndQuery(page, '#name', `update_${lidarNameVal}`);
-    await clickEnableDisableTextBtn(page);
+    await clickEnableDisableTextBtn(page, 'text="禁用"');
     await clickConfirmModalOkBtn(page);
     await checkSuccessMsg(page);
   });

@@ -69,6 +69,7 @@ test.describe('The Business Page', () => {
     expect(res).toBeGreaterThan(0);
     // RSE Simulator 发送应答数据
     await getseqNumForSendAck(simulatorPage, ackTopic);
+    await simulatorPage.waitForTimeout(2000);
     // RSE Simulator 断开连接
     await deviceContextPage.close();
     await simulatorPage.close();

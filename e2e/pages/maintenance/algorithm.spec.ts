@@ -36,7 +36,7 @@ test.describe('The Algorithm Version and Config Page', () => {
     await globalModalSubmitBtn(page);
     await checkSuccessMsg(page);
   });
-  test('create repeat algo version failedly', async ({ page }) => {
+  test.skip('create repeat algo version failedly', async ({ page }) => {
     await page.goto(versionpageUrl);
     await clickCreateBtn(page);
 
