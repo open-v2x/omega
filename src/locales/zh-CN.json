@@ -502,5 +502,9 @@
   "Upload Bitmap": "上传位图",
   "Please upload a Bitmap image": "请上传位图",
   "Please enter a algorithm version name": "请输入算法版本名称",
-  "Intersection [_name, _areaCode] already exist": "操作失败, 在目标区域下已经存在该路口名称, 请检查路口名称！"
+  "Intersection [_name, _areaCode] already exist": "操作失败, 在目标区域下已经存在该路口名称, 请检查路口名称！",
+  "Select Rsu": "选择 RSU",
+  "Running Status": "运行状态",
+  "Not Registered": "未接入",
+  "Online rate": "在线率"
 }
