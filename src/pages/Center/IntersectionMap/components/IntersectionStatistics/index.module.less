@@ -21,8 +21,7 @@
   }
 }
 
-.online,
-.intersection {
+.online {
   position: absolute;
   top: 78px;
   display: flex;
@@ -34,38 +33,7 @@
   background: url('../../../../../assets/images/platform_online.png') no-repeat center/cover;
   background-size: 100% 100%;
   margin-top: 20px;
-
-  .wrapper {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .left-icon,
-  .right-icon {
-    position: absolute;
-    top: 10px;
-    color: #2feeff;
-    font-size: 24px;
-  }
-
-  @media (max-width: 1600px) {
-    top: 100px;
-  }
-
-  @media (max-width: 1400px) {
-    width: 380px;
-    padding: 24px 20px 10px;
-  }
-
-  @media (max-width: 1200px) {
-    display: none;
-  }
-}
-
-.online {
-  left: 20px;
+  right: 20px;
   height: calc(70vh - 104px);
 
   &-image {
@@ -133,97 +101,33 @@
       padding-right: 50px;
     }
   }
-}
-
-.intersection {
-  right: 20px;
-  height: 530px;
-  padding-bottom: 40px;
 
   .wrapper {
-    padding: 10px 27px 0 8px;
-
-    .information-item {
-      display: flex;
-      max-width: 416px;
-      height: 60px;
-      background: url('../../../../../assets/images/platform_intersection.png') no-repeat
-        center/cover;
-      background-size: 100% 100%;
-    }
-  }
-
-  &-icon {
-    width: 65px;
-    margin-left: 0;
-
-    &-image {
-      width: 40px;
-      height: 40px;
-    }
-  }
-
-  &-name {
     display: flex;
-    align-items: center;
-    padding-left: 5px;
-    font-weight: 400;
-    font-size: 14px;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
-  &-number {
-    margin: 0 13% 0 auto;
-    font-weight: 400;
-    font-size: 30px;
-    font-family: Impact;
-  }
-
-  &-value {
-    margin: 0 2% 0 auto;
-    color: #25ffaf;
-    font-weight: 400;
-    font-size: 18px;
-  }
-
+  .left-icon,
   .right-icon {
-    left: -26px;
+    position: absolute;
+    top: 10px;
+    color: #2feeff;
+    font-size: 24px;
   }
 
-  &.show {
-    transform: translateX(0);
-  }
-
-  &.hide {
-    transform: translateX(calc(100% + 20px));
+  @media (max-width: 1600px) {
+    top: 100px;
   }
 
   @media (max-width: 1400px) {
-    height: 460px;
+    width: 380px;
+    padding: 24px 20px 10px;
+  }
 
-    .wrapper .information-item {
-      height: 60px;
-    }
-
-    &-icon {
-      width: 70px;
-
-      &-image {
-        width: 36px;
-        height: 36px;
-      }
-    }
-
-    &-name {
-      font-size: 12px;
-    }
-
-    &-number {
-      font-size: 26px;
-    }
-
-    &-value {
-      font-size: 16px;
-    }
+  @media (max-width: 1200px) {
+    display: none;
   }
 }
 
@@ -246,7 +150,7 @@
   flex-direction: column;
   align-items: center;
   font-size: 12px;
-  
+
   svg {
     font-size: 14px;
   }
