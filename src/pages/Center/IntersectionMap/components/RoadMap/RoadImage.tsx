@@ -69,7 +69,10 @@ const RoadImage: React.FC<{ nodeId: string; intersectionCode: string }> = ({
   };
 
   useEffect(() => {
-    const mqtt = new MQTT(process.env.MQTT_URL!);
+    const protocol = window.location.protocol === 'https:' ? 'mqtts:' : 'mqtt:';
+    const host = window.location.host;
+    console.log('当前协议', protocol);
+    const mqtt = new MQTT(`${protocol}//${host}`);
 
     mqtt.connect({
       path: process.env.MQTT_PATH,
