@@ -100,22 +100,6 @@ const useMenuStore = create<IMenuStore>((set, get) => ({
     }
     return DeviceMenu.related;
   },
-  handleChangeMenu: menu => {
-    if (menu?.path) {
-      const parentPath = menu.path.split('/');
-      const pPath = `/${parentPath[1]}`;
-      const currentMenu = menuList.find(m => m.path === pPath);
-
-      if (currentMenu) {
-        get().setMenus(currentMenu?.children);
-        get().setRelatedMenus(currentMenu?.related || []);
-      } else {
-        const cMenu = menuList.find(c => c.path === menu?.path);
-        get().setMenus([cMenu]);
-        get().setRelatedMenus(cMenu?.related || []);
-      }
-    }
-  },
 }));
 
 export { useMenuStore };
