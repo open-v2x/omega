@@ -39,6 +39,8 @@ const SelectDeviceModal: React.FC<SelectDeviceProps> = ({ defaultSelectedIds, se
         style={{ top: '8vh' }}
         destroyOnClose
         wrapClassName="rsu_modal"
+        cancelText={t('Cancel')}
+        okText={t('Sure')}
         onOk={confirm}
         onCancel={() => setIsVisible(false)}
       >
