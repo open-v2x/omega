@@ -55,7 +55,7 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
       children: [
         {
           required: true,
-          width: 912,
+          width: 'xl',
           name: 'streamUrl',
           label: t('Video Stream URL'),
           disabled: isDetails,
@@ -174,6 +174,8 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
       modalProps={{ className: 'overflow' }}
       submitForm={async ({ province, ...values }) => {
         values.intersectionCode = province!.pop()!;
+        values.rsuId = values.rsuId || null;
+        values.rsuName = values.rsuName || null;
         if (editInfo) {
           await updateCamera(editInfo.id, values);
         } else {
