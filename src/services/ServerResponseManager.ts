@@ -87,6 +87,7 @@ class ServerResponseFailedManager {
   }
 
   handleCodeIsDefault(msg: string) {
+    console.log('报错', msg);
     message.error(msg);
   }
 }

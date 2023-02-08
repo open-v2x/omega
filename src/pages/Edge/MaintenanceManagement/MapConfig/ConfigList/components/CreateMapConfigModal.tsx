@@ -1,5 +1,4 @@
 import { CreateModalProps, FormGroupType } from '#/typings/pro-component';
-import { downloadFile } from '#/utils';
 import { Button, Form, message, Upload } from 'antd';
 import React, { useState } from 'react';
 import { UploadChangeParam } from 'antd/lib/upload';
@@ -22,11 +21,7 @@ const UploadLabel: React.FC = () => (
   <div>
     {t('MAP Data File Upload')}
     <span style={{ color: '#000000', marginLeft: '8px' }}>{t('MAP_UPLOAD_TIP')}</span>
-    <Button
-      type="link"
-      size="small"
-      onClick={() => downloadFile('/assets/file/example.json', `${t('MAP data example')}.json`)}
-    >
+    <Button type="link" size="small" onClick={() => window.open('/assets/file/example.json')}>
       {t('MAP data example')}
     </Button>
   </div>
@@ -131,7 +126,10 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
           name: 'name',
           label: t('MAP Name'),
           fieldProps: { maxLength: 64 },
-          rules: [{ required: true, message: t('Please enter a MAP name') }],
+          rules: [
+            { required: true, message: t('Please enter a MAP name') },
+            { pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_\-]+$/, message: t('RSU_NAME_VALIDATE_MSG') },
+          ],
         },
         {
           name: 'province',
