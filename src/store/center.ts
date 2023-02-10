@@ -4,6 +4,7 @@ import { lidarList } from '#/services/api/device/lidar';
 import create from 'zustand';
 
 interface ICenterStore {
+  setState: (params: any) => void;
   // 大屏路口
   intersectionCode: string;
   setIntersectionCode: (code: string) => void;
@@ -30,6 +31,11 @@ interface ICenterStore {
 }
 
 const useCenterStore = create<ICenterStore>((set, get) => ({
+  setState: params => {
+    set({
+      ...params,
+    });
+  },
   intersectionCode: '',
   setIntersectionCode: code => set({ intersectionCode: code }),
   rsus: [],
