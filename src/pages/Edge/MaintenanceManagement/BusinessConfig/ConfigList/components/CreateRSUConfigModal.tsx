@@ -15,10 +15,13 @@ import {
   parameterConfigInfo,
   updateParameterConfig,
 } from '#/services/api/config/business';
+import ResizeObserver from 'rc-resize-observer';
 
 const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) => {
   const [defaultSelectedIds, setDefaultSelectedIds] = useState<number[]>([]);
   const [deviceList, setDeviceList] = useState<Device.DeviceListItem[]>([]);
+  const [responsive, setResponsive] = useState(false);
+
   const getSelectedData = (data: Device.DeviceListItem[]) => {
     const list = [...deviceList, ...data];
     setDefaultSelectedIds(list.map(({ id }) => id));
@@ -73,6 +76,7 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
             precision: 0,
             max: 10000,
           },
+          width: 'sm',
           rules: [{ required: true, message: t('Please enter sample rate') }],
         },
         {
@@ -86,6 +90,7 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
             precision: 0,
             max: 10000,
           },
+          width: 'sm',
           rules: [
             { required: true, message: t('Please enter the upper limit of upstream forwarding') },
           ],
@@ -93,6 +98,7 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
         {
           name: ['bsm', 'upFilters'],
           label: t('Filter Rules'),
+          width: 'md',
           ...upFiltersProps,
         },
       ],
@@ -103,6 +109,7 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
         {
           name: ['rsi', 'upFilters'],
           label: t('Filter Rules'),
+          width: 'md',
           ...upFiltersProps,
         },
       ],
@@ -121,6 +128,7 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
             precision: 0,
             max: 10000,
           },
+          width: 'sm',
           rules: [
             { required: true, message: t('Please enter the upper limit of upstream forwarding') },
           ],
@@ -129,6 +137,7 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
           name: ['rsm', 'upFilters'],
           label: t('Filter Rules'),
           ...upFiltersProps,
+          width: 'md',
         },
       ],
     },
@@ -146,6 +155,7 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
             precision: 0,
             max: 10000,
           },
+          width: 'sm',
           rules: [
             { required: true, message: t('Please enter the upper limit of upstream forwarding') },
           ],
@@ -154,6 +164,7 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
           name: ['map', 'upFilters'],
           label: t('Filter Rules'),
           ...upFiltersProps,
+          width: 'md',
         },
       ],
     },
@@ -171,6 +182,7 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
             precision: 0,
             max: 10000,
           },
+          width: 'sm',
           rules: [
             { required: true, message: t('Please enter the upper limit of upstream forwarding') },
           ],
@@ -179,6 +191,7 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
           name: ['spat', 'upFilters'],
           label: t('Filter Rules'),
           ...upFiltersProps,
+          width: 'md',
         },
       ],
     },
@@ -201,8 +214,8 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
       key: 'template',
       title: t('Parameter Configuration Template'),
       components: configMap.map(({ title, children }) => (
-        <ProCard key={title} bordered className="parameter-info">
-          <div className="parameter-title t-center">{title}</div>
+        <ProCard key={title} bordered split={responsive ? 'horizontal' : 'vertical'} colSpan="50%">
+          <div className={styles['parameter-title']}>{title}</div>
           <FormField items={children} />
         </ProCard>
       )),
@@ -298,7 +311,14 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
         return { name, ...values };
       }}
     >
-      <FormItem items={formItems} />
+      <ResizeObserver
+        key="resize-observer"
+        onResize={offset => {
+          setResponsive(offset.width < 800);
+        }}
+      >
+        <FormItem items={formItems} />
+      </ResizeObserver>
     </Modal>
   );
 };
