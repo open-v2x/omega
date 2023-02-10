@@ -29,8 +29,17 @@ const IntersectionStatistics: React.FC<{ intersectionCode: string }> = ({ inters
   }, [showCloudPoint]);
 
   const handleClearCamera = () => {
-    centerStore.cameraUrl = undefined;
-    centerStore.showCamera = false;
+    centerStore.setState({
+      cameraUrl: undefined,
+      showCamera: false,
+    });
+  };
+
+  const handleClearLidar = () => {
+    centerStore.setState({
+      cloudPointUrl: undefined,
+      showCloudPoint: false,
+    });
   };
 
   return (
@@ -55,7 +64,7 @@ const IntersectionStatistics: React.FC<{ intersectionCode: string }> = ({ inters
           <CloudPoint height={450} width={780} isFixedAspect wsUrl={centerStore.cloudPointUrl} />
         }
         footer={null}
-        onCloseCallback={null}
+        onCloseCallback={handleClearLidar}
       />
     </div>
   );

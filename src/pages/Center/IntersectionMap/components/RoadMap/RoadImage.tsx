@@ -74,7 +74,7 @@ const RoadImage: React.FC<{ nodeId: string; intersectionCode: string }> = ({
     const mqtt = new MQTT(`${protocol}//${host}`);
 
     mqtt.connect({
-      path: `/mqtt-proxy${process.env.MQTT_PATH}`,
+      path: process.env.MQTT_PATH,
       username: process.env.MQTT_USERNAME,
       password: process.env.MQTT_PASSWORD,
       clientId: `v2x_mqtt_${new Date().getTime()}_nodeId_${nodeId}`,
