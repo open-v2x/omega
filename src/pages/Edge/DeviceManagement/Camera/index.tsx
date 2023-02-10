@@ -38,6 +38,8 @@ const CameraManagement: FC = () => {
       render: (_, row) => renderAreaFormatName(row),
       renderFormItem: renderAreaFormItem,
       search: true,
+      width: 200,
+      ellipsis: true,
     },
     {
       title: t('Longitude'),
