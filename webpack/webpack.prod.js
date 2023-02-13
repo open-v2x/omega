@@ -20,10 +20,6 @@ const config = {
     minimizer: [
       new TerserPlugin({
         extractComments: false,
-        terserOptions: {
-          keep_fnames: true,
-          keep_classnames: true,
-        },
       }),
     ],
     moduleIds: 'deterministic', //单独模块id，模块内容变化再更新
