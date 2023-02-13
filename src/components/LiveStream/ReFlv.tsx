@@ -19,7 +19,7 @@ const ReFlv: React.FC<FlvProps> = (props: FlvProps) => {
   const [curSpeed, setCurSpeed] = useState(0);
 
   const initProgress = useCallback(() => {
-    if (flvRef.current) {
+    if (flvRef.current && flvRef.current.buffered.length !== 0) {
       const end = flvRef.current.buffered.end(0);
       const delta = end - flvRef.current.currentTime;
 
