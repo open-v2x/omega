@@ -21,7 +21,7 @@ LABEL omega.build_branch=${GIT_BRANCH} \
       omega.release_version=${RELEASE_VERSION}
 
 
-RUN mkdir /etc/nginx/omeg
+RUN mkdir /etc/nginx/omega
 
 COPY --from=builder /root/omega/dist /var/www/omega
 COPY ./deploy/init_env.sh /init_env.sh

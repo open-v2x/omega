@@ -1,5 +1,6 @@
 const webpackMerge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const config = {
   mode: 'production',
@@ -8,7 +9,16 @@ const config = {
     pathinfo: false, //优化
   },
   optimization: {
-    minimize: true, //开启压缩
+    minimize: false, //关闭压缩，目前 mpegts 压缩会失效，暂时关闭
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+        terserOptions: {
+          keep_fnames: true,
+          keep_classnames: true,
+        },
+      }),
+    ],
     moduleIds: 'deterministic', //单独模块id，模块内容变化再更新
     splitChunks: {
       chunks: 'all', // 匹配的块的类型：initial（初始块），async（按需加载的异步块），all（所有块）
