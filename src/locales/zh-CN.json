@@ -78,7 +78,7 @@
   "Orientation (°)": "朝向(°)",
   "Associate RSU": "关联 RSU",
   "Are you sure you want to delete this camera?": "确定要删除该摄像头吗？",
-  "Radar Name": "雷达名称",
+  "Radar Name": "毫米波雷达名称",
   "Lidar Name": "激光雷达名称",
   "Radar IP": "雷达 IP",
   "Lidar IP": "激光雷达 IP",

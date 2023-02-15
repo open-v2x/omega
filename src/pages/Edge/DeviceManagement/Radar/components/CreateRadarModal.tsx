@@ -167,6 +167,8 @@ const CreateRadarModal: FC<CreateModalProps> = ({ editInfo, isDetails = false, s
       submitForm={async ({ province, ...values }) => {
         values.intersectionCode = province!.pop()!;
         if (editInfo) {
+          values.rsuId = values.rsuId || null;
+          values.rsuName = values.rsuName || null;
           await updateRadar(editInfo.id, values);
         } else {
           await createRadar(values);
