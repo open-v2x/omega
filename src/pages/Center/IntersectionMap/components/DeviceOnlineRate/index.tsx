@@ -104,7 +104,8 @@ const DeviceOnlineRate: FC = () => {
         <div className={styles['device-title']}>{t('Device online rate')}</div>
         <div className={styles['device-content']}>
           {onlineMaps.map((map, index) => {
-            const { online, offline, notRegister } = rateInfo[map.tag];
+            const { online = 0, offline = 0, notRegister = 0 } = rateInfo[map.tag];
+            const rate = online === 0 && offline === 0 ? 0 : (online / (online + offline)) * 100;
             return (
               <div key={index} className={styles['device-item']}>
                 <div className={styles['device-item-center']}>
@@ -129,7 +130,7 @@ const DeviceOnlineRate: FC = () => {
                   {t('Not Registered')}: {notRegister}
                 </div>
                 <div>
-                  {t('Online rate')}:{(online / (online + offline)) * 100}%
+                  {t('Online rate')}:{rate}%
                 </div>
               </div>
             );
