@@ -82,12 +82,12 @@ const DeviceOnlineRate: FC = () => {
       title: t('Radar'),
       icon: imgRadar,
       tag: 'radar',
-      isClick: true,
     },
     {
       title: t('Lidar'),
       icon: imgRadar,
       tag: 'lidar',
+      isClick: true,
     },
     {
       title: t('SPAT'),
