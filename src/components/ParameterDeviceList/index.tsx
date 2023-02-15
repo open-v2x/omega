@@ -7,6 +7,7 @@ import { statusOptionFormat } from '#/utils';
 import { DeviceOnlineStatusOptions, RSUStatusOptions, SendStatusOptions } from '#/constants/edge';
 import BaseProTable from '#/components/BaseProTable';
 import { ProColumns } from '#/typings/pro-component';
+import { renderAreaFormatName } from '../Country/renderHelper';
 
 type ParameterDeviceListType = {
   showDeliveryStatus?: boolean;
@@ -48,8 +49,8 @@ const ParameterDeviceList: React.FC<ParameterDeviceListType> = ({
       title: t('Installation Area'),
       dataIndex: 'location',
       ellipsis: true,
-      render: (_, { countryName, provinceName, cityName, areaName }) =>
-        `${countryName || ''}${provinceName || ''}${cityName || ''}${areaName || ''}`,
+      render: (_, row) => renderAreaFormatName(row),
+      width: 300,
     },
     {
       title: t('Online Status'),
