@@ -51,18 +51,15 @@ const DeviceOnlineRate: FC = () => {
   const handleClickCamera = params => {
     const index = params.streamUrl.indexOf('//');
     const streamUrl = window.__POWERED_BY_QIANKUN__
-      ? `${params.streamUrl.slice(0, index + 2)}${
-          window.location.host
-        }/nginx/?url=${params.streamUrl.slice(index + 2)}`
+      ? `${window.location.origin}/omega/nginx/?url=${params.streamUrl.slice(index + 2)}`
       : params.wsUrl;
     centerStore.setShowCamera(streamUrl);
   };
   const handleClickLidar = params => {
     const index = params.streamUrl.indexOf('//');
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     const wsUrl = window.__POWERED_BY_QIANKUN__
-      ? `${params.wsUrl.slice(0, index + 2)}${window.location.host}/nginx/?url=${params.wsUrl.slice(
-          index,
-        )}`
+      ? `${protocol}//${window.location.host}/nginx/?url=${params.wsUrl.slice(index)}`
       : params.wsUrl;
     centerStore.setShowCloudPoint(wsUrl);
   };
