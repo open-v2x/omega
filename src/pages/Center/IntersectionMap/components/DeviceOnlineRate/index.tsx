@@ -56,10 +56,10 @@ const DeviceOnlineRate: FC = () => {
     centerStore.setShowCamera(streamUrl);
   };
   const handleClickLidar = params => {
-    const index = params.streamUrl.indexOf('//');
+    const index = params.wsUrl.indexOf('//');
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     const wsUrl = window.__POWERED_BY_QIANKUN__
-      ? `${protocol}//${window.location.host}/nginx/?url=${params.wsUrl.slice(index)}`
+      ? `${protocol}//${window.location.host}/nginx/?url=${params.wsUrl.slice(index + 2)}`
       : params.wsUrl;
     centerStore.setShowCloudPoint(wsUrl);
   };
