@@ -49,10 +49,22 @@ const DeviceOnlineRate: FC = () => {
     setShowFooterIndex(index === showFooterIndex ? -1 : index);
 
   const handleClickCamera = params => {
-    centerStore.setShowCamera(params.streamUrl);
+    const index = params.streamUrl.indexOf('//');
+    const streamUrl = window.__POWERED_BY_QIANKUN__
+      ? `${params.streamUrl.slice(0, index + 2)}${
+          window.location.host
+        }/nginx/?url=${params.streamUrl.slice(index + 2)}`
+      : params.wsUrl;
+    centerStore.setShowCamera(streamUrl);
   };
   const handleClickLidar = params => {
-    centerStore.setShowCloudPoint(params.wsUrl);
+    const index = params.streamUrl.indexOf('//');
+    const wsUrl = window.__POWERED_BY_QIANKUN__
+      ? `${params.wsUrl.slice(0, index + 2)}${window.location.host}/nginx/?url=${params.wsUrl.slice(
+          index,
+        )}`
+      : params.wsUrl;
+    centerStore.setShowCloudPoint(wsUrl);
   };
 
   const footerMap = {
@@ -60,7 +72,7 @@ const DeviceOnlineRate: FC = () => {
     1: (
       <ControlTable title={t('Camera Name')} dataName={'cameras'} onCallback={handleClickCamera} />
     ),
-    2: <ControlTable title={t('Lidar Name')} dataName={'lidars'} onCallback={handleClickLidar} />,
+    3: <ControlTable title={t('Lidar Name')} dataName={'lidars'} onCallback={handleClickLidar} />,
   };
 
   const showFooter = () => footerMap[showFooterIndex];
@@ -82,12 +94,12 @@ const DeviceOnlineRate: FC = () => {
       title: t('Radar'),
       icon: imgRadar,
       tag: 'radar',
-      isClick: true,
     },
     {
       title: t('Lidar'),
       icon: imgRadar,
       tag: 'lidar',
+      isClick: true,
     },
     {
       title: t('SPAT'),

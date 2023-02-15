@@ -1,6 +1,7 @@
 const webpackMerge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 const util = require('./utils/util');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const { getPackageName } = util;
 console.log('packageName:', getPackageName());
