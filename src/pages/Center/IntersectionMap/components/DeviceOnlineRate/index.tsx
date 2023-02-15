@@ -69,76 +69,71 @@ const DeviceOnlineRate: FC = () => {
     {
       title: t('RSU online rate'),
       icon: imgRsu,
-      online: rateInfo.rsu.online,
-      offline: rateInfo.rsu.offline,
-      notRegister: rateInfo.rsu.notRegister,
+      tag: 'rsu',
       isClick: true,
     },
     {
       title: t('Side Camera'),
       icon: imgCamera,
-      online: rateInfo.camera.online,
-      offline: rateInfo.camera.offline,
-      notRegister: rateInfo.camera.notRegister,
+      tag: 'camera',
       isClick: true,
     },
     {
       title: t('Radar'),
       icon: imgRadar,
-      online: rateInfo.radar.notRegister,
-      offline: rateInfo.radar.notRegister,
-      notRegister: rateInfo.radar.notRegister,
+      tag: 'radar',
       isClick: true,
     },
     {
       title: t('Lidar'),
       icon: imgRadar,
-      online: rateInfo.lidar.online,
-      offline: rateInfo.lidar.offline,
-      notRegister: rateInfo.lidar.notRegister,
+      tag: 'lidar',
     },
     {
       title: t('SPAT'),
       icon: imgSpat,
-      online: rateInfo.spat.online,
-      offline: rateInfo.spat.offline,
-      notRegister: rateInfo.spat.notRegister,
+      tag: 'spat',
     },
   ];
+
+  console.log('rateInfo', onlineMaps);
 
   return (
     <div className={styles['d-container']}>
       <div className={styles['device-container']}>
         <div className={styles['device-title']}>{t('Device online rate')}</div>
         <div className={styles['device-content']}>
-          {onlineMaps.map((map, index) => (
-            <div key={index} className={styles['device-item']}>
-              <div className={styles['device-item-center']}>
-                <div>{map.title}</div>
-                <div
-                  className={classNames(
-                    styles['device-image'],
-                    map.isClick ? styles['device-image-click'] : null,
-                  )}
-                  onClick={() => map.isClick && handleClickItem(index)}
-                >
-                  <img className={styles['device-image-icon']} src={map.icon} alt="" />
+          {onlineMaps.map((map, index) => {
+            const { online, offline, notRegister } = rateInfo[map.tag];
+            return (
+              <div key={index} className={styles['device-item']}>
+                <div className={styles['device-item-center']}>
+                  <div>{map.title}</div>
+                  <div
+                    className={classNames(
+                      styles['device-image'],
+                      map.isClick ? styles['device-image-click'] : null,
+                    )}
+                    onClick={() => map.isClick && handleClickItem(index)}
+                  >
+                    <img className={styles['device-image-icon']} src={map.icon} alt="" />
+                  </div>
+                </div>
+                <div>
+                  {t('Online')}: {online}
+                </div>
+                <div>
+                  {t('Offline')}: {offline}
+                </div>
+                <div>
+                  {t('Not Registered')}: {notRegister}
+                </div>
+                <div>
+                  {t('Online rate')}:{(online / (online + offline)) * 100}%
                 </div>
               </div>
-              <div>
-                {t('Online')}: {map.online}
-              </div>
-              <div>
-                {t('Offline')}: {map.offline}
-              </div>
-              <div>
-                {t('Not Registered')}: {map.notRegister}
-              </div>
-              <div>
-                {t('Online rate')}: {(map.online / (map.online + map.offline)) * 100}%
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
       {showFooterIndex > -1 && showFooter()}
