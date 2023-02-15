@@ -96,8 +96,6 @@ const DeviceOnlineRate: FC = () => {
     },
   ];
 
-  console.log('rateInfo', onlineMaps);
-
   return (
     <div className={styles['d-container']}>
       <div className={styles['device-container']}>
