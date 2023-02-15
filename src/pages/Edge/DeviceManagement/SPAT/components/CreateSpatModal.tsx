@@ -151,6 +151,8 @@ const CreateSpatModal: React.FC<CreateModalProps> = ({ editInfo, isDetails = fal
       submitForm={async ({ province, ...values }) => {
         values.intersectionCode = province!.pop()!;
         if (editInfo) {
+          values.rsuId = values.rsuId || null;
+          values.rsuName = values.rsuName || null;
           await updateSpat(editInfo.id, values);
         } else {
           await createSpat(values);

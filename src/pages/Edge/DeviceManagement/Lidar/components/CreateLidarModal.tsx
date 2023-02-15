@@ -204,6 +204,8 @@ const CreateLidarModal: React.FC<CreateModalProps> = ({ editInfo, isDetails = fa
       submitForm={async ({ province, ...values }) => {
         values.intersectionCode = province!.pop()!;
         if (editInfo) {
+          values.rsuId = values.rsuId || null;
+          values.rsuName = values.rsuName || null;
           await updateLidar(editInfo.id, values);
         } else {
           await createLidar(values);
