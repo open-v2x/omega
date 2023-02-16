@@ -52,7 +52,7 @@ const DeviceOnlineRate: FC = () => {
     const index = params.streamUrl.indexOf('//');
     const streamUrl = window.__POWERED_BY_QIANKUN__
       ? `${window.location.origin}/omega/nginx/?url=${params.streamUrl.slice(index + 2)}`
-      : params.wsUrl;
+      : params.streamUrl;
     centerStore.setShowCamera(streamUrl);
   };
   const handleClickLidar = params => {
