@@ -166,6 +166,16 @@ const routes = [
         ),
       },
       {
+        path: 'bitmap/preview/:id',
+        component: React.lazy(
+          () =>
+            import(
+              /* webpackChunkName: "edge_maintenance_bitmap_preview",webpackPrefetch: true */
+              '#/pages/Edge/MaintenanceManagement/MapConfig/ConfigPreview/BitmapPreview'
+            ),
+        ),
+      },
+      {
         path: 'business',
         component: React.lazy(
           () => import('#/pages/Edge/MaintenanceManagement/BusinessConfig/ConfigList'),
