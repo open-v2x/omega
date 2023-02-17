@@ -51,7 +51,7 @@ const DeviceOnlineRate: FC = () => {
   const handleClickCamera = params => {
     const index = params.streamUrl.indexOf('//');
     const streamUrl = window.__POWERED_BY_QIANKUN__
-      ? `${window.location.origin}/omega/nginx/?url=${params.streamUrl.slice(index + 2)}`
+      ? `${window.location.origin}/live/?url=${params.streamUrl.slice(index + 2)}`
       : params.streamUrl;
     centerStore.setShowCamera(streamUrl);
   };
