@@ -53,6 +53,19 @@ const BasicInfo: React.FC<{ basicInfo: Config.MapListItem | undefined }> = ({ ba
       ),
     },
     {
+      key: 'bitmap preview',
+      label: t('Bitmap Preview'),
+      render: ({ id }: { id: number }) => (
+        <Button
+          type="link"
+          size="small"
+          onClick={() => navigate(`/maintenance/bitmap/preview/${id}`)}
+        >
+          {t('Preview')}
+        </Button>
+      ),
+    },
+    {
       key: 'desc',
       label: t('Describe'),
       block: true,
