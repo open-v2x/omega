@@ -507,5 +507,15 @@
   "Running Status": "运行状态",
   "Not Registered": "未接入",
   "Online rate": "在线率",
-  "Bitmap Preview": "位图预览"
+  "Bitmap Preview": "位图预览",
+  "Congestion Event": "拥堵事件（Congestion）",
+  "Congestion Level": "拥堵级别",
+  "Lane Number": "车道号",
+  "Average Speed": "平均车速",
+  "laneID": "车道号",
+  "SensorLatitude": "传感器纬度",
+  "SensorLongtitude": "传感器精度",
+  "The congestion start position": "拥堵的起点经纬度",
+  "The congestion end position": "拥堵的终点经纬度",
+  "Congestion Event Detail": "拥堵事件详情"
 }
