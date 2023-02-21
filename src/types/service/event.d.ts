@@ -81,4 +81,6 @@ declare namespace Event {
     egoId: string;
     egoPos: LonLat;
   };
+
+  type CGWListItem = {};
 }

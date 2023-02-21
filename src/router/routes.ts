@@ -287,6 +287,16 @@ const routes = [
         path: 'clc',
         component: React.lazy(() => import('#/pages/Edge/EventManagement/CooperativeLaneChange')),
       },
+      {
+        path: 'congestion',
+        component: React.lazy(() => import('#/pages/Edge/EventManagement/CongestionWarning')),
+      },
+      {
+        path: 'congestion/details/:id',
+        component: React.lazy(
+          () => import('#/pages/Edge/EventManagement/CongestionWarning/Detail'),
+        ),
+      },
     ],
   },
   {
