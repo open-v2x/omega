@@ -52,6 +52,7 @@ const DeviceOnlineRate: FC = () => {
     centerStore.setShowCamera(params.streamUrl);
   };
   const handleClickLidar = params => {
+    console.log('设定', params.wsUrl);
     centerStore.setShowCloudPoint(params.wsUrl);
   };
 
@@ -60,7 +61,7 @@ const DeviceOnlineRate: FC = () => {
     1: (
       <ControlTable title={t('Camera Name')} dataName={'cameras'} onCallback={handleClickCamera} />
     ),
-    2: <ControlTable title={t('Lidar Name')} dataName={'lidars'} onCallback={handleClickLidar} />,
+    3: <ControlTable title={t('Lidar Name')} dataName={'lidars'} onCallback={handleClickLidar} />,
   };
 
   const showFooter = () => footerMap[showFooterIndex];

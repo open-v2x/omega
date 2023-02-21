@@ -506,5 +506,15 @@
   "Running Status": "Running Status",
   "Not Registered": "Not Registered",
   "Online rate": "Online rate",
-  "Bitmap Preview": "Bitmap Preview"
+  "Bitmap Preview": "Bitmap Preview",
+  "Congestion Event": "Congestion Event（Congestion）",
+  "Congestion Level": "Congestion Level",
+  "Lane Number": "Lane Number",
+  "Average Speed": "Average Speed",
+  "laneID": "laneID",
+  "SensorLatitude": "Sensor Latitude",
+  "SensorLongtitude": "Sensor Longitude",
+  "The congestion start position": "The congestion start position",
+  "The congestion end position": "The congestion end position",
+  "Congestion Event Detail": "Congestion Event Detail"
 }

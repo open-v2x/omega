@@ -51,5 +51,14 @@ export const eventMenu = {
       path: '/event/clc',
       name: 'Cooperative Lane Change',
     },
+    {
+      path: '/event/congestion',
+      name: 'Congestion Event',
+    },
+    {
+      path: '/event/congestion/details/:id',
+      name: 'Congestion Event Detail',
+      hideInMenu: true,
+    },
   ],
 };
