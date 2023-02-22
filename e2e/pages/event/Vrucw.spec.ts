@@ -9,7 +9,7 @@ import {
 } from '../../utils/global';
 import { checkDataset, connectMqtt } from '../../utils/road_simulator';
 
-import { checkEmptyTable, checkTableRowLength, clickDetailTextBtn } from '../../utils/table';
+import { checkEmptyTable, checkTableRowLength, clickDetailTextBtn,waitUntilTableHavedata } from '../../utils/table';
 
 test.describe('The Vrucw Page', () => {
   const pageUrl = '/event/vrucw';
@@ -20,23 +20,28 @@ test.describe('The Vrucw Page', () => {
     await page.goto(pageUrl);
   });
 
-  test('用路侧模拟器发送[弱势交通参与者碰撞预警]数据', async ({ page }) => {
-    await gotoRoadSimulator(page);
-    await connectMqtt(page);
-    await checkDataset(page, 'VPTC_CW_track_stright');
-    await checkDataset(page, 'VPTC_CW_track_turn');
+  test('用路侧模拟器发送[弱势交通参与者碰撞预警]数据--事件列表成功接收到数据', async ({ browser }) => {
+    const deviceContext = await browser.newContext();
+    const simulatorContext = await browser.newContext();
+
+    // Create pages and interact with contexts independently
+    const deviceContextPage = await deviceContext.newPage();
+    const simulatorPage = await simulatorContext.newPage();
+    
+    await gotoRoadSimulator(simulatorPage);
+    await connectMqtt(simulatorPage);
+    await checkDataset(simulatorPage, 'VPTC_CW_track_stright');
+    await checkDataset(simulatorPage, 'VPTC_CW_track_turn');
     // 直到loading结束再点击发送按钮
-    await page.locator('#loading-VPTC_CW_track_stright').waitFor({ state: 'hidden' });
-    await page.locator('#loading-VPTC_CW_track_turn').waitFor({ state: 'hidden' });
-    await page.click('#publishDataSetButton');
-    await page.waitForTimeout(10000); // 发送10s数据后停止发送
-    await page.click('#connectButton');
-  });
-
-  test('成功接收到数据', async ({ page }) => {
-    page.reload();
-
-    await checkTableRowLength(page, 3);
+    await simulatorPage.locator('#loading-VPTC_CW_track_stright').waitFor({ state: 'hidden' });
+    await simulatorPage.locator('#loading-VPTC_CW_track_turn').waitFor({ state: 'hidden' });
+    await simulatorPage.click('#publishDataSetButton');
+    // await page.waitForTimeout(10000); // 发送10s数据后停止发送
+    // await page.click('#connectButton');
+    await waitUntilTableHavedata(deviceContextPage,pageUrl,6000);
+    await checkTableRowLength(deviceContextPage, 3);
+    await deviceContextPage.close();
+    await simulatorPage.close();
   });
 
   test('成功通过下拉框筛选数据', async ({ page }) => {
