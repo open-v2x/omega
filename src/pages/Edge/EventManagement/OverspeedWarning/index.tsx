@@ -1,6 +1,6 @@
 import BaseContainer from '#/components/BaseContainer';
 import BaseProTable from '#/components/BaseProTable';
-import { getCGWList } from '#/services/api/event/cgw';
+import { getOSWList } from '#/services/api/event/osw';
 import { ProColumns } from '#/typings/pro-component';
 import { ActionType } from '@ant-design/pro-components';
 import { Button } from 'antd';
@@ -11,15 +11,19 @@ const OverspeedWarning: React.FC = () => {
   const actionRef = useRef<ActionType>();
   const navigator = useNavigate();
 
-  const columns: ProColumns<Event.CGWListItem>[] = [
+  const columns: ProColumns<Event.OSWListItem>[] = [
     { title: t('ID'), dataIndex: 'id' },
     {
-      title: t('Congestion Level'),
-      dataIndex: 'cgwLevel',
-      search: true,
+      title: t('Overspeed Lat'),
+      dataIndex: 'egoPos',
+      render: item => <div>{item.lat}</div>,
     },
-    { title: t('Lane Number'), dataIndex: 'laneID' },
-    { title: t('Average Speed'), dataIndex: 'avgSpeed' },
+    {
+      title: t('Overspeed Lon'),
+      dataIndex: 'egoPos',
+      render: item => <div>{item.lon}</div>,
+    },
+    { title: t('Idea ID'), dataIndex: 'egoID' },
     { title: t('Millisecond Time'), dataIndex: 'secMark' },
     { title: t('Creation Time'), dataIndex: 'createTime' },
     {
@@ -31,7 +35,7 @@ const OverspeedWarning: React.FC = () => {
           type="link"
           size="small"
           key="details"
-          onClick={() => navigator(`/event/overspeed/details`, { state: row })}
+          onClick={() => navigator(`/event/overspeed/details/${row.id}`, { state: row })}
         >
           {t('Details')}
         </Button>,
@@ -40,7 +44,7 @@ const OverspeedWarning: React.FC = () => {
   ];
   return (
     <BaseContainer>
-      <BaseProTable columns={columns} actionRef={actionRef} request={getCGWList} />
+      <BaseProTable columns={columns} actionRef={actionRef} request={getOSWList} />
     </BaseContainer>
   );
 };

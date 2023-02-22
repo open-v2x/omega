@@ -297,6 +297,14 @@ const routes = [
           () => import('#/pages/Edge/EventManagement/CongestionWarning/Detail'),
         ),
       },
+      {
+        path: 'overspeed',
+        component: React.lazy(() => import('#/pages/Edge/EventManagement/OverspeedWarning')),
+      },
+      {
+        path: 'overspeed/details/:id',
+        component: React.lazy(() => import('#/pages/Edge/EventManagement/OverspeedWarning/Detail')),
+      },
     ],
   },
   {
