@@ -60,5 +60,14 @@ export const eventMenu = {
       name: 'Congestion Event Detail',
       hideInMenu: true,
     },
+    {
+      path: '/event/overspeed',
+      name: 'Overspeed Warning',
+    },
+    {
+      path: '/event/overspeed/details/:id',
+      name: 'Overspeed Warning Detail',
+      hideInMenu: true,
+    },
   ],
 };

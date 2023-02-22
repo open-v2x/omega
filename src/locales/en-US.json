@@ -516,5 +516,17 @@
   "SensorLongtitude": "Sensor Longitude",
   "The congestion start position": "The congestion start position",
   "The congestion end position": "The congestion end position",
-  "Congestion Event Detail": "Congestion Event Detail"
+  "Congestion Event Detail": "Congestion Event Detail",
+  "Overspeed Warning": "Overspeed Warning",
+  "Overspeed Lat": "Overspeed Latitude",
+  "Overspeed Lon": "Overspeed Longitude",
+  "Idea ID": "Idea ID",
+  "Congestion Clear": "Clear",
+  "Congestion Level One": "Level I",
+  "Congestion Level Two": "Level II",
+  "Congestion Level Three": "Level III",
+  "Overspeed Warning Detail": "Overspeed Warning Detail",
+  "Car`s Length": "Car`s Length",
+  "Car`s Width": "Car`s Width",
+  "Car`s Height": "Car`s Height"
 }

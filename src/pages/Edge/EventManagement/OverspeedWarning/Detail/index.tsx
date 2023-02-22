@@ -1,11 +1,10 @@
-import React from 'react';
 import BaseContainer from '#/components/BaseContainer';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { ProCard } from '@ant-design/pro-components';
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './index.module.less';
-import { CongestionLevel } from '#/constants/edge';
 
-const CongestionDetail: React.FC = () => {
+const OverspeedWarningDetail: React.FC = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   if (!state) {
@@ -14,13 +13,13 @@ const CongestionDetail: React.FC = () => {
 
   return (
     <BaseContainer back>
-      <ProCard direction="column" gutter={8} title={'基本信息'}>
+      <ProCard title="基本信息" direction="column" gutter={8}>
         <div className={styles['basic-line']}>
           <div>
             {t('Message ID')}: {state.id}
           </div>
           <div>
-            {t('laneID')}: {state.laneID}
+            {t('Idea ID')}: {state.egoID}
           </div>
         </div>
         <div className={styles['basic-line']}>
@@ -33,24 +32,37 @@ const CongestionDetail: React.FC = () => {
         </div>
         <div className={styles['basic-line']}>
           <div>
-            {t('The congestion start position')}: {state.startPoint.lon} , {state.startPoint.lat}
+            {t('Overspeed Lon')}: {state.egoPos.lon}
           </div>
           <div>
-            {t('The congestion end position')}: {state.endPoint.lon} , {state.endPoint.lat}
+            {t('Overspeed Lat')}: {state.egoPos.lat}
           </div>
         </div>
         <div className={styles['basic-line']}>
           <div>
-            {t('Average Speed')}: {state.avgSpeed} km/h
+            {t('Speed')}: {state.speed} km/h
           </div>
           <div>
-            {t('Congestion Level')}: {CongestionLevel[state.cgwLevel]}
+            {t('Heading')}: {state.heading}
           </div>
         </div>
         <div className={styles['basic-line']}>
+          <div>
+            {t('Car`s Length')}: {state.length}
+          </div>
+          <div>
+            {t('Car`s Width')}: {state.width}
+          </div>
+        </div>
+        <div className={styles['basic-line']}>
+          <div>
+            {t('Car`s Height')}: {state.height}
+          </div>
           <div>
             {t('Millisecond Time')}: {state.secMark}
           </div>
+        </div>
+        <div className={styles['basic-line']}>
           <div>
             {t('Reporting Time')}: {state.createTime}
           </div>
@@ -60,4 +72,4 @@ const CongestionDetail: React.FC = () => {
   );
 };
 
-export default CongestionDetail;
+export default OverspeedWarningDetail;
