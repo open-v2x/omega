@@ -517,5 +517,17 @@
   "SensorLongtitude": "传感器精度",
   "The congestion start position": "拥堵的起点经纬度",
   "The congestion end position": "拥堵的终点经纬度",
-  "Congestion Event Detail": "拥堵事件详情"
+  "Congestion Event Detail": "拥堵事件详情",
+  "Overspeed Warning": "车辆超速",
+  "Overspeed Lat": "超速车辆经度",
+  "Overspeed Lon": "超速车辆纬度",
+  "Idea ID": "目标id",
+  "Congestion Clear": "通畅",
+  "Congestion Level One": "I级拥堵",
+  "Congestion Level Two": "II级拥堵",
+  "Congestion Level Three": "III级拥堵",
+  "Overspeed Warning Detail": "车辆超速详情",
+  "Car`s Length": "车长",
+  "Car`s Width": "车宽",
+  "Car`s Height": "车高"
 }
