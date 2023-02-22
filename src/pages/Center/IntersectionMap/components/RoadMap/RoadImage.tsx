@@ -8,6 +8,7 @@ import ReverseOvertaking from '../Events/ReverseOvertaking';
 import ChangeLanes from '../Events/ChangeLanes';
 import EventWarnLine from '../Events/EventWarnLine';
 import Track from '../Events/Track';
+import CongestionWarning from '../Events/CongestionWarning';
 
 const RoadImage: React.FC<{ nodeId: string; intersectionCode: string }> = ({
   nodeId,
@@ -74,7 +75,8 @@ const RoadImage: React.FC<{ nodeId: string; intersectionCode: string }> = ({
     const mqtt = new MQTT(`${protocol}//${host}`);
 
     mqtt.connect({
-      path: `/mqtt-proxy${process.env.MQTT_PATH}`,
+      path:
+        process.env.NODE_ENV === 'development' ? '/mqtt' : `/mqtt-proxy${process.env.MQTT_PATH}`,
       username: process.env.MQTT_USERNAME,
       password: process.env.MQTT_PASSWORD,
       clientId: `v2x_mqtt_${new Date().getTime()}_nodeId_${nodeId}`,
@@ -173,9 +175,14 @@ const RoadImage: React.FC<{ nodeId: string; intersectionCode: string }> = ({
         {RWData.map(({ ego, ego_current_point }) => (
           <RetrogradeWarning key={ego} point={ego_current_point} />
         ))}
-        {CongestionData.map(d => {
-          console.log(d);
-        })}
+        {CongestionData.map(({ level, startPoint, endPoint, type }, index) => (
+          <CongestionWarning
+            key={`${type}_${index}`}
+            level={level}
+            start={startPoint}
+            end={endPoint}
+          />
+        ))}
       </Layer>
     </Stage>
   );
