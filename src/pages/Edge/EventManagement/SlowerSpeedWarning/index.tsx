@@ -1,25 +1,25 @@
 import BaseContainer from '#/components/BaseContainer';
 import BaseProTable from '#/components/BaseProTable';
-import { getOSWList } from '#/services/api/event/osw';
+import { getSSWList } from '#/services/api/event/ssw';
 import { ProColumns } from '#/typings/pro-component';
 import { ActionType } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
-const OverspeedWarning: React.FC = () => {
+const SlowerSpeedWarning: React.FC = () => {
   const actionRef = useRef<ActionType>();
   const navigator = useNavigate();
 
   const columns: ProColumns<Event.SpeedWarningListItem>[] = [
     { title: t('ID'), dataIndex: 'id' },
     {
-      title: t('Overspeed Lat'),
+      title: t('Slower Speed Lat'),
       dataIndex: 'egoPos',
       render: item => <div>{item.lat}</div>,
     },
     {
-      title: t('Overspeed Lon'),
+      title: t('Slower Speed Lon'),
       dataIndex: 'egoPos',
       render: item => <div>{item.lon}</div>,
     },
@@ -35,18 +35,19 @@ const OverspeedWarning: React.FC = () => {
           type="link"
           size="small"
           key="details"
-          onClick={() => navigator(`/event/overspeed/details/${row.id}`, { state: row })}
+          onClick={() => navigator(`/event/slowerspeed/details/${row.id}`, { state: row })}
         >
           {t('Details')}
         </Button>,
       ],
     },
   ];
+
   return (
     <BaseContainer>
-      <BaseProTable columns={columns} actionRef={actionRef} request={getOSWList} />
+      <BaseProTable columns={columns} actionRef={actionRef} request={getSSWList} />
     </BaseContainer>
   );
 };
 
-export default OverspeedWarning;
+export default SlowerSpeedWarning;

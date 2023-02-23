@@ -305,6 +305,16 @@ const routes = [
         path: 'overspeed/details/:id',
         component: React.lazy(() => import('#/pages/Edge/EventManagement/OverspeedWarning/Detail')),
       },
+      {
+        path: 'slowerspeed',
+        component: React.lazy(() => import('#/pages/Edge/EventManagement/SlowerSpeedWarning')),
+      },
+      {
+        path: 'slowerspeed/details/:id',
+        component: React.lazy(
+          () => import('#/pages/Edge/EventManagement/SlowerSpeedWarning/Detail'),
+        ),
+      },
     ],
   },
   {

@@ -69,5 +69,14 @@ export const eventMenu = {
       name: 'Overspeed Warning Detail',
       hideInMenu: true,
     },
+    {
+      path: '/event/slowerspeed',
+      name: 'Slower Speed Warning',
+    },
+    {
+      path: '/event/slowerspeed/details/:id',
+      name: 'Slower Speed Warning Detail',
+      hideInMenu: true,
+    },
   ],
 };
