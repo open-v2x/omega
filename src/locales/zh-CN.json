@@ -508,7 +508,7 @@
   "Not Registered": "未接入",
   "Online rate": "在线率",
   "Bitmap Preview": "位图预览",
-  "Congestion Event": "拥堵事件（Congestion）",
+  "Congestion Event": "拥堵预警（Congestion）",
   "Congestion Level": "拥堵级别",
   "Lane Number": "车道号",
   "Average Speed": "平均车速",
@@ -518,7 +518,7 @@
   "The congestion start position": "拥堵的起点经纬度",
   "The congestion end position": "拥堵的终点经纬度",
   "Congestion Event Detail": "拥堵事件详情",
-  "Overspeed Warning": "车辆超速",
+  "Overspeed Warning": "车辆超速预警（OSW）",
   "Overspeed Lat": "超速车辆经度",
   "Overspeed Lon": "超速车辆纬度",
   "Idea ID": "目标id",
@@ -529,5 +529,9 @@
   "Overspeed Warning Detail": "车辆超速详情",
   "Car`s Length": "车长",
   "Car`s Width": "车宽",
-  "Car`s Height": "车高"
+  "Car`s Height": "车高",
+  "Slower Speed Warning": "车辆慢行预警（SSW）",
+  "Slower Speed Warning Detail": "车辆慢行警报详情",
+  "Slower Speed Lat": "慢行车辆经度",
+  "Slower Speed Lon": "慢行车辆纬度"
 }

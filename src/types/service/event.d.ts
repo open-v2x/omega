@@ -94,7 +94,7 @@ declare namespace Event {
     createTime: string;
   };
 
-  type OSWListItem = {
+  type SpeedWarningListItem = {
     id: number;
     egoID: string;
     egoPos: LonLat;
