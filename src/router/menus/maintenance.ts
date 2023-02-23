@@ -47,5 +47,10 @@ export const maintenanceMenu = {
       path: '/maintenance/crossing',
       name: 'Crossing Management',
     },
+    {
+      path: '/maintenance/bitmap/preview/:id',
+      name: 'Bitmap Preview',
+      hideInMenu: true,
+    },
   ],
 };

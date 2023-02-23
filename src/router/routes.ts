@@ -166,6 +166,16 @@ const routes = [
         ),
       },
       {
+        path: 'bitmap/preview/:id',
+        component: React.lazy(
+          () =>
+            import(
+              /* webpackChunkName: "edge_maintenance_bitmap_preview",webpackPrefetch: true */
+              '#/pages/Edge/MaintenanceManagement/MapConfig/ConfigPreview/BitmapPreview'
+            ),
+        ),
+      },
+      {
         path: 'business',
         component: React.lazy(
           () => import('#/pages/Edge/MaintenanceManagement/BusinessConfig/ConfigList'),
@@ -276,6 +286,38 @@ const routes = [
       {
         path: 'clc',
         component: React.lazy(() => import('#/pages/Edge/EventManagement/CooperativeLaneChange')),
+      },
+      {
+        path: 'congestion',
+        component: React.lazy(() => import('#/pages/Edge/EventManagement/CongestionWarning')),
+      },
+      {
+        path: 'congestion/details/:id',
+        component: React.lazy(
+          () => import('#/pages/Edge/EventManagement/CongestionWarning/Detail'),
+        ),
+      },
+      {
+        path: 'overspeed',
+        component: React.lazy(() => import('#/pages/Edge/EventManagement/OverspeedWarning')),
+      },
+      {
+        path: 'overspeed/details/:id',
+        component: React.lazy(() => import('#/pages/Edge/EventManagement/OverspeedWarning/Detail')),
+      },
+      {
+        path: 'slowerspeed',
+        component: React.lazy(() => import('#/pages/Edge/EventManagement/SlowerSpeedWarning')),
+      },
+      {
+        path: 'slowerspeed/details/:id',
+        component: React.lazy(
+          () => import('#/pages/Edge/EventManagement/SlowerSpeedWarning/Detail'),
+        ),
+      },
+      {
+        path: 'retrograde',
+        component: React.lazy(() => import('#/pages/Edge/EventManagement/RetrogradeWarning')),
       },
     ],
   },
