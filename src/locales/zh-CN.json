@@ -519,8 +519,8 @@
   "The congestion end position": "拥堵的终点经纬度",
   "Congestion Event Detail": "拥堵事件详情",
   "Overspeed Warning": "车辆超速预警（OSW）",
-  "Overspeed Lat": "超速车辆经度",
-  "Overspeed Lon": "超速车辆纬度",
+  "Overspeed Lat": "超速车辆纬度",
+  "Overspeed Lon": "超速车辆经度",
   "Idea ID": "目标id",
   "Congestion Clear": "通畅",
   "Congestion Level One": "I级拥堵",
@@ -532,6 +532,10 @@
   "Car`s Height": "车高",
   "Slower Speed Warning": "车辆慢行预警（SSW）",
   "Slower Speed Warning Detail": "车辆慢行警报详情",
-  "Slower Speed Lat": "慢行车辆经度",
-  "Slower Speed Lon": "慢行车辆纬度"
+  "Slower Speed Lat": "慢行车辆纬度",
+  "Slower Speed Lon": "慢行车辆经度",
+  "Retrograde Warning": "车辆逆行预警（RDW）",
+  "Retrograde Warning Detail": "车辆逆行预警详情",
+  "Retrograde Lon": "车辆逆行经度",
+  "Retrograde Lat": "车辆逆行纬度"
 }

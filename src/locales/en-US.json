@@ -532,5 +532,9 @@
   "Slower Speed Warning": "Slower Speed Warning",
   "Slower Speed Warning Detail": "Slower Speed Warning Detail",
   "Slower Speed Lat": "Slower Speed Latitude",
-  "Slower Speed Lon": "Slower Speed Longitude"
+  "Slower Speed Lon": "Slower Speed Longitude",
+  "Retrograde Warning": "Retrograde Warning",
+  "Retrograde Warning Detail": "Retrograde Warning Detail",
+  "Retrograde Lon": "Retrograde Lon",
+  "Retrograde Lat": "Retrograde Lat"
 }

@@ -1,29 +1,30 @@
 import BaseContainer from '#/components/BaseContainer';
 import BaseProTable from '#/components/BaseProTable';
-import { CongestionLevel } from '#/constants/edge';
-import { getCGWList } from '#/services/api/event/cgw';
+import { getRDWList } from '#/services/api/event/rdw';
 import { ProColumns } from '#/typings/pro-component';
-import { statusOptionFormat } from '#/utils';
 import { ActionType } from '@ant-design/pro-components';
 import { Button } from 'antd';
-import React, { useRef } from 'react';
+import React from 'react';
+import { useRef } from 'react';
 import { useNavigate } from 'react-router';
 
-const CongestionWarning: React.FC = () => {
+const RetrogradeWarning: React.FC = () => {
   const actionRef = useRef<ActionType>();
   const navigator = useNavigate();
 
-  const columns: ProColumns<Event.CGWListItem>[] = [
+  const columns: ProColumns<Event.SpeedWarningListItem>[] = [
     { title: t('ID'), dataIndex: 'id' },
     {
-      title: t('Congestion Level'),
-      dataIndex: 'cgwLevel',
-      search: true,
-      valueType: 'select',
-      valueEnum: statusOptionFormat(CongestionLevel),
+      title: t('Retrograde Lat'),
+      dataIndex: 'egoPos',
+      render: item => <div>{item.lat}</div>,
     },
-    { title: t('Lane Number'), dataIndex: 'laneID' },
-    { title: t('Average Speed'), dataIndex: 'avgSpeed', render: item => <div>{item} km/h</div> },
+    {
+      title: t('Retrograde Lon'),
+      dataIndex: 'egoPos',
+      render: item => <div>{item.lon}</div>,
+    },
+    { title: t('Idea ID'), dataIndex: 'egoID' },
     { title: t('Millisecond Time'), dataIndex: 'secMark' },
     { title: t('Creation Time'), dataIndex: 'createTime' },
     {
@@ -35,18 +36,19 @@ const CongestionWarning: React.FC = () => {
           type="link"
           size="small"
           key="details"
-          onClick={() => navigator(`/event/congestion/details/${row.id}`, { state: row })}
+          onClick={() => navigator(`/event/retrograde/details/${row.id}`, { state: row })}
         >
           {t('Details')}
         </Button>,
       ],
     },
   ];
+
   return (
     <BaseContainer>
-      <BaseProTable columns={columns} actionRef={actionRef} request={getCGWList} />
+      <BaseProTable actionRef={actionRef} columns={columns} request={getRDWList} />
     </BaseContainer>
   );
 };
 
-export default CongestionWarning;
+export default RetrogradeWarning;
