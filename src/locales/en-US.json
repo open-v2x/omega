@@ -528,5 +528,9 @@
   "Overspeed Warning Detail": "Overspeed Warning Detail",
   "Car`s Length": "Car`s Length",
   "Car`s Width": "Car`s Width",
-  "Car`s Height": "Car`s Height"
+  "Car`s Height": "Car`s Height",
+  "Slower Speed Warning": "Slower Speed Warning",
+  "Slower Speed Warning Detail": "Slower Speed Warning Detail",
+  "Slower Speed Lat": "Slower Speed Latitude",
+  "Slower Speed Lon": "Slower Speed Longitude"
 }
