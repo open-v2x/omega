@@ -6,7 +6,6 @@ const CongestionWarning: React.FC<{
   start: { x: number; y: number };
   end: { x: number; y: number };
 }> = ({ level, start, end }) => {
-
   const levelRgb = {
     0: 'transparent',
     1: 'rgba(220, 48, 35, 0.9)',

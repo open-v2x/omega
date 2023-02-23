@@ -315,6 +315,10 @@ const routes = [
           () => import('#/pages/Edge/EventManagement/SlowerSpeedWarning/Detail'),
         ),
       },
+      {
+        path: 'retrograde',
+        component: React.lazy(() => import('#/pages/Edge/EventManagement/RetrogradeWarning')),
+      },
     ],
   },
   {

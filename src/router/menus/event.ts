@@ -78,5 +78,9 @@ export const eventMenu = {
       name: 'Slower Speed Warning Detail',
       hideInMenu: true,
     },
+    {
+      path: '/event/retrograde',
+      name: 'Retrograde Warning',
+    },
   ],
 };
