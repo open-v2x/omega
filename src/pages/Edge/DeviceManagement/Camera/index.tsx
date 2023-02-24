@@ -22,15 +22,19 @@ const CameraManagement: FC = () => {
       title: t('Camera Name'),
       dataIndex: 'name',
       search: true,
+      width: 100,
     },
     {
       title: t('Serial Number'),
       dataIndex: 'sn',
       search: true,
+      width: 100,
     },
     {
       title: t('Video Stream URL'),
       dataIndex: 'streamUrl',
+      width: 200,
+      ellipsis: true,
     },
     {
       title: t('Installation Area'),
@@ -44,24 +48,29 @@ const CameraManagement: FC = () => {
     {
       title: t('Longitude'),
       dataIndex: 'lng',
+      width: 60,
     },
     {
       title: t('Latitude'),
       dataIndex: 'lat',
+      width: 60,
     },
     {
       title: t('Altitude (m)'),
       dataIndex: 'elevation',
+      width: 80,
     },
     {
       title: t('Orientation (°)'),
       dataIndex: 'towards',
+      width: 80,
     },
     {
       title: t('Associate RSU'),
       dataIndex: 'rsuName',
       valueType: 'select',
       request: fetchDeviceList,
+      width: 100,
     },
     {
       title: t('Associate RSU'),
@@ -74,10 +83,11 @@ const CameraManagement: FC = () => {
     {
       title: t('Creation Time'),
       dataIndex: 'createTime',
+      width: 200,
     },
     {
       title: t('Operate'),
-      width: 220,
+      width: 280,
       fixed: 'right',
       render: (_, row) => [
         <CreateCameraModal key="edit" editInfo={row} success={() => actionRef.current?.reload()} />,
@@ -114,6 +124,7 @@ const CameraManagement: FC = () => {
         columns={columns}
         actionRef={actionRef}
         request={cameraList}
+        scroll={{ x: 1400 }}
         toolBarRender={() => [
           <CreateCameraModal key="create" success={() => actionRef.current?.reload()} />,
         ]}
