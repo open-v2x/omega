@@ -13,7 +13,13 @@ import { onlineRate } from '#/services/api/center/site';
 const DeviceOnlineRate: FC = () => {
   const centerStore = useCenterStore();
   const [showFooterIndex, setShowFooterIndex] = useState(-1);
-  const [rateInfo, setRateInfo] = useState<Center.OnlineRateItem>();
+  const [rateInfo, setRateInfo] = useState<Center.OnlineRateItem>({
+    rsu: { online: 0, offline: 0, notRegister: 0 },
+    camera: { online: 0, offline: 0, notRegister: 0 },
+    radar: { online: 0, offline: 0, notRegister: 0 },
+    lidar: { online: 0, offline: 0, notRegister: 0 },
+    spat: { online: 0, offline: 0, notRegister: 0 },
+  });
 
   const fetchOnlineRate = async (rsuId?: number) => {
     const { data } = await onlineRate({
