@@ -38,7 +38,7 @@ const ControlTable: React.FC<{
         dataSource={data}
         pagination={false}
         size={'small'}
-        scroll={{ y: '100px' }}
+        scroll={{ y: '180px' }}
         rowClassName={styles['control-table-row']}
       />
     </div>
