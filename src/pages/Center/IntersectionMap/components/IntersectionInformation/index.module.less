@@ -1,36 +1,69 @@
-.intersection {
+.i-container {
   position: absolute;
-  left: 20px;
   top: 130px;
-  color: white;
+  left: 20px;
   width: 25vw;
-  background-color: #39546f80;
-  border-radius: 15px;
-  padding: 1vh 1vw;
 
-  &-title {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
+  .intersection {
+    position: relative;
+    color: white;
+    background-color: #39546f90;
+    border-radius: 5px;
+    padding: 5px 20px;
+    margin: 0 30px 0 0;
 
-  .wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-right: 20px;
+    &-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
 
-    > div {
-      &:first-child {
-        flex: 1;
+    .wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-right: 20px;
+
+      > div {
+        &:first-child {
+          flex: 1;
+        }
+
+        &:last-child {
+          flex: 1.5;
+        }
       }
+    }
 
-      &:last-child {
-        flex: 1.5;
-      }
+    .mb-10 {
+      margin-bottom: 10px;
     }
   }
 
-  .mb-10 {
-    margin-bottom: 10px;
+  .left-icon {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    color: #2feeff;
+    font-size: 24px;
+  }
+
+  &.show {
+    transform: translateX(0);
+    transition: all 1s ease-in-out;
+  }
+
+  &.hide {
+    transform: translateX(calc(-100% + 10px));
+    transition: all 1s ease-in-out;
+  }
+
+  .intersection-show {
+    visibility: visible;
+    transition: all 1s ease-in-out;
+  }
+
+  .intersection-hide {
+    visibility: hidden;
+    transition: all 1s ease-in-out;
   }
 }

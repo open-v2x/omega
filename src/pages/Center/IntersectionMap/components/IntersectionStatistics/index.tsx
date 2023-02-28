@@ -5,7 +5,6 @@ import React, { useEffect } from 'react';
 import { useRef } from 'react';
 import DeviceOnlineRate from '../DeviceOnlineRate';
 import IntersectionInformation from '../IntersectionInformation';
-import styles from './index.module.less';
 import { useCenterStore } from '#/store/center';
 
 const IntersectionStatistics: React.FC<{ intersectionCode: string }> = ({ intersectionCode }) => {
@@ -43,8 +42,8 @@ const IntersectionStatistics: React.FC<{ intersectionCode: string }> = ({ inters
   };
 
   return (
-    <div className={styles['common-content']}>
-      <DeviceOnlineRate />
+    <>
+      <DeviceOnlineRate code={intersectionCode} />
       <IntersectionInformation code={intersectionCode} />
 
       <DisplayModal
@@ -66,7 +65,7 @@ const IntersectionStatistics: React.FC<{ intersectionCode: string }> = ({ inters
         footer={null}
         onCloseCallback={handleClearLidar}
       />
-    </div>
+    </>
   );
 };
 

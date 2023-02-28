@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC, useEffect, useState } from 'react';
 import styles from './index.module.less';
 import imgRsu from '#/assets/images/platform_rsu.svg';
@@ -9,10 +10,12 @@ import { useCenterStore } from '#/store/center';
 import classNames from 'classnames';
 import ControlTable from './ControlTable';
 import { onlineRate } from '#/services/api/center/site';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
-const DeviceOnlineRate: FC = () => {
+const DeviceOnlineRate: FC<{ code: string }> = ({ code }) => {
   const centerStore = useCenterStore();
   const [showFooterIndex, setShowFooterIndex] = useState(-1);
+  const [show, setShow] = useState(true);
   const [rateInfo, setRateInfo] = useState<Center.OnlineRateItem>({
     rsu: { online: 0, offline: 0, notRegister: 0 },
     camera: { online: 0, offline: 0, notRegister: 0 },
@@ -24,36 +27,25 @@ const DeviceOnlineRate: FC = () => {
   const fetchOnlineRate = async (rsuId?: number) => {
     const { data } = await onlineRate({
       edgeRsuId: rsuId,
-      intersectionCode: centerStore.intersectionCode,
+      intersectionCode: code,
     });
     setRateInfo(data);
   };
 
-  const clearRate = () => {
-    setRateInfo({
-      rsu: { online: 0, offline: 0, notRegister: 0 },
-      camera: { online: 0, offline: 0, notRegister: 0 },
-      radar: { online: 0, offline: 0, notRegister: 0 },
-      lidar: { online: 0, offline: 0, notRegister: 0 },
-      spat: { online: 0, offline: 0, notRegister: 0 },
-    });
-  };
-
   useEffect(() => {
-    clearRate();
-    centerStore.fetchRsus();
-    centerStore.fetchCameras();
+    centerStore.fetchRsus(code);
+    centerStore.fetchCameras(code);
     fetchOnlineRate();
     const id = setInterval(() => {
-      centerStore.fetchRsus();
+      centerStore.fetchRsus(code);
       fetchOnlineRate();
     }, 5000);
     return () => clearInterval(id);
   }, []);
 
   useEffect(() => {
-    centerStore.fetchCameras();
-    centerStore.fetchLidars();
+    centerStore.fetchCameras(code);
+    centerStore.fetchLidars(code);
   }, [centerStore.currentRSU]);
 
   const handleClickItem = (index: number) =>
@@ -71,7 +63,7 @@ const DeviceOnlineRate: FC = () => {
     1: (
       <ControlTable title={t('Camera Name')} dataName={'cameras'} onCallback={handleClickCamera} />
     ),
-    3: <ControlTable title={t('Lidar Name')} dataName={'lidars'} onCallback={handleClickLidar} />,
+    2: <ControlTable title={t('Lidar Name')} dataName={'lidars'} onCallback={handleClickLidar} />,
   };
 
   const showFooter = () => footerMap[showFooterIndex];
@@ -82,23 +74,26 @@ const DeviceOnlineRate: FC = () => {
       icon: imgRsu,
       tag: 'rsu',
       isClick: true,
+      showBadge: true,
     },
     {
       title: t('Side Camera'),
       icon: imgCamera,
       tag: 'camera',
       isClick: true,
-    },
-    {
-      title: t('Radar'),
-      icon: imgRadar,
-      tag: 'radar',
+      showBadge: true,
     },
     {
       title: t('Lidar'),
       icon: imgRadar,
       tag: 'lidar',
       isClick: true,
+      showBadge: true,
+    },
+    {
+      title: t('Radar'),
+      icon: imgRadar,
+      tag: 'radar',
     },
     {
       title: t('SPAT'),
@@ -108,45 +103,54 @@ const DeviceOnlineRate: FC = () => {
   ];
 
   return (
-    <div className={styles['d-container']}>
-      <div className={styles['device-container']}>
-        <div className={styles['device-title']}>{t('Device online rate')}</div>
-        <div className={styles['device-content']}>
-          {onlineMaps.map((map, index) => {
-            const { online = 0, offline = 0, notRegister = 0 } = rateInfo[map.tag];
-            const rate = online === 0 && offline === 0 ? 0 : (online / (online + offline)) * 100;
-            return (
-              <div key={index} className={styles['device-item']}>
-                <div className={styles['device-item-center']}>
-                  <div>{map.title}</div>
-                  <div
-                    className={classNames(
-                      styles['device-image'],
-                      map.isClick ? styles['device-image-click'] : null,
-                    )}
-                    onClick={() => map.isClick && handleClickItem(index)}
-                  >
-                    <img className={styles['device-image-icon']} src={map.icon} alt="" />
+    <div className={classNames(styles['d-container'], show ? styles.show : styles.hide)}>
+      <a className={styles['right-icon']} onClick={() => setShow(!show)}>
+        {show ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+      </a>
+      <div
+        className={classNames(styles.device, show ? styles['device-show'] : styles['device-hide'])}
+      >
+        <div className={classNames(styles['device-container'])}>
+          <div className={styles['device-title']}>{t('Device online rate')}</div>
+          <div className={styles['device-content']}>
+            {onlineMaps.map((map, index) => {
+              const { online = 0, offline = 0, notRegister = 0 } = rateInfo[map.tag];
+              console.log(`渲染的数据${map.tag}`, online, offline, rateInfo);
+              const rate = online === 0 && offline === 0 ? 0 : (online / (online + offline)) * 100;
+              return (
+                <div key={index} className={styles['device-item']}>
+                  <div className={styles['device-item-center']}>
+                    <div>{map.title}</div>
+                    <div
+                      className={classNames(
+                        styles['device-image'],
+                        map.isClick ? styles['device-image-click'] : null,
+                        map.showBadge && online + offline > 0 ? 'online' : 'offline',
+                      )}
+                      onClick={() => map.isClick && handleClickItem(index)}
+                    >
+                      <img className={styles['device-image-icon']} src={map.icon} alt="" />
+                    </div>
+                  </div>
+                  <div>
+                    {t('Online')}: {online}
+                  </div>
+                  <div>
+                    {t('Offline')}: {offline}
+                  </div>
+                  <div>
+                    {t('Not Registered')}: {notRegister}
+                  </div>
+                  <div>
+                    {t('Online rate')}:{rate}%
                   </div>
                 </div>
-                <div>
-                  {t('Online')}: {online}
-                </div>
-                <div>
-                  {t('Offline')}: {offline}
-                </div>
-                <div>
-                  {t('Not Registered')}: {notRegister}
-                </div>
-                <div>
-                  {t('Online rate')}:{rate}%
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
+        {showFooterIndex > -1 && <div className={styles['control-container']}>{showFooter()}</div>}
       </div>
-      {showFooterIndex > -1 && showFooter()}
     </div>
   );
 };

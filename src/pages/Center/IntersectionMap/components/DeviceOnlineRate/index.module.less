@@ -4,65 +4,97 @@
   right: 20px;
   width: 30vw;
 
-  .device-container {
+  .device {
     position: relative;
-    background-color: #39546f80;
     color: white;
-    padding: 5px 20px;
+    margin: 0 0 0 30px;
 
-    .device-title {
-      font-size: 1.5rem;
-      padding-top: 10px;
-    }
+    .device-container {
+      background-color: #39546f90;
+      padding: 5px 20px;
+      border-radius: 5px;
 
-    .device-content {
-      margin-top: 20px;
-      display: flex;
-      align-items: flex-start;
-      flex-direction: row;
-      overflow-x: scroll;
-    }
+      .device-title {
+        font-size: 1.5rem;
+        padding-top: 10px;
+      }
 
-    .device-item {
-      display: flex;
-      min-width: 90px;
-      margin-right: 20px;
-      flex-direction: column;
-      font-size: 12px;
-      margin-bottom: 10px;
-
-      &-center {
+      .device-content {
+        margin-top: 20px;
         display: flex;
+        align-items: flex-start;
+        flex-direction: row;
+        overflow-x: scroll;
+      }
+
+      .device-item {
+        display: flex;
+        min-width: 90px;
+        margin-right: 20px;
         flex-direction: column;
-        font-size: 16px;
+        font-size: 12px;
+        margin-bottom: 10px;
 
-        .device-image {
+        &-center {
           display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 10px 0;
-          width: 50px;
-          height: 50px;
-          border-radius: 50px;
-          background-color: #b2b4bb80;
+          flex-direction: column;
+          font-size: 16px;
 
-          &-click {
-            cursor: pointer;
-          }
+          .device-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            background-color: #b2b4bb80;
 
-          &-icon {
-            width: 30px;
+            &-click {
+              cursor: pointer;
+            }
+
+            &-icon {
+              width: 30px;
+            }
           }
         }
       }
     }
+
+    .control-container {
+      position: relative;
+      background-color: #39546f90;
+      color: white;
+      padding: 20px;
+      margin-top: 10px;
+    }
   }
 
-  .control-container {
-    position: relative;
-    background-color: #39546f80;
-    color: white;
-    padding: 0 20px;
-    margin-top: 5px;
+  .right-icon {
+    position: absolute;
+    top: 10px;
+    color: #2feeff;
+    font-size: 24px;
+  }
+
+  &.show {
+    transform: translateX(0);
+    transition: all 1s ease-in-out;
+  }
+
+  &.hide {
+    transform: translateX(calc(100% - 10px));
+    transition: all 1s ease-in-out;
+  }
+
+  .device-show {
+    visibility: visible;
+    transition: all 1s ease-in-out;
+  }
+
+  .device-hide {
+    visibility: hidden;
+    transition: all 1s ease-in-out;
   }
 }
