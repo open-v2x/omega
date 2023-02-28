@@ -8,9 +8,9 @@ const CongestionWarning: React.FC<{
 }> = ({ level, start, end }) => {
   const levelRgb = {
     0: 'transparent',
-    1: 'rgba(220, 48, 35, 0.9)',
+    1: 'rgba(255,165,0, 0.5)',
     2: 'rgba(240, 86, 84, 0.9)',
-    3: 'rgba(255,165,0, 0.5)',
+    3: 'rgba(220, 48, 35, 0.9)',
   };
 
   return (
