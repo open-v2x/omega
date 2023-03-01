@@ -1,5 +1,6 @@
 import CardList from '#/components/CardList';
 import LonLatUnit from '#/components/LonLatUnit';
+import { formatHeading, formatLength, formatSpeed } from '#/constants/direction';
 import { dataFormat } from '#/utils';
 import { ProCard } from '@ant-design/pro-components';
 import React from 'react';
@@ -23,23 +24,22 @@ const CarInfo: React.FC<{ info: Event.ICWListItem | undefined }> = ({ info = {} 
     {
       key: 'egoHeading',
       label: t('Direction Angle'),
-      render: ({ egoHeading }: Event.ICWListItem) => dataFormat(egoHeading * 0.0125, '°'),
+      render: ({ egoHeading }: Event.ICWListItem) => formatHeading(egoHeading),
     },
     {
       key: 'egoWidth',
       label: t('Vehicle Width'),
-      render: ({ egoWidth }: Event.ICWListItem) => dataFormat(egoWidth * 0.01, 'm'),
+      render: ({ egoWidth }: Event.ICWListItem) => formatLength(egoWidth),
     },
     {
       key: 'egoLength',
       label: t('Vehicle Length'),
-      render: ({ egoLength }: Event.ICWListItem) => dataFormat(egoLength * 0.01, 'm'),
+      render: ({ egoLength }: Event.ICWListItem) => formatLength(egoLength),
     },
     {
       key: 'speed',
       label: t('Speed'),
-      render: ({ egoKinematicsInfo: { speed } }: Event.ICWListItem) =>
-        dataFormat(speed * 0.02 * 3.6, 'km/h'),
+      render: ({ egoKinematicsInfo: { speed } }: Event.ICWListItem) => formatSpeed(speed),
     },
     {
       key: 'accelerate',
@@ -48,7 +48,8 @@ const CarInfo: React.FC<{ info: Event.ICWListItem | undefined }> = ({ info = {} 
         <>
           {dataFormat(accelerate * 0.02)}
           <span style={{ marginLeft: '6px' }}>
-            m/s<sup>2</sup>
+            {t('Meter')}/{t('Second')}
+            <sup>2</sup>
           </span>
         </>
       ),

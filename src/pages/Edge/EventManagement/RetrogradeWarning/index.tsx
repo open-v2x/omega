@@ -46,7 +46,7 @@ const RetrogradeWarning: React.FC = () => {
 
   return (
     <BaseContainer>
-      <BaseProTable actionRef={actionRef} columns={columns} request={getRDWList} />
+      <BaseProTable actionRef={actionRef} columns={columns} request={getRDWList} search={false} />
     </BaseContainer>
   );
 };

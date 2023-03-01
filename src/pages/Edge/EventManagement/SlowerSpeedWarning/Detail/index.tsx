@@ -3,6 +3,8 @@ import { ProCard } from '@ant-design/pro-components';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './index.module.less';
+import LonLatUnit from '#/components/LonLatUnit';
+import { formatHeading, formatLength, formatSpeed } from '#/constants/direction';
 
 const SlowerSpeedWarningDetail: React.FC = () => {
   const { state } = useLocation();
@@ -13,7 +15,7 @@ const SlowerSpeedWarningDetail: React.FC = () => {
 
   return (
     <BaseContainer back>
-      <ProCard title="基本信息" direction="column" gutter={8}>
+      <ProCard title={t('Basic Information')} direction="column" gutter={8}>
         <div className={styles['basic-line']}>
           <div>
             {t('Message ID')}: {state.id}
@@ -24,39 +26,39 @@ const SlowerSpeedWarningDetail: React.FC = () => {
         </div>
         <div className={styles['basic-line']}>
           <div>
-            {t('SensorLongtitude')}: {state.sensorPos.lon}
+            {t('SensorLongtitude')}: {<LonLatUnit data={state.sensorPos.lon} />}
           </div>
           <div>
-            {t('SensorLatitude')}: {state.sensorPos.lat}
-          </div>
-        </div>
-        <div className={styles['basic-line']}>
-          <div>
-            {t('Slower Speed Lon')}: {state.egoPos.lon}
-          </div>
-          <div>
-            {t('Slower Speed Lat')}: {state.egoPos.lat}
+            {t('SensorLatitude')}: {<LonLatUnit data={state.sensorPos.lat} />}
           </div>
         </div>
         <div className={styles['basic-line']}>
           <div>
-            {t('Speed')}: {state.speed} km/h
+            {t('Slower Speed Lon')}: {<LonLatUnit data={state.egoPos.lon} />}
           </div>
           <div>
-            {t('Heading')}: {state.heading}
-          </div>
-        </div>
-        <div className={styles['basic-line']}>
-          <div>
-            {t('Car`s Length')}: {state.length}
-          </div>
-          <div>
-            {t('Car`s Width')}: {state.width}
+            {t('Slower Speed Lat')}: {<LonLatUnit data={state.egoPos.lat} />}
           </div>
         </div>
         <div className={styles['basic-line']}>
           <div>
-            {t('Car`s Height')}: {state.height}
+            {t('Speed')}: {formatSpeed(state.speed)}
+          </div>
+          <div>
+            {t('Heading')}: {formatHeading(state.heading)}
+          </div>
+        </div>
+        <div className={styles['basic-line']}>
+          <div>
+            {t('Car`s Length')}: {formatLength(state.length)}
+          </div>
+          <div>
+            {t('Car`s Width')}: {formatLength(state.width)}
+          </div>
+        </div>
+        <div className={styles['basic-line']}>
+          <div>
+            {t('Car`s Height')}: {formatLength(state.height)}
           </div>
           <div>
             {t('Millisecond Time')}: {state.secMark}
