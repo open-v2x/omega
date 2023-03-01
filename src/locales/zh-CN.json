@@ -99,7 +99,7 @@
   "Data Sources": "数据来源",
   "Millisecond Time": "1 分钟中的毫秒级时刻",
   "Speed": "速度",
-  "Heading": "航向角",
+  "Heading": "方向角",
   "Reporting Time": "上报时间",
   "Event Classification": "事件分类",
   "Event Type": "事件类型",
@@ -514,7 +514,7 @@
   "Average Speed": "平均车速",
   "laneID": "车道号",
   "SensorLatitude": "传感器纬度",
-  "SensorLongtitude": "传感器精度",
+  "SensorLongtitude": "传感器经度",
   "The congestion start position": "拥堵的起点经纬度",
   "The congestion end position": "拥堵的终点经纬度",
   "Congestion Event Detail": "拥堵事件详情",
@@ -537,5 +537,7 @@
   "Retrograde Warning": "车辆逆行预警（RDW）",
   "Retrograde Warning Detail": "车辆逆行预警详情",
   "Retrograde Lon": "车辆逆行经度",
-  "Retrograde Lat": "车辆逆行纬度"
+  "Retrograde Lat": "车辆逆行纬度",
+  "Meter": "米",
+  "Second": "秒"
 }

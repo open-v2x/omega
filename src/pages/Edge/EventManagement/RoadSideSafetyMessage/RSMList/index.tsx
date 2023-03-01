@@ -1,10 +1,11 @@
 import BaseContainer from '#/components/BaseContainer';
 import BaseProTable from '#/components/BaseProTable';
 import LonLatUnit from '#/components/LonLatUnit';
+import { formatHeading, formatSpeed } from '#/constants/direction';
 import { DataSourceOptions, ParticipantTypeOptions } from '#/constants/edge';
 import { roadSideMessageList } from '#/services/api/event/rsm';
 import { ProColumns } from '#/typings/pro-component';
-import { dataFormat, statusOptionFormat } from '#/utils';
+import { statusOptionFormat } from '#/utils';
 import { ActionType } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import React, { useRef } from 'react';
@@ -42,12 +43,12 @@ const RSMList: React.FC = () => {
     {
       title: t('Speed'),
       dataIndex: 'speed',
-      render: (_, { speed }: Event.RSMListItem) => dataFormat(speed * 0.02 * 3.6, 'km/h'),
+      render: (_, { speed }: Event.RSMListItem) => formatSpeed(speed),
     },
     {
       title: t('Heading'),
       dataIndex: 'heading',
-      render: (_, { heading }: Event.RSMListItem) => dataFormat(heading * 0.0125, '°'),
+      render: (_, { heading }: Event.RSMListItem) => formatHeading(heading),
     },
     {
       title: t('Longitude'),

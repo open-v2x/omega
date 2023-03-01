@@ -1,5 +1,6 @@
 import BaseContainer from '#/components/BaseContainer';
 import BaseProTable from '#/components/BaseProTable';
+import LonLatUnit from '#/components/LonLatUnit';
 import { getSSWList } from '#/services/api/event/ssw';
 import { ProColumns } from '#/typings/pro-component';
 import { ActionType } from '@ant-design/pro-components';
@@ -16,12 +17,12 @@ const SlowerSpeedWarning: React.FC = () => {
     {
       title: t('Slower Speed Lat'),
       dataIndex: 'egoPos',
-      render: item => <div>{item.lat}</div>,
+      render: item => <LonLatUnit data={item.lat} />,
     },
     {
       title: t('Slower Speed Lon'),
       dataIndex: 'egoPos',
-      render: item => <div>{item.lon}</div>,
+      render: item => <LonLatUnit data={item.lon} />,
     },
     { title: t('Idea ID'), dataIndex: 'egoID' },
     { title: t('Millisecond Time'), dataIndex: 'secMark' },
@@ -45,7 +46,7 @@ const SlowerSpeedWarning: React.FC = () => {
 
   return (
     <BaseContainer>
-      <BaseProTable columns={columns} actionRef={actionRef} request={getSSWList} />
+      <BaseProTable columns={columns} actionRef={actionRef} request={getSSWList} search={false} />
     </BaseContainer>
   );
 };

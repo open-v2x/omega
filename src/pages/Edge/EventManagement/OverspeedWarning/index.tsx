@@ -1,5 +1,6 @@
 import BaseContainer from '#/components/BaseContainer';
 import BaseProTable from '#/components/BaseProTable';
+import LonLatUnit from '#/components/LonLatUnit';
 import { getOSWList } from '#/services/api/event/osw';
 import { ProColumns } from '#/typings/pro-component';
 import { ActionType } from '@ant-design/pro-components';
@@ -16,12 +17,12 @@ const OverspeedWarning: React.FC = () => {
     {
       title: t('Overspeed Lat'),
       dataIndex: 'egoPos',
-      render: item => <div>{item.lat}</div>,
+      render: item => <LonLatUnit data={item.lat} />,
     },
     {
       title: t('Overspeed Lon'),
       dataIndex: 'egoPos',
-      render: item => <div>{item.lon}</div>,
+      render: item => <LonLatUnit data={item.lon} />,
     },
     { title: t('Idea ID'), dataIndex: 'egoID' },
     { title: t('Millisecond Time'), dataIndex: 'secMark' },
@@ -44,7 +45,7 @@ const OverspeedWarning: React.FC = () => {
   ];
   return (
     <BaseContainer>
-      <BaseProTable columns={columns} actionRef={actionRef} request={getOSWList} />
+      <BaseProTable columns={columns} actionRef={actionRef} request={getOSWList} search={false} />
     </BaseContainer>
   );
 };
