@@ -1,5 +1,6 @@
 import BaseContainer from '#/components/BaseContainer';
 import BaseProTable from '#/components/BaseProTable';
+import { formatSpeed } from '#/constants/direction';
 import { CongestionLevel } from '#/constants/edge';
 import { getCGWList } from '#/services/api/event/cgw';
 import { ProColumns } from '#/typings/pro-component';
@@ -23,7 +24,7 @@ const CongestionWarning: React.FC = () => {
       valueEnum: statusOptionFormat(CongestionLevel),
     },
     { title: t('Lane Number'), dataIndex: 'laneID' },
-    { title: t('Average Speed'), dataIndex: 'avgSpeed', render: item => <div>{item} km/h</div> },
+    { title: t('Average Speed'), dataIndex: 'avgSpeed', render: speed => formatSpeed(speed) },
     { title: t('Millisecond Time'), dataIndex: 'secMark' },
     { title: t('Creation Time'), dataIndex: 'createTime' },
     {

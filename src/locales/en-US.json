@@ -536,5 +536,7 @@
   "Retrograde Warning": "Retrograde Warning",
   "Retrograde Warning Detail": "Retrograde Warning Detail",
   "Retrograde Lon": "Retrograde Lon",
-  "Retrograde Lat": "Retrograde Lat"
+  "Retrograde Lat": "Retrograde Lat",
+  "Meter": "m",
+  "Second": "s"
 }
