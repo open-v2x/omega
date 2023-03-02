@@ -11,6 +11,7 @@ const PrivateRoute: FC<RouteProps> = ({ children }) => {
   const { fetchMenus } = useMenuStore();
   const location = useLocation();
   const navigate = useNavigate();
+  console.log('navigate', location);
 
   useEffect(() => {
     fetchUserInfo();
@@ -19,13 +20,15 @@ const PrivateRoute: FC<RouteProps> = ({ children }) => {
   fetchMenus(location.pathname);
 
   const initModelDefault = async () => {
-    const { intersectionCode, mapID, nodeID } = await getModelDefault();
-    navigate(`/center/map?type=1&code=${intersectionCode}&id=${mapID}&nodeId=${nodeID}`);
+    if (location.pathname === '/center/model') {
+      const { intersectionCode, mapID, nodeID } = await getModelDefault();
+      navigate(`/center/map?type=1&code=${intersectionCode}&id=${mapID}&nodeId=${nodeID}`);
+    }
   };
 
   useEffect(() => {
     initModelDefault();
-  }, [location.pathname === '/center/model']);
+  }, [location.pathname]);
 
   return getToken() ? (
     location.pathname === '/center/model' ? (
