@@ -13,6 +13,7 @@ const PrivateRoute: FC<RouteProps> = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [init, setInit] = useState(false);
+  console.log('navigate', location);
 
   const getUserInfo = async () => {
     if (!userInfo.username) {
@@ -34,13 +35,15 @@ const PrivateRoute: FC<RouteProps> = ({ children }) => {
   }
 
   const initModelDefault = async () => {
-    const { intersectionCode, mapID, nodeID } = await getModelDefault();
-    navigate(`/center/map?type=1&code=${intersectionCode}&id=${mapID}&nodeId=${nodeID}`);
+    if (location.pathname === '/center/model') {
+      const { intersectionCode, mapID, nodeID } = await getModelDefault();
+      navigate(`/center/map?type=1&code=${intersectionCode}&id=${mapID}&nodeId=${nodeID}`);
+    }
   };
 
   useEffect(() => {
     initModelDefault();
-  }, [location.pathname === '/center/model']);
+  }, [location.pathname]);
 
   return getToken() ? (
     location.pathname === '/center/model' ? (
