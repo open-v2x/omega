@@ -48,6 +48,10 @@ const routes = [
             ),
         ),
       },
+      {
+        path: 'model',
+        component: React.lazy(() => import('#/pages/Center/IntersectionMap')),
+      },
     ],
   },
   {
@@ -374,6 +378,10 @@ const routes = [
     redirect: '/algorithm/config',
   },
   { path: '/system', redirect: 'site' },
+  {
+    path: '/center',
+    redirect: '/center/site',
+  },
 ];
 
 export default routes;
