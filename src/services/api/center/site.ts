@@ -32,3 +32,7 @@ export async function routeInfo(params: { intersectionCode: string }) {
     params,
   });
 }
+
+export async function getModelDefault() {
+  return apiService.get<Center.ModelDefault>(`v1/intersections/default/`);
+}

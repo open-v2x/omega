@@ -53,4 +53,10 @@ declare namespace Center {
     pedestrianTotal: number;
     congestion: string;
   };
+
+  type ModelDefault = {
+    intersectionCode: string;
+    mapID: number;
+    nodeID: number;
+  };
 }

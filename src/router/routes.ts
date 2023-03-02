@@ -48,6 +48,10 @@ const routes = [
             ),
         ),
       },
+      {
+        path: 'model',
+        component: React.lazy(() => import('#/pages/Center/IntersectionMap')),
+      },
     ],
   },
   {
