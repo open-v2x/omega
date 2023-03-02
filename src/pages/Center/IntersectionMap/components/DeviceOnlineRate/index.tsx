@@ -115,7 +115,6 @@ const DeviceOnlineRate: FC<{ code: string }> = ({ code }) => {
           <div className={styles['device-content']}>
             {onlineMaps.map((map, index) => {
               const { online = 0, offline = 0, notRegister = 0 } = rateInfo[map.tag];
-              console.log(`渲染的数据${map.tag}`, online, offline, rateInfo);
               const rate = online === 0 && offline === 0 ? 0 : (online / (online + offline)) * 100;
               return (
                 <div key={index} className={styles['device-item']}>
