@@ -5,6 +5,8 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 import styles from './index.module.less';
 import layoutSettings from '#/config/proLayoutSetting';
 import GlobalHeader from '#/components/Layout/GlobalHeader';
+import GlobalSetting from '#/components/GlobalSetting';
+import GlobalHint from '#/components/GlobalSetting/GlobalHint';
 
 const SiderLayout: FC = () => {
   const menuStore = useMenuStore();
@@ -96,6 +98,8 @@ const SiderLayout: FC = () => {
       >
         <Outlet />
       </ProLayout>
+      <GlobalSetting />
+      <GlobalHint />
     </div>
   );
 };
