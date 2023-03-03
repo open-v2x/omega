@@ -539,5 +539,15 @@
   "Retrograde Lon": "车辆逆行经度",
   "Retrograde Lat": "车辆逆行纬度",
   "Meter": "米",
-  "Second": "秒"
+  "Second": "秒",
+  "Creating Intersection": "创建路口",
+  "Creating Intersection Hint": "选择城市 / 区域，确定路口、经纬度。上传路口地图和对应的json 文件。",
+  "Deploy and register devices": "部署和注册设备",
+  "Deploy and register devices Hint": "线下安装部署设备到指定区域，并配置好参数，根据配置的参数将设备注册到 V2X，设备间进行关联，保证数据正常流通。\n 点击设备名称快速注册。",
+  "Configuring Site": "站点配置",
+  "Configuring Site Hint": "配置 MQTT 服务器相关信息。",
+  "Huge Screen Hint": "进入监控中心，查看小车行驶轨迹。",
+  "Creating Intersection Button": "立即创建路口",
+  "Deploy and register devices Button": "立即配置",
+  "Huge Screen Button": "立即查看"
 }

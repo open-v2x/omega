@@ -1,0 +1,148 @@
+.global-setting {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  z-index: 99999;
+  cursor: pointer;
+
+  &-icon {
+    width: 40px;
+  }
+}
+
+.global-hint {
+  background: white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99998;
+
+  &-container {
+    margin: 5% 4%;
+  }
+
+  &-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 50px;
+  }
+
+  &-cards {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-card {
+    flex: 1;
+    position: relative;
+    border: 1px solid #f2f2f2;
+    border-top: 3px solid #7db4dd;
+    padding-top: 25px;
+    margin-right: 20px;
+    height: 290px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &-number-container {
+      position: absolute;
+      left: 60px;
+      top: -24px;
+      z-index: 9000;
+      border-radius: 57px;
+      background: white;
+      padding: 0 10px;
+    }
+
+    &-number {
+      width: 47px;
+      height: 47px;
+      border-radius: 47px;
+      border: 3px solid #7db4dd;
+      text-align: center;
+      line-height: 40px;
+      font-size: 15px;
+    }
+
+    &-content {
+      height: 90%;
+
+      :global {
+        .ant-steps-item-title {
+          font-size: 12px;
+        }
+      }
+    }
+
+    &-btn {
+      text-align: center;
+      font-size: 12px;
+
+      &-f {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+
+        &-item {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+
+          &:hover {
+            color: #428FC0;
+            font-weight: 700;
+          }
+
+          > img {
+            width: 20px;
+            height: 20px;
+            margin-bottom: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes change-open {
+  from {
+    opacity: 0;
+    display: block;
+    z-index: 99998;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes change-close {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    display: none;
+    z-index: -11111;
+  }
+}
+
+.show {
+  animation: change-open 0.5s ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+.hidden {
+  animation: change-close 0.5s ease-out;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
