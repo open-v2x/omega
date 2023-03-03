@@ -538,5 +538,15 @@
   "Retrograde Lon": "Retrograde Lon",
   "Retrograde Lat": "Retrograde Lat",
   "Meter": "m",
-  "Second": "s"
+  "Second": "s",
+  "Creating Intersection": "Creating Intersection",
+  "Creating Intersection Hint": "Selecting a city/area, determine the intersection, latitude and longitude. Upload the intersection map and the corresponding json file.",
+  "Deploy and register devices": "Deploy and register devices",
+  "Deploy and register devices Hint": "Install and deploy the device offline to the designated area, configure the parameters, and register the device to V2X according to the configured parameters. Device inter-progress row association to ensure the normal flow of data. \n Click on device name and quickly start",
+  "Configuring Site": "Configuring Site",
+  "Configuring Site Hint": "Configuring information about the MQTT server.",
+  "Huge Screen Hint": "Enter the monitoring center to view the driving track of the car.",
+  "Creating Intersection Button": "Quickly Start",
+  "Deploy and register devices Button": "Quickly Start",
+  "Huge Screen Button": "Quickly Start"
 }
