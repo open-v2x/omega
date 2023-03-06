@@ -546,7 +546,8 @@
   "Configuring Site": "Configuring Site",
   "Configuring Site Hint": "Configuring information about the MQTT server.",
   "Huge Screen Hint": "Enter the monitoring center to view the driving track of the car.",
-  "Creating Intersection Button": "Quickly Start",
-  "Deploy and register devices Button": "Quickly Start",
-  "Huge Screen Button": "Quickly Start"
+  "Creating Intersection Button": "Quickly Start.",
+  "Deploy and register devices Button": "Quickly Start.",
+  "Huge Screen Button": "Quickly Start.",
+  "Service guidance": "Service guidance"
 }
