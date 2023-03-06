@@ -7,10 +7,13 @@ import layoutSettings from '#/config/proLayoutSetting';
 import GlobalHeader from '#/components/Layout/GlobalHeader';
 import GlobalSetting from '#/components/GlobalSetting';
 import GlobalHint from '#/components/GlobalSetting/GlobalHint';
+import classNames from 'classnames';
+import { useRootStore } from '#/store/root';
 
 const SiderLayout: FC = () => {
   const menuStore = useMenuStore();
   const navigate = useNavigate();
+  const showHint = useRootStore(state => state.showHint);
 
   const toggle = () => {
     menuStore.toggle = !menuStore.toggle;
@@ -45,10 +48,10 @@ const SiderLayout: FC = () => {
   }, [menuStore.menus]);
 
   return (
-    <>
+    <div className={styles['layout-container']}>
       <ProLayout
         {...layoutSettings}
-        className={styles['layout-content']}
+        className={classNames(styles['layout-content'], showHint ? styles['layout-hidden'] : '')}
         onCollapse={toggle}
         siderWidth={246}
         menuDataRender={() => menuStore.menus}
@@ -98,7 +101,7 @@ const SiderLayout: FC = () => {
       </ProLayout>
       <GlobalSetting />
       <GlobalHint />
-    </>
+    </div>
   );
 };
 
