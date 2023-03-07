@@ -3,7 +3,7 @@ import { ProCard } from '@ant-design/pro-components';
 import React, { useCallback, useEffect, useState } from 'react';
 import styles from './index.module.less';
 import { useParams } from 'react-router-dom';
-import { getBitmap } from '#/services/api/config/map';
+import { getBitmap } from '#/services/api/config/crossing';
 
 const BitmapPreview: React.FC = () => {
   const [imageUrl, setImageUrl] = useState('');

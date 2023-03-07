@@ -7,10 +7,12 @@ import { ProColumns } from '#/typings/pro-component';
 import { ActionType } from '@ant-design/pro-components';
 import { Button, Divider } from 'antd';
 import React, { FC, useRef } from 'react';
-import CreateCrossingModal from '../component/CreateCrossingModal';
+import CreateCrossingModal from '../components/CreateCrossingModal';
+import { useNavigate } from 'react-router';
 
 const Crossing: FC = () => {
   const actionRef = useRef<ActionType>();
+  const navigate = useNavigate();
   const columns: ProColumns<Config.CrossingItem>[] = [
     {
       title: t('Crossing Name'),
@@ -39,15 +41,30 @@ const Crossing: FC = () => {
     },
     {
       title: t('Operate'),
-      width: 220,
+      width: 280,
       fixed: 'right',
       render: (_, row) => [
+        <Button type="link" size="small" key="enter">
+          {t('Enter the intersection')}
+        </Button>,
+        <Divider key="enter-divider" type="vertical" />,
         <CreateCrossingModal
           key="edit"
           editInfo={row}
           success={() => actionRef.current?.reload()}
         />,
         <Divider key="edit-divider" type="vertical" />,
+        <Button
+          type="link"
+          size="small"
+          key="detail"
+          onClick={() => {
+            navigate(`/maintenance/crossing/details/${row.id}`);
+          }}
+        >
+          {t('Details')}
+        </Button>,
+        <Divider key="detail-divider" type="vertical" />,
         <Button
           type="link"
           size="small"

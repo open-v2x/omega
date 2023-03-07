@@ -1,19 +1,16 @@
 import React from 'react';
 import { Button } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
 import { CreateModalProps, FormGroupType } from '#/typings/pro-component';
 import { useRequestStore } from '#/store/request';
 import Modal from '../Modal';
-import { createMapRSU } from '#/services/api/config/map';
 import { copyMaintenanceConfig } from '#/services/api/config/maintenance';
 import FormItem from '../FormItem';
 
 type CreateSendModalProps = CreateModalProps & {
-  type: 'map' | 'rsu';
   id: number;
 };
 
-const CreateSendModal: React.FC<CreateSendModalProps> = ({ type, id, success }) => {
+const CreateSendModal: React.FC<CreateSendModalProps> = ({ id, success }) => {
   const { fetchDeviceListInModal } = useRequestStore();
   const formItems: FormGroupType[] = [
     {
@@ -33,24 +30,20 @@ const CreateSendModal: React.FC<CreateSendModalProps> = ({ type, id, success }) 
   ];
   return (
     <Modal
-      title={type === 'map' ? t('Add the issued RSU') : t('Copy configuration')}
+      title={t('Copy configuration')}
       trigger={
-        <Button
-          id="sendRSU"
-          icon={type === 'map' ? <PlusOutlined /> : ''}
-          type={type === 'map' ? 'primary' : 'link'}
-        >
-          {type === 'map' ? t('Down') : t('Copy')}
+        <Button id="sendRSU" type={'link'}>
+          {t('Copy')}
         </Button>
       }
       width={500}
       modalProps={{ maskClosable: false }}
       submitForm={async values => {
-        await { map: createMapRSU, rsu: copyMaintenanceConfig }[type]?.(id, values);
+        await copyMaintenanceConfig(id, values);
         success();
       }}
       successMsg={t('{{value}} successfully', {
-        value: type === 'map' ? t('Delivered') : t('Copy configuration'),
+        value: t('Copy configuration'),
       })}
     >
       <FormItem items={formItems} />
