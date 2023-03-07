@@ -1,20 +1,20 @@
-import { CreateModalProps, FormGroupType } from '#/typings/pro-component';
-import { Button, Form, message, Upload } from 'antd';
-import React, { useState } from 'react';
-import { UploadChangeParam } from 'antd/lib/upload';
-import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
 import Country from '#/components/Country';
-import { CloudUploadOutlined, LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import Modal from '#/components/Modal';
 import FormItem from '#/components/FormItem';
+import Modal from '#/components/Modal';
+import { LatReg, LngReg } from '#/constants/edge';
 import {
-  createMapConfig,
+  createCrossing,
+  fetchCrossing,
   getBitData,
   getBitmap,
-  mapConfigInfo,
-  updateMapConfig,
+  updateCrossing,
   uploadBitmap,
-} from '#/services/api/config/map';
+} from '#/services/api/config/crossing';
+import { CreateModalProps, FormGroupType } from '#/typings/pro-component';
+import { CloudUploadOutlined, LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, Form, message } from 'antd';
+import Upload, { RcFile, UploadChangeParam, UploadFile, UploadProps } from 'antd/lib/upload';
+import React, { FC, useState } from 'react';
 
 // MAP 数据文件上传组件的 label 属性
 const UploadLabel: React.FC = () => (
@@ -27,8 +27,11 @@ const UploadLabel: React.FC = () => (
   </div>
 );
 
-const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) => {
+const CreateCrossingModal: FC<CreateModalProps> = ({ editInfo, success }) => {
   const [mapData, setMapData] = useState<Record<string, any> | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string>();
+  const [bitmapName, setBitmapName] = useState('');
 
   // MAP 数据文件上传的 upload 组件属性
   const UploadFieldProps = {
@@ -68,10 +71,6 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
     return isJpgOrPng && isLt2M;
   };
 
-  const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string>();
-  const [bitmapName, setBitmapName] = useState('');
-
   const handleChange: UploadProps['onChange'] = (info: UploadChangeParam<UploadFile>) => {
     if (info.file.status === 'uploading') {
       setLoading(true);
@@ -89,7 +88,7 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
+      <div style={{ marginTop: 8 }}>{t('Upload')}</div>
     </div>
   );
 
@@ -110,38 +109,52 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
   };
 
   const normFile = (e: any) => {
-    console.log('Upload event:', e);
     if (Array.isArray(e)) {
       return e;
     }
     return e?.fileList;
   };
 
-  const formItem: FormGroupType[] = [
+  const formItems: FormGroupType[] = [
     {
-      key: 'name',
+      key: 'crossing',
       children: [
         {
           required: true,
           name: 'name',
-          label: t('MAP Name'),
-          fieldProps: { maxLength: 64 },
+          label: t('Crossing Name'),
+          tooltip: t('RSU_NAME_TIP'),
           rules: [
-            { required: true, message: t('Please enter a MAP name') },
+            { required: true, message: t('Please enter the intersection name') },
             { pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_\-]+$/, message: t('RSU_NAME_VALIDATE_MSG') },
           ],
         },
         {
-          name: 'province',
           required: true,
+          name: 'code',
+          label: t('Crossing Code'),
+          tooltip: t('SERIAL_NUMBER_TIP'),
+          rules: [
+            { required: true, message: t('Please enter the intersection code') },
+            { pattern: /^[a-zA-Z0-9_]+$/, message: t('SERIAL_NUMBER_VALIDATE_MSG') },
+          ],
+        },
+      ],
+    },
+    {
+      key: 'area',
+      children: [
+        {
+          required: true,
+          name: 'province',
           components: (
             <Country
-              key="province"
+              key="area"
               required
               width="lg"
-              label={t('Installation Area')}
+              label={t('Crossing Area')}
               name="province"
-              params={{ cascade: true, needIntersection: true }}
+              params={{ cascade: true, needIntersection: false }}
               rules={[{ required: true, message: t('Please select an installation area') }]}
             />
           ),
@@ -149,14 +162,25 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
       ],
     },
     {
-      key: 'desc',
+      key: 'longitude',
       children: [
         {
-          type: 'textarea',
-          width: 912,
-          name: 'desc',
-          label: t('Describe'),
-          fieldProps: { autoSize: { minRows: 3, maxRows: 5 } },
+          required: true,
+          name: 'lng',
+          label: t('Longitude'),
+          rules: [
+            { required: true, message: t('Please enter longitude') },
+            { pattern: LngReg, message: t('Incorrect longitude format') },
+          ],
+        },
+        {
+          required: true,
+          name: 'lat',
+          label: t('Latitude'),
+          rules: [
+            { required: true, message: t('Please enter latitude') },
+            { pattern: LatReg, message: t('Incorrect latitude format') },
+          ],
         },
       ],
     },
@@ -165,11 +189,13 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
       children: [
         {
           type: 'uploadButton',
-          required: editId ? false : true,
+          required: editInfo?.id ? false : true,
           width: 912,
           name: 'data',
           label: <UploadLabel />,
-          rules: [{ required: editId ? false : true, message: t('Please upload a MAP data file') }],
+          rules: [
+            { required: editInfo?.id ? false : true, message: t('Please upload a MAP data file') },
+          ],
           fieldProps: UploadFieldProps,
           title: t('Upload files'),
           icon: <CloudUploadOutlined />,
@@ -184,13 +210,16 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
           components: (
             <Form.Item
               key="bitmap"
-              required={editId ? false : true}
+              required={editInfo?.id ? false : true}
               name={'bitmapFilename'}
               valuePropName="fileList"
               getValueFromEvent={normFile}
               label={t('Upload Bitmap')}
               rules={[
-                { required: editId ? false : true, message: t('Please upload a Bitmap image') },
+                {
+                  required: editInfo?.id ? false : true,
+                  message: t('Please upload a Bitmap image'),
+                },
               ]}
             >
               <Upload
@@ -217,55 +246,47 @@ const CreateMapConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
 
   return (
     <Modal
-      title={editId ? t('Edit MAP configuration') : t('Add MAP configuration')}
-      createTrigger={t('Add MAP')}
-      submitForm={async ({ province, ...values }) => {
-        values.intersectionCode = province!.pop()!;
+      title={editInfo ? t('Edit Crossing') : t('Create Crossing')}
+      createTrigger={t('Add Crossing')}
+      modalProps={{ className: 'overflow' }}
+      submitForm={async ({ province, ...values }: Config.CreateCrossingParams) => {
+        values.areaCode = province.pop()!;
         if (mapData) {
-          values.data = mapData;
+          values.mapData = mapData;
         }
         if (bitmapName) {
           values.bitmapFilename = bitmapName;
         }
-        if (editId) {
-          await updateMapConfig(editId, values);
+        if (editInfo) {
+          await updateCrossing(editInfo.id, values);
         } else {
-          await createMapConfig(values);
+          await createCrossing(values);
         }
         success();
       }}
-      editId={editId}
+      editId={editInfo?.id}
       request={async ({ id }) => {
-        const data = await mapConfigInfo(id);
+        const info = await fetchCrossing(id);
         const bitmap = await getBitmap(id);
         const bitData = await getBitData(id);
         let blob = new Blob([bitmap], { type: 'image/jpeg' });
         const bitmapUrl = window.URL.createObjectURL(blob);
         setImageUrl(bitmapUrl);
         setMapData(bitData);
-        const {
-          name,
-          areaCode,
-          address,
-          desc,
-          countryCode,
-          provinceCode,
-          intersectionCode,
-          cityCode,
-        } = data;
+
+        const { provinceCode, countryCode, cityCode, areaCode, ...rest } = info;
+        const province = [countryCode!, provinceCode!, cityCode!, areaCode];
+
         return {
-          name,
-          areaCode,
-          address,
-          desc,
+          province,
           data: bitData ? [{ uid: '1', name: 'map_data.json', status: 'done' }] : null,
-          province: [countryCode, provinceCode, cityCode, areaCode, intersectionCode],
+          ...rest,
         };
       }}
     >
-      <FormItem items={formItem} />
+      <FormItem items={formItems} />
     </Modal>
   );
 };
 
-export default CreateMapConfigModal;
+export default CreateCrossingModal;

@@ -140,32 +140,22 @@ const routes = [
     auth: true,
     children: [
       {
-        path: 'map',
+        path: 'crossing/details/:id',
         component: React.lazy(
           () =>
             import(
-              /* webpackChunkName: "edge_maintenance_map",webpackPrefetch: true */
-              '#/pages/Edge/MaintenanceManagement/MapConfig/ConfigList'
+              /* webpackChunkName: "edge_maintenance_crossing_detail",webpackPrefetch: true */
+              '#/pages/Edge/MaintenanceManagement/Crossing/Detail'
             ),
         ),
       },
       {
-        path: 'map/details/:id',
+        path: 'crossing/preview/:id',
         component: React.lazy(
           () =>
             import(
-              /* webpackChunkName: "edge_maintenance_map_detail",webpackPrefetch: true */
-              '#/pages/Edge/MaintenanceManagement/MapConfig/ConfigDetail'
-            ),
-        ),
-      },
-      {
-        path: 'map/preview/:id',
-        component: React.lazy(
-          () =>
-            import(
-              /* webpackChunkName: "edge_maintenance_map_preview",webpackPrefetch: true */
-              '#/pages/Edge/MaintenanceManagement/MapConfig/ConfigPreview'
+              /* webpackChunkName: "edge_maintenance_crossing_preview",webpackPrefetch: true */
+              '#/pages/Edge/MaintenanceManagement/Crossing/Preview'
             ),
         ),
       },
@@ -175,7 +165,7 @@ const routes = [
           () =>
             import(
               /* webpackChunkName: "edge_maintenance_bitmap_preview",webpackPrefetch: true */
-              '#/pages/Edge/MaintenanceManagement/MapConfig/ConfigPreview/BitmapPreview'
+              '#/pages/Edge/MaintenanceManagement/Crossing/Preview/BitmapPreview'
             ),
         ),
       },

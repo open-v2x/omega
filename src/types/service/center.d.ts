@@ -56,7 +56,7 @@ declare namespace Center {
 
   type ModelDefault = {
     intersectionCode: string;
-    mapID: number;
+    intersectionID: number;
     nodeID: number;
   };
 }

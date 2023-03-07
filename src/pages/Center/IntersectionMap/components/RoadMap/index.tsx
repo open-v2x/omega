@@ -2,31 +2,24 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.module.less';
 import imgMapBg from '#/assets/images/map_bg.jpg';
 import RoadImage from './RoadImage';
-import { getBitmap, mapConfigList } from '#/services/api/config/map';
 import { PageLoading } from '@ant-design/pro-components';
+import { getBitmap } from '#/services/api/config/crossing';
 
-const RoadMap: React.FC<{ nodeId: string; intersectionCode: string }> = ({
+const RoadMap: React.FC<{ nodeId: string; intersectionCode: string; id: string }> = ({
   nodeId,
   intersectionCode,
+  id,
 }) => {
   const [imageUrl, setImageUrl] = useState('');
   const [loading, setLoading] = useState(true);
 
   const fetchMapBg = async () => {
     try {
-      const result = await mapConfigList({
-        pageNum: 1,
-        pageSize: 1,
-        intersectionCode,
-      });
-      if (result.total > 0) {
-        const { id } = result.data[0];
-        const bitmap = await getBitmap(id);
-        if (bitmap) {
-          let blob = new Blob([bitmap], { type: 'image/jpeg' });
-          const bitmapUrl = window.URL.createObjectURL(blob);
-          setImageUrl(bitmapUrl);
-        }
+      const bitmap = await getBitmap(id);
+      if (bitmap) {
+        let blob = new Blob([bitmap], { type: 'image/jpeg' });
+        const bitmapUrl = window.URL.createObjectURL(blob);
+        setImageUrl(bitmapUrl);
       }
     } catch (error) {
       setImageUrl('');
@@ -37,7 +30,7 @@ const RoadMap: React.FC<{ nodeId: string; intersectionCode: string }> = ({
 
   useEffect(() => {
     fetchMapBg();
-  }, [intersectionCode]);
+  }, [id]);
 
   return loading ? (
     <PageLoading />

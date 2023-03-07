@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import BaseContainer from '#/components/BaseContainer';
-import { downloadMapConfig } from '#/services/api/config/map';
 import { ProCard } from '@ant-design/pro-components';
 import { Stage, Layer, Rect, Line, Group } from 'react-konva';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './index.module.less';
+import { getBitData } from '#/services/api/config/crossing';
 
 const canvasWidth = window.innerWidth - 256 - 40;
 const canvasHeight = window.innerHeight - 52 - 72 - 40;
@@ -156,7 +156,7 @@ const LaneMap: React.FC<LaneMapProps> = ({ laneNumbers, laneWidths }) => {
   );
 };
 
-const ConfigPreview: React.FC = () => {
+const CrossingPreview: React.FC = () => {
   const naviagte = useNavigate();
   const params = useParams();
   const [data, setData] = useState<any>();
@@ -166,7 +166,7 @@ const ConfigPreview: React.FC = () => {
   }
 
   const fetchMapConfig = async () => {
-    const result = await downloadMapConfig(+params.id);
+    const result = await getBitData(+params.id);
     setData(result?.nodes);
   };
 
@@ -211,4 +211,4 @@ const ConfigPreview: React.FC = () => {
   );
 };
 
-export default ConfigPreview;
+export default CrossingPreview;

@@ -30,14 +30,14 @@ const SiderLayout: FC = () => {
 
   const renderRelatedMenus = () => (
     <div className={styles['related-container']}>
-      <div className={styles['related-container-title']}>关联菜单</div>
+      <div className={styles['related-container-title']}>{t('Related Menus')}</div>
       {menuStore.relatedMenus.map(related => (
         <div
           key={related.path}
           className={styles['related-item']}
           onClick={() => handleToRelated(related)}
         >
-          {related.name}
+          {t(related.name)}
         </div>
       ))}
     </div>

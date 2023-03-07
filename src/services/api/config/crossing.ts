@@ -1,5 +1,6 @@
 import { IResponseListData } from '#/types/service/responseData';
 import { apiService } from '#/services/BaseService';
+import { RcFile } from 'antd/lib/upload';
 
 // 获取路口列表
 export async function fetchCrossingList({
@@ -32,4 +33,29 @@ export async function deleteCrossing(id: number) {
 // 路口详情
 export async function fetchCrossing(id: number) {
   return apiService.get<Config.CrossingItem>(`v1/intersections/${id}`);
+}
+
+// 上传 Bitmap 位图
+export async function uploadBitmap(bitmap: RcFile) {
+  return apiService.post<any>(
+    `v1/intersections/bitmap`,
+    { bitmap },
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    },
+  );
+}
+
+// 获取 Bitmap 位图
+export async function getBitmap(id: number) {
+  return apiService.get<any>(`v1/intersections/${id}/bitmap`, {
+    responseType: 'blob',
+  });
+}
+
+// 获取 Bit Data
+export async function getBitData(id: number) {
+  return apiService.get<any>(`v1/intersections/${id}/data`);
 }
