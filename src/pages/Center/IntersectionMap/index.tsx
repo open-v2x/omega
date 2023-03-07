@@ -18,7 +18,7 @@ const IntersectionMap: React.FC = () => {
       {
         <div>
           {type === '1' && (
-            <RoadMap intersectionCode={intersectionCode} nodeId={nodeId as string} />
+            <RoadMap intersectionCode={intersectionCode} id={id} nodeId={nodeId as string} />
           )}
           {type === '2' && <RoadMapXml id={id as string} />}
           <IntersectionStatistics intersectionCode={intersectionCode} />

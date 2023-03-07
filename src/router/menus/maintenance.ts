@@ -4,15 +4,6 @@ export const maintenanceMenu = {
   icon: 'icon-maintain',
   children: [
     {
-      path: '/maintenance/map',
-      name: 'MAP Config',
-    },
-    {
-      path: '/maintenance/map/details/:id',
-      name: 'MAP Details',
-      hideInMenu: true,
-    },
-    {
       path: '/maintenance/map/preview/:id',
       name: 'MAP Preview',
       hideInMenu: true,

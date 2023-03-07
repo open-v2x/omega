@@ -12,31 +12,6 @@ declare namespace Config {
     provinceCode?: string; // 安装位置-省
     cityCode?: string; // 安装位置-市
   };
-  type MapListItem = MapItem & {
-    id: number;
-    countryName: string; // MAP 区域-国家
-    countryCode: string; //
-    provinceName: string; // MAP 区域-省
-    provinceCode: string;
-    intersectionCode: string;
-    intersectionName: string;
-    areaName: string; // MAP 区域-市
-    cityName: string; // MAP 区域-区
-    cityCode: string;
-    status: boolean; // 下发状态
-    amount: number; // 下发 RSU 数量
-    number: number; // 下发 RSU 数量
-    createTime: string;
-  };
-  type MapRSUListItem = {
-    id: number;
-    rsuName: string;
-    rsuSn: string;
-    onlineStatus: boolean;
-    rsuStatus: boolean;
-    deliveryStatus: number;
-    createTime: string;
-  };
 
   type RSM<T> = {
     upLimit: number; // 上行转发上限
@@ -164,6 +139,8 @@ declare namespace Config {
     lng: string;
     areaCode: string;
     province?: string[];
+    mapData: any;
+    bitmapFilename: string;
   };
 
   type CrossingItem = CreateCrossingParams & {
