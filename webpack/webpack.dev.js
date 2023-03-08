@@ -29,11 +29,19 @@ const config = {
     allowedHosts: 'all',
     hot: true,
     proxy: {
-      '/api/omega': {
-        target: 'http://47.100.126.13:28300/api',
+      '/api/omega/edge': {
+        // target: 'http://47.100.126.13:28300/api',
+        target: 'http://150.158.47.136:2288',
         changeOrigin: true,
         logLevel: 'debug',
-        pathRewrite: { '^/api/omega': '' },
+        // pathRewrite: { '^/api/omega/edge': '' },
+      },
+      '/api/omega/center': {
+        // target: 'http://47.100.126.13:28300/api',
+        target: 'http://150.158.47.136:2288',
+        changeOrigin: true,
+        logLevel: 'debug',
+        // pathRewrite: { '^/api/omega/center': '' },
       },
     },
     devMiddleware: {

@@ -49,13 +49,13 @@ export async function uploadBitmap(bitmap: RcFile) {
 }
 
 // 获取 Bitmap 位图
-export async function getBitmap(id: number) {
-  return apiService.get<any>(`v1/intersections/${id}/bitmap`, {
+export async function getBitmap(id: number | string) {
+  return apiService.getBlob<any>(`v1/intersections/${id}/bitmap`, {
     responseType: 'blob',
   });
 }
 
 // 获取 Bit Data
-export async function getBitData(id: number) {
+export async function getBitData(id: number | string) {
   return apiService.get<any>(`v1/intersections/${id}/data`);
 }

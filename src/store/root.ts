@@ -6,6 +6,8 @@ interface IRootStore {
   history: BrowserHistory;
   showHint: boolean;
   reverseShowHint: () => void;
+  edgeSiteIP: string;
+  setEdgeSiteIP: (ip: string) => void;
 }
 
 const useRootStore = create<IRootStore>((set, get) => ({
@@ -17,6 +19,11 @@ const useRootStore = create<IRootStore>((set, get) => ({
       showHint: !get().showHint,
     });
   },
+  edgeSiteIP: '150.158.47.136',
+  setEdgeSiteIP: (ip: string) =>
+    set({
+      edgeSiteIP: ip,
+    }),
 }));
 
 export { useRootStore };
