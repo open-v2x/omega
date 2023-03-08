@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.module.less';
-import imgMapBg from '#/assets/images/map_bg.jpg';
 import RoadImage from './RoadImage';
 import { PageLoading } from '@ant-design/pro-components';
 import { getBitmap } from '#/services/api/config/crossing';
@@ -37,7 +36,7 @@ const RoadMap: React.FC<{ nodeId: string; intersectionCode: string; id: string }
   ) : (
     <div className={styles['map-wrapper']}>
       <div className={styles.box}>
-        <img className={styles['box-map']} src={imageUrl ? imageUrl : imgMapBg} alt="" />
+        {imageUrl && <img className={styles['box-map']} src={imageUrl} alt="" />}
         <RoadImage nodeId={nodeId} intersectionCode={intersectionCode} />
       </div>
     </div>
