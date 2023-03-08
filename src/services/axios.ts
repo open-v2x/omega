@@ -44,7 +44,6 @@ axiosInstance.interceptors.response.use(
 );
 
 export function setAuthorization(token) {
-  console.log('request:setAuthorization', token);
   axiosInstance.defaults.headers.Authorization = token;
 }
 
@@ -68,12 +67,13 @@ export function put<T>(url: string, data: any, config?: AxiosRequestConfig): Pro
   return axiosInstance.put<T>(url, data, config).then((res: any) => res);
 }
 
-export function getBlob(url: string): Promise<Blob> {
-  return axios
-    .get(url, {
-      responseType: 'blob',
-    })
-    .then(res => res.data);
+export function getBlob<T>(url: string, config?: AxiosRequestConfig): Promise<Blob> {
+  return axiosInstance.get<T>(url, config).then((res: any) => res);
+  // return axios
+  //   .get(url, {
+  //     responseType: 'blob',
+  //   })
+  //   .then(res => res.data);
 }
 
 export default axiosInstance;

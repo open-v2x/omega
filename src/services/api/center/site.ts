@@ -1,9 +1,10 @@
 import { IResponseListData } from '#/types/service/responseData';
 import { apiService } from '#/services/BaseService';
 // 站点列表
-export async function edgeSiteList(params: Center.EdgeSiteSearch) {
+export async function edgeSiteList(params: Center.EdgeSiteSearch, isCenter: boolean = false) {
   return apiService.get<IResponseListData<Center.EdgeSiteItem>>(`v1/edge_nodes`, {
     params,
+    isCenter,
   });
 }
 

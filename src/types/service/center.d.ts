@@ -8,6 +8,7 @@ declare namespace Center {
   type EdgeSiteItem = {
     id: number;
     name: string;
+    ip: string;
   };
 
   type DeviceListItem = {
