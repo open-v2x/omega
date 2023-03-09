@@ -31,10 +31,9 @@ export default class BaseService {
   }
 
   getFullPath = (path: string, config: any = {}) => {
-    console.log('edgeSite', useRootStore.getState().edgeSiteIP);
     const { isCenter = false, params = undefined } = config;
-    if (isCenter) return `${this.baseUrl}/center/${path}`;
     const ip = useRootStore.getState().edgeSiteIP;
+    if (isCenter || !ip) return `${this.baseUrl}/center/${path}`;
     const edge = `${this.baseUrl}/edge/${ip}:28300/api/${path}`;
     const url = this.handleGetUrl('', params);
     return url ? `${edge}${url}` : edge;
