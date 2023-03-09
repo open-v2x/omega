@@ -19,7 +19,7 @@ const useRootStore = create<IRootStore>((set, get) => ({
       showHint: !get().showHint,
     });
   },
-  edgeSiteIP: '150.158.47.136',
+  edgeSiteIP: '',
   setEdgeSiteIP: (ip: string) =>
     set({
       edgeSiteIP: ip,
