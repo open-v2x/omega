@@ -31,11 +31,11 @@ export default class BaseService {
   }
 
   getFullPath = (path: string, config: any = {}) => {
+    console.log('edgeSite', useRootStore.getState().edgeSiteIP);
     const { isCenter = false, params = undefined } = config;
     if (isCenter) return `${this.baseUrl}/center/${path}`;
     const ip = useRootStore.getState().edgeSiteIP;
     const edge = `${this.baseUrl}/edge/${ip}:28300/api/${path}`;
-    console.log('边缘', edge);
     const url = this.handleGetUrl('', params);
     return url ? `${edge}${url}` : edge;
   };
@@ -51,19 +51,19 @@ export default class BaseService {
       : get<T>(this.getFullPath(path, config));
 
   post = <T>(path: string, data: any = {}, config?: MyAxiosRequestConfig): Promise<T> =>
-    post<T>(this.getFullPath(path, config?.isCenter), data, config);
+    post<T>(this.getFullPath(path, config), data, config);
 
   patch = <T>(path: string, data: any, config?: MyAxiosRequestConfig): Promise<T> =>
-    patch<T>(this.getFullPath(path, config?.isCenter), data, config);
+    patch<T>(this.getFullPath(path, config), data, config);
 
   delete = <T>(path: string, config?: MyAxiosRequestConfig): Promise<T> =>
-    deletE<T>(this.getFullPath(path, config?.isCenter), config);
+    deletE<T>(this.getFullPath(path, config), config);
 
   put = <T>(path: string, data: any, config?: MyAxiosRequestConfig): Promise<T> =>
-    put<T>(this.getFullPath(path, config?.isCenter), data, config);
+    put<T>(this.getFullPath(path, config), data, config);
 
   getBlob = <T>(path: string, config?: MyAxiosRequestConfig): Promise<Blob> =>
-    getBlob<T>(this.getFullPath(path, config?.isCenter), config);
+    getBlob<T>(this.getFullPath(path, config), config);
 }
 
 export const apiService = new BaseService(apiConfig.API_SERVER);
