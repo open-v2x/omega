@@ -1,5 +1,4 @@
 import { SelectLang } from '#/components/SelectLang';
-import { ProBreadcrumb } from '@ant-design/pro-components';
 import React, { useEffect, useState } from 'react';
 import AvatarDropdown from './AvatarDropDown';
 import styles from './index.module.less';
@@ -10,11 +9,13 @@ import { useRootStore } from '#/store/root';
 
 export default function RightContent() {
   const [siteList, setSiteList] = useState([]);
-  const ip = useRootStore(state => state.edgeSiteIP);
-  const { setEdgeSiteIP } = useRootStore();
+  const ip = useRootStore(state => state.edgeSite.ip);
+  const { setEdgeSite, setReload } = useRootStore();
 
-  const handleChange = value => {
-    setEdgeSiteIP(value);
+  const handleChange = (selectIP: string) => {
+    const edge = siteList.find(e => e.ip === selectIP);
+    setEdgeSite(edge);
+    setReload(true);
   };
 
   const renderRegion = () => (
@@ -46,7 +47,7 @@ export default function RightContent() {
       true,
     );
     if (total > 0) {
-      setEdgeSiteIP(data[0].ip);
+      setEdgeSite(data[0]);
     }
     setSiteList(data);
   };
@@ -58,7 +59,6 @@ export default function RightContent() {
   return (
     <div className={styles['header-content']}>
       {renderRegion()}
-      <ProBreadcrumb />
       <div className={styles['header-right']}>
         <AvatarDropdown />
         <div className={styles.action}>

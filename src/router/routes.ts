@@ -17,21 +17,14 @@ const routes = [
   },
   {
     path: '/center',
+    breadcrumbName: 'Monitoring Overview',
     component: React.lazy(() => import('#/layouts/SiderLayout')),
     layout: true,
     auth: true,
     children: [
       {
-        path: 'site',
-        component: React.lazy(
-          () =>
-            import(
-              /* webpackChunkName: "center_site",webpackPrefetch: true */ '#/pages/Center/Site'
-            ),
-        ),
-      },
-      {
         path: 'cloud',
+        breadcrumbName: 'Monitoring Overview',
         component: React.lazy(
           () =>
             import(
@@ -48,10 +41,6 @@ const routes = [
             ),
         ),
       },
-      {
-        path: 'model',
-        component: React.lazy(() => import('#/pages/Center/IntersectionMap')),
-      },
     ],
   },
   {
@@ -59,9 +48,11 @@ const routes = [
     component: React.lazy(() => import('#/layouts/SiderLayout')),
     layout: true,
     auth: true,
+    breadcrumbName: 'Device',
     children: [
       {
-        path: 'rsu',
+        path: '/device/rsu',
+        breadcrumbName: 'RSU Device',
         component: React.lazy(
           () =>
             import(
@@ -71,7 +62,8 @@ const routes = [
         ),
       },
       {
-        path: 'rsu/details/:id',
+        path: '/device/rsu/details/:id',
+        breadcrumbName: 'Device Details',
         component: React.lazy(
           () =>
             import(
@@ -81,7 +73,8 @@ const routes = [
         ),
       },
       {
-        path: 'model',
+        path: '/device/model',
+        breadcrumbName: 'RSU Model',
         component: React.lazy(
           () =>
             import(
@@ -92,7 +85,8 @@ const routes = [
       },
 
       {
-        path: 'camera',
+        path: '/device/camera',
+        breadcrumbName: 'Camera Device',
         component: React.lazy(
           () =>
             import(
@@ -102,7 +96,8 @@ const routes = [
         ),
       },
       {
-        path: 'radar',
+        path: '/device/radar',
+        breadcrumbName: 'Radar Device',
         component: React.lazy(
           () =>
             import(
@@ -112,7 +107,8 @@ const routes = [
         ),
       },
       {
-        path: 'lidar',
+        path: '/device/lidar',
+        breadcrumbName: 'Lidar Device',
         component: React.lazy(
           () =>
             import(
@@ -122,7 +118,8 @@ const routes = [
         ),
       },
       {
-        path: 'spat',
+        path: '/device/spat',
+        breadcrumbName: 'SPAT Device',
         component: React.lazy(
           () =>
             import(
@@ -136,11 +133,18 @@ const routes = [
   {
     path: '/maintenance',
     component: React.lazy(() => import('#/layouts/SiderLayout')),
+    breadcrumbName: 'Maintenance',
     layout: true,
     auth: true,
     children: [
       {
-        path: 'crossing/details/:id',
+        path: '/maintenance/crossing',
+        breadcrumbName: 'Crossing Management',
+        component: React.lazy(() => import('#/pages/Edge/MaintenanceManagement/Crossing/List')),
+      },
+      {
+        path: '/maintenance/crossing/details/:id',
+        breadcrumbName: 'Crossing Managemen Detail',
         component: React.lazy(
           () =>
             import(
@@ -150,7 +154,8 @@ const routes = [
         ),
       },
       {
-        path: 'crossing/preview/:id',
+        path: '/maintenance/crossing/preview/:id',
+        breadcrumbName: 'MAP Preview',
         component: React.lazy(
           () =>
             import(
@@ -160,7 +165,8 @@ const routes = [
         ),
       },
       {
-        path: 'bitmap/preview/:id',
+        path: '/maintenance/bitmap/preview/:id',
+        breadcrumbName: 'Bitmap Preview',
         component: React.lazy(
           () =>
             import(
@@ -170,57 +176,62 @@ const routes = [
         ),
       },
       {
-        path: 'business',
+        path: '/maintenance/business',
+        breadcrumbName: 'RSU Business Config',
         component: React.lazy(
           () => import('#/pages/Edge/MaintenanceManagement/BusinessConfig/ConfigList'),
         ),
       },
       {
-        path: 'business/details/:id',
+        path: '/maintenance/business/details/:id',
+        breadcrumbName: 'Business Details',
         component: React.lazy(
           () => import('#/pages/Edge/MaintenanceManagement/BusinessConfig/ConfigDetail'),
         ),
       },
       {
-        path: 'maintenance',
+        path: '/maintenance/maintenance',
+        breadcrumbName: 'RSU Maintenance Config',
         component: React.lazy(() => import('#/pages/Edge/MaintenanceManagement/RSUMaintenance')),
       },
       {
-        path: 'log',
+        path: '/maintenance/log',
+        breadcrumbName: 'RSU Log Config',
         component: React.lazy(() => import('#/pages/Edge/MaintenanceManagement/LogConfig')),
       },
       {
-        path: 'query',
+        path: '/maintenance/query',
+        breadcrumbName: 'RSU Information Query',
         component: React.lazy(
           () => import('#/pages/Edge/MaintenanceManagement/RSUInfoQuery/InfoQueryList'),
         ),
       },
       {
-        path: 'query/details/:id',
+        path: '/maintenance/query/details/:id',
+        breadcrumbName: 'Query Details',
         component: React.lazy(
           () => import('#/pages/Edge/MaintenanceManagement/RSUInfoQuery/InfoQueryDetail'),
         ),
-      },
-      {
-        path: 'crossing',
-        component: React.lazy(() => import('#/pages/Edge/MaintenanceManagement/Crossing/List')),
       },
     ],
   },
   {
     path: '/event',
+    breadcrumbName: 'Event',
     component: React.lazy(() => import('#/layouts/SiderLayout')),
     layout: true,
     auth: true,
     children: [
       {
-        path: 'rsi',
+        path: '/event/rsi',
+        breadcrumbName: 'Road Side Information',
         component: React.lazy(
           () => import('#/pages/Edge/EventManagement/RoadSideInfomation/RSIList'),
         ),
       },
       {
-        path: 'rsi/details/:id',
+        path: '/event/rsi/details/:id',
+        breadcrumbName: 'RSI Details',
         component: React.lazy(
           () =>
             import(
@@ -230,7 +241,8 @@ const routes = [
         ),
       },
       {
-        path: 'rsm',
+        path: '/event/rsm',
+        breadcrumbName: 'Roadside Safety Message',
         component: React.lazy(
           () =>
             import(
@@ -240,105 +252,111 @@ const routes = [
         ),
       },
       {
-        path: 'rsm/details',
+        path: '/event/rsm/details',
+        breadcrumbName: 'RSM Details',
         component: React.lazy(
           () => import('#/pages/Edge/EventManagement/RoadSideSafetyMessage/RSMDetail'),
         ),
       },
       {
-        path: 'icw',
+        path: '/event/icw',
+        breadcrumbName: 'Intersection Collision Warning',
         component: React.lazy(
           () => import('#/pages/Edge/EventManagement/IntersectionCollisionWarning/ICWList'),
         ),
       },
       {
-        path: 'icw/details',
+        path: '/event/icw/details',
+        breadcrumbName: 'ICW Details',
         component: React.lazy(
           () => import('#/pages/Edge/EventManagement/IntersectionCollisionWarning/ICWDetail'),
         ),
       },
       {
-        path: 'vrucw',
+        path: '/event/vrucw',
+        breadcrumbName: 'Vulnerable Road User Collision Warning',
         component: React.lazy(
           () => import('#/pages/Edge/EventManagement/ValnerableRoadMessage/VRUCWList'),
         ),
       },
       {
-        path: 'vrucw/details',
+        path: '/event/vrucw/details',
+        breadcrumbName: 'VRUCW Details',
         component: React.lazy(
           () => import('#/pages/Edge/EventManagement/ValnerableRoadMessage/VRUCWDetail'),
         ),
       },
       {
-        path: 'dnpw',
+        path: '/event/dnpw',
+        breadcrumbName: 'Do Not Pass Warning',
         component: React.lazy(() => import('#/pages/Edge/EventManagement/DoNotPassWarning')),
       },
       {
-        path: 'sds',
+        path: '/event/sds',
+        breadcrumbName: 'Sensor Data Sharing',
         component: React.lazy(() => import('#/pages/Edge/EventManagement/SensorDataSharing')),
       },
       {
-        path: 'clc',
+        path: '/event/clc',
+        breadcrumbName: 'Cooperative Lane Change',
         component: React.lazy(() => import('#/pages/Edge/EventManagement/CooperativeLaneChange')),
       },
       {
-        path: 'congestion',
+        path: '/event/congestion',
+        breadcrumbName: 'Congestion Event',
         component: React.lazy(() => import('#/pages/Edge/EventManagement/CongestionWarning')),
       },
       {
-        path: 'congestion/details/:id',
+        path: '/event/congestion/details/:id',
+        breadcrumbName: 'Congestion Event Detail',
         component: React.lazy(
           () => import('#/pages/Edge/EventManagement/CongestionWarning/Detail'),
         ),
       },
       {
-        path: 'overspeed',
+        path: '/event/overspeed',
+        breadcrumbName: 'Overspeed Warning',
         component: React.lazy(() => import('#/pages/Edge/EventManagement/OverspeedWarning')),
       },
       {
-        path: 'overspeed/details/:id',
+        path: '/event/overspeed/details/:id',
+        breadcrumbName: 'Overspeed Warning Detail',
         component: React.lazy(() => import('#/pages/Edge/EventManagement/OverspeedWarning/Detail')),
       },
       {
-        path: 'slowerspeed',
+        path: '/event/slowerspeed',
+        breadcrumbName: 'Slower Speed Warning',
         component: React.lazy(() => import('#/pages/Edge/EventManagement/SlowerSpeedWarning')),
       },
       {
-        path: 'slowerspeed/details/:id',
+        path: '/event/slowerspeed/details/:id',
+        breadcrumbName: 'Slower Speed Warning Detail',
         component: React.lazy(
           () => import('#/pages/Edge/EventManagement/SlowerSpeedWarning/Detail'),
         ),
       },
       {
-        path: 'retrograde',
+        path: '/event/retrograde',
+        breadcrumbName: 'Retrograde Warning',
         component: React.lazy(() => import('#/pages/Edge/EventManagement/RetrogradeWarning')),
       },
     ],
   },
   {
-    path: '/system',
-    component: React.lazy(() => import('#/layouts/SiderLayout')),
-    layout: true,
-    auth: true,
-    children: [
-      {
-        path: 'site',
-        component: React.lazy(() => import('#/pages/Edge/SystemConfiguration/EdgeSiteConfig')),
-      },
-    ],
-  },
-  {
     path: '/algorithm',
+    breadcrumbName: 'Algorithm Management',
     component: React.lazy(() => import('#/layouts/SiderLayout')),
     layout: true,
     auth: true,
     children: [
       {
-        path: 'config',
+        path: '/algorithm/config',
+        breadcrumbName: 'Algorithm Config',
         component: React.lazy(() => import('#/pages/Edge/AlgorithmManagement/Config')),
       },
       {
-        path: 'version',
+        path: '/algorithm/version',
+        breadcrumbName: 'Algorithm Version',
         component: React.lazy(() => import('#/pages/Edge/AlgorithmManagement/Version')),
       },
     ],
@@ -357,7 +375,7 @@ const routes = [
   },
   {
     path: '/maintenance',
-    redirect: '/maintenance/map',
+    redirect: '/maintenance/crossing',
   },
   {
     path: '/event',
@@ -368,6 +386,10 @@ const routes = [
     redirect: '/algorithm/config',
   },
   { path: '/system', redirect: '/system/site' },
+  {
+    path: '/center',
+    redirect: '/center/cloud',
+  },
 ];
 
 export default routes;

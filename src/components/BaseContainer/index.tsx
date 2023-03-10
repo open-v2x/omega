@@ -1,17 +1,14 @@
-import { menuList } from '#/router/menus';
 import { useRootStore } from '#/store/root';
 import { PageContainer } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import React, { FC } from 'react';
-import { matchRoutes } from 'react-router';
+import BaseBreadcrumb from '../BaseBreadcrumb';
 
 type BaseContainerType = {
   children: React.ReactNode;
   back?: boolean;
   disablePage?: boolean;
 };
-
-const QIANKUN_PRE = 'omega';
 
 /**
  * @description: you can use the page container by default or do everything by yourself.
@@ -21,17 +18,17 @@ const BaseContainer: FC<BaseContainerType> = ({ children, back = false, disableP
   const onBack = () => {
     history.back();
   };
-  const getCurrentMenuName = (pathname: string) =>
-    pathname.startsWith(`/${QIANKUN_PRE}/`)
-      ? pathname.substring(QIANKUN_PRE.length + 1, pathname.length)
-      : pathname;
-  const [{ route }] = matchRoutes(menuList, getCurrentMenuName(history.location.pathname));
 
   return disablePage ? (
     <>{children}</>
   ) : (
     <PageContainer
-      header={{ breadcrumb: undefined, style: { background: 'white' }, title: t(route.name) }}
+      header={{
+        title: <BaseBreadcrumb />,
+        style: {
+          background: 'white',
+        },
+      }}
       extra={
         back
           ? [

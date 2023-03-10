@@ -3,9 +3,13 @@ import { MenuDataItem } from '@ant-design/pro-components';
 import create from 'zustand';
 import { menuList } from '#/router/menus/index';
 import { formatMenus } from '#/utils/path';
+import { Route } from 'antd/lib/breadcrumb/Breadcrumb';
+// import * as pathToRegexp from 'path-to-regexp';
+const pathToRegexp = require('path-to-regexp');
+import routes from '#/router/routes';
 interface IMenuStore {
   toggle: boolean;
-  menuRouter: string;
+  currentMenu: MenuDataItem;
   menus: MenuDataItem[];
   rightMenus: [];
   relatedMenus: MenuDataItem[];
@@ -17,12 +21,13 @@ interface IMenuStore {
   fetchRightMenus: () => void;
   addFavoriteMenu: (key: string) => void;
   deleteFavoriteMenu: (favoriteId: number, isAdminPage?: boolean) => void;
+  getBreadcrumb: (pathname: string) => Route[];
 }
 
 const useMenuStore = create<IMenuStore>((set, get) => ({
   toggle: false,
+  currentMenu: undefined,
   menus: [],
-  menuRouter: '',
   rightMenus: [],
   relatedMenus: [],
   favoriteMenu: [
@@ -40,27 +45,16 @@ const useMenuStore = create<IMenuStore>((set, get) => ({
   ],
   favoriteMenuInit: false,
   fetchMenus: path => {
-    const parentPath = path.split('/');
-    const pPath = `/${parentPath[1]}`;
-    if (get().menuRouter === pPath) {
+    const pPath = `/${path.split('/')[1]}`;
+    if (get().currentMenu?.path === pPath) {
       return;
     }
-    const currentMenu = menuList.find(m => m.path === pPath);
+    const currentMenu = menuList.find(m => m.path.startsWith(pPath));
 
-    let menu, related;
-
-    if (currentMenu) {
-      menu = formatMenus(currentMenu?.children);
-      related = formatMenus(currentMenu?.related || []);
-    } else {
-      const cMenu = menuList.find(c => c.path.startsWith(`${pPath}/`));
-      menu = formatMenus(cMenu);
-      related = formatMenus(cMenu?.related || []);
-    }
     set({
-      menus: menu,
-      relatedMenus: related,
-      menuRouter: pPath,
+      menus: formatMenus(currentMenu),
+      relatedMenus: formatMenus(currentMenu?.related || []),
+      currentMenu: currentMenu,
     });
   },
   fetchFavoriteMenus: () => {
@@ -78,6 +72,34 @@ const useMenuStore = create<IMenuStore>((set, get) => ({
     set({
       rightMenus: result,
     });
+  },
+  getBreadcrumb: (pathname: string) => {
+    const tempList: Route[] = [];
+    try {
+      function getNodePath(node) {
+        tempList.push(node);
+        if (pathToRegexp(node.path).exec(pathname)) {
+          throw new Error('Got It');
+        }
+        if (node.children && node.children.length > 0) {
+          for (let i = 0; i < node.children.length; i++) {
+            getNodePath(node.children[i]);
+          }
+          //当前节点的子节点遍历完依旧没找到，则删除路径中的该节点
+          tempList.pop();
+        } else {
+          //找到叶子节点时，删除路径当中的该叶子节点
+          tempList.pop();
+        }
+      }
+      for (let i = 0; i < routes.length; i++) {
+        getNodePath(routes[i]);
+      }
+    } catch (error) {
+      return tempList;
+    }
+
+    return [];
   },
 }));
 

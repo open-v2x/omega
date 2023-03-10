@@ -28,10 +28,8 @@ const App = () => {
     <>
       <AppContext.Provider value={getLiveContextValue()}>
         <ConfigProvider locale={{ locale: getLocale() }}>
-          <BrowserRouter basename={basename}>
-            <Suspense fallback={<PageLoading />}>
-              <RenderRouter />
-            </Suspense>
+          <BrowserRouter>
+            <RenderRouter />
           </BrowserRouter>
         </ConfigProvider>
       </AppContext.Provider>
