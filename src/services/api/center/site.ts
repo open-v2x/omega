@@ -7,7 +7,9 @@ export async function edgeSiteList(params: Center.EdgeSiteSearch, isCenter: bool
     isCenter,
   });
 }
-
+export async function areas() {
+  return apiService.get<Center.CountriesItem[]>(`v1/areas`);
+}
 // 区域
 export async function countries() {
   return apiService.get<Center.CountriesItem[]>(`v1/countries`, {
