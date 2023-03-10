@@ -6,8 +6,10 @@ interface IRootStore {
   history: BrowserHistory;
   showHint: boolean;
   reverseShowHint: () => void;
-  edgeSiteIP: string;
-  setEdgeSiteIP: (ip: string) => void;
+  edgeSite: Center.EdgeSiteItem;
+  setEdgeSite: (edge: Center.EdgeSiteItem) => void;
+  reload: boolean;
+  setReload: (reload: boolean) => void;
 }
 
 const useRootStore = create<IRootStore>((set, get) => ({
@@ -19,11 +21,18 @@ const useRootStore = create<IRootStore>((set, get) => ({
       showHint: !get().showHint,
     });
   },
-  edgeSiteIP: '',
-  setEdgeSiteIP: (ip: string) =>
+  edgeSite: {
+    name: '',
+    ip: '',
+    id: -1,
+  },
+  setEdgeSite: (edge: Center.EdgeSiteItem) => {
     set({
-      edgeSiteIP: ip,
-    }),
+      edgeSite: edge,
+    });
+  },
+  reload: false,
+  setReload: r => set({ reload: r }),
 }));
 
 export { useRootStore };
