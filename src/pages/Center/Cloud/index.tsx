@@ -10,12 +10,13 @@ import {
 } from '@uiw/react-amap';
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import imgLocation from '#/assets/images/location.png';
 import styles from './index.module.less';
 import { Card, Dropdown } from 'antd';
 import BgContainer from '../components/BgContainer';
 import classNames from 'classnames';
+import { useRootStore } from '#/store/root';
 
 type MarkerType = {
   type: number;
@@ -26,11 +27,11 @@ type MarkerType = {
 
 const CloudPlatform: React.FC = () => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const id = searchParams.get('id');
 
   const [markerList, setMarkerList] = useState<MarkerType>();
   const { AMap: AM } = useMapContext();
+
+  const edgeSite = useRootStore(state => state.edgeSite);
 
   const mapLngLat = (data?: MarkerType) => {
     setMarkerList(data);
@@ -52,7 +53,7 @@ const CloudPlatform: React.FC = () => {
           position={new AMap.LngLat(...markerList.lngLat)}
           onClick={() => {
             navigate(
-              `/center/map?type=${markerList.type}&code=${markerList.code}&id=${markerList.id}&nodeId=${id}`,
+              `/center/map?type=${markerList.type}&code=${markerList.code}&id=${markerList.id}&nodeId=${edgeSite.id}`,
             );
           }}
         />
