@@ -9,10 +9,16 @@ import { Button, Divider } from 'antd';
 import React, { FC, useRef } from 'react';
 import CreateCrossingModal from '../components/CreateCrossingModal';
 import { useNavigate } from 'react-router';
+import { useRootStore } from '#/store/root';
 
 const Crossing: FC = () => {
   const actionRef = useRef<ActionType>();
   const navigate = useNavigate();
+  const edgeSite = useRootStore(state => state.edgeSite);
+
+  const goToIntersection = row =>
+    navigate(`/center/map?type=1&code=${row.code}&id=${row.id}&nodeId=${edgeSite.id}`);
+
   const columns: ProColumns<Config.CrossingItem>[] = [
     {
       title: t('Crossing Name'),
@@ -44,7 +50,7 @@ const Crossing: FC = () => {
       width: 280,
       fixed: 'right',
       render: (_, row) => [
-        <Button type="link" size="small" key="enter">
+        <Button type="link" size="small" key="enter" onClick={() => goToIntersection(row)}>
           {t('Enter the intersection')}
         </Button>,
         <Divider key="enter-divider" type="vertical" />,

@@ -33,6 +33,7 @@ const RegisteredList: FC = () => {
     {
       title: t('RSU IP'),
       dataIndex: 'rsuIP',
+      width: 120,
     },
     {
       title: t('Installation Area'),
@@ -40,6 +41,7 @@ const RegisteredList: FC = () => {
       render: (_, row) => renderAreaFormatName(row),
       renderFormItem: renderAreaFormItem,
       search: true,
+      width: 200,
     },
     {
       title: t('Online Status'),
@@ -49,6 +51,7 @@ const RegisteredList: FC = () => {
       ),
       valueType: 'select',
       valueEnum: statusOptionFormat(DeviceOnlineStatusOptions),
+      width: 140,
     },
     {
       title: t('Device Status'),
@@ -60,6 +63,7 @@ const RegisteredList: FC = () => {
     {
       title: t('Creation Time'),
       dataIndex: 'createTime',
+      width: 200,
     },
     {
       title: t('Operate'),
