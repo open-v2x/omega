@@ -1,7 +1,7 @@
 export const maintenanceMenu = {
   path: '/maintenance',
   name: 'Maintenance',
-  icon: 'icon-maintain',
+  icon: 'icon-maintenance',
   children: [
     {
       path: '/maintenance/map/preview/:id',
