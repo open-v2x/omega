@@ -1,4 +1,4 @@
-import { countries } from '#/services/api/center/site';
+import { areas } from '#/services/api/center/site';
 import { fetchCrossingList } from '#/services/api/config/crossing';
 import { ProFormCascader } from '@ant-design/pro-components';
 import React from 'react';
@@ -27,6 +27,7 @@ const CountryCascader: React.FC<CountryCascaderProps> = ({ defaultValue, mapChan
 
   const changeCode = () => {
     const result = crossing.find(c => c.code === areaCode);
+    console.log('选择了', result);
     if (result) {
       mapChange({
         type: 1,
@@ -54,10 +55,10 @@ const CountryCascader: React.FC<CountryCascaderProps> = ({ defaultValue, mapChan
           allowClear: false,
           fieldNames: { label: 'name', value: 'code' },
           defaultValue,
-          onChange: ([, , , , code]: (string | number)[]) => setAreaCode(code as string),
+          onChange: ([, code]: (string | number)[]) => setAreaCode(code as string),
         }}
         request={async () => {
-          const res = await countries();
+          const res = await areas();
           return res;
         }}
         label={t('Address')}
