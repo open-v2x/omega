@@ -43,7 +43,7 @@ const BaseProTable: React.FC<BaseProTableType> = props => {
     rowKey = 'id',
     search = { labelWidth: 0 },
     pagination = { pageSize: 10 },
-    scroll,
+    scroll = columns.length > 6 ? { x: 1400 } : null,
     headerTitle,
     toolBarRender,
     options,

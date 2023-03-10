@@ -27,7 +27,6 @@ const CountryCascader: React.FC<CountryCascaderProps> = ({ defaultValue, mapChan
 
   const changeCode = () => {
     const result = crossing.find(c => c.code === areaCode);
-    console.log('选择了', result);
     if (result) {
       mapChange({
         type: 1,
