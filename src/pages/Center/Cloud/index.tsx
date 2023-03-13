@@ -81,7 +81,7 @@ const CloudPlatform: React.FC = () => {
         <APILoader akay={process.env.AMAP_KEY}>
           <Map
             center={markerList?.lngLat.length ? markerList.lngLat : undefined}
-            mapStyle="amap://styles/blue"
+            mapStyle="amap://styles/macaron"
             zoom={16}
             children={<ChildrenMap AMap={AM} />}
           />

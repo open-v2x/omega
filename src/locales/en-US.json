@@ -1,7 +1,6 @@
 {
   "OpenV2X": "OpenV2X",
-  "OpenV2X Edge Portal": "OpenV2X Management Portal",
-  "Platform Login": "Platform Login",
+  "OpenV2X Portal": "Welcome OpenV2X",
   "Username": "Username",
   "Please input your username": "Please input your username",
   "Password": "Password",
@@ -461,7 +460,7 @@
   "Intersection information": "Intersection information",
   "Not connected": "Not connected",
   "Total": "Total",
-  "OpenV2X Central Portal": "OpenV2X Central Portal",
+  "OpenV2X Central Portal": "Central Portal",
   "Please select an edge location": "Please select an edge location",
   "EDGE_SITE_TIPS": "Select the edge site to be viewed, and click '{{value}}' to view the intersection information of the site",
   "Go to [Regional Edge Portal]": "Go to [Regional Edge Portal]",

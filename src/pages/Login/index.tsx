@@ -5,13 +5,15 @@ import { SelectLang } from '#/components/SelectLang';
 
 import styles from './index.module.less';
 import { useUserStore } from '#/store/user';
-import imgLoginUser from '#/assets/images/login_user.png';
-import imgLoginPwd from '#/assets/images/login_password.png';
+import imgLogo from '#/assets/images/logo.png';
+import imgLoginFullImage from '#/assets/images/login_full_image.jpeg';
 import { LoginParams } from '#/types/service/user';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { login } from '#/services/api/user';
 import { getUrlSearch } from '#/utils';
 import classNames from 'classnames';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+
 const Login: React.FC = () => {
   const { fetchUserInfo } = useUserStore();
   const navigate = useNavigate();
@@ -29,36 +31,47 @@ const Login: React.FC = () => {
 
   return (
     <div className={classNames(styles.container)}>
-      <div className={styles.lang}>
-        <SelectLang />
+      <div className={styles.left}>
+        <div className={styles.lang}>
+          <SelectLang />
+        </div>
+        <div className={styles.main}>
+          <LoginForm
+            logo={imgLogo}
+            title={'OpenV2X'}
+            onFinish={async values => {
+              await handleSubmit(values as LoginParams);
+            }}
+          >
+            <div className={styles.form}>
+              {/* <img src={imgLogo} alt="logo" />
+                  <div className={styles.welcome}>{t('OpenV2X Portal')}</div> */}
+              <ProFormText
+                name="username"
+                fieldProps={{
+                  size: 'large',
+                  prefix: <UserOutlined className={'prefixIcon'} />,
+                }}
+                placeholder={t('Username')}
+                rules={[{ required: true, message: t('Please input your username') }]}
+              />
+              <ProFormText.Password
+                name="password"
+                fieldProps={{
+                  size: 'large',
+                  prefix: <LockOutlined className={'prefixIcon'} />,
+                  autoComplete: 'off',
+                }}
+                placeholder={t('Password')}
+                rules={[{ required: true, message: t('Please input your password') }]}
+              />
+            </div>
+          </LoginForm>
+        </div>
       </div>
-      <LoginForm
-        logo={<>{t('OpenV2X Edge Portal')}</>}
-        onFinish={async values => {
-          await handleSubmit(values as LoginParams);
-        }}
-      >
-        <p>{t('Platform Login')}</p>
-        <ProFormText
-          name="username"
-          fieldProps={{
-            size: 'large',
-            prefix: <img src={imgLoginUser} alt="" />,
-          }}
-          placeholder={t('Username')}
-          rules={[{ required: true, message: t('Please input your username') }]}
-        />
-        <ProFormText.Password
-          name="password"
-          fieldProps={{
-            size: 'large',
-            prefix: <img src={imgLoginPwd} alt="" />,
-            autoComplete: 'off',
-          }}
-          placeholder={t('Password')}
-          rules={[{ required: true, message: t('Please input your password') }]}
-        />
-      </LoginForm>
+      <div className={styles.right}>
+        <img className={styles['right-login-img']} src={imgLoginFullImage} alt="login_full_image" />
+      </div>
     </div>
   );
 };
