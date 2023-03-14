@@ -1,6 +1,5 @@
 import { BrowserHistory, createBrowserHistory } from 'history';
 import create from 'zustand';
-
 interface IRootStore {
   showHeader: boolean;
   history: BrowserHistory;

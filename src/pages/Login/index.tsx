@@ -5,8 +5,6 @@ import { SelectLang } from '#/components/SelectLang';
 
 import styles from './index.module.less';
 import { useUserStore } from '#/store/user';
-import imgLogo from '#/assets/images/logo.png';
-import imgLoginFullImage from '#/assets/images/login_full_image.jpeg';
 import { LoginParams } from '#/types/service/user';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { login } from '#/services/api/user';
@@ -37,15 +35,13 @@ const Login: React.FC = () => {
         </div>
         <div className={styles.main}>
           <LoginForm
-            logo={imgLogo}
-            title={'OpenV2X'}
+            logo={'/assets/img/logo.png'}
+            title={t('OpenV2X Title')}
             onFinish={async values => {
               await handleSubmit(values as LoginParams);
             }}
           >
             <div className={styles.form}>
-              {/* <img src={imgLogo} alt="logo" />
-                  <div className={styles.welcome}>{t('OpenV2X Portal')}</div> */}
               <ProFormText
                 name="username"
                 fieldProps={{
@@ -70,7 +66,11 @@ const Login: React.FC = () => {
         </div>
       </div>
       <div className={styles.right}>
-        <img className={styles['right-login-img']} src={imgLoginFullImage} alt="login_full_image" />
+        <img
+          className={styles['right-login-img']}
+          src={'/assets/img/login_full_image.png'}
+          alt="login_full_image"
+        />
       </div>
     </div>
   );
