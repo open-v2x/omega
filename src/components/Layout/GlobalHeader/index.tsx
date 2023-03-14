@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import RightContent from '../HeaderRightContent';
-import logo from '#/assets/images/logo.png';
 import styles from './index.module.less';
 import GlobalNav from '../GlobalNav';
 export interface GlobalHeaderProps {
@@ -26,7 +25,7 @@ export default function GlobalHeader(props: GlobalHeaderProps) {
     return (
       <div className={classnames(styles.logo)}>
         <Link to={homeUrl}>
-          <img src={logo} alt="logo" className={styles['logo-image']} />
+          <img src={'/assets/img/logo.png'} alt="logo" className={styles['logo-image']} />
         </Link>
       </div>
     );
