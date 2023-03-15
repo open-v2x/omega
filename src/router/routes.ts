@@ -340,6 +340,13 @@ const routes = [
         breadcrumbName: 'Retrograde Warning',
         component: React.lazy(() => import('#/pages/Edge/EventManagement/RetrogradeWarning')),
       },
+      {
+        path: '/event/retrograde/details/:id',
+        breadcrumbName: 'Retrograde Warning Detail',
+        component: React.lazy(
+          () => import('#/pages/Edge/EventManagement/RetrogradeWarning/Detail'),
+        ),
+      },
     ],
   },
   {
