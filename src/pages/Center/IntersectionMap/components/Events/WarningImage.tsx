@@ -1,10 +1,9 @@
 import React from 'react';
-import imgEventWarn from '#/assets/images/event_warn.png';
 import { Image as KonvaImage } from 'react-konva';
 
-const WarningImage: React.FC<{ x: number; y: number }> = ({ x, y }) => {
+const WarningImage: React.FC<{ x: number; y: number; img: string }> = ({ x, y, img }) => {
   const image = new Image();
-  image.src = imgEventWarn;
+  image.src = img;
   const iconWidth = 15;
 
   return (
