@@ -13,8 +13,6 @@ const CongestionWarning: React.FC<{
     3: 'rgba(220, 48, 35, 0.9)',
   };
 
-  console.log(`事件拥堵等级：${level}`);
-
   return (
     <Group>
       <Line points={[start.x, start.y, end.x, end.y]} stroke={levelRgb[level]} strokeWidth={16} />
