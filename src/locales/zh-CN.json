@@ -12,7 +12,7 @@
   "Deleted": "删除",
   "Status updated": "状态更新",
   "Registered": "一键注册",
-  "Edited": "编辑",
+  "Edit": "编辑",
   "Added": "添加",
   "Delivered": "下发",
   "{{value}} successfully": "{{value}}成功",
@@ -54,7 +54,6 @@
   "Edit RSU device": "编辑 RSU 设备",
   "Add RSU device": "添加 RSU 设备",
   "Add RSU": "添加 RSU",
-  "Edit": "编辑",
   "Submit": "提交",
   "Model Name": "RSU 型号名称",
   "Manufacturer Name": "厂商名称",
@@ -552,5 +551,6 @@
   "Related Links": "关联链接",
   "Enter the intersection": "进入路口",
   "Edge Site": "边缘站点",
-  "Search": "查询"
+  "Search": "查询",
+  "More": "更多"
 }

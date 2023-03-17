@@ -48,15 +48,14 @@ const Modal: React.FC<ModalProps> = ({
     className={className}
     title={title}
     trigger={
-      trigger || (
-        <Button
-          icon={editId ? '' : <PlusOutlined />}
-          type={editId ? 'link' : 'primary'}
-          id={isDetails ? '' : editId ? 'editButton' : 'createButton'}
-        >
-          {(editId ? editTrigger : createTrigger) || t('Edit')}
+      trigger ||
+      (editId ? (
+        <a href="#">{editTrigger || t('Edit')}</a>
+      ) : (
+        <Button icon={<PlusOutlined />} type={'primary'} id={'createButton'}>
+          {createTrigger}
         </Button>
-      )
+      ))
     }
     width={width}
     omitNil={omitNil}
@@ -83,7 +82,7 @@ const Modal: React.FC<ModalProps> = ({
         return false;
       }
       message.success(
-        successMsg || t('{{value}} successfully', { value: editId ? t('Edited') : t('Added') }),
+        successMsg || t('{{value}} successfully', { value: editId ? t('Edit') : t('Added') }),
       );
       return true;
     }}

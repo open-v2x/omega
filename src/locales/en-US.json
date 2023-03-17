@@ -12,7 +12,6 @@
   "Deleted": "Deleted",
   "Status updated": "Status updated",
   "Registered": "Registered",
-  "Edited": "Edited",
   "Added": "Added",
   "Delivered": "Delivered",
   "{{value}} successfully": "{{value}} successfully",
@@ -551,5 +550,6 @@
   "Related Links": "Related Links",
   "Enter the intersection": "Enter the intersection",
   "Edge Site": "Edge site",
-  "Search": "Search"
+  "Search": "Search",
+  "More": "More"
 }

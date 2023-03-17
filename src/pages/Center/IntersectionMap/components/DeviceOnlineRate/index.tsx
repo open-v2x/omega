@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC, useEffect, useState } from 'react';
 import styles from './index.module.less';
 import imgRsu from '#/assets/images/platform_rsu.svg';
