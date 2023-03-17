@@ -3,6 +3,7 @@ import { PageContainer } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import React, { FC } from 'react';
 import BaseBreadcrumb from '../BaseBreadcrumb';
+import styles from './index.module.less';
 
 type BaseContainerType = {
   children: React.ReactNode;
@@ -24,6 +25,7 @@ const BaseContainer: FC<BaseContainerType> = ({ children, back = false, disableP
     <>{children}</>
   ) : (
     <PageContainer
+      className={styles['base-container']}
       header={{
         title: <BaseBreadcrumb />,
         style: {

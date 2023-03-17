@@ -105,7 +105,6 @@ const OperatingStatus: React.FC<{ data?: Config.QueryInfoDetails[] }> = ({ data 
       dataSource={dataSource}
       rowKey="rsuId"
       search={false}
-      scroll={{ x: 800 }}
       toolBarRender={false}
     />
   );

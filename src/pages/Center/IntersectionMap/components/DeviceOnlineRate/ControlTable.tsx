@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Space, Table } from 'antd';
 import React from 'react';
 import styles from './controlTable.module.less';
@@ -38,7 +37,6 @@ const ControlTable: React.FC<{
         dataSource={data}
         pagination={false}
         size={'small'}
-        scroll={{ y: '180px' }}
         rowClassName={styles['control-table-row']}
       />
     </div>
