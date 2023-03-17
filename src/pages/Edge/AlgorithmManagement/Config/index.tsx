@@ -66,7 +66,6 @@ const AlgorithmConfig: FC = () => {
       key: 'option',
       valueType: 'option',
       render: (_text, record, _, action) => [
-        // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a
           key="editable"
           onClick={() => {
@@ -74,7 +73,7 @@ const AlgorithmConfig: FC = () => {
             setEditStatus(record.enable);
           }}
         >
-          {t('Edited')}
+          {t('Edit')}
         </a>,
       ],
     },
@@ -107,7 +106,6 @@ const AlgorithmConfig: FC = () => {
           editableKeys,
           actionRender: (row, config, defaultDoms) => [
             defaultDoms.save,
-            // eslint-disable-next-line jsx-a11y/anchor-is-valid
             <a
               key="set"
               className={editStatus ? styles.disabled : null}

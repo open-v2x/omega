@@ -57,7 +57,6 @@ module.exports = {
     'object-shorthand': [0, 'never'],
     //单引号
     quotes: 'off',
-    'jsx-a11y/anchor-is-valid': 0,
     '@typescript-eslint/quotes': 'off',
     '@typescript-eslint/no-var-requires': 0,
     'member-ordering': 0,
@@ -154,7 +153,7 @@ module.exports = {
     // 交互的需要role
     'jsx-a11y/no-static-element-interactions': 'off',
     // 锚无效
-    'jsx-a11y/anchor-is-valid': 'warn',
+    'jsx-a11y/anchor-is-valid': 0,
     'jsx-a11y/anchor-has-content': 'warn',
     'react/jsx-no-target-blank': 0,
     'react/jsx-props-no-spreading': 0,

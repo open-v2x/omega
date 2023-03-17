@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { routeInfo } from '#/services/api/center/site';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
