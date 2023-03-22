@@ -4,9 +4,6 @@ import { useRootStore } from '#/store/root';
 import classNames from 'classnames';
 import { ProCard } from '@ant-design/pro-components';
 import { Button, Steps } from 'antd';
-import imgRsu from '#/assets/images/platform_rsu.svg';
-import imgCamera from '#/assets/images/platform_camera.svg';
-import imgLidar from '#/assets/images/platform_radar.svg';
 import { useNavigate } from 'react-router';
 
 const GlobalHint: React.FC = () => {
@@ -42,71 +39,48 @@ const GlobalHint: React.FC = () => {
 
   const hints = [
     {
-      title: t('Creating Intersection'),
-      content: t('Creating Intersection Hint'),
+      title: t('Device deployment'),
+      content: t('Device deployment Hint'),
+    },
+    {
+      title: t('Register devices'),
+      content: t('Register devices Hint'),
       bottom: (
-        <Button onClick={() => handleGo('maintenance/crossing')}>
-          {t('Creating Intersection Button')}
+        <Button danger onClick={() => handleGo('device/rsu')}>
+          {t('Register Now')}
         </Button>
       ),
     },
     {
-      title: t('Deploy and register devices'),
-      content: t('Deploy and register devices Hint'),
+      title: t('Config the map'),
+      content: t('Config the map Hint'),
       bottom: (
-        <div className={styles['global-hint-card-btn-f']}>
-          <div
-            className={styles['global-hint-card-btn-f-item']}
-            onClick={() => handleGo('device/rsu')}
-          >
-            <img src={imgRsu} alt="rsu" />
-            {t('RSU')}
-          </div>
-          <div
-            className={styles['global-hint-card-btn-f-item']}
-            onClick={() => handleGo('device/camera')}
-          >
-            <img src={imgCamera} alt="camera" />
-            {t('Camera')}
-          </div>
-          <div
-            className={styles['global-hint-card-btn-f-item']}
-            onClick={() => handleGo('device/lidar')}
-          >
-            <img src={imgLidar} alt="lidar" />
-            {t('Lidar')}
-          </div>
-          <div
-            className={styles['global-hint-card-btn-f-item']}
-            onClick={() => handleGo('device/radar')}
-          >
-            <img src={imgLidar} alt="radar" />
-            {t('Radar')}
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: t('Configuring Site'),
-      content: t('Configuring Site Hint'),
-      bottom: (
-        <Button onClick={() => handleGo('system/site')}>
-          {t('Deploy and register devices Button')}
+        <Button danger onClick={() => handleGo('system/site')}>
+          {t('Config Now')}
         </Button>
       ),
     },
     {
-      title: t('Monitoring Overview'),
-      content: t('Huge Screen Hint'),
-      bottom: <Button onClick={() => handleGo('center/site')}>{t('Huge Screen Button')}</Button>,
+      title: t('Traffic screen'),
+      content: t('Traffic screen Hint'),
+      bottom: (
+        <Button danger onClick={() => handleGo('center/site')}>
+          {t('Have Try')}
+        </Button>
+      ),
     },
   ];
 
   return (
-    <div className={classNames(styles['global-hint'], showHint ? styles.show : styles.hidden)}>
+    <div
+      className={classNames(styles['global-hint'], showHint ? styles.show : styles.hidden)}
+      onClick={() => {
+        reverseShowHint();
+      }}
+    >
       {showHint && (
-        <div className={styles['global-hint-container']}>
-          <div className={styles['global-hint-title']}>服务指引</div>
+        <div className={styles['global-hint-container']} onClick={e => e.stopPropagation()}>
+          <div className={styles['global-hint-title']}>{t('Service guidance')}</div>
           <div className={styles['global-hint-cards']}>
             {hints.map((hint, index) => (
               <HintCard
