@@ -7,7 +7,7 @@ import React from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
 // 路口信息
-const IntersectionInformation: React.FC<{ code: string }> = ({ code }) => {
+const IntersectionInformation: React.FC = () => {
   const [show, setShow] = useState(true);
   const [info, setInfo] = useState<Center.RouteInfoItem>({
     vehicleTotal: 0,
@@ -17,7 +17,7 @@ const IntersectionInformation: React.FC<{ code: string }> = ({ code }) => {
   });
 
   const fetchRouteInfo = async () => {
-    const res = await routeInfo({ intersectionCode: code });
+    const res = await routeInfo();
     setInfo(res);
   };
 

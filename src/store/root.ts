@@ -6,9 +6,9 @@ interface IRootStore {
   showHint: boolean;
   reverseShowHint: () => void;
   edgeSite: Center.EdgeSiteItem;
-  setEdgeSite: (edge: Center.EdgeSiteItem) => void;
   reload: boolean;
-  setReload: (reload: boolean) => void;
+  setState: (params: any) => void;
+  inited: boolean;
 }
 
 const useRootStore = create<IRootStore>((set, get) => ({
@@ -25,13 +25,13 @@ const useRootStore = create<IRootStore>((set, get) => ({
     ip: '',
     id: -1,
   },
-  setEdgeSite: (edge: Center.EdgeSiteItem) => {
+  reload: false,
+  inited: false,
+  setState: params => {
     set({
-      edgeSite: edge,
+      ...params,
     });
   },
-  reload: false,
-  setReload: r => set({ reload: r }),
 }));
 
 export { useRootStore };

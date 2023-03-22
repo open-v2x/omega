@@ -5,7 +5,6 @@ import FormItem from '#/components/FormItem';
 import { CreateModalProps, FormGroupType } from '#/typings/pro-component';
 import { createRadar, updateRadar } from '#/services/api/device/radar';
 import { useRequestStore } from '#/store/request';
-import Country from '#/components/Country';
 
 const CreateRadarModal: FC<CreateModalProps> = ({ editInfo, isDetails = false, success }) => {
   const { fetchDeviceListInModal } = useRequestStore();
@@ -118,25 +117,6 @@ const CreateRadarModal: FC<CreateModalProps> = ({ editInfo, isDetails = false, s
       ],
     },
     {
-      key: 'province',
-      children: [
-        {
-          name: 'province',
-          components: (
-            <Country
-              key="province"
-              required
-              width="lg"
-              label={t('Installation Area')}
-              name="province"
-              params={{ cascade: true, needIntersection: true }}
-              rules={[{ required: true, message: t('Please select an installation area') }]}
-            />
-          ),
-        },
-      ],
-    },
-    {
       key: 'desc',
       children: [
         {
@@ -164,8 +144,7 @@ const CreateRadarModal: FC<CreateModalProps> = ({ editInfo, isDetails = false, s
       createTrigger={t('Add {{type}}', { type: lowerType })}
       editTrigger={isDetails ? t('Details') : ''}
       modalProps={{ className: 'overflow' }}
-      submitForm={async ({ province, ...values }) => {
-        values.intersectionCode = province!.pop()!;
+      submitForm={async values => {
         if (editInfo) {
           values.rsuId = values.rsuId || null;
           values.rsuName = values.rsuName || null;
@@ -177,13 +156,7 @@ const CreateRadarModal: FC<CreateModalProps> = ({ editInfo, isDetails = false, s
       }}
       editId={editInfo?.id}
       isDetails={isDetails}
-      request={async () => {
-        const { name, sn, radarIP, lng, lat, elevation, towards, rsuId, desc } = editInfo!;
-        const { provinceCode, countryCode, cityCode, areaCode, intersectionCode } = editInfo;
-        const province = [countryCode!, provinceCode!, cityCode!, areaCode!, intersectionCode!];
-
-        return { name, sn, radarIP, lng, lat, elevation, towards, rsuId, desc, province };
-      }}
+      request={async () => editInfo!}
     >
       <FormItem items={formItems} />
     </Modal>

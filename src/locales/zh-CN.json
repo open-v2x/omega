@@ -194,6 +194,7 @@
   "Number Of Releases": "下发 RSU 数量",
   "MAP Data File": "MAP 数据文件",
   "MAP Preview": "地图预览",
+  "Map Management": "MAP 管理",
   "Preview": "预览",
   "Issue RSU": "下发 RSU",
   "Forwarding Limit": "上行转发上限",
@@ -533,8 +534,8 @@
   "Slower Speed Lon": "慢行车辆经度",
   "Retrograde Warning": "车辆逆行预警（RDW）",
   "Retrograde Warning Detail": "车辆逆行预警详情",
-  "Retrograde Lon": "车辆逆行经度",
-  "Retrograde Lat": "车辆逆行纬度",
+  "Retrograde Lon": "逆行车辆经度",
+  "Retrograde Lat": "逆行车辆纬度",
   "Meter": "米",
   "Second": "秒",
   "Creating Intersection": "创建路口",
@@ -552,5 +553,6 @@
   "Enter the intersection": "进入路口",
   "Edge Site": "边缘站点",
   "Search": "查询",
-  "More": "更多"
+  "More": "更多",
+  "Not authenticated": "登录失效，请重新登录！"
 }

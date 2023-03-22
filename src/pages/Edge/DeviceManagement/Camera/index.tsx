@@ -7,6 +7,7 @@ import { ProColumns } from '#/typings/pro-component';
 import { ActionType } from '@ant-design/pro-components';
 import React, { useRef, FC } from 'react';
 import CreateCameraModal from './components/CreateCameraModal';
+import { renderNameAndNo } from '#/components/BaseProTable/components/TableHelper';
 
 const fetchDeviceList = async () => {
   const { data } = await deviceList({ pageNum: 1, pageSize: -1 });
@@ -52,18 +53,15 @@ const CameraManagement: FC = () => {
       title: `${t('Camera Name')}/${t('Serial Number')}`,
       dataIndex: 'name',
       search: true,
-      width: 100,
-      render: (_, row) => (
-        <span>
-          <div>{row.name}</div>
-          <div>{row.sn}</div>
-        </span>
-      ),
-    },
-    {
-      dataIndex: 'sn',
-      search: true,
-      hidden: true,
+      render: (_, row) =>
+        renderNameAndNo(row.name, row.sn, () => (
+          <CreateCameraModal
+            key="details"
+            isDetails
+            editInfo={row}
+            success={() => actionRef.current?.reload()}
+          />
+        )),
     },
     {
       title: t('Video Stream URL'),
@@ -80,16 +78,6 @@ const CameraManagement: FC = () => {
       title: t('Latitude'),
       dataIndex: 'lat',
       width: 60,
-    },
-    {
-      title: t('Altitude (m)'),
-      dataIndex: 'elevation',
-      width: 80,
-    },
-    {
-      title: t('Orientation (°)'),
-      dataIndex: 'towards',
-      width: 80,
     },
     {
       title: t('Associate RSU'),

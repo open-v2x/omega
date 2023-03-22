@@ -7,7 +7,7 @@ import DeviceOnlineRate from '../DeviceOnlineRate';
 import IntersectionInformation from '../IntersectionInformation';
 import { useCenterStore } from '#/store/center';
 
-const IntersectionStatistics: React.FC<{ intersectionCode: string }> = ({ intersectionCode }) => {
+const IntersectionStatistics: React.FC = () => {
   const cameraModalRef: any = useRef(null);
   const cloudPointModalRef: any = useRef(null);
   const centerStore = useCenterStore();
@@ -43,8 +43,8 @@ const IntersectionStatistics: React.FC<{ intersectionCode: string }> = ({ inters
 
   return (
     <>
-      <DeviceOnlineRate code={intersectionCode} />
-      <IntersectionInformation code={intersectionCode} />
+      <DeviceOnlineRate />
+      <IntersectionInformation />
 
       <DisplayModal
         ref={cameraModalRef}

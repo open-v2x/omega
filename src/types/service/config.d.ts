@@ -1,16 +1,22 @@
 declare namespace Config {
   type MapItem = {
+    id: string | number;
     name: string; // MAP 名称
-    areaCode: string; // MAP 区域
-    address: string; // MAP 位置
     desc: string; // MAP 信息描述
   };
-  type CreateMapConfigParams = MapItem & {
+  type MapConfigParams = MapItem & {
     data: Record<string, any>; // MAP 数据文件
-    province?: string[]; // 安装位置
-    countryCode?: string; // 安装位置-国
-    provinceCode?: string; // 安装位置-省
-    cityCode?: string; // 安装位置-市
+    bitmapFilename: string;
+  };
+
+  type MapRSUListItem = {
+    id: number;
+    rsuName: string;
+    rsuSn: string;
+    onlineStatus: boolean;
+    rsuStatus: boolean;
+    deliveryStatus: number;
+    createTime: string;
   };
 
   type RSM<T> = {

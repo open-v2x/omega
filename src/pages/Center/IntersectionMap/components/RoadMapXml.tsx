@@ -121,10 +121,11 @@ const LaneMap: React.FC<LaneMapProps> = ({ laneNumbers, laneWidths, stroke }) =>
   );
 };
 
-const RoadMap: React.FC<{ id: string }> = ({ id }) => {
+const RoadMap: React.FC = () => {
   const [data, setData] = useState<any>();
   const fetchMapConfig = async () => {
-    const result = await downloadMapConfig(+id);
+    // mapId 只有 1
+    const result = await downloadMapConfig(1);
     setData(result);
   };
   useEffect(() => {

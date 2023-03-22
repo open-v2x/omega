@@ -18,22 +18,20 @@ export async function countries() {
 }
 
 // 下载 MAP 配置
-export async function downloadMapConfig(id: number) {
+export async function downloadMapConfig(id: number | string) {
   return apiService.get<any>(`v1/rsus/${id}/map`);
 }
 
 // 设备在线率
-export async function onlineRate(params: { edgeRsuId: number; intersectionCode: number | string }) {
+export async function onlineRate(params: { rsuId: number }) {
   return apiService.get<{ data: Center.OnlineRateItem }>(`v1/homes/online_rate`, {
     params,
   });
 }
 
 // 路口信息
-export async function routeInfo(params: { intersectionCode: string }) {
-  return apiService.get<Center.RouteInfoItem>(`v1/homes/route_info`, {
-    params,
-  });
+export async function routeInfo() {
+  return apiService.get<Center.RouteInfoItem>(`v1/homes/route_info`);
 }
 
 export async function getModelDefault() {
