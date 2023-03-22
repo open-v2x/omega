@@ -386,7 +386,7 @@ const routes = [
   },
   {
     path: '/maintenance',
-    redirect: '/maintenance/crossing',
+    redirect: '/maintenance/business',
   },
   {
     path: '/event',
