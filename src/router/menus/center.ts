@@ -1,6 +1,6 @@
 export const centerMenu = {
   path: '/center',
-  name: 'Monitoring Overview',
+  name: 'Traffic screen',
   icon: 'icon-screen',
   children: [],
 };
