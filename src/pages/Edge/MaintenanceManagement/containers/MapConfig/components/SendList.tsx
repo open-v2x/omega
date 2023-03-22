@@ -84,7 +84,12 @@ const SendList: React.FC<{ mapId: number }> = ({ mapId }) => {
         request={mapRSUList}
         search={false}
         toolBarRender={() => [
-          <CreateSendModal key="create" id={mapId} success={() => actionRef.current?.reload()} />,
+          <CreateSendModal
+            type="map"
+            key="create"
+            id={mapId}
+            success={() => actionRef.current?.reload()}
+          />,
         ]}
       />
     </ProCard>
