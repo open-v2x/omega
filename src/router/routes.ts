@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: '/center',
-    breadcrumbName: 'Monitoring Overview',
+    breadcrumbName: 'Traffic screen',
     component: React.lazy(() => import('#/layouts/SiderLayout')),
     layout: true,
     auth: true,
