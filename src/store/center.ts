@@ -8,7 +8,7 @@ interface ICenterStore {
   // 路口下所有 rsu
   rsus: any[];
   // 获取路口下所有 rsu
-  fetchRsus: (code: string) => void;
+  fetchRsus: () => void;
   // 当前选择的rsu
   currentRSU: any;
   setCurrentRsuByRsuId: (id: string | number | undefined) => void;
@@ -16,14 +16,14 @@ interface ICenterStore {
   cameras: any[];
   showCamera: boolean;
   cameraUrl: string;
-  fetchCameras: (code: string) => void;
+  fetchCameras: () => void;
   setShowCamera: (url: string) => void;
 
   //   路口下所有激光雷达
   lidars: any[];
   cloudPointUrl: string;
   showCloudPoint: boolean;
-  fetchLidars: (code) => void;
+  fetchLidars: () => void;
   setShowCloudPoint: (url: string) => void;
 }
 
@@ -35,11 +35,10 @@ const useCenterStore = create<ICenterStore>((set, get) => ({
   },
   rsus: [],
   currentRSU: undefined,
-  fetchRsus: async code => {
+  fetchRsus: async () => {
     const { data } = await deviceList({
       pageNum: 1,
       pageSize: -1,
-      intersectionCode: code,
     });
     if (data.length !== get().rsus.length) {
       set({
@@ -61,9 +60,9 @@ const useCenterStore = create<ICenterStore>((set, get) => ({
   cameras: [],
   showCamera: false,
   cameraUrl: undefined,
-  fetchCameras: async code => {
+  fetchCameras: async () => {
     const rsuId = get().currentRSU?.rsuId || undefined;
-    const { data } = await cameraList({ intersectionCode: code, rsuId });
+    const { data } = await cameraList({ rsuId });
     const result = data.map(d => ({
       id: d.id,
       sn: d.sn,
@@ -84,9 +83,9 @@ const useCenterStore = create<ICenterStore>((set, get) => ({
   lidars: [],
   cloudPointUrl: undefined,
   showCloudPoint: false,
-  fetchLidars: async code => {
+  fetchLidars: async () => {
     const rsuId = get().currentRSU?.rsuId || undefined;
-    const { data } = await lidarList({ intersectionCode: code, rsuId });
+    const { data } = await lidarList({ rsuId });
     set({
       lidars: data,
     });

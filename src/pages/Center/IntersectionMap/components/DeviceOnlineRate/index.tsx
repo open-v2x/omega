@@ -11,7 +11,7 @@ import ControlTable from './ControlTable';
 import { onlineRate } from '#/services/api/center/site';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
-const DeviceOnlineRate: FC<{ code: string }> = ({ code }) => {
+const DeviceOnlineRate: FC = () => {
   const centerStore = useCenterStore();
   const [showFooterIndex, setShowFooterIndex] = useState(-1);
   const [show, setShow] = useState(true);
@@ -25,26 +25,25 @@ const DeviceOnlineRate: FC<{ code: string }> = ({ code }) => {
 
   const fetchOnlineRate = async (rsuId?: number) => {
     const { data } = await onlineRate({
-      edgeRsuId: rsuId,
-      intersectionCode: code,
+      rsuId,
     });
     setRateInfo(data);
   };
 
   useEffect(() => {
-    centerStore.fetchRsus(code);
-    centerStore.fetchCameras(code);
+    centerStore.fetchRsus();
+    centerStore.fetchCameras();
     fetchOnlineRate();
     const id = setInterval(() => {
-      centerStore.fetchRsus(code);
+      centerStore.fetchRsus();
       fetchOnlineRate();
     }, 5000);
     return () => clearInterval(id);
   }, []);
 
   useEffect(() => {
-    centerStore.fetchCameras(code);
-    centerStore.fetchLidars(code);
+    centerStore.fetchCameras();
+    centerStore.fetchLidars();
   }, [centerStore.currentRSU]);
 
   const handleClickItem = (index: number) =>

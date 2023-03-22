@@ -23,17 +23,7 @@ const routes = [
     auth: true,
     children: [
       {
-        path: 'cloud',
-        breadcrumbName: 'Monitoring Overview',
-        component: React.lazy(
-          () =>
-            import(
-              /* webpackChunkName: "center_cloud",webpackPrefetch: true */ '#/pages/Center/Cloud'
-            ),
-        ),
-      },
-      {
-        path: 'map',
+        path: '/center/map',
         component: React.lazy(
           () =>
             import(
@@ -211,6 +201,20 @@ const routes = [
         breadcrumbName: 'Query Details',
         component: React.lazy(
           () => import('#/pages/Edge/MaintenanceManagement/RSUInfoQuery/InfoQueryDetail'),
+        ),
+      },
+      {
+        path: '/maintenance/map',
+        breadcrumbName: 'Map Management',
+        component: React.lazy(
+          () => import('#/pages/Edge/MaintenanceManagement/containers/MapConfig/List'),
+        ),
+      },
+      {
+        path: '/maintenance/map/details/:id',
+        breadcrumbName: 'Map Details',
+        component: React.lazy(
+          () => import('#/pages/Edge/MaintenanceManagement/containers/MapConfig/Detail'),
         ),
       },
     ],
@@ -394,7 +398,7 @@ const routes = [
   },
   {
     path: '/center',
-    redirect: '/center/cloud',
+    redirect: '/center/map?type=1',
   },
 ];
 

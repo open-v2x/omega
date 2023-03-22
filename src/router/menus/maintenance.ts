@@ -34,13 +34,22 @@ export const maintenanceMenu = {
       name: 'Query Details',
       hideInMenu: true,
     },
-    {
-      path: '/maintenance/crossing',
-      name: 'Crossing Management',
-    },
+    // {
+    //   path: '/maintenance/crossing',
+    //   name: 'Crossing Management',
+    // },
     {
       path: '/maintenance/bitmap/preview/:id',
       name: 'Bitmap Preview',
+      hideInMenu: true,
+    },
+    {
+      path: '/maintenance/map',
+      name: 'Map Management',
+    },
+    {
+      path: '/maintenance/map/details/:id',
+      name: 'Map Details',
       hideInMenu: true,
     },
   ],

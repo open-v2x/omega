@@ -24,12 +24,12 @@ const DnNotPassWarning: React.FC = () => {
       dataIndex: 'secMark',
     },
     {
-      title: t('Longitude'),
+      title: t('Vehicle Longitude'),
       dataIndex: ['refPos', 'lon'],
       render: (_, { refPos: { lon } }) => <LonLatUnit data={lon} />,
     },
     {
-      title: t('Latitude'),
+      title: t('Vehicle Latitude'),
       dataIndex: ['refPos', 'lat'],
       render: (_, { refPos: { lat } }) => <LonLatUnit data={lat} />,
     },

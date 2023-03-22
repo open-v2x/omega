@@ -2,13 +2,7 @@ import { apiService } from '#/services/BaseService';
 import { IResponseListData } from '#/types/service/responseData';
 
 // RSU 设备列表
-export async function deviceList({
-  countryName,
-  ...params
-}: API.PageParams & { countryName?: string[]; intersectionCode?: string }) {
-  if (countryName?.length) {
-    params.intersectionCode = countryName[countryName.length - 1];
-  }
+export async function deviceList(params: API.PageParams) {
   return apiService.get<IResponseListData<Device.DeviceListItem>>(`v1/rsus`, {
     params,
   });

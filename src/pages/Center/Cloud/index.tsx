@@ -52,9 +52,7 @@ const CloudPlatform: React.FC = () => {
           offset={new AMap.Pixel(-18, -36)}
           position={new AMap.LngLat(...markerList.lngLat)}
           onClick={() => {
-            navigate(
-              `/center/map?type=${markerList.type}&code=${markerList.code}&id=${markerList.id}&nodeId=${edgeSite.id}`,
-            );
+            navigate(`/center/map?type=${markerList.type}&nodeId=${edgeSite.id}`);
           }}
         />
       ) : (

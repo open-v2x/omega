@@ -1,4 +1,3 @@
-import Country from '#/components/Country';
 import FormItem from '#/components/FormItem';
 import Modal from '#/components/Modal';
 import { IPReg, LatReg, LngReg } from '#/constants/edge';
@@ -47,26 +46,6 @@ const CreateDeviceModal: React.FC<CreateModalProps & { isRegister?: boolean }> =
         },
       ],
     },
-    {
-      key: 'province',
-      children: [
-        {
-          name: 'province',
-          components: (
-            <Country
-              key="province"
-              required
-              width="lg"
-              label={t('Installation Area')}
-              name="province"
-              params={{ cascade: true, needIntersection: true }}
-              rules={[{ required: true, message: t('Please select an installation area') }]}
-            />
-          ),
-        },
-      ],
-    },
-
     {
       key: 'lng',
       children: [
@@ -142,8 +121,7 @@ const CreateDeviceModal: React.FC<CreateModalProps & { isRegister?: boolean }> =
       title={isRegister ? t('Register') : editId ? t('Edit RSU device') : t('Add RSU device')}
       createTrigger={isRegister ? '' : t('Add RSU')}
       editTrigger={isRegister ? t('Register') : ''}
-      submitForm={async ({ province, ...values }: Device.CreateDeviceParams) => {
-        values.intersectionCode = province!.pop()!;
+      submitForm={async (values: Device.CreateDeviceParams) => {
         if (!isRegister && editId) {
           values.rsuModelId = values.rsuModelId ?? null;
           await updateDevice(editId, values);
@@ -160,10 +138,9 @@ const CreateDeviceModal: React.FC<CreateModalProps & { isRegister?: boolean }> =
           return { rsuEsn, rsuId, rsuName };
         }
         const data = await deviceInfo(id);
-        const { provinceCode, countryCode, cityCode, areaCode, intersectionCode, location } = data;
-        const province = [countryCode!, provinceCode!, cityCode!, areaCode!, intersectionCode!];
+        const { location } = data;
         const { lon, lat } = location;
-        return { province, lon, lat, ...data };
+        return { lon, lat, ...data };
       }}
     >
       <FormItem items={formItems} />
