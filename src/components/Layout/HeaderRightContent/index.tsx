@@ -10,12 +10,14 @@ import { useRootStore } from '#/store/root';
 export default function RightContent() {
   const [siteList, setSiteList] = useState([]);
   const ip = useRootStore(state => state.edgeSite.ip);
-  const { setEdgeSite, setReload } = useRootStore();
+  const rootStore = useRootStore();
 
   const handleChange = (selectIP: string) => {
     const edge = siteList.find(e => e.ip === selectIP);
-    setEdgeSite(edge);
-    setReload(true);
+    rootStore.setState({
+      edgeSite: edge,
+      reload: true,
+    });
   };
 
   const renderRegion = () => (
@@ -47,8 +49,13 @@ export default function RightContent() {
       true,
     );
     if (total > 0) {
-      setEdgeSite(data[0]);
+      rootStore.setState({
+        edgeSite: data[0],
+      });
     }
+    rootStore.setState({
+      inited: true,
+    });
     setSiteList(data);
   };
 

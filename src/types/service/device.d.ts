@@ -52,10 +52,6 @@ declare namespace Device {
   type CreateDeviceParams = DeviceItem & {
     rsuId?: number;
     tmpId?: number; // 未注册 RSU 的临时 RSU id
-    province?: string[]; // 安装位置
-    countryCode?: string; // 安装位置-国
-    provinceCode?: string; // 安装位置-省
-    cityCode?: string; // 安装位置-市
     rsuModelId?: number; // RSU 型号
     desc?: string; // 描述
     rsuIP?: string; // RSU IP

@@ -101,6 +101,7 @@ const AlgorithmConfig: FC = () => {
         onChange={setData}
         controlled
         search={{ labelWidth: 0, filterType: 'query' }}
+        scroll={{ y: '50vh' }}
         editable={{
           type: 'single',
           editableKeys,
@@ -111,12 +112,12 @@ const AlgorithmConfig: FC = () => {
               className={editStatus ? styles.disabled : null}
               onClick={() => {
                 setEditStatus(!editStatus);
-                editorFormRef.current?.setRowData?.(config.index!, {
+                editorFormRef.current?.setRowData?.(`${config.recordKey}`, {
                   enable: !row.enable,
                 });
               }}
             >
-              {editStatus ? '禁用' : '启用'}
+              {editStatus ? 'Disabled' : 'Enable'}
             </a>,
           ],
           onChange: setEditableRowKeys,

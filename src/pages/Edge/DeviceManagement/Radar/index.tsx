@@ -7,6 +7,7 @@ import { ProColumns } from '#/typings/pro-component';
 import { ActionType } from '@ant-design/pro-components';
 import React, { FC, useRef } from 'react';
 import CreateRadarModal from './components/CreateRadarModal';
+import { renderNameAndNo } from '#/components/BaseProTable/components/TableHelper';
 
 const fetchDeviceList = async () => {
   const { data } = await deviceList({ pageNum: 1, pageSize: -1 });
@@ -50,14 +51,16 @@ const Radar: FC = () => {
 
   const columns: ProColumns<Device.CameraListItem>[] = [
     {
-      title: t('Radar Name'),
+      title: `${t('Radar Name')}/${t('Serial Number')}`,
       dataIndex: 'name',
       search: true,
+      render: (_, row) => renderNameAndNo(row.name, row.sn),
     },
     {
       title: t('Serial Number'),
       dataIndex: 'sn',
       search: true,
+      hideInTable: true,
     },
     {
       title: t('Radar IP'),

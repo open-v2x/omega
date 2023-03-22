@@ -1,4 +1,4 @@
-import React, { MutableRefObject } from 'react';
+import React, { MutableRefObject, useState } from 'react';
 import type { ActionType } from '@ant-design/pro-table';
 import { Dropdown, MenuProps, Space, TableProps } from 'antd';
 import type { OptionConfig, ToolBarProps } from '@ant-design/pro-table/es/components/ToolBar';
@@ -57,11 +57,13 @@ const BaseProTable: React.FC<BaseProTableType> = props => {
     rowActions,
   } = props;
 
+  const [isScroll, setIsScroll] = useState(false);
+
   /**
    * @description: 获取处理后的columns
    * @return {*}
    */
-  const getColumns = () => {
+  const getColumns = (): ProColumns<any>[] => {
     const rowActionColumns = {
       title: t('Operate'),
       width: 110,
@@ -119,6 +121,7 @@ const BaseProTable: React.FC<BaseProTableType> = props => {
           param.sortDir = createTime === 'ascend' ? 'asc' : 'desc';
         }
         const res = await request?.(param);
+        setIsScroll(res?.total > 5 ? true : false);
         return { data: res?.data, total: res?.total, success: true };
       }}
       params={params}
@@ -130,6 +133,10 @@ const BaseProTable: React.FC<BaseProTableType> = props => {
       toolBarRender={toolBarRender}
       options={options}
       expandable={expandable}
+      editable={editable}
+      formRef={formRef}
+      scroll={isScroll ? { x: 'max-content', y: '50vh' } : { x: 'max-content' }}
+      onDataSourceChange={onDataSourceChange}
     />
   );
 };

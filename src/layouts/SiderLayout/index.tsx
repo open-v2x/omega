@@ -16,12 +16,15 @@ import { PageLoading } from '@ant-design/pro-components';
 const SiderLayout: FC = () => {
   const menuStore = useMenuStore();
   const reload = useRootStore(state => state.reload);
-  const { setReload } = useRootStore();
+  const inited = useRootStore(state => state.inited);
+  const rootStore = useRootStore();
 
   useEffect(() => {
     if (reload) {
       setTimeout(() => {
-        setReload(false);
+        rootStore.setState({
+          reload: false,
+        });
       }, 0);
     }
   }, [reload]);
@@ -46,7 +49,7 @@ const SiderLayout: FC = () => {
         <Sider
           className={styles['menu-container']}
           collapsed={toggle}
-          width={246}
+          width={240}
           collapsedWidth={56}
           theme={'light'}
         >
@@ -61,7 +64,7 @@ const SiderLayout: FC = () => {
           </div>
         </Sider>
         <Content className={styles['content-container']}>
-          {reload ? <PageLoading /> : <Outlet />}
+          {inited && reload ? <PageLoading /> : <Outlet />}
         </Content>
       </Layout>
       <GlobalSetting />

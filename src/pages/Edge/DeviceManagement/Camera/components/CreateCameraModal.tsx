@@ -1,4 +1,3 @@
-import Country from '#/components/Country';
 import FormItem from '#/components/FormItem';
 import Modal from '#/components/Modal';
 import { LatReg, LngReg } from '#/constants/edge';
@@ -55,7 +54,6 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
       children: [
         {
           required: true,
-          width: 'xl',
           name: 'streamUrl',
           label: t('Video Stream URL'),
           disabled: isDetails,
@@ -65,6 +63,13 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
               message: t('Please enter video stream URL'),
             },
           ],
+        },
+        {
+          type: 'select',
+          name: 'rsuId',
+          label: t('Associate RSU'),
+          disabled: isDetails,
+          request: fetchDeviceListInModal,
         },
       ],
     },
@@ -118,33 +123,6 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
       ],
     },
     {
-      key: 'rsuId',
-      children: [
-        {
-          type: 'select',
-          name: 'rsuId',
-          label: t('Associate RSU'),
-          disabled: isDetails,
-          request: fetchDeviceListInModal,
-        },
-        {
-          name: 'province',
-          required: true,
-          components: (
-            <Country
-              key="province"
-              required
-              width="lg"
-              label={t('Installation Area')}
-              name="province"
-              params={{ cascade: true, needIntersection: true }}
-              rules={[{ required: true, message: t('Please select an installation area') }]}
-            />
-          ),
-        },
-      ],
-    },
-    {
       key: 'desc',
       children: [
         {
@@ -172,8 +150,7 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
       createTrigger={t('Add {{type}}', { type: lowerType })}
       editTrigger={isDetails ? t('Details') : ''}
       modalProps={{ className: 'overflow' }}
-      submitForm={async ({ province, ...values }) => {
-        values.intersectionCode = province!.pop()!;
+      submitForm={async values => {
         values.rsuId = values.rsuId || null;
         values.rsuName = values.rsuName || null;
         if (editInfo) {
@@ -185,12 +162,7 @@ const CreateCameraModal: React.FC<CreateModalProps> = ({
       }}
       editId={editInfo?.id}
       isDetails={isDetails}
-      request={async () => {
-        const { name, sn, streamUrl, lng, lat, elevation, towards, rsuId, desc } = editInfo!;
-        const { provinceCode, countryCode, cityCode, areaCode, intersectionCode } = editInfo;
-        const province = [countryCode!, provinceCode!, cityCode!, areaCode!, intersectionCode!];
-        return { name, sn, streamUrl, lng, lat, elevation, towards, rsuId, desc, province };
-      }}
+      request={async () => editInfo}
     >
       <FormItem items={formItems} />
     </Modal>

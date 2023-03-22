@@ -11,11 +11,10 @@ import Track from '../Events/Track';
 import CongestionWarning from '../Events/CongestionWarning';
 import OverSpeedWarning from '../Events/OverSpeedWarning';
 import SlowerSpeedWarning from '../Events/SlowerSpeedWarning';
+import { useRootStore } from '#/store/root';
 
-const RoadImage: React.FC<{ nodeId: string; intersectionCode: string }> = ({
-  nodeId,
-  intersectionCode,
-}) => {
+const RoadImage: React.FC = () => {
+  const nodeId = useRootStore(state => state.edgeSite.id);
   // 参与者信息
   const [trackData, setTrackData] = useState<any[]>([]);
   const clearTrackData = debounce(() => setTrackData([]), 1000);
@@ -66,23 +65,23 @@ const RoadImage: React.FC<{ nodeId: string; intersectionCode: string }> = ({
 
   const MQTT_TOPIC = {
     // 参与者
-    PARTICIPANT: `V2X/DEVICE/${intersectionCode}/PARTICIPANT/NODE${nodeId}`,
+    PARTICIPANT: `V2X/DEVICE/PARTICIPANT/NODE${nodeId}`,
     // 碰撞
-    CW: `V2X/DEVICE/${intersectionCode}/APPLICATION/CW/NODE${nodeId}`,
+    CW: `V2X/DEVICE/APPLICATION/CW/NODE${nodeId}`,
     // 协同换道
-    CLC: `V2X/DEVICE/${intersectionCode}/APPLICATION/CLC/NODE${nodeId}`,
+    CLC: `V2X/DEVICE/APPLICATION/CLC/NODE${nodeId}`,
     // 逆行超车
-    DNP: `V2X/DEVICE/${intersectionCode}/APPLICATION/DNP/NODE${nodeId}`,
+    DNP: `V2X/DEVICE/APPLICATION/DNP/NODE${nodeId}`,
     // 数据共享
-    SDS: `V2X/DEVICE/${intersectionCode}/APPLICATION/SDS/NODE${nodeId}`,
+    SDS: `V2X/DEVICE/APPLICATION/SDS/NODE${nodeId}`,
     // 逆向数据
-    RDW: `V2X/DEVICE/${intersectionCode}/APPLICATION/RDW/NODE${nodeId}`,
+    RDW: `V2X/DEVICE/APPLICATION/RDW/NODE${nodeId}`,
     // 拥堵数据
-    CONGESTION: `V2X/DEVICE/${intersectionCode}/APPLICATION/CGW/NODE${nodeId}`,
+    CONGESTION: `V2X/DEVICE/APPLICATION/CGW/NODE${nodeId}`,
     // 超速
-    OSW: `V2X/DEVICE/${intersectionCode}/APPLICATION/OSW/NODE${nodeId}`,
+    OSW: `V2X/DEVICE/APPLICATION/OSW/NODE${nodeId}`,
     // 慢行
-    SSW: `V2X/DEVICE/${intersectionCode}/APPLICATION/SSW/NODE${nodeId}`,
+    SSW: `V2X/DEVICE/APPLICATION/SSW/NODE${nodeId}`,
   };
 
   const subscribeMQTT = (mqtt, mqttTopic, setData, clearData) => {

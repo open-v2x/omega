@@ -194,6 +194,7 @@
   "Number Of Releases": "Number Of Releases",
   "MAP Data File": "MAP Data File",
   "MAP Preview": "MAP Preview",
+  "Map Management": "Map Management",
   "Preview": "Preview",
   "Issue RSU": "Issue RSU",
   "Forwarding Limit": "Forwarding Limit",
@@ -551,5 +552,6 @@
   "Enter the intersection": "Enter the intersection",
   "Edge Site": "Edge site",
   "Search": "Search",
-  "More": "More"
+  "More": "More",
+  "Not authenticated": "Not authenticated"
 }

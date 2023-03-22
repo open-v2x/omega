@@ -10,6 +10,7 @@ import React, { FC, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CreateDeviceModal from '../CreateDeviceModal';
 import { ProColumns } from '#/typings/pro-component';
+import { renderNameAndNo } from '#/components/BaseProTable/components/TableHelper';
 
 const RegisteredList: FC = () => {
   const navigate = useNavigate();
@@ -17,21 +18,7 @@ const RegisteredList: FC = () => {
 
   const moreActions = (row: Device.DeviceListItem) => [
     {
-      key: '1',
-      label: (
-        <Button
-          type="link"
-          id="detailButton"
-          key="details"
-          size="small"
-          onClick={() => navigate(`/device/rsu/details/${row.id}`)}
-        >
-          {t('Details')}
-        </Button>
-      ),
-    },
-    {
-      key: '2',
+      key: 'disabled',
       label: (
         <Button
           id="enableDisableButton"
@@ -58,7 +45,7 @@ const RegisteredList: FC = () => {
       ),
     },
     {
-      key: '3',
+      key: 'delete',
       label: (
         <Button
           type="link"
@@ -82,14 +69,10 @@ const RegisteredList: FC = () => {
 
   const columns: ProColumns<Device.DeviceListItem>[] = [
     {
-      title: `${t('RSU ID')}/${t('RSU Name')}`,
-      dataIndex: 'rsuId',
-      render: (_, row) => (
-        <span>
-          <div>{row.rsuId}</div>
-          <div>{row.rsuName}</div>
-        </span>
-      ),
+      title: `${t('RSU Name')}/${t('RSU ID')}`,
+      dataIndex: 'rsuName',
+      render: (_, row) =>
+        renderNameAndNo(row.rsuName, row.rsuId, () => navigate(`/device/rsu/details/${row.id}`)),
     },
     {
       title: t('Serial Number'),

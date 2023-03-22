@@ -1,4 +1,3 @@
-import Country from '#/components/Country';
 import FormItem from '#/components/FormItem';
 import Modal from '#/components/Modal';
 import { IPReg, LatReg, LngReg } from '#/constants/edge';
@@ -155,25 +154,6 @@ const CreateLidarModal: React.FC<CreateModalProps> = ({ editInfo, isDetails = fa
       ],
     },
     {
-      key: 'province',
-      children: [
-        {
-          name: 'province',
-          components: (
-            <Country
-              key="province"
-              required
-              width="lg"
-              label={t('Installation Area')}
-              name="province"
-              params={{ cascade: true, needIntersection: true }}
-              rules={[{ required: true, message: t('Please select an installation area') }]}
-            />
-          ),
-        },
-      ],
-    },
-    {
       key: 'desc',
       children: [
         {
@@ -201,8 +181,7 @@ const CreateLidarModal: React.FC<CreateModalProps> = ({ editInfo, isDetails = fa
       createTrigger={t('Add {{type}}', { type: lowerType })}
       editTrigger={isDetails ? t('Details') : ''}
       modalProps={{ className: 'overflow' }}
-      submitForm={async ({ province, ...values }) => {
-        values.intersectionCode = province!.pop()!;
+      submitForm={async values => {
         if (editInfo) {
           values.rsuId = values.rsuId || null;
           values.rsuName = values.rsuName || null;
@@ -214,14 +193,7 @@ const CreateLidarModal: React.FC<CreateModalProps> = ({ editInfo, isDetails = fa
       }}
       editId={editInfo?.id}
       isDetails={isDetails}
-      request={async () => {
-        const { provinceCode, countryCode, cityCode, areaCode, intersectionCode } = editInfo;
-        const province = [countryCode!, provinceCode!, cityCode!, areaCode!, intersectionCode!];
-        return {
-          province,
-          ...editInfo,
-        };
-      }}
+      request={async () => editInfo}
     >
       <FormItem items={formItems} />
     </Modal>

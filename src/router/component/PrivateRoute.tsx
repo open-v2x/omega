@@ -1,9 +1,7 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Navigate, RouteProps, useLocation, useNavigate } from 'react-router';
 import { useUserStore } from '#/store/user';
 import { useMenuStore } from '#/store/menu';
-import { getModelDefault } from '#/services/api/center/site';
-import { PageLoading } from '@ant-design/pro-components';
 import { getToken } from '#/utils/storage';
 
 const PrivateRoute: FC<RouteProps> = ({ children }) => {
@@ -33,26 +31,7 @@ const PrivateRoute: FC<RouteProps> = ({ children }) => {
     fetchMenus(location.pathname);
   }
 
-  const initModelDefault = async () => {
-    if (location.pathname === '/center/model') {
-      const { intersectionCode, intersectionID, nodeID } = await getModelDefault();
-      navigate(`/center/map?type=1&code=${intersectionCode}&id=${intersectionID}&nodeId=${nodeID}`);
-    }
-  };
-
-  useEffect(() => {
-    initModelDefault();
-  }, [location.pathname]);
-
-  return getToken() ? (
-    location.pathname === '/center/model' ? (
-      <PageLoading />
-    ) : (
-      <div>{children}</div>
-    )
-  ) : (
-    <Navigate to="/user/login" />
-  );
+  return getToken() ? <div>{children}</div> : <Navigate to="/user/login" />;
 };
 
 export default PrivateRoute;
