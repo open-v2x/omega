@@ -40,13 +40,14 @@ export async function getMapDetail(id: number) {
 }
 
 export async function updateMapDetail(id: number, params: Config.MapConfigParams) {
+  console.log('更新', params);
   return apiService.patch(`v1/maps/${id}`, params);
 }
 
 // 上传 Bitmap 位图
 export async function uploadBitmap(bitmap: RcFile) {
   return apiService.post<any>(
-    `v1/intersections/bitmap`,
+    `v1/maps/bitmap`,
     { bitmap },
     {
       headers: {
