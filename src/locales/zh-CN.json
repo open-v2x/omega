@@ -554,5 +554,6 @@
   "Edge Site": "边缘站点",
   "Search": "查询",
   "More": "更多",
-  "Not authenticated": "登录失效，请重新登录！"
+  "Not authenticated": "登录失效，请重新登录！",
+  "version error": "算法版本 {{v}} 已经存在"
 }
