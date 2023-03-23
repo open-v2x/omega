@@ -553,5 +553,6 @@
   "Edge Site": "Edge site",
   "Search": "Search",
   "More": "More",
-  "Not authenticated": "Not authenticated"
+  "Not authenticated": "Not authenticated",
+  "version error": "Version {{v}} already exist"
 }
