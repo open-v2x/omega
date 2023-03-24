@@ -1,6 +1,6 @@
 import { Space, Table } from 'antd';
 import React from 'react';
-import styles from './controlTable.module.less';
+import styles from './index.module.less';
 import { useCenterStore } from '#/store/center';
 import { CaretRightOutlined } from '@ant-design/icons';
 

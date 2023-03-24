@@ -14,17 +14,14 @@ interface ICenterStore {
   setCurrentRsuByRsuId: (id: string | number | undefined) => void;
   // 路口下所有摄像头
   cameras: any[];
-  showCamera: boolean;
   cameraUrl: string;
+  isCameraFullscreen: boolean;
   fetchCameras: () => void;
-  setShowCamera: (url: string) => void;
-
   //   路口下所有激光雷达
   lidars: any[];
   cloudPointUrl: string;
-  showCloudPoint: boolean;
+  isCloudPointFullscreen: boolean;
   fetchLidars: () => void;
-  setShowCloudPoint: (url: string) => void;
 }
 
 const useCenterStore = create<ICenterStore>((set, get) => ({
@@ -58,7 +55,7 @@ const useCenterStore = create<ICenterStore>((set, get) => ({
   },
 
   cameras: [],
-  showCamera: false,
+  isCameraFullscreen: false,
   cameraUrl: undefined,
   fetchCameras: async () => {
     const rsuId = get().currentRSU?.rsuId || undefined;
@@ -73,27 +70,15 @@ const useCenterStore = create<ICenterStore>((set, get) => ({
       cameras: result,
     });
   },
-  setShowCamera: url => {
-    set({
-      showCamera: url ? true : false,
-      cameraUrl: url,
-    });
-  },
 
   lidars: [],
   cloudPointUrl: undefined,
-  showCloudPoint: false,
+  isCloudPointFullscreen: false,
   fetchLidars: async () => {
     const rsuId = get().currentRSU?.rsuId || undefined;
     const { data } = await lidarList({ rsuId });
     set({
       lidars: data,
-    });
-  },
-  setShowCloudPoint: url => {
-    set({
-      showCloudPoint: url ? true : false,
-      cloudPointUrl: url,
     });
   },
 }));

@@ -1,7 +1,7 @@
 import { useCenterStore } from '#/store/center';
 import { Select } from 'antd';
 import React from 'react';
-import styles from './controlRsu.module.less';
+import styles from './index.module.less';
 
 const ControlRsu: React.FC = () => {
   const { setCurrentRsuByRsuId } = useCenterStore();
