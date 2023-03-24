@@ -13,27 +13,28 @@ import IntersectionInformation from '#/pages/TrafficScreen/components/Intersecti
 import classNames from 'classnames';
 import styles from './index.module.less';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
-import LiveStreamModule from '../../components/LiveStreamModule';
-import CloudPointModule from '../../components/CloudPointModule';
+import LiveStreamModule from '#/pages/TrafficScreen/components/LiveStreamModule';
+import CloudPointModule from '#/pages/TrafficScreen/components/CloudPointModule';
 
 const IntersectionMap: React.FC = () => {
   const [searchParams] = useSearchParams();
   const type = searchParams.get('type');
 
-  const [show, setShow] = useState(true);
+  const [showRight, setShowRight] = useState(true);
+  const [showLeft, setShowLeft] = useState(true);
 
   const cameraModalRef: any = useRef(null);
   const cloudPointModalRef: any = useRef(null);
   const centerStore = useCenterStore();
 
-  const showLive = useCenterStore(state => state.isCameraFullscreen);
+  const isLiveStreamFullscreen = useCenterStore(state => state.isLiveStreamFullscreen);
   const isCloudPointFullscreen = useCenterStore(state => state.isCloudPointFullscreen);
 
   useEffect(() => {
-    if (showLive) {
+    if (isLiveStreamFullscreen) {
       cameraModalRef.current?.handleShowModal();
     }
-  }, [showLive]);
+  }, [isLiveStreamFullscreen]);
 
   useEffect(() => {
     if (isCloudPointFullscreen) {
@@ -49,36 +50,45 @@ const IntersectionMap: React.FC = () => {
           {type === '1' && <RoadMap />}
           {type === '2' && <RoadMapXml />}
           <>
-            <div className={classNames(styles.right, show ? styles.show : styles.hide)}>
-              <a className={styles['right-icon']} onClick={() => setShow(!show)}>
-                {show ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            <div className={classNames(styles.left, showLeft ? styles.show : styles.hide)}>
+              <a className={styles['left-icon']} onClick={() => setShowLeft(!showLeft)}>
+                {showLeft ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
+              </a>
+              <div className={styles['left-content']}>
+                <IntersectionInformation
+                  className={showLeft ? styles['left-show'] : styles['left-hide']}
+                />
+              </div>
+            </div>
+            <div className={classNames(styles.right, showRight ? styles.show : styles.hide)}>
+              <a className={styles['right-icon']} onClick={() => setShowRight(!showRight)}>
+                {showRight ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
               </a>
               <div className={styles['right-content']}>
                 <DeviceOnlineRate
-                  className={show ? styles['device-show'] : styles['device-hide']}
+                  className={showRight ? styles['right-show'] : styles['right-hide']}
                 />
                 <LiveStreamModule />
                 <CloudPointModule />
               </div>
             </div>
-            <IntersectionInformation />
 
             <DisplayModal
               ref={cameraModalRef}
               title={`${t('Show Camera')}`}
               width={800}
-              component={<LiveStream url={centerStore.cameraUrl} />}
+              component={<LiveStream url={centerStore.liveStreamUrl} />}
               footer={null}
               showFullscreen
               onCloseCallback={() => {
                 centerStore.setState({
-                  isCameraFullscreen: false,
-                  cameraUrl: undefined,
+                  isLiveStreamFullscreen: false,
+                  liveStreamUrl: undefined,
                 });
               }}
               onFullscreenCallback={() =>
                 centerStore.setState({
-                  isCameraFullscreen: false,
+                  isLiveStreamFullscreen: false,
                 })
               }
             />
