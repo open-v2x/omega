@@ -145,11 +145,11 @@ const EditMapModal: React.FC<CreateModalProps> = ({ editId, success }) => {
       children: [
         {
           type: 'uploadButton',
-          required: editId ? false : true,
+          required: true,
           width: 912,
           name: 'data',
           label: <UploadLabel />,
-          rules: [{ required: editId ? false : true, message: t('Please upload a MAP data file') }],
+          rules: [{ required: true, message: t('Please upload a MAP data file') }],
           fieldProps: UploadFieldProps,
           title: t('Upload files'),
           icon: <CloudUploadOutlined />,
@@ -164,14 +164,12 @@ const EditMapModal: React.FC<CreateModalProps> = ({ editId, success }) => {
           components: (
             <Form.Item
               key="bitmap"
-              required={editId ? false : true}
               name={'bitmapFilename'}
               valuePropName="fileList"
               getValueFromEvent={normFile}
               label={t('Upload Bitmap')}
               rules={[
                 {
-                  required: editId ? false : true,
                   message: t('Please upload a Bitmap image'),
                 },
               ]}

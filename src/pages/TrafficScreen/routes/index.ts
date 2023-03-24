@@ -10,7 +10,7 @@ const routes = [
   {
     path: PATH,
     breadcrumbName: 'Traffic screen',
-    component: lazy(() => import('#/layouts/SiderLayout')),
+    component: lazy(() => import('#/layouts/BlankLayout')),
     layout: true,
     auth: true,
     children: [

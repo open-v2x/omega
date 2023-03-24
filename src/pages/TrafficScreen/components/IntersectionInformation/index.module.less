@@ -1,0 +1,33 @@
+.intersection {
+  position: relative;
+  color: white;
+  background-color: #39546f90;
+  border-radius: 5px;
+  padding: 5px 20px;
+
+  &-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 20px;
+
+    > div {
+      &:first-child {
+        flex: 1;
+      }
+
+      &:last-child {
+        flex: 1.5;
+      }
+    }
+  }
+
+  .mb-10 {
+    margin-bottom: 10px;
+  }
+}
