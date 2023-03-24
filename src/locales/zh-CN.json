@@ -459,7 +459,6 @@
   "Intersection information": "路口信息",
   "Not connected": "未接入",
   "Total": "总计",
-  "OpenV2X Central Portal": "云控中心",
   "Please select an edge location": "请选择边缘站点",
   "EDGE_SITE_TIPS": "选择需查看的边缘站点，点击‘{{value}}’，可查看该站点的路口信息",
   "Go to [Regional Edge Portal]": "前往【区域 Edge Portal】",

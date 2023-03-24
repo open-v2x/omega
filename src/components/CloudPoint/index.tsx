@@ -138,6 +138,7 @@ const CloudPoint: React.FC<CloudPointProps> = (props: CloudPointProps) => {
     window.addEventListener('resize', onWindowResize, false);
     return () => {
       window.removeEventListener('resize', onWindowResize, false);
+      ws.current.close();
     };
   }, []);
 

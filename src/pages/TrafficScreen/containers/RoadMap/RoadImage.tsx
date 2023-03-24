@@ -2,15 +2,15 @@ import { MQTT } from '#/utils/mqtt';
 import { debounce } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Layer, Stage } from 'react-konva';
-import RetrogradeWarning from '../Events/RetrogradeWarning';
-import DataSharing from '../Events/DataSharing';
-import ReverseOvertaking from '../Events/ReverseOvertaking';
-import ChangeLanes from '../Events/ChangeLanes';
-import EventWarnLine from '../Events/EventWarnLine';
-import Track from '../Events/Track';
-import CongestionWarning from '../Events/CongestionWarning';
-import OverSpeedWarning from '../Events/OverSpeedWarning';
-import SlowerSpeedWarning from '../Events/SlowerSpeedWarning';
+import RetrogradeWarning from '#/pages/TrafficScreen/components/Events/RetrogradeWarning';
+import DataSharing from '#/pages/TrafficScreen/components/Events/DataSharing';
+import ReverseOvertaking from '#/pages/TrafficScreen/components/Events/ReverseOvertaking';
+import ChangeLanes from '#/pages/TrafficScreen/components/Events/ChangeLanes';
+import EventWarnLine from '#/pages/TrafficScreen/components/Events/EventWarnLine';
+import Track from '#/pages/TrafficScreen/components/Events/Track';
+import CongestionWarning from '#/pages/TrafficScreen/components/Events/CongestionWarning';
+import OverSpeedWarning from '#/pages/TrafficScreen/components/Events/OverSpeedWarning';
+import SlowerSpeedWarning from '#/pages/TrafficScreen/components/Events/SlowerSpeedWarning';
 import { useRootStore } from '#/store/root';
 
 const RoadImage: React.FC = () => {
