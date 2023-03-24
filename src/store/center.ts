@@ -14,8 +14,8 @@ interface ICenterStore {
   setCurrentRsuByRsuId: (id: string | number | undefined) => void;
   // 路口下所有摄像头
   cameras: any[];
-  cameraUrl: string;
-  isCameraFullscreen: boolean;
+  liveStreamUrl: string;
+  isLiveStreamFullscreen: boolean;
   fetchCameras: () => void;
   //   路口下所有激光雷达
   lidars: any[];
@@ -55,8 +55,8 @@ const useCenterStore = create<ICenterStore>((set, get) => ({
   },
 
   cameras: [],
-  isCameraFullscreen: false,
-  cameraUrl: undefined,
+  isLiveStreamFullscreen: false,
+  liveStreamUrl: undefined,
   fetchCameras: async () => {
     const rsuId = get().currentRSU?.rsuId || undefined;
     const { data } = await cameraList({ rsuId });

@@ -53,14 +53,14 @@ const DeviceOnlineRate: React.FC<{ className: string }> = ({ className: cName })
 
   const handleClickCamera = params => {
     useCenterStore.setState({
-      cameraUrl: params.streamUrl,
+      liveStreamUrl: params.streamUrl,
       cloudPointUrl: undefined,
     });
   };
 
   const handleClickLidar = params => {
     useCenterStore.setState({
-      cameraUrl: undefined,
+      liveStreamUrl: undefined,
       cloudPointUrl: params.wsUrl,
     });
   };

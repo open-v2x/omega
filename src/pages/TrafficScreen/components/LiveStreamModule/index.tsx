@@ -4,27 +4,27 @@ import ModalContainer from '../ModalContainer';
 import LiveStream from '#/components/LiveStream';
 
 const LiveStreamModule: React.FC = () => {
-  const isCameraFullScreen = useCenterStore(state => state.isCameraFullscreen);
-  const cameraUrl = useCenterStore(state => state.cameraUrl);
+  const isLiveStreamFullscreen = useCenterStore(state => state.isLiveStreamFullscreen);
+  const liveStreamUrl = useCenterStore(state => state.liveStreamUrl);
 
   const handleFullscreenCamera = () => {
     useCenterStore.setState({
-      isCameraFullscreen: true,
+      isLiveStreamFullscreen: true,
     });
   };
 
   const handleCloseCamera = () => {
     useCenterStore.setState({
-      cameraUrl: undefined,
+      liveStreamUrl: undefined,
     });
   };
 
   return (
     <ModalContainer
-      show={cameraUrl && !isCameraFullScreen}
+      show={liveStreamUrl && !isLiveStreamFullscreen}
       fullscreenCallback={handleFullscreenCamera}
       closeCallback={handleCloseCamera}
-      component={<LiveStream url={cameraUrl} />}
+      component={<LiveStream url={liveStreamUrl} />}
     />
   );
 };

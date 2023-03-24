@@ -4,11 +4,9 @@ import { useEffect, useState } from 'react';
 import styles from './index.module.less';
 
 import React from 'react';
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
 // 路口信息
-const IntersectionInformation: React.FC = () => {
-  const [show, setShow] = useState(true);
+const IntersectionInformation: React.FC<{ className: string }> = ({ className: cName }) => {
   const [info, setInfo] = useState<Center.RouteInfoItem>({
     vehicleTotal: 0,
     averageSpeed: 0,
@@ -32,33 +30,23 @@ const IntersectionInformation: React.FC = () => {
     congestion: t('Congestion'),
   };
   return (
-    <div className={classNames(styles['i-container'], show ? styles.show : styles.hide)}>
-      <a className={styles['left-icon']} onClick={() => setShow(!show)}>
-        {show ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
-      </a>
-      <div
-        className={classNames(
-          styles.intersection,
-          show ? styles['intersection-show'] : styles['intersection-hide'],
-        )}
-      >
-        <div className={styles['intersection-title']}>{t('Intersection information')}</div>
-        <div>
-          <div className={classNames(styles.wrapper, styles['mb-10'])}>
-            <div>
-              {t('Vehicles (unit)')}: {info.vehicleTotal || 0}
-            </div>
-            <div>
-              {t('Average speed (km/h)')}: {info.averageSpeed || 0}
-            </div>
+    <div className={classNames(styles.intersection, cName)}>
+      <div className={styles['intersection-title']}>{t('Intersection information')}</div>
+      <div>
+        <div className={classNames(styles.wrapper, styles['mb-10'])}>
+          <div>
+            {t('Vehicles (unit)')}: {info.vehicleTotal || 0}
           </div>
-          <div className={styles.wrapper}>
-            <div>
-              {t('Pedestrians')}: {info.pedestrianTotal || 0}
-            </div>
-            <div>
-              {t('Congestion situation')}: {congestionMap[info.congestion] || ''}
-            </div>
+          <div>
+            {t('Average speed (km/h)')}: {info.averageSpeed || 0}
+          </div>
+        </div>
+        <div className={styles.wrapper}>
+          <div>
+            {t('Pedestrians')}: {info.pedestrianTotal || 0}
+          </div>
+          <div>
+            {t('Congestion situation')}: {congestionMap[info.congestion] || ''}
           </div>
         </div>
       </div>

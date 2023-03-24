@@ -1,10 +1,53 @@
-.right {
+.right,
+.left {
   position: absolute;
   top: 80px;
-  right: 20px;
-  width: 30vw;
   height: calc(100vh - 80px);
   overflow-y: auto;
+}
+
+.left {
+  left: 20px;
+  width: 25vw;
+
+  &-icon {
+    position: absolute;
+    top: 10px;
+    color: #2feeff;
+    font-size: 24px;
+    right: 0;
+  }
+
+  &-content {
+    color: white;
+    position: relative;
+    margin: 0 30px 0 0;
+  }
+
+  &.show {
+    transform: translateX(0);
+    transition: all 1s ease-in-out;
+  }
+
+  &.hide {
+    transform: translateX(calc(-100% + 10px));
+    transition: all 1s ease-in-out;
+  }
+
+  &-show {
+    visibility: visible;
+    transition: all 1s ease-in-out;
+  }
+
+  &-hide {
+    visibility: hidden;
+    transition: all 1s ease-in-out;
+  }
+}
+
+.right {
+  right: 20px;
+  width: 30vw;
 
   &-icon {
     position: absolute;
@@ -19,12 +62,12 @@
     margin: 0 0 0 30px;
   }
 
-  .right-show {
+  &-show {
     visibility: visible;
     transition: all 1s ease-in-out;
   }
 
-  .right-hide {
+  &-hide {
     visibility: hidden;
     transition: all 1s ease-in-out;
   }
