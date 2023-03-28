@@ -15,10 +15,13 @@ import styles from './index.module.less';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import LiveStreamModule from '#/pages/TrafficScreen/components/LiveStreamModule';
 import CloudPointModule from '#/pages/TrafficScreen/components/CloudPointModule';
+import { useRootStore } from '#/store/root';
+import { PageLoading } from '@ant-design/pro-components';
 
 const IntersectionMap: React.FC = () => {
   const [searchParams] = useSearchParams();
   const type = searchParams.get('type');
+  const { getNodeId } = useRootStore();
 
   const [showRight, setShowRight] = useState(true);
   const [showLeft, setShowLeft] = useState(true);
@@ -42,7 +45,7 @@ const IntersectionMap: React.FC = () => {
     }
   }, [isCloudPointFullscreen]);
 
-  return (
+  return getNodeId ? (
     <BgContainer>
       <PlatformHeader back />
       {
@@ -123,6 +126,8 @@ const IntersectionMap: React.FC = () => {
         </div>
       }
     </BgContainer>
+  ) : (
+    <PageLoading />
   );
 };
 

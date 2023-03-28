@@ -44,7 +44,12 @@ const EditMapModal: React.FC<CreateModalProps> = ({ editId, success }) => {
       const reader = new FileReader();
       reader.readAsText(file);
       reader.onload = () => {
-        setMapData(JSON.parse(reader.result as string));
+        try {
+          const data = JSON.parse(reader.result as string);
+          setMapData(data);
+        } catch (error) {
+          message.error('JSON parse error');
+        }
       };
       return false;
     },

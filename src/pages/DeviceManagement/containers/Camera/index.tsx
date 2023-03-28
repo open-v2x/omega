@@ -45,9 +45,14 @@ const CameraManagement: FC = () => {
     {
       title: `${t('Camera Name')}/${t('Serial Number')}`,
       dataIndex: 'name',
-      search: true,
       render: (_, row) =>
         renderNameAndNo(row.name, row.sn, () => navigate(`/device/camera/details/${row.id}`)),
+    },
+    {
+      title: t('Camera Name'),
+      dataIndex: 'name',
+      search: true,
+      hiddenInTable: true,
     },
     {
       title: t('Video Stream URL'),

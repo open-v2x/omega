@@ -6,7 +6,7 @@ declare namespace Center {
   };
 
   type EdgeSiteItem = {
-    id: number;
+    id: number | string;
     name: string;
     ip: string;
   };

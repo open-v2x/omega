@@ -547,5 +547,6 @@
   "Search": "Search",
   "More": "More",
   "Not authenticated": "Not authenticated",
-  "version error": "Version {{v}} already exist"
+  "version error": "Version {{v}} already exist",
+  "Select": "Select"
 }

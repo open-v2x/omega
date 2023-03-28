@@ -34,13 +34,12 @@ const Radar: FC = () => {
     {
       title: `${t('Radar Name')}/${t('Serial Number')}`,
       dataIndex: 'name',
-      search: true,
       render: (_, row) =>
         renderNameAndNo(row.name, row.sn, () => navigate(`/device/radar/details/${row.id}`)),
     },
     {
-      title: t('Serial Number'),
-      dataIndex: 'sn',
+      title: t('Radar Name'),
+      dataIndex: 'name',
       search: true,
       hideInTable: true,
     },
