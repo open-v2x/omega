@@ -18,6 +18,7 @@ export default function RightContent() {
       edgeSite: edge,
       reload: true,
     });
+    rootStore.setNodeId(edge.nodeId);
   };
 
   const renderRegion = () => (
@@ -52,6 +53,7 @@ export default function RightContent() {
       rootStore.setState({
         edgeSite: data[0],
       });
+      rootStore.setNodeId(`${data[0].id}`);
     }
     rootStore.setState({
       inited: true,

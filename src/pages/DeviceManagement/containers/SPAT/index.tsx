@@ -45,11 +45,16 @@ const SpatManagement: React.FC = () => {
     {
       title: `${t('SPAT Name')}/${t('Serial Number')}`,
       dataIndex: 'name',
-      search: true,
       render: (_, row) =>
         renderNameAndNo(row.name, row.intersectionId, () =>
           navigate(`/device/spat/details/${row.id}`),
         ),
+    },
+    {
+      title: t('SPAT Name'),
+      dataIndex: 'name',
+      search: true,
+      hiddenInTable: true,
     },
     {
       title: t('SPAT IP'),

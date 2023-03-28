@@ -1,4 +1,5 @@
 import { BrowserHistory, createBrowserHistory } from 'history';
+import Cookies from 'js-cookie';
 import create from 'zustand';
 interface IRootStore {
   showHeader: boolean;
@@ -9,6 +10,8 @@ interface IRootStore {
   reload: boolean;
   setState: (params: any) => void;
   inited: boolean;
+  setNodeId: (id: string) => void;
+  getNodeId: () => string | number;
 }
 
 const useRootStore = create<IRootStore>((set, get) => ({
@@ -23,7 +26,7 @@ const useRootStore = create<IRootStore>((set, get) => ({
   edgeSite: {
     name: '',
     ip: '',
-    id: -1,
+    id: undefined,
   },
   reload: false,
   inited: false,
@@ -31,6 +34,15 @@ const useRootStore = create<IRootStore>((set, get) => ({
     set({
       ...params,
     });
+  },
+  setNodeId: (id: string) => {
+    Cookies.set('nodeId', id);
+  },
+  getNodeId: () => {
+    if (get().edgeSite.id) {
+      return get().edgeSite.id;
+    }
+    return Cookies.get('nodeId') || undefined;
   },
 }));
 
