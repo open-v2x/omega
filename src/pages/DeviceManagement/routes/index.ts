@@ -47,7 +47,6 @@ const routes = [
             ),
         ),
       },
-
       {
         path: `${PATH}/camera`,
         breadcrumbName: 'Camera Device',
@@ -56,6 +55,17 @@ const routes = [
             import(
               /* webpackChunkName: "edge_device_camera",webpackPrefetch: true */
               '#/pages/DeviceManagement/containers/Camera'
+            ),
+        ),
+      },
+      {
+        path: `${PATH}/camera/details/:id`,
+        breadcrumbName: 'Camera Device Details',
+        component: lazy(
+          () =>
+            import(
+              /* webpackChunkName: "edge_device_camera",webpackPrefetch: true */
+              '#/pages/DeviceManagement/containers/Camera/Detail'
             ),
         ),
       },
@@ -71,6 +81,17 @@ const routes = [
         ),
       },
       {
+        path: `${PATH}/radar/details/:id`,
+        breadcrumbName: 'Radar Device Detail',
+        component: lazy(
+          () =>
+            import(
+              /* webpackChunkName: "edge_device_radar",webpackPrefetch: true */
+              '#/pages/DeviceManagement/containers/Radar/Detail'
+            ),
+        ),
+      },
+      {
         path: `${PATH}/lidar`,
         breadcrumbName: 'Lidar Device',
         component: lazy(
@@ -82,6 +103,17 @@ const routes = [
         ),
       },
       {
+        path: `${PATH}/lidar/details/:id`,
+        breadcrumbName: 'Lidar Device Detail',
+        component: lazy(
+          () =>
+            import(
+              /* webpackChunkName: "edge_device_lidar",webpackPrefetch: true */
+              '#/pages/DeviceManagement/containers/Lidar/Detail'
+            ),
+        ),
+      },
+      {
         path: `${PATH}/spat`,
         breadcrumbName: 'SPAT Device',
         component: lazy(
@@ -89,6 +121,17 @@ const routes = [
             import(
               /* webpackChunkName: "edge_device_spat",webpackPrefetch: true */
               '#/pages/DeviceManagement/containers/SPAT'
+            ),
+        ),
+      },
+      {
+        path: `${PATH}/spat/details/:id`,
+        breadcrumbName: 'SPAT Device Detail',
+        component: lazy(
+          () =>
+            import(
+              /* webpackChunkName: "edge_device_spat",webpackPrefetch: true */
+              '#/pages/DeviceManagement/containers/SPAT/Detail'
             ),
         ),
       },

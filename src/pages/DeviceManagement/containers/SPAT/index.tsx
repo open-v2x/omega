@@ -1,6 +1,5 @@
 import BaseContainer from '#/components/BaseContainer';
 import BaseProTable from '#/components/BaseProTable';
-import { confirmModal } from '#/components/ConfirmModal';
 import OnlineStatus from '#/components/OnlineStatus';
 import { DeviceOnlineStatusOptions, DeviceStatusOptions } from '#/constants/edge';
 import { deleteSpat, spatList, updateSpat } from '#/services/api/device/spat';
@@ -10,7 +9,12 @@ import { ActionType } from '@ant-design/pro-components';
 import React, { useRef } from 'react';
 import CreateSpatModal from './components/CreateSpatModal';
 import { deviceList } from '#/services/api/device/device';
-import { renderNameAndNo } from '#/components/BaseProTable/components/TableHelper';
+import {
+  renderDeleteBtn,
+  renderEnableBtn,
+  renderNameAndNo,
+} from '#/components/BaseProTable/components/TableHelper';
+import { useNavigate } from 'react-router';
 
 const fetchDeviceList = async () => {
   const { data } = await deviceList({ pageNum: 1, pageSize: -1 });
@@ -19,67 +23,33 @@ const fetchDeviceList = async () => {
 
 const SpatManagement: React.FC = () => {
   const actionRef = useRef<ActionType>();
+  const navigate = useNavigate();
 
   const moreActions = row => [
     {
       key: 'disbaled',
-      label: (
-        <a
-          style={{ color: row.enabled ? '#E74040' : '' }}
-          onClick={() =>
-            confirmModal({
-              id: row.id,
-              params: { enabled: !row.enabled },
-              title: row.enabled ? t('Disable') : t('Enable'),
-              content: row.enabled
-                ? t('Are you sure you want to disable this device?')
-                : t('Are you sure you want to enable this device?'),
-              successMsg: t('{{value}} successfully', { value: t('Status updated') }),
-              modalFn: updateSpat,
-              actionRef,
-            })
-          }
-        >
-          {row.enabled ? t('Disable') : t('Enable')}
-        </a>
-      ),
-    },
-    {
-      key: 'details',
-      label: (
-        <CreateSpatModal
-          key="details"
-          isDetails
-          editInfo={row}
-          success={() => actionRef.current?.reload()}
-        />
-      ),
+      label: renderEnableBtn(row.id, row.enabled, updateSpat, actionRef),
     },
     {
       key: 'delete',
-      label: (
-        <a
-          onClick={() =>
-            confirmModal({
-              id: row.id,
-              content: t('Are you sure you want to delete this SPAT?'),
-              modalFn: deleteSpat,
-              actionRef,
-            })
-          }
-        >
-          {t('Delete')}
-        </a>
+      label: renderDeleteBtn(
+        row.id,
+        deleteSpat,
+        t('Are you sure you want to delete this SPAT?'),
+        actionRef,
       ),
     },
   ];
 
-  const columns: ProColumns<Device.SpatListItem>[] = [
+  const columns: ProColumns<Device.SpatItem>[] = [
     {
       title: `${t('SPAT Name')}/${t('Serial Number')}`,
       dataIndex: 'name',
       search: true,
-      render: (_, row) => renderNameAndNo(row.name, row.intersectionId),
+      render: (_, row) =>
+        renderNameAndNo(row.name, row.intersectionId, () =>
+          navigate(`/device/spat/details/${row.id}`),
+        ),
     },
     {
       title: t('SPAT IP'),

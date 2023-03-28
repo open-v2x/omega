@@ -1,13 +1,13 @@
 import BaseContainer from '#/components/BaseContainer';
 import BaseProTable from '#/components/BaseProTable';
-import { confirmModal } from '#/components/ConfirmModal';
 import { cameraList, deleteCamera } from '#/services/api/device/camera';
 import { deviceList } from '#/services/api/device/device';
 import { ProColumns } from '#/typings/pro-component';
 import { ActionType } from '@ant-design/pro-components';
 import React, { useRef, FC } from 'react';
 import CreateCameraModal from './components/CreateCameraModal';
-import { renderNameAndNo } from '#/components/BaseProTable/components/TableHelper';
+import { renderDeleteBtn, renderNameAndNo } from '#/components/BaseProTable/components/TableHelper';
+import { useNavigate } from 'react-router';
 
 const fetchDeviceList = async () => {
   const { data } = await deviceList({ pageNum: 1, pageSize: -1 });
@@ -16,6 +16,7 @@ const fetchDeviceList = async () => {
 
 const CameraManagement: FC = () => {
   const actionRef = useRef<ActionType>();
+  const navigate = useNavigate();
 
   const moreActions = row => [
     {
@@ -31,19 +32,11 @@ const CameraManagement: FC = () => {
     },
     {
       key: 'delete',
-      label: (
-        <a
-          onClick={() =>
-            confirmModal({
-              id: row.id,
-              content: t('Are you sure you want to delete this camera?'),
-              modalFn: deleteCamera,
-              actionRef,
-            })
-          }
-        >
-          {t('Delete')}
-        </a>
+      label: renderDeleteBtn(
+        row.id,
+        deleteCamera,
+        t('Are you sure you want to delete this camera?'),
+        actionRef,
       ),
     },
   ];
@@ -54,14 +47,7 @@ const CameraManagement: FC = () => {
       dataIndex: 'name',
       search: true,
       render: (_, row) =>
-        renderNameAndNo(row.name, row.sn, () => (
-          <CreateCameraModal
-            key="details"
-            isDetails
-            editInfo={row}
-            success={() => actionRef.current?.reload()}
-          />
-        )),
+        renderNameAndNo(row.name, row.sn, () => navigate(`/device/camera/details/${row.id}`)),
     },
     {
       title: t('Video Stream URL'),
