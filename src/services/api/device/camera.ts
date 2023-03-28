@@ -16,6 +16,11 @@ export async function deleteCamera(id: number) {
   return apiService.delete(`v1/cameras/${id}`);
 }
 
+// 获取摄像头详情
+export async function getCameraDetail(id: number | string) {
+  return apiService.get<Device.CameraItem>(`v1/cameras/${id}`);
+}
+
 // 摄像头列表
 export async function cameraList({
   countryName,
