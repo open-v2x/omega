@@ -88,7 +88,7 @@ class ServerResponseFailedManager {
 
   handleCodeIsDefault(msg: string) {
     const regex = /^Version .* already exist$/;
-    const match = msg.match(regex);
+    const match = msg?.match(regex);
     if (match) {
       const v = match[0].replace(/^Version (.*) already exist$/, '$1');
       message.error(t('version error', { v }));

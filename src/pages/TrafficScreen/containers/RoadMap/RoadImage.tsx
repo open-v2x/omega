@@ -14,7 +14,7 @@ import SlowerSpeedWarning from '#/pages/TrafficScreen/components/Events/SlowerSp
 import { useRootStore } from '#/store/root';
 
 const RoadImage: React.FC = () => {
-  const nodeId = useRootStore(state => state.edgeSite.id);
+  const nodeId = useRootStore().getNodeId();
   // 参与者信息
   const [trackData, setTrackData] = useState<any[]>([]);
   const clearTrackData = debounce(() => setTrackData([]), 1000);
