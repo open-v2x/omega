@@ -2,7 +2,7 @@ FROM node:14-alpine AS builder
 
 COPY ./ /root/omega/
 WORKDIR /root/omega
-RUN npm i pnpm -g
+RUN npm i pnpm@7.14.0 -g
 RUN  pnpm config set network-timeout 300000 \
   && pnpm install \
   && pnpm run build:prod
