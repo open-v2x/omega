@@ -26,7 +26,7 @@ export default function RightContent() {
       <Select
         value={ip}
         style={{
-          width: '100px',
+          width: '200px',
         }}
         fieldNames={{
           label: 'name',

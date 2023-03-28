@@ -1,16 +1,18 @@
 import BaseProTable from '#/components/BaseProTable';
-import { confirmModal } from '#/components/ConfirmModal';
 import OnlineStatus from '#/components/OnlineStatus';
 import { DeviceOnlineStatusOptions, DeviceStatusOptions } from '#/constants/edge';
 import { deleteDevice, deviceList, updateDevice } from '#/services/api/device/device';
 import { statusOptionFormat } from '#/utils';
 import type { ActionType } from '@ant-design/pro-table';
-import { Button } from 'antd';
 import React, { FC, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CreateDeviceModal from '../CreateDeviceModal';
 import { ProColumns } from '#/typings/pro-component';
-import { renderNameAndNo } from '#/components/BaseProTable/components/TableHelper';
+import {
+  renderDeleteBtn,
+  renderEnableBtn,
+  renderNameAndNo,
+} from '#/components/BaseProTable/components/TableHelper';
 
 const RegisteredList: FC = () => {
   const navigate = useNavigate();
@@ -19,50 +21,15 @@ const RegisteredList: FC = () => {
   const moreActions = (row: Device.DeviceListItem) => [
     {
       key: 'disabled',
-      label: (
-        <Button
-          id="enableDisableButton"
-          key="disabled"
-          type="link"
-          size="small"
-          style={{ color: row.enabled ? '#E74040' : '' }}
-          onClick={() =>
-            confirmModal({
-              id: row.id,
-              params: { enabled: !row.enabled },
-              title: row.enabled ? t('Disable') : t('Enable'),
-              content: row.enabled
-                ? t('Are you sure you want to disable this device?')
-                : t('Are you sure you want to enable this device?'),
-              successMsg: t('{{value}} successfully', { value: t('Status updated') }),
-              modalFn: updateDevice,
-              actionRef,
-            })
-          }
-        >
-          {row.enabled ? t('Disable') : t('Enable')}
-        </Button>
-      ),
+      label: renderEnableBtn(row.id, row.enabled, updateDevice, actionRef),
     },
     {
       key: 'delete',
-      label: (
-        <Button
-          type="link"
-          size="small"
-          id="deleteButton"
-          key="delete"
-          onClick={() =>
-            confirmModal({
-              id: row.id,
-              content: t('Are you sure you want to delete this device?'),
-              modalFn: deleteDevice,
-              actionRef,
-            })
-          }
-        >
-          {t('Delete')}
-        </Button>
+      label: renderDeleteBtn(
+        row.id,
+        deleteDevice,
+        t('Are you sure you want to delete this device?'),
+        actionRef,
       ),
     },
   ];

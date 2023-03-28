@@ -5,11 +5,15 @@ import { ProColumns } from '#/typings/pro-component';
 import { statusOptionFormat } from '#/utils';
 import { DeviceStatusOptions } from '#/constants/edge';
 import CreateLidarModal from './components/CreateLidarModal';
-import { confirmModal } from '#/components/ConfirmModal';
 import { deleteLidar, lidarList, updateLidar } from '#/services/api/device/lidar';
 import BaseContainer from '#/components/BaseContainer';
 import BaseProTable from '#/components/BaseProTable';
-import { renderNameAndNo } from '#/components/BaseProTable/components/TableHelper';
+import {
+  renderDeleteBtn,
+  renderEnableBtn,
+  renderNameAndNo,
+} from '#/components/BaseProTable/components/TableHelper';
+import { useNavigate } from 'react-router-dom';
 const fetchDeviceList = async () => {
   const { data } = await deviceList({ pageNum: 1, pageSize: -1 });
   return data.map(({ id, rsuName }: Device.DeviceListItem) => ({ label: rsuName, value: id }));
@@ -17,58 +21,20 @@ const fetchDeviceList = async () => {
 
 const Lidar: React.FC = () => {
   const actionRef = useRef<ActionType>();
+  const navigate = useNavigate();
 
   const moreActions = row => [
     {
       key: 'disabled',
-      label: (
-        <a
-          style={{ color: row.enabled ? '#E74040' : '' }}
-          onClick={() =>
-            confirmModal({
-              id: row.id,
-              params: { enabled: !row.enabled },
-              title: row.enabled ? t('Disable') : t('Enable'),
-              content: row.enabled
-                ? t('Are you sure you want to disable this device?')
-                : t('Are you sure you want to enable this device?'),
-              successMsg: t('{{value}} successfully', { value: t('Status updated') }),
-              modalFn: updateLidar,
-              actionRef,
-            })
-          }
-        >
-          {row.enabled ? t('Disable') : t('Enable')}
-        </a>
-      ),
-    },
-    {
-      key: 'details',
-      label: (
-        <CreateLidarModal
-          key="details"
-          isDetails
-          editInfo={row}
-          success={() => actionRef.current?.reload()}
-        />
-      ),
+      label: renderEnableBtn(row.id, row.enabled, updateLidar, actionRef),
     },
     {
       key: 'delete',
-      label: (
-        <a
-          key="delete"
-          onClick={() =>
-            confirmModal({
-              id: row.id,
-              content: t('Are you sure you want to delete this lidar?'),
-              modalFn: deleteLidar,
-              actionRef,
-            })
-          }
-        >
-          {t('Delete')}
-        </a>
+      label: renderDeleteBtn(
+        row.id,
+        deleteLidar,
+        t('Are you sure you want to delete this lidar?'),
+        actionRef,
       ),
     },
   ];
@@ -79,7 +45,8 @@ const Lidar: React.FC = () => {
       dataIndex: 'name',
       search: true,
       ellipsis: true,
-      render: (_, row) => renderNameAndNo(row.name, row.sn),
+      render: (_, row) =>
+        renderNameAndNo(row.name, row.sn, () => navigate(`/device/lidar/details/${row.id}`)),
     },
     {
       title: t('Lidar IP'),

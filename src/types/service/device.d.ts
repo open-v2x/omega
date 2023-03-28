@@ -97,6 +97,7 @@ declare namespace Device {
     elevation: number; // 海拔
     towards: number; // 朝向
     desc: string; // 描述
+    rsuName: string;
   };
   type CreateCameraParams = CameraItem & {
     rsuId: number; // 关联 RSU
@@ -111,42 +112,51 @@ declare namespace Device {
     createTime: string; // 创建时间
   };
 
-  // 激光雷达
-  type LidarItem = {
-    name: string;
+  type Radar = {
+    id: number;
     sn: string;
-    rsuId: string;
+    name: string;
+    lng: number;
+    lat: number;
+    elevation: string;
+    towards: string;
+    enable: boolean;
+    rsuId: number;
+    rsuName: string;
+    desc: string;
+    createTime: string;
   };
-  type CreateLidarItem = LidarItem & {
+
+  type LidarItem = Radar & {
     lidarIP: string;
-    lng: number; // 经度
-    lat: number; // 纬度
-    elevation: number; // 海拔
-    towards: number; // 朝向
+    onlineStatus: boolean;
     point: string;
     pole: string;
-    desc: string;
-  };
-  type LidarListItem = LidarItem & {
-    id: number;
+    wsUrl: string;
   };
 
-  type SpatItem = {
-    name: string;
+  type RadarItem = Radar & {
+    radarIP: string;
+    status: boolean;
+  };
+
+  type CreateSpatItem = {
     intersectionId: string; // 序列号
+    name: string;
     spatIP: string;
     point: string;
-  };
-
-  type CreateSpatItem = SpatItem & {
     phaseId: string;
     light: string;
     rsuId: number;
+    desc: string;
   };
 
-  type SpatListItem = SpatItem & {
+  type SpatItem = CreateSpatItem & {
     id: string;
     onlineStatus: boolean;
     enabled: boolean;
+    createTime: string;
+    timing: string;
+    rsuName: string;
   };
 }
