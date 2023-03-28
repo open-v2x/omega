@@ -43,10 +43,15 @@ const Lidar: React.FC = () => {
     {
       title: `${t('Lidar Name')}/${t('Serial Number')}`,
       dataIndex: 'name',
-      search: true,
       ellipsis: true,
       render: (_, row) =>
         renderNameAndNo(row.name, row.sn, () => navigate(`/device/lidar/details/${row.id}`)),
+    },
+    {
+      title: t('Lidar Name'),
+      dataIndex: 'name',
+      search: true,
+      hiddenInTable: true,
     },
     {
       title: t('Lidar IP'),

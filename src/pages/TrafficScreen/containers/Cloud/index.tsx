@@ -66,13 +66,18 @@ const CloudPlatform: React.FC = () => {
       <PlatformHeader back position="relative">
         <Dropdown
           trigger={['click']}
+          overlayClassName={styles['dropdown-overlay']}
           dropdownRender={() => (
-            <Card className={styles['map-address']}>
-              <CountryCascader mapChange={mapLngLat} />
+            <Card className={styles['map-address']} bordered={false}>
+              <CountryCascader
+                mapChange={mapLngLat}
+                colon={false}
+                labelClass={styles['map-address-label']}
+              />
             </Card>
           )}
         >
-          <div className={classNames(styles['left-button'], 'f-middle')}>选择</div>
+          <div className={classNames(styles['left-button'], 'f-middle')}>{t('Select')}</div>
         </Dropdown>
       </PlatformHeader>
       <div className={styles['map-container']}>

@@ -5,6 +5,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 
 type CountryCascaderProps = {
+  colon?: boolean;
   defaultValue?: string[];
   mapChange: (data?: {
     type: 1 | 2;
@@ -12,9 +13,15 @@ type CountryCascaderProps = {
     code: string;
     lngLat: [number, number] | [];
   }) => void;
+  labelClass?: string;
 };
 
-const CountryCascader: React.FC<CountryCascaderProps> = ({ defaultValue, mapChange }) => {
+const CountryCascader: React.FC<CountryCascaderProps> = ({
+  colon = true,
+  defaultValue,
+  mapChange,
+  labelClass,
+}) => {
   const [areaCode, setAreaCode] = useState<string>();
   const [crossing, setCrossing] = useState([]);
   const fetchData = async () => {
@@ -60,7 +67,8 @@ const CountryCascader: React.FC<CountryCascaderProps> = ({ defaultValue, mapChan
           const res = await areas();
           return res;
         }}
-        label={t('Address')}
+        colon={colon}
+        label={<div className={labelClass}>{t('Address')}</div>}
       />
     </div>
   );
