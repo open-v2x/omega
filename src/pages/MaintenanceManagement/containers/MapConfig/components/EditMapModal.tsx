@@ -48,7 +48,8 @@ const EditMapModal: React.FC<CreateModalProps> = ({ editId, success }) => {
           const data = JSON.parse(reader.result as string);
           setMapData(data);
         } catch (error) {
-          message.error('JSON parse error');
+          setMapData(null);
+          message.error('MAP 数据文件内容不符合数据规范，请重新检查后上传！');
         }
       };
       return false;
