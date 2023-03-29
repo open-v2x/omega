@@ -53,77 +53,75 @@ const IntersectionMap: React.FC = () => {
         <div>
           {type === '1' && <RoadMap />}
           {type === '2' && <RoadMapXml />}
-          <>
-            <div className={classNames(styles.left, showLeft ? styles.show : styles.hide)}>
-              <a className={styles['left-icon']} onClick={() => setShowLeft(!showLeft)}>
-                {showLeft ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
-              </a>
-              <div className={styles['left-content']}>
-                <IntersectionInformation
-                  className={showLeft ? styles['left-show'] : styles['left-hide']}
-                />
-              </div>
+          <div className={classNames(styles.left, showLeft ? styles.show : styles.hide)}>
+            <a className={styles['left-icon']} onClick={() => setShowLeft(!showLeft)}>
+              {showLeft ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
+            </a>
+            <div className={styles['left-content']}>
+              <IntersectionInformation
+                className={showLeft ? styles['left-show'] : styles['left-hide']}
+              />
             </div>
-            <div className={classNames(styles.right, showRight ? styles.show : styles.hide)}>
-              <a className={styles['right-icon']} onClick={() => setShowRight(!showRight)}>
-                {showRight ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              </a>
-              <div className={styles['right-content']}>
-                <DeviceOnlineRate
-                  className={showRight ? styles['right-show'] : styles['right-hide']}
-                />
-                <LiveStreamModule />
-                <CloudPointModule />
-              </div>
+          </div>
+          <div className={classNames(styles.right, showRight ? styles.show : styles.hide)}>
+            <a className={styles['right-icon']} onClick={() => setShowRight(!showRight)}>
+              {showRight ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            </a>
+            <div className={styles['right-content']}>
+              <DeviceOnlineRate
+                className={showRight ? styles['right-show'] : styles['right-hide']}
+              />
+              <LiveStreamModule />
+              <CloudPointModule />
             </div>
+          </div>
 
-            <DisplayModal
-              ref={cameraModalRef}
-              title={`${t('Show Camera')}`}
-              width={800}
-              component={<LiveStream url={centerStore.liveStreamUrl} />}
-              footer={null}
-              showFullscreen
-              onCloseCallback={() => {
-                centerStore.setState({
-                  isLiveStreamFullscreen: false,
-                  liveStreamUrl: undefined,
-                });
-              }}
-              onFullscreenCallback={() =>
-                centerStore.setState({
-                  isLiveStreamFullscreen: false,
-                })
-              }
-            />
+          <DisplayModal
+            ref={cameraModalRef}
+            title={`${t('Show Camera')}`}
+            width={800}
+            component={<LiveStream url={centerStore.liveStreamUrl} />}
+            footer={null}
+            showFullscreen
+            onCloseCallback={() => {
+              centerStore.setState({
+                isLiveStreamFullscreen: false,
+                liveStreamUrl: undefined,
+              });
+            }}
+            onFullscreenCallback={() =>
+              centerStore.setState({
+                isLiveStreamFullscreen: false,
+              })
+            }
+          />
 
-            <DisplayModal
-              ref={cloudPointModalRef}
-              title={t('Point Cloud')}
-              width={800}
-              component={
-                <CloudPoint
-                  height={450}
-                  width={780}
-                  isFixedAspect
-                  wsUrl={centerStore.cloudPointUrl}
-                />
-              }
-              footer={null}
-              showFullscreen
-              onCloseCallback={() =>
-                centerStore.setState({
-                  isCloudPointFullscreen: false,
-                  cloudPointUrl: undefined,
-                })
-              }
-              onFullscreenCallback={() => {
-                centerStore.setState({
-                  isCloudPointFullscreen: false,
-                });
-              }}
-            />
-          </>
+          <DisplayModal
+            ref={cloudPointModalRef}
+            title={t('Point Cloud')}
+            width={800}
+            component={
+              <CloudPoint
+                height={450}
+                width={780}
+                isFixedAspect
+                wsUrl={centerStore.cloudPointUrl}
+              />
+            }
+            footer={null}
+            showFullscreen
+            onCloseCallback={() =>
+              centerStore.setState({
+                isCloudPointFullscreen: false,
+                cloudPointUrl: undefined,
+              })
+            }
+            onFullscreenCallback={() => {
+              centerStore.setState({
+                isCloudPointFullscreen: false,
+              });
+            }}
+          />
         </div>
       }
     </BgContainer>
