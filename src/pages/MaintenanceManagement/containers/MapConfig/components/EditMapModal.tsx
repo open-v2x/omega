@@ -49,7 +49,7 @@ const EditMapModal: React.FC<CreateModalProps> = ({ editId, success }) => {
           setMapData(data);
         } catch (error) {
           setMapData(null);
-          message.error('MAP 数据文件内容不符合数据规范，请重新检查后上传！');
+          // message.error('MAP 数据文件内容不符合数据规范，请重新检查后上传！');
         }
       };
       return false;

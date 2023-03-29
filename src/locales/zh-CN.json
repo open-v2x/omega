@@ -549,5 +549,6 @@
   "Search": "查询",
   "More": "更多",
   "Not authenticated": "登录失效，请重新登录！",
-  "version error": "算法版本 {{v}} 已经存在"
+  "version error": "算法版本 {{v}} 已经存在",
+  "value is not a valid dict": "MAP 数据文件内容不符合数据规范，请重新检查后上传！"
 }
