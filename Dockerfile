@@ -8,7 +8,7 @@ RUN  pnpm config set network-timeout 300000 \
   && pnpm run build:prod
 
 # Step2. Put into nginx
-FROM mugennsou/nginx-http-flv:1.2.10-alpine
+FROM openv2x/nginx-http-flv:1.2.10-alpine
 
 ARG REPO_URL
 ARG GIR_BRANCH
