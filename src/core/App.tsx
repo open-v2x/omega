@@ -27,7 +27,7 @@ const App = () => {
     <>
       <AppContext.Provider value={getLiveContextValue()}>
         <ConfigProvider locale={{ locale: getLocale() }}>
-          <BrowserRouter>
+          <BrowserRouter basename={basename}>
             <RenderRouter />
           </BrowserRouter>
         </ConfigProvider>
