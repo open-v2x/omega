@@ -32,7 +32,6 @@ export const formatMenus = (menus?: MenuDataItem[] | MenuDataItem): MenuDataItem
   if (Array.isArray(menus)) {
     const menu = menus.map(({ icon, children: childrens, ...item }) => ({
       ...item,
-      name: t(item.name),
       icon: icon,
       children: childrens && formatMenus(childrens),
     }));
@@ -42,7 +41,6 @@ export const formatMenus = (menus?: MenuDataItem[] | MenuDataItem): MenuDataItem
     return [
       {
         ...item,
-        name: t(item.name),
         icon: icon,
         children: childrens && formatMenus(childrens),
       },

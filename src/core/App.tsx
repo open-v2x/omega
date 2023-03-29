@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import AppContext from '#/common/AppContext';
 import { IAppContext } from '#/types/IAppContext';
 import i18n from '#/utils/i18n';
@@ -7,7 +7,6 @@ import { BrowserRouter, useRoutes } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import { getLocale } from '#/utils/storage';
 import { useTranslation } from 'react-i18next';
-import { PageLoading } from '@ant-design/pro-components';
 window.t = i18n.t;
 
 const App = () => {
@@ -29,9 +28,7 @@ const App = () => {
       <AppContext.Provider value={getLiveContextValue()}>
         <ConfigProvider locale={{ locale: getLocale() }}>
           <BrowserRouter basename={basename}>
-            <Suspense fallback={<PageLoading />}>
-              <RenderRouter />
-            </Suspense>
+            <RenderRouter />
           </BrowserRouter>
         </ConfigProvider>
       </AppContext.Provider>

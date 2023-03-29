@@ -1,102 +1,75 @@
 import { useMenuStore } from '#/store/menu';
-import { ProLayout } from '@ant-design/pro-components';
 import React, { FC, useEffect } from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import styles from './index.module.less';
-import layoutSettings from '#/config/proLayoutSetting';
 import GlobalHeader from '#/components/Layout/GlobalHeader';
+import GlobalSetting from '#/components/GlobalSetting';
+import GlobalHint from '#/components/GlobalSetting/GlobalHint';
+import { useRootStore } from '#/store/root';
+import GlobalMenu from '#/components/Layout/GlobalMenu';
+import { Layout } from 'antd';
+import Sider from 'antd/lib/layout/Sider';
+import { Content } from 'antd/lib/layout/layout';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import { PageLoading } from '@ant-design/pro-components';
 
 const SiderLayout: FC = () => {
   const menuStore = useMenuStore();
-  const navigate = useNavigate();
+  const reload = useRootStore(state => state.reload);
+  const inited = useRootStore(state => state.inited);
+  const rootStore = useRootStore();
 
-  const toggle = () => {
-    menuStore.toggle = !menuStore.toggle;
-  };
+  useEffect(() => {
+    if (reload) {
+      setTimeout(() => {
+        rootStore.setState({
+          reload: false,
+        });
+      }, 0);
+    }
+  }, [reload]);
+
+  const toggle = useMenuStore(state => state.toggle);
 
   const init = async () => {
     menuStore.fetchFavoriteMenus();
     menuStore.fetchRightMenus();
   };
 
-  const handleToRelated = item => {
-    navigate(item?.path);
-  };
-
-  const renderRelatedMenus = () => (
-    <div className={styles['related-container']}>
-      <div className={styles['related-container-title']}>关联菜单</div>
-      {menuStore.relatedMenus.map(related => (
-        <div
-          key={related.path}
-          className={styles['related-item']}
-          onClick={() => handleToRelated(related)}
-        >
-          {related.name}
-        </div>
-      ))}
-    </div>
-  );
-
   useEffect(() => {
     init();
   }, [menuStore.menus]);
 
   return (
-    <div className={styles['qiankun-container']}>
-      <ProLayout
-        {...layoutSettings}
-        className={styles['layout-content']}
-        onCollapse={toggle}
-        siderWidth={246}
-        menuDataRender={() => menuStore.menus}
-        menuItemRender={item => (
+    <Layout className={styles['layout-container']}>
+      <div className={styles['header-container']}>
+        <GlobalHeader navItems={[]} isAdminPage={false} />
+      </div>
+      <Layout className={styles['box-container']}>
+        <Sider
+          className={styles['menu-container']}
+          collapsed={toggle}
+          width={240}
+          collapsedWidth={56}
+          theme={'light'}
+        >
+          <GlobalMenu />
           <div
-            style={{
-              alignItems: 'center',
-              gap: 8,
-              overflowWrap: 'break-word',
-              textOverflow: 'ellipsis',
-              overflow: 'hidden',
-            }}
-            onClick={() => {
-              navigate(item.path);
-            }}
+            className={styles['menu-toggle']}
+            onClick={() => useMenuStore.setState({ toggle: !toggle })}
           >
-            {item.name}
+            <div className={styles['menu-toggle-c']}>
+              {toggle ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            </div>
           </div>
-        )}
-        menuFooterRender={props => {
-          if (props?.collapsed) return undefined;
-          return menuStore.relatedMenus.length ? renderRelatedMenus() : undefined;
-        }}
-        headerRender={() =>
-          window.__POWERED_BY_QIANKUN__ ? null : <GlobalHeader navItems={[]} isAdminPage={false} />
-        }
-        breadcrumbRender={(routers = []) =>
-          routers.map(router => ({
-            ...router,
-            breadcrumbName: t(router.breadcrumbName),
-          }))
-        }
-        itemRender={(route, _params, routes, paths) => {
-          const first = routes.indexOf(route) === 0;
-          return first ? (
-            <Link to={paths.join('/')}>{route.breadcrumbName}</Link>
-          ) : (
-            <span>{route.breadcrumbName}</span>
-          );
-        }}
-        // onPageChange={location => {
-        // if (location.pathname && ) {
-        // navigate(location.pathname);
-        // history.push(location.pathname);
-        // }
-        // }}
-      >
-        <Outlet />
-      </ProLayout>
-    </div>
+        </Sider>
+        <Content className={styles['content-container']}>
+          {inited && reload ? <PageLoading /> : <Outlet />}
+        </Content>
+      </Layout>
+      <GlobalSetting />
+      <GlobalHint />
+    </Layout>
   );
 };
 

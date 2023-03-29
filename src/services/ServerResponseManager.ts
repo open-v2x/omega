@@ -1,6 +1,7 @@
 import { clearStorage } from '#/utils/storage';
 import { AxiosResponse, AxiosError } from 'axios';
 import { message } from 'antd';
+import { isArray } from 'lodash';
 
 /**
  * 针对请求成功：返回的 code 码做不同的响应处理
@@ -31,7 +32,8 @@ class ServerResponseFailedManager {
   getErrorMessage(error: AxiosError) {
     const { detail } = error.response.data as unknown as any;
     console.error('error.response==', detail);
-    const { msg, code } = detail;
+
+    const { msg, code } = isArray(detail) ? detail[0] : detail;
     const parser = {
       '403': () => this.handleCodeIs403(),
       '1062': () => this.handleShowErrorWithDetailKey(code, detail.detail),
@@ -87,10 +89,13 @@ class ServerResponseFailedManager {
   }
 
   handleCodeIsDefault(msg: string) {
-    console.log('报错', msg);
-    message.error(msg);
-    if (msg === 'Not authenticated') {
-      this.handleCodeIs403();
+    const regex = /^Version .* already exist$/;
+    const match = msg?.match(regex);
+    if (match) {
+      const v = match[0].replace(/^Version (.*) already exist$/, '$1');
+      message.error(t('version error', { v }));
+    } else {
+      message.error(t(msg));
     }
   }
 }

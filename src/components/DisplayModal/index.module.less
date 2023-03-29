@@ -1,4 +1,23 @@
 .modal-container {
+  .modal-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
+
+    &-text {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    &-actions {
+      > * {
+        margin-right: 10px;
+      }
+    }
+  }
+
   :global(.ant-modal-body) {
     margin: 0;
     padding: 10px;

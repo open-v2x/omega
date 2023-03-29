@@ -1,6 +1,7 @@
-import { AxiosRequestConfig } from 'axios';
+import { useRootStore } from '#/store/root';
 import { get, post, patch, deletE, put, getBlob } from './axios';
 import getConfig from './serviceConfig';
+import { MyAxiosRequestConfig } from '#/types/service/axios';
 
 const apiConfig = getConfig();
 
@@ -29,29 +30,39 @@ export default class BaseService {
     return curUrl;
   }
 
-  getFullPath = (path: string) => `${this.baseUrl}/${path}`;
+  getFullPath = (path: string, config: any = {}) => {
+    const { isCenter = false, params = undefined } = config;
+    const ip = useRootStore.getState().edgeSite.ip;
+    if (isCenter || !ip) return `${this.baseUrl}/center/${path}`;
+    const edge = `${this.baseUrl}/edge/${ip}:28300/api/${path}`;
+    const url = this.handleGetUrl('', params);
+    return url ? `${edge}${url}` : edge;
+  };
 
-  getByQuery = <T>(path: string, data: any = {}, config?: AxiosRequestConfig): Promise<T> => {
+  getByQuery = <T>(path: string, data: any = {}, config?: MyAxiosRequestConfig): Promise<T> => {
     const curPath = this.handleGetUrl(path, data);
     return this.get<T>(curPath, config);
   };
 
-  get = <T>(path: string, config?: AxiosRequestConfig): Promise<T> =>
-    get<T>(this.getFullPath(path), config);
+  get = <T>(path: string, config?: MyAxiosRequestConfig): Promise<T> =>
+    config?.isCenter
+      ? get<T>(this.getFullPath(path, config), config)
+      : get<T>(this.getFullPath(path, config));
 
-  post = <T>(path: string, data: any = {}, config?: AxiosRequestConfig): Promise<T> =>
-    post<T>(this.getFullPath(path), data, config);
+  post = <T>(path: string, data: any = {}, config?: MyAxiosRequestConfig): Promise<T> =>
+    post<T>(this.getFullPath(path, config), data, config);
 
-  patch = <T>(path: string, data: any, config?: AxiosRequestConfig): Promise<T> =>
-    patch<T>(this.getFullPath(path), data, config);
+  patch = <T>(path: string, data: any, config?: MyAxiosRequestConfig): Promise<T> =>
+    patch<T>(this.getFullPath(path, config), data, config);
 
-  delete = <T>(path: string, config?: AxiosRequestConfig): Promise<T> =>
-    deletE<T>(this.getFullPath(path), config);
+  delete = <T>(path: string, config?: MyAxiosRequestConfig): Promise<T> =>
+    deletE<T>(this.getFullPath(path, config), config);
 
-  put = <T>(path: string, data: any, config?: AxiosRequestConfig): Promise<T> =>
-    put<T>(this.getFullPath(path), data, config);
+  put = <T>(path: string, data: any, config?: MyAxiosRequestConfig): Promise<T> =>
+    put<T>(this.getFullPath(path, config), data, config);
 
-  getBlob = (path: string): Promise<Blob> => getBlob(this.getFullPath(path));
+  getBlob = <T>(path: string, config?: MyAxiosRequestConfig): Promise<Blob> =>
+    getBlob<T>(this.getFullPath(path, config), config);
 }
 
 export const apiService = new BaseService(apiConfig.API_SERVER);

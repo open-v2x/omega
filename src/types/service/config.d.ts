@@ -1,33 +1,14 @@
 declare namespace Config {
   type MapItem = {
+    id: string | number;
     name: string; // MAP 名称
-    areaCode: string; // MAP 区域
-    address: string; // MAP 位置
     desc: string; // MAP 信息描述
   };
-  type CreateMapConfigParams = MapItem & {
+  type MapConfigParams = MapItem & {
     data: Record<string, any>; // MAP 数据文件
-    province?: string[]; // 安装位置
-    countryCode?: string; // 安装位置-国
-    provinceCode?: string; // 安装位置-省
-    cityCode?: string; // 安装位置-市
+    bitmapFilename: string;
   };
-  type MapListItem = MapItem & {
-    id: number;
-    countryName: string; // MAP 区域-国家
-    countryCode: string; //
-    provinceName: string; // MAP 区域-省
-    provinceCode: string;
-    intersectionCode: string;
-    intersectionName: string;
-    areaName: string; // MAP 区域-市
-    cityName: string; // MAP 区域-区
-    cityCode: string;
-    status: boolean; // 下发状态
-    amount: number; // 下发 RSU 数量
-    number: number; // 下发 RSU 数量
-    createTime: string;
-  };
+
   type MapRSUListItem = {
     id: number;
     rsuName: string;
@@ -164,6 +145,8 @@ declare namespace Config {
     lng: string;
     areaCode: string;
     province?: string[];
+    mapData: any;
+    bitmapFilename: string;
   };
 
   type CrossingItem = CreateCrossingParams & {

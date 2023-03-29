@@ -1,43 +1,48 @@
-:global {
-  .ant-pro-layout-container {
-    header {
-      padding: 0 !important;
+.layout-container {
+  position: relative;
+  height: 100vh;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box-container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+
+  .menu-container {
+    width: 246px;
+  }
+
+  .menu-toggle {
+    position: absolute;
+    right: -24px;
+    bottom: 48px;
+    width: 24px;
+    height: 70px;
+    line-height: 70px;
+    border-width: 24px;
+    border-radius: 0 10px 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: rgba(119, 136, 153, 0.4);
+    z-index: 99;
+
+    &-c {
+      position: absolute;
+      left: 0;
+      font-size: 20px;
     }
   }
 
-  .ant-pro .ant-pro-layout .ant-pro-layout-content {
-    padding: 0;
+  .content-container {
+    flex: 1;
+    position: relative;
     overflow-x: hidden;
+    overflow-y: auto;
   }
 }
-
-.menu-item {
-  background-color: white;
-}
-
-.related-container {
-  height: 33vh;
-
-  &-title {
-    text-align: center;
-  }
-}
-
-.related-item {
-  padding: 10px;
-  color: #000000a6;
-  cursor: pointer;
-
-  &:hover {
-    color: #40a9ff;
-    background-color: #f6f5f5;
-  }
-}
-
-// .qiankun-container {
-//   padding-top: 50px;
-//   box-sizing: content-box;
-//   background-color: #f7f8fa;
-//   width: 100%;
-//   height: calc(100vh);
-// }

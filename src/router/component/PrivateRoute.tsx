@@ -1,7 +1,8 @@
 import React, { FC, useState } from 'react';
-import { RouteProps, useLocation, useNavigate } from 'react-router';
+import { Navigate, RouteProps, useLocation, useNavigate } from 'react-router';
 import { useUserStore } from '#/store/user';
 import { useMenuStore } from '#/store/menu';
+import { getToken } from '#/utils/storage';
 
 const PrivateRoute: FC<RouteProps> = ({ children }) => {
   const { fetchUserInfo, fetchTokenByIam } = useUserStore();
@@ -30,7 +31,7 @@ const PrivateRoute: FC<RouteProps> = ({ children }) => {
     fetchMenus(location.pathname);
   }
 
-  return init ? <div>{children}</div> : <></>;
+  return getToken() ? <div>{children}</div> : <Navigate to="/user/login" />;
 };
 
 export default PrivateRoute;

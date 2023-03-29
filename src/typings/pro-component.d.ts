@@ -63,3 +63,7 @@ type InfoMapType = {
   span?: number;
   unit?: string;
 };
+
+import type { MenuProps } from 'antd';
+
+type MenuItem = Required<MenuProps>['items'][number];

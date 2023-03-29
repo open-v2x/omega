@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
 import { CreateModalProps, FormGroupType } from '#/typings/pro-component';
 import { useRequestStore } from '#/store/request';
 import Modal from '../Modal';
-import { createMapRSU } from '#/services/api/config/map';
 import { copyMaintenanceConfig } from '#/services/api/config/maintenance';
 import FormItem from '../FormItem';
+import { PlusOutlined } from '@ant-design/icons';
+import { postIssuedRsus } from '#/services/api/config/map';
 
 type CreateSendModalProps = CreateModalProps & {
   type: 'map' | 'rsu';
@@ -46,7 +46,7 @@ const CreateSendModal: React.FC<CreateSendModalProps> = ({ type, id, success }) 
       width={500}
       modalProps={{ maskClosable: false }}
       submitForm={async values => {
-        await { map: createMapRSU, rsu: copyMaintenanceConfig }[type]?.(id, values);
+        await { map: postIssuedRsus, rsu: copyMaintenanceConfig }[type]?.(id, values);
         success();
       }}
       successMsg={t('{{value}} successfully', {

@@ -1,8 +1,9 @@
 import { IRouteConfig } from '#/types/router';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Navigate, RouteObject } from 'react-router-dom';
 import routes from './routes';
 import WrapperRouteComponent from './component/WrapperRoute';
+import { PageLoading } from '@ant-design/pro-components';
 
 const getRouteConfig = (routeConfig: IRouteConfig): RouteObject => {
   const { path, layout, component: Comp, children, auth, redirect } = routeConfig;
@@ -10,7 +11,9 @@ const getRouteConfig = (routeConfig: IRouteConfig): RouteObject => {
   const element = redirect ? (
     <Navigate to={redirect} replace />
   ) : (
-    <WrapperRouteComponent auth={auth} children={<Comp />} redirect={redirect} />
+    <Suspense fallback={<PageLoading />}>
+      <WrapperRouteComponent auth={auth} children={<Comp />} redirect={redirect} />
+    </Suspense>
   );
 
   let childrenRoutes: any[] = [];
