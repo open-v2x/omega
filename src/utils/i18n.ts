@@ -6,7 +6,7 @@ import axios from 'axios';
 import yaml from 'js-yaml';
 
 const getResource = async () => {
-  const { data } = await axios.get('/assets/file/globals.yml');
+  const { data } = await axios.get('/omega-portal/assets/file/globals.yml');
   const ymlData = yaml.load(data);
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { v2x_info_title = { en: 'OpenV2X', zh: 'OpenV2X' } } = ymlData;
