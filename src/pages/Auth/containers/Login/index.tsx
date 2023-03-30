@@ -35,7 +35,7 @@ const Login: React.FC = () => {
         </div>
         <div className={styles.main}>
           <LoginForm
-            logo={'/assets/img/logo.png'}
+            logo={'/omega-portal/assets/img/logo.png'}
             title={t('OpenV2X Title')}
             onFinish={async values => {
               await handleSubmit(values as LoginParams);
@@ -68,7 +68,7 @@ const Login: React.FC = () => {
       <div className={styles.right}>
         <img
           className={styles['right-login-img']}
-          src={'/assets/img/login_full_image.png'}
+          src={'/omega-portal/assets/img/login_full_image.png'}
           alt="login_full_image"
         />
       </div>
