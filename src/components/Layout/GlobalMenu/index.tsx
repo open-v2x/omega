@@ -6,6 +6,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router';
 const { SubMenu } = Menu;
 import styles from './index.module.less';
+import { QIANKUN_PREFIX } from '#/constants/variable';
 
 const GlobalMenu: React.FC = () => {
   const menus = useMenuStore(state => state.menus);
@@ -25,10 +26,14 @@ const GlobalMenu: React.FC = () => {
     }
   };
 
+  const defaultSelectedkey = window.__POWERED_BY_QIANKUN__
+    ? location.pathname.substring(QIANKUN_PREFIX.length)
+    : location.pathname;
+
   return (
     <Menu
-      defaultOpenKeys={[currentMenu.path]}
-      defaultSelectedKeys={[location.pathname]}
+      defaultOpenKeys={[currentMenu?.path]}
+      defaultSelectedKeys={[defaultSelectedkey]}
       mode="inline"
       onClick={handleClick}
       inlineCollapsed={toggle}
