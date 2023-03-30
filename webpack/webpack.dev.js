@@ -47,7 +47,7 @@ const config = {
     },
     proxy: {
       '/api/omega': {
-        target: 'http://47.100.126.13:2288',
+        target: 'http://47.100.126.13:2299',
         changeOrigin: true,
         logLevel: 'debug',
       },

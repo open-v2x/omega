@@ -45,9 +45,7 @@ const useMenuStore = create<IMenuStore>((set, get) => ({
   ],
   favoriteMenuInit: false,
   fetchMenus: path => {
-    const index = window.__POWERED_BY_QIANKUN__ ? 2 : 1;
-    const pPath = `/${path.split('/')[index]}`;
-    console.log(pPath);
+    const pPath = `/${path.split('/')[1]}`;
     if (get().currentMenu?.path === pPath) {
       return;
     }

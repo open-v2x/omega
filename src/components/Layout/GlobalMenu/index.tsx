@@ -26,14 +26,10 @@ const GlobalMenu: React.FC = () => {
     }
   };
 
-  const defaultSelectedkey = window.__POWERED_BY_QIANKUN__
-    ? location.pathname.substring(QIANKUN_PREFIX.length)
-    : location.pathname;
-
   return (
     <Menu
       defaultOpenKeys={[currentMenu?.path]}
-      defaultSelectedKeys={[defaultSelectedkey]}
+      defaultSelectedKeys={[location.pathname]}
       mode="inline"
       onClick={handleClick}
       inlineCollapsed={toggle}
