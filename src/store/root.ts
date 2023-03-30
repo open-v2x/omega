@@ -36,13 +36,16 @@ const useRootStore = create<IRootStore>((set, get) => ({
     });
   },
   setNodeId: (id: string) => {
-    Cookies.set('nodeId', id);
+    Cookies.set('enode', id);
   },
   getNodeId: () => {
     if (get().edgeSite.id) {
       return get().edgeSite.id;
     }
-    return Cookies.get('nodeId') || undefined;
+    const enode = Cookies.get('enode');
+    const edge = JSON.parse(decodeURIComponent(enode));
+
+    return edge.id || undefined;
   },
 }));
 
