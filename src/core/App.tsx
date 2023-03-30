@@ -7,6 +7,7 @@ import { BrowserRouter, useRoutes } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import { getLocale } from '#/utils/storage';
 import { useTranslation } from 'react-i18next';
+import { QIANKUN_PREFIX } from '#/constants/variable';
 window.t = i18n.t;
 
 const App = () => {
@@ -21,7 +22,7 @@ const App = () => {
     return routes;
   };
 
-  const basename = window.__POWERED_BY_QIANKUN__ ? '/omega' : undefined;
+  const basename = window.__POWERED_BY_QIANKUN__ ? QIANKUN_PREFIX : undefined;
 
   return (
     <>
