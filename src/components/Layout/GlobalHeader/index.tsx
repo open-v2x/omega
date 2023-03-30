@@ -25,7 +25,11 @@ export default function GlobalHeader(props: GlobalHeaderProps) {
     return (
       <div className={classnames(styles.logo)}>
         <Link to={homeUrl}>
-          <img src={'/assets/img/logo.png'} alt="logo" className={styles['logo-image']} />
+          <img
+            src={'/omega-portal/assets/img/logo.png'}
+            alt="logo"
+            className={styles['logo-image']}
+          />
         </Link>
       </div>
     );
