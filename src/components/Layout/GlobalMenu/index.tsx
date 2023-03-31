@@ -6,6 +6,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router';
 const { SubMenu } = Menu;
 import styles from './index.module.less';
+import { QIANKUN_FILE_PREFIX } from '#/constants/variable';
 
 const GlobalMenu: React.FC = () => {
   const menus = useMenuStore(state => state.menus);
@@ -16,7 +17,7 @@ const GlobalMenu: React.FC = () => {
   const currentMenu = useMenuStore(state => state.currentMenu);
 
   const IconFont = createFromIconfontCN({
-    scriptUrl: '/assets/font/iconfont.js',
+    scriptUrl: `${QIANKUN_FILE_PREFIX}/assets/font/iconfont.js`,
   });
 
   const handleClick = props => {

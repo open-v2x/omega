@@ -10,7 +10,7 @@ interface IRootStore {
   reload: boolean;
   setState: (params: any) => void;
   inited: boolean;
-  setNodeId: (id: string) => void;
+  setNode: (edge: Center.EdgeSiteItem) => void;
   getNodeId: () => string | number;
 }
 
@@ -35,8 +35,8 @@ const useRootStore = create<IRootStore>((set, get) => ({
       ...params,
     });
   },
-  setNodeId: (id: string) => {
-    Cookies.set('enode', id);
+  setNode: edge => {
+    Cookies.set('enode', encodeURIComponent(JSON.stringify(edge)));
   },
   getNodeId: () => {
     if (get().edgeSite.id) {
