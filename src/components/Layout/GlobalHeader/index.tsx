@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import RightContent from '../HeaderRightContent';
 import styles from './index.module.less';
 import GlobalNav from '../GlobalNav';
+import { QIANKUN_FILE_PREFIX } from '#/constants/variable';
 export interface GlobalHeaderProps {
   navItems: any[];
   isAdminPage: boolean;
@@ -26,7 +27,7 @@ export default function GlobalHeader(props: GlobalHeaderProps) {
       <div className={classnames(styles.logo)}>
         <Link to={homeUrl}>
           <img
-            src={'/omega-portal/assets/img/logo.png'}
+            src={`${QIANKUN_FILE_PREFIX}/assets/img/logo.png`}
             alt="logo"
             className={styles['logo-image']}
           />
