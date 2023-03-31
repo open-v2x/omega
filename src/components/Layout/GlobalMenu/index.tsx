@@ -6,7 +6,6 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router';
 const { SubMenu } = Menu;
 import styles from './index.module.less';
-import { QIANKUN_PREFIX } from '#/constants/variable';
 
 const GlobalMenu: React.FC = () => {
   const menus = useMenuStore(state => state.menus);

@@ -4,9 +4,10 @@ import zhCN from '#/locales/zh-CN.json';
 import enUS from '#/locales/en-US.json';
 import axios from 'axios';
 import yaml from 'js-yaml';
+import { QIANKUN_FILE_PREFIX } from '#/constants/variable';
 
 const getResource = async () => {
-  const { data } = await axios.get('/omega-portal/assets/file/globals.yml');
+  const { data } = await axios.get(`${QIANKUN_FILE_PREFIX}/assets/file/globals.yml`);
   const ymlData = yaml.load(data);
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { v2x_info_title = { en: 'OpenV2X', zh: 'OpenV2X' } } = ymlData;

@@ -11,6 +11,7 @@ import { login } from '#/services/api/user';
 import { getUrlSearch } from '#/utils';
 import classNames from 'classnames';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { QIANKUN_FILE_PREFIX } from '#/constants/variable';
 
 const Login: React.FC = () => {
   const { fetchUserInfo } = useUserStore();
@@ -35,7 +36,7 @@ const Login: React.FC = () => {
         </div>
         <div className={styles.main}>
           <LoginForm
-            logo={'/omega-portal/assets/img/logo.png'}
+            logo={`${QIANKUN_FILE_PREFIX}/assets/img/logo.png`}
             title={t('OpenV2X Title')}
             onFinish={async values => {
               await handleSubmit(values as LoginParams);
@@ -68,7 +69,7 @@ const Login: React.FC = () => {
       <div className={styles.right}>
         <img
           className={styles['right-login-img']}
-          src={'/omega-portal/assets/img/login_full_image.png'}
+          src={`${QIANKUN_FILE_PREFIX}/assets/img/login_full_image.png`}
           alt="login_full_image"
         />
       </div>
