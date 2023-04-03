@@ -20,17 +20,6 @@ const CameraManagement: FC = () => {
 
   const moreActions = row => [
     {
-      key: 'detail',
-      label: (
-        <CreateCameraModal
-          key="details"
-          isDetails
-          editInfo={row}
-          success={() => actionRef.current?.reload()}
-        />
-      ),
-    },
-    {
       key: 'delete',
       label: renderDeleteBtn(
         row.id,

@@ -1,718 +1,1508 @@
 {
-  "name": "LUKOU",
-  "id": { "region": 10, "id": 19 },
-  "refPos": {
-    "lon": 118.840897,
-    "lat": 31.8833,
-    "ele": 625
-  },
-  "inLinks": [
-    {
-      "name": "18-19",
-      "upstreamNodeId": { "region": 10, "id": 18 },
-      "speedLimits": {
-        "RegulatorySpeedLimit": {
-          "type": { "vehicleMaxSpeed": "" },
-          "speed": 833
-        }
-      },
-      "linkWidth": 660,
-      "points": {
-        "RoadPoint": [
-          {
-            "posOffset": {
-              "offsetLL": {
-                "position-LatLon": {
-                  "lon": "1165142774",
-                  "lat": "397841165"
-                }
-              }
-            }
-          },
-          {
-            "posOffset": {
-              "offsetLL": {
-                "position-LatLon": {
-                  "lon": "1165129744",
-                  "lat": "397857197"
-                }
-              }
-            }
-          },
-          {
-            "posOffset": {
-              "offsetLL": {
-                "position-LatLon": {
-                  "lon": "1165120283",
-                  "lat": "397868872"
-                }
-              }
-            }
-          }
-        ]
-      },
-      "lanes": [
-        {
-          "laneID": "1",
-          "laneWidth": "330",
-          "laneAttributes": {
-            "shareWith": "0000000000",
-            "laneType": { "vehicle": "00000000" }
-          },
-          "connectsTo": {
-            "Connection": [
-              {
-                "remoteIntersection": {
-                  "region": "10",
-                  "id": "12"
-                },
-                "connectingLane": {
-                  "lane": "1",
-                  "maneuver": "010000000000"
-                },
-                "phaseId": "7"
-              },
-              {
-                "remoteIntersection": {
-                  "region": "10",
-                  "id": "20"
-                },
-                "connectingLane": {
-                  "lane": "1",
-                  "maneuver": "100000000000"
-                },
-                "phaseId": "6"
-              }
-            ]
-          },
-          "points": {
-            "RoadPoint": [
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165142774",
-                      "lat": "397841165"
-                    }
-                  }
-                }
-              },
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165129744",
-                      "lat": "397857197"
-                    }
-                  }
-                }
-              },
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165120283",
-                      "lat": "397868872"
-                    }
-                  }
-                }
-              }
-            ]
-          }
+  "msgCnt": "1",
+  "nodes": {
+    "Node": [
+      {
+        "name": "17",
+        "id": {
+          "region": "10",
+          "id": "17"
         },
-        {
-          "laneID": "2",
-          "laneWidth": "330",
-          "laneAttributes": {
-            "shareWith": "0000000000",
-            "laneType": { "vehicle": "00000000" }
-          },
-          "maneuvers": "001000000000",
-          "connectsTo": {
-            "Connection": {
-              "remoteIntersection": { "region": "10", "id": "29" },
-              "connectingLane": {
-                "lane": "1",
-                "maneuver": "001000000000"
-              },
-              "phaseId": "8"
-            }
-          },
-          "points": {
-            "RoadPoint": [
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165142774",
-                      "lat": "397841165"
-                    }
-                  }
-                }
-              },
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165129744",
-                      "lat": "397857197"
-                    }
-                  }
-                }
-              },
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165120622",
-                      "lat": "397869034"
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "name": "12-19",
-      "upstreamNodeId": { "region": "10", "id": "12" },
-      "speedLimits": {
-        "RegulatorySpeedLimit": {
-          "type": { "vehicleMaxSpeed": "" },
-          "speed": "833"
-        }
-      },
-      "linkWidth": 800,
-      "points": {
-        "RoadPoint": [
-          {
-            "posOffset": {
-              "offsetLL": {
-                "position-LatLon": {
-                  "lon": "1165093456",
-                  "lat": "397857496"
-                }
-              }
-            }
-          },
-          {
-            "posOffset": {
-              "offsetLL": {
-                "position-LatLon": {
-                  "lon": "1165102631",
-                  "lat": "397862082"
-                }
-              }
-            }
-          },
-          {
-            "posOffset": {
-              "offsetLL": {
-                "position-LatLon": {
-                  "lon": "1165117219",
-                  "lat": "397869139"
-                }
-              }
-            }
-          }
-        ]
-      },
-      "lanes": [
-        {
-          "laneID": "1",
-          "laneWidth": "400",
-          "laneAttributes": {
-            "shareWith": "0000000000",
-            "laneType": { "vehicle": "00000000" }
-          },
-          "maneuvers": "110000000000",
-          "connectsTo": {
-            "Connection": [
-              {
-                "remoteIntersection": {
-                  "region": "10",
-                  "id": "20"
-                },
-                "connectingLane": {
-                  "lane": "1",
-                  "maneuver": "010000000000"
-                },
-                "phaseId": "17"
-              },
-              {
-                "remoteIntersection": {
-                  "region": "10",
-                  "id": "29"
-                },
-                "connectingLane": {
-                  "lane": "1",
-                  "maneuver": "100000000000"
-                },
-                "phaseId": "16"
-              }
-            ]
-          },
-          "points": {
-            "RoadPoint": [
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165093456",
-                      "lat": "397857496"
-                    }
-                  }
-                }
-              },
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165102631",
-                      "lat": "397862082"
-                    }
-                  }
-                }
-              },
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165117219",
-                      "lat": "397869139"
-                    }
-                  }
-                }
-              }
-            ]
-          }
+        "refPos": {
+          "lat": "319348466",
+          "long": "1188203963",
+          "elevation": "0"
         },
-        {
-          "laneID": "2",
-          "laneWidth": "400",
-          "laneAttributes": {
-            "shareWith": "0000000000",
-            "laneType": { "vehicle": "00000000" }
-          },
-          "maneuvers": "101000000000",
-          "connectsTo": {
-            "Connection": [
-              {
-                "remoteIntersection": {
-                  "region": "10",
-                  "id": "29"
-                },
-                "connectingLane": {
-                  "lane": "1",
-                  "maneuver": "100000000000"
-                },
-                "phaseId": "16"
+        "inLinks": {
+          "Link": [
+            {
+              "name": "19-17",
+              "upstreamNodeId": {
+                "region": "10",
+                "id": "19"
               },
-              {
-                "remoteIntersection": {
-                  "region": "10",
-                  "id": "18"
-                },
-                "connectingLane": {
-                  "lane": "1",
-                  "maneuver": "001000000000"
-                },
-                "phaseId": "18"
+              "linkWidth": "1000",
+              "lanes": {
+                "Lane": [
+                  {
+                    "laneID": "14",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "100000000000",
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188217225",
+                                "lat": "319353148"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188218008",
+                                "lat": "319353057"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188215464",
+                                "lat": "319353352"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "laneID": "15",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "100000000000",
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188218660",
+                                "lat": "319352708"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188217344",
+                                "lat": "319352861"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188216101",
+                                "lat": "319353005"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
               }
-            ]
-          },
-          "points": {
-            "RoadPoint": [
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165093858",
-                      "lat": "397856990"
-                    }
-                  }
-                }
-              },
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165102839",
-                      "lat": "397861774"
-                    }
-                  }
-                }
-              },
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165117469",
-                      "lat": "397868830"
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "name": "20-19",
-      "upstreamNodeId": { "region": "10", "id": "20" },
-      "speedLimits": {
-        "RegulatorySpeedLimit": {
-          "type": { "vehicleMaxSpeed": "" },
-          "speed": "833"
+            }
+          ]
         }
       },
-      "linkWidth": 660,
-      "points": {
-        "RoadPoint": [
-          {
-            "posOffset": {
-              "offsetLL": {
-                "position-LatLon": {
-                  "lon": "1165095240",
-                  "lat": "397899027"
-                }
-              }
-            }
-          },
-          {
-            "posOffset": {
-              "offsetLL": {
-                "position-LatLon": {
-                  "lon": "1165105845",
-                  "lat": "397885982"
-                }
-              }
-            }
-          },
-          {
-            "posOffset": {
-              "offsetLL": {
-                "position-LatLon": {
-                  "lon": "1165117636",
-                  "lat": "397871423"
-                }
-              }
-            }
-          }
-        ]
-      },
-      "lanes": [
-        {
-          "laneID": "1",
-          "laneWidth": "330",
-          "laneAttributes": {
-            "shareWith": "0000000000",
-            "laneType": { "vehicle": "00000000" }
-          },
-          "maneuvers": "110000000000",
-          "connectsTo": {
-            "Connection": [
-              {
-                "remoteIntersection": {
-                  "region": "10",
-                  "id": "29"
-                },
-                "connectingLane": {
-                  "lane": "1",
-                  "maneuver": "010000000000"
-                },
-                "phaseId": "27"
-              },
-              {
-                "remoteIntersection": {
-                  "region": "10",
-                  "id": "18"
-                },
-                "connectingLane": {
-                  "lane": "1",
-                  "maneuver": "100000000000"
-                },
-                "phaseId": "26"
-              }
-            ]
-          },
-          "points": {
-            "RoadPoint": [
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165095240",
-                      "lat": "397899027"
-                    }
-                  }
-                }
-              },
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165105845",
-                      "lat": "397885982"
-                    }
-                  }
-                }
-              },
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165117636",
-                      "lat": "397871423"
-                    }
-                  }
-                }
-              }
-            ]
-          }
+      {
+        "name": "18",
+        "id": {
+          "region": "10",
+          "id": "18"
         },
-        {
-          "laneID": "2",
-          "laneWidth": "330",
-          "laneAttributes": {
-            "shareWith": "0000000000",
-            "laneType": { "vehicle": "00000000" }
-          },
-          "maneuvers": "001000000000",
-          "connectsTo": {
-            "Connection": {
-              "remoteIntersection": { "region": "10", "id": "12" },
-              "connectingLane": {
-                "lane": "1",
-                "maneuver": "001000000000"
-              },
-              "phaseId": "28"
-            }
-          },
-          "points": {
-            "RoadPoint": [
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165095240",
-                      "lat": "397899027"
-                    }
-                  }
-                }
-              },
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165105845",
-                      "lat": "397885982"
-                    }
-                  }
-                }
-              },
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165117292",
-                      "lat": "397871274"
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "name": "129-19",
-      "upstreamNodeId": { "region": "10", "id": "29" },
-      "speedLimits": {
-        "RegulatorySpeedLimit": {
-          "type": { "vehicleMaxSpeed": "" },
-          "speed": "833"
-        }
-      },
-      "linkWidth": 780,
-      "points": {
-        "RoadPoint": [
-          {
-            "posOffset": {
-              "offsetLL": {
-                "position-LatLon": {
-                  "lon": "1165153657",
-                  "lat": "397887241"
-                }
-              }
-            }
-          },
-          {
-            "posOffset": {
-              "offsetLL": {
-                "position-LatLon": {
-                  "lon": "1165136723",
-                  "lat": "397878978"
-                }
-              }
-            }
-          },
-          {
-            "posOffset": {
-              "offsetLL": {
-                "position-LatLon": {
-                  "lon": "1165120695",
-                  "lat": "397871234"
-                }
-              }
-            }
-          }
-        ]
-      },
-      "lanes": [
-        {
-          "laneID": "1",
-          "laneWidth": "390",
-          "laneAttributes": {
-            "shareWith": "0000000000",
-            "laneType": { "vehicle": "00000000" }
-          },
-          "maneuvers": "110000000000",
-          "connectsTo": {
-            "Connection": [
-              {
-                "remoteIntersection": {
-                  "region": "10",
-                  "id": "18"
-                },
-                "connectingLane": {
-                  "lane": "1",
-                  "maneuver": "010000000000"
-                },
-                "phaseId": "37"
-              },
-              {
-                "remoteIntersection": {
-                  "region": "10",
-                  "id": "12"
-                },
-                "connectingLane": {
-                  "lane": "1",
-                  "maneuver": "100000000000"
-                },
-                "phaseId": "36"
-              }
-            ]
-          },
-          "points": {
-            "RoadPoint": [
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165153657",
-                      "lat": "397887241"
-                    }
-                  }
-                }
-              },
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165136723",
-                      "lat": "397878978"
-                    }
-                  }
-                }
-              },
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165120695",
-                      "lat": "397871234"
-                    }
-                  }
-                }
-              }
-            ]
-          }
+        "refPos": {
+          "lat": "319358466",
+          "long": "1188213963",
+          "elevation": "0"
         },
-        {
-          "laneID": "2",
-          "laneWidth": "390",
-          "laneAttributes": {
-            "shareWith": "0000000000",
-            "laneType": { "vehicle": "00000000" }
-          },
-          "maneuvers": "101000000000",
-          "connectsTo": {
-            "Connection": [
-              {
-                "remoteIntersection": {
-                  "region": "10",
-                  "id": "12"
-                },
-                "connectingLane": {
-                  "lane": "1",
-                  "maneuver": "100000000000"
-                },
-                "phaseId": "36"
+        "inLinks": {
+          "Link": [
+            {
+              "name": "19-18",
+              "upstreamNodeId": {
+                "region": "10",
+                "id": "19"
               },
-              {
-                "remoteIntersection": {
-                  "region": "10",
-                  "id": "20"
-                },
-                "connectingLane": {
-                  "lane": "1",
-                  "maneuver": "001000000000"
-                },
-                "phaseId": "38"
+              "linkWidth": "1400",
+              "lanes": {
+                "Lane": [
+                  {
+                    "laneID": "20",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "100000000000",
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222844",
+                                "lat": "319350759"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222870",
+                                "lat": "319350210"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222831",
+                                "lat": "319351028"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "laneID": "21",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "100000000000",
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188223149",
+                                "lat": "319351015"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188223162",
+                                "lat": "319350741"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188223176",
+                                "lat": "319350464"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "laneID": "22",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "100000000000",
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188223502",
+                                "lat": "319350949"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188223527",
+                                "lat": "319350426"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188223565",
+                                "lat": "319349685"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
               }
-            ]
-          },
-          "points": {
-            "RoadPoint": [
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165153184",
-                      "lat": "397887780"
-                    }
-                  }
-                }
-              },
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165136426",
-                      "lat": "397879247"
-                    }
-                  }
-                }
-              },
-              {
-                "posOffset": {
-                  "offsetLL": {
-                    "position-LatLon": {
-                      "lon": "1165120459",
-                      "lat": "397871540"
-                    }
-                  }
-                }
-              }
-            ]
-          }
+            }
+          ]
         }
-      ]
-    }
-  ]
+      },
+      {
+        "name": "19",
+        "id": {
+          "region": "10",
+          "id": "19"
+        },
+        "refPos": {
+          "lat": "319348466",
+          "long": "1188213963",
+          "elevation": "0"
+        },
+        "inLinks": {
+          "Link": [
+            {
+              "name": "18-19",
+              "upstreamNodeId": {
+                "region": "10",
+                "id": "18"
+              },
+              "linkWidth": "1400",
+              "lanes": {
+                "Lane": [
+                  {
+                    "laneID": "16",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "101000000000",
+                    "connectsTo": {
+                      "Connection": [
+                        {
+                          "remoteIntersection": {
+                            "region": "10",
+                            "id": "17"
+                          },
+                          "connectingLane": {
+                            "lane": "15",
+                            "maneuver": "100000000000"
+                          }
+                        },
+                        {
+                          "remoteIntersection": {
+                            "region": "10",
+                            "id": "20"
+                          },
+                          "connectingLane": {
+                            "lane": "10",
+                            "maneuver": "100000000000"
+                          }
+                        }
+                      ]
+                    },
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188221527",
+                                "lat": "319351114"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188221549",
+                                "lat": "319350737"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188221569",
+                                "lat": "319350377"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "laneID": "17",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "100000000000",
+                    "connectsTo": {
+                      "Connection": [{
+                        "remoteIntersection": {
+                          "region": "10",
+                          "id": "20"
+                        },
+                        "connectingLane": {
+                          "lane": "9",
+                          "maneuver": "100000000000"
+                        }
+                      }]
+                    },
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188221926",
+                                "lat": "319349676"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188221876",
+                                "lat": "319350566"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188221842",
+                                "lat": "319351160"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "laneID": "18",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "100000000000",
+                    "connectsTo": {
+                      "Connection": [{
+                        "remoteIntersection": {
+                          "region": "10",
+                          "id": "20"
+                        },
+                        "connectingLane": {
+                          "lane": "8",
+                          "maneuver": "100000000000"
+                        }
+                      }]
+                    },
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222195",
+                                "lat": "319350531"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222180",
+                                "lat": "319350800"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222129",
+                                "lat": "319351312"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "laneID": "19",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "001010000000",
+                    "connectsTo": {
+                      "Connection": [{
+                        "remoteIntersection": {
+                          "region": "10",
+                          "id": "21"
+                        },
+                        "connectingLane": {
+                          "lane": "2",
+                          "maneuver": "100000000000"
+                        }
+                      },
+                      {
+                        "remoteIntersection": {
+                          "region": "10",
+                          "id": "18"
+                        },
+                        "connectingLane": {
+                          "lane": "21",
+                          "maneuver": "100000000000"
+                        }
+                      }
+                      ]
+                    },
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222485",
+                                "lat": "319351017"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222531",
+                                "lat": "319350207"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222498",
+                                "lat": "319350782"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "21-19",
+              "upstreamNodeId": {
+                "region": "10",
+                "id": "21"
+              },
+              "linkWidth": "1000",
+              "lanes": {
+                "Lane": [
+                  {
+                    "laneID": "23",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "101000000000",
+                    "connectsTo": {
+                      "Connection": [
+                        {
+                          "remoteIntersection": {
+                            "region": "10",
+                            "id": "17"
+                          },
+                          "connectingLane": {
+                            "lane": "15",
+                            "maneuver": "100000000000"
+                          }
+                        },
+                        {
+                          "remoteIntersection": {
+                            "region": "10",
+                            "id": "18"
+                          },
+                          "connectingLane": {
+                            "lane": "22",
+                            "maneuver": "100000000000"
+                          }
+                        }
+                      ]
+                    },
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188225464",
+                                "lat": "319352044"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188226722",
+                                "lat": "319351896"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188228076",
+                                "lat": "319351743"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "laneID": "24",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "010000000000",
+                    "connectsTo": {
+                      "Connection": [
+                        {
+                          "remoteIntersection": {
+                            "region": "10",
+                            "id": "20"
+                          },
+                          "connectingLane": {
+                            "lane": "9",
+                            "maneuver": "100000000000"
+                          }
+                        }
+                      ]
+                    },
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188226382",
+                                "lat": "319352209"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188227346",
+                                "lat": "319352099"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188225533",
+                                "lat": "319352309"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "laneID": "1",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "010000000000",
+                    "connectsTo": {
+                      "Connection": [
+                        {
+                          "remoteIntersection": {
+                            "region": "10",
+                            "id": "20"
+                          },
+                          "connectingLane": {
+                            "lane": "8",
+                            "maneuver": "100000000000"
+                          }
+                        }
+                      ]
+                    },
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188225796",
+                                "lat": "319352551"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188229232",
+                                "lat": "319352158"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188227722",
+                                "lat": "319352329"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "20-19",
+              "upstreamNodeId": {
+                "region": "10",
+                "id": "20"
+              },
+              "linkWidth": "1400",
+              "lanes": {
+                "Lane": [
+                  {
+                    "laneID": "4",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "101000000000",
+                    "connectsTo": {
+                      "Connection": [
+                        {
+                          "remoteIntersection": {
+                            "region": "10",
+                            "id": "18"
+                          },
+                          "connectingLane": {
+                            "lane": "22",
+                            "maneuver": "100000000000"
+                          }
+                        },
+                        {
+                          "remoteIntersection": {
+                            "region": "10",
+                            "id": "21"
+                          },
+                          "connectingLane": {
+                            "lane": "3",
+                            "maneuver": "100000000000"
+                          }
+                        }
+                      ]
+                    },
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188223207",
+                                "lat": "319355380"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188223220",
+                                "lat": "319355118"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188223234",
+                                "lat": "319354857"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "laneID": "5",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "100000000000",
+                    "connectsTo": {
+                      "Connection": {
+                        "remoteIntersection": {
+                          "region": "10",
+                          "id": "18"
+                        },
+                        "connectingLane": {
+                          "lane": "21",
+                          "maneuver": "100000000000"
+                        }
+                      }
+                    },
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222883",
+                                "lat": "319355483"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222899",
+                                "lat": "319355186"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222914",
+                                "lat": "319354889"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "laneID": "6",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "100000000000",
+                    "connectsTo": {
+                      "Connection": {
+                        "remoteIntersection": {
+                          "region": "10",
+                          "id": "18"
+                        },
+                        "connectingLane": {
+                          "lane": "20",
+                          "maneuver": "100000000000"
+                        }
+                      }
+                    },
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222595",
+                                "lat": "319354922"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222630",
+                                "lat": "319354329"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222564",
+                                "lat": "319355512"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "laneID": "7",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "010000000000",
+                    "connectsTo": {
+                      "Connection": {
+                        "remoteIntersection": {
+                          "region": "10",
+                          "id": "17"
+                        },
+                        "connectingLane": {
+                          "lane": "14",
+                          "maneuver": "100000000000"
+                        }
+                      }
+                    },
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222255",
+                                "lat": "319355359"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222270",
+                                "lat": "319355069"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188222281",
+                                "lat": "319354871"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "17-19",
+              "upstreamNodeId": {
+                "region": "10",
+                "id": "17"
+              },
+              "linkWidth": "1000",
+              "lanes": {
+                "Lane": [
+                  {
+                    "laneID": "11",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "101000000000",
+                    "connectsTo": {
+                      "Connection": [
+                        {
+                          "remoteIntersection": {
+                            "region": "10",
+                            "id": "21"
+                          },
+                          "connectingLane": {
+                            "lane": "3",
+                            "maneuver": "100000000000"
+                          }
+                        },
+                        {
+                          "remoteIntersection": {
+                            "region": "10",
+                            "id": "20"
+                          },
+                          "connectingLane": {
+                            "lane": "10",
+                            "maneuver": "100000000000"
+                          }
+                        }
+                      ]
+                    },
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188219385",
+                                "lat": "319353716"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188216838",
+                                "lat": "319354004"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188215888",
+                                "lat": "319354111"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "laneID": "12",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "100000000000",
+                    "connectsTo": {
+                      "Connection": [
+                        {
+                          "remoteIntersection": {
+                            "region": "10",
+                            "id": "21"
+                          },
+                          "connectingLane": {
+                            "lane": "2",
+                            "maneuver": "100000000000"
+                          }
+                        }
+                      ]
+                    },
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188219346",
+                                "lat": "319353470"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188218036",
+                                "lat": "319353618"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188217479",
+                                "lat": "319353681"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "laneID": "13",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "000110000000",
+                    "connectsTo": {
+                      "Connection": [
+                        {
+                          "remoteIntersection": {
+                            "region": "10",
+                            "id": "18"
+                          },
+                          "connectingLane": {
+                            "lane": "20",
+                            "maneuver": "100000000000"
+                          }
+                        },
+                        {
+                          "remoteIntersection": {
+                            "region": "10",
+                            "id": "17"
+                          },
+                          "connectingLane": {
+                            "lane": "14",
+                            "maneuver": "100000000000"
+                          }
+                        }
+                      ]
+                    },
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188218255",
+                                "lat": "319353320"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188217197",
+                                "lat": "319353440"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188219198",
+                                "lat": "319353214"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "20",
+        "id": {
+          "region": "10",
+          "id": "20"
+        },
+        "refPos": {
+          "lat": "319338466",
+          "long": "1188213963",
+          "elevation": "0"
+        },
+        "inLinks": {
+          "Link": [
+            {
+              "name": "19-20",
+              "upstreamNodeId": {
+                "region": "10",
+                "id": "19"
+              },
+              "linkWidth": "1400",
+              "lanes": {
+                "Lane": [
+                  {
+                    "laneID": "8",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "100000000000",
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188221935",
+                                "lat": "319354840"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188221931",
+                                "lat": "319355067"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188221927",
+                                "lat": "319355294"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "laneID": "9",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "100000000000",
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188221588",
+                                "lat": "319355059"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188221577",
+                                "lat": "319355511"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188221583",
+                                "lat": "319355346"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "laneID": "10",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "100000000000",
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188221227",
+                                "lat": "319354828"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188221222",
+                                "lat": "319355088"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188221218",
+                                "lat": "319355352"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "21",
+        "id": {
+          "region": "10",
+          "id": "21"
+        },
+        "refPos": {
+          "lat": "319348466",
+          "long": "1188223963",
+          "elevation": "0"
+        },
+        "inLinks": {
+          "Link": [
+            {
+              "name": "19-21",
+              "upstreamNodeId": {
+                "region": "10",
+                "id": "19"
+              },
+              "linkWidth": "1000",
+              "lanes": {
+                "Lane": [
+                  {
+                    "laneID": "2",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "100000000000",
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188228987",
+                                "lat": "319352469"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188228099",
+                                "lat": "319352571"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188227276",
+                                "lat": "319352665"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "laneID": "3",
+                    "laneWidth": "200",
+                    "laneAttributes": {
+                      "shareWith": "0000000000",
+                      "laneType": {
+                        "vehicle": "00000000"
+                      }
+                    },
+                    "maneuvers": "100000000000",
+                    "points": {
+                      "RoadPoint": [
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188225876",
+                                "lat": "319353123"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188226223",
+                                "lat": "319353092"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "posOffset": {
+                            "offsetLL": {
+                              "position-LatLon": {
+                                "lon": "1188226570",
+                                "lat": "319353061"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
 }

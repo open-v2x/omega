@@ -539,7 +539,7 @@
   "Register Now": "立即注册",
   "Config the map": "配置地图",
   "Config the map Hint": "进入 MAP 配置页面，上传路口地图和对应的 JSON 文件。",
-  "Traffic screen Hint": "进入监控中心，查看小车行驶轨迹。",
+  "Traffic screen Hint": "进入交通大屏，查看交通预警信息、车辆状态信息、路测设备状态信息",
   "Config Now": "立即配置",
   "Have Try": "立即查看",
   "Service guidance": "服务指引",
@@ -550,5 +550,6 @@
   "More": "更多",
   "Not authenticated": "登录失效，请重新登录！",
   "version error": "算法版本 {{v}} 已经存在",
-  "value is not a valid dict": "MAP 数据文件内容不符合数据规范，请重新检查后上传！"
+  "value is not a valid dict": "MAP 数据文件内容不符合数据规范，请重新检查后上传！",
+  "Map Details": "MAP 详情"
 }
