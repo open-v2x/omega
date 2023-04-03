@@ -1,6 +1,5 @@
 import CardList from '#/components/CardList';
-import { downloadMapConfig } from '#/services/api/center/site';
-import { getMapDetail } from '#/services/api/config/crossing';
+import { getBitData, getMapDetail } from '#/services/api/config/crossing';
 import { downloadFile } from '#/utils';
 import { FileTextOutlined } from '@ant-design/icons';
 import { ProCard } from '@ant-design/pro-components';
@@ -23,7 +22,7 @@ const BasicInfo: React.FC<{ mapId: number }> = ({ mapId }) => {
   }, []);
 
   const getDownloadFile = async (id: number | string, name: string) => {
-    const data = await downloadMapConfig(id);
+    const data = await getBitData(id);
     const dataStr = `data:application/json;charset=utf-8,${encodeURIComponent(
       JSON.stringify(data),
     )}`;
@@ -53,7 +52,11 @@ const BasicInfo: React.FC<{ mapId: number }> = ({ mapId }) => {
       key: 'preview',
       label: t('MAP Preview'),
       render: ({ id }: { id: number }) => (
-        <Button type="link" size="small" onClick={() => navigate(`/maintenance/map/preview/${id}`)}>
+        <Button
+          type="link"
+          size="small"
+          onClick={() => navigate(`/maintenance/bitmap/preview/${id}`)}
+        >
           {t('Preview')}
         </Button>
       ),

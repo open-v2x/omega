@@ -28,7 +28,7 @@ const EditMapModal: React.FC<CreateModalProps> = ({ editId, success }) => {
   const [mapData, setMapData] = useState<Record<string, any> | null>(null);
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
-  const [bitmapName, setBitmapName] = useState('');
+  const [bitmapFilename, setBitmapFilename] = useState('');
 
   // MAP 数据文件上传的 upload 组件属性
   const UploadFieldProps = {
@@ -100,9 +100,9 @@ const EditMapModal: React.FC<CreateModalProps> = ({ editId, success }) => {
     if (file) {
       try {
         const result = await uploadBitmap(file);
-        const { bitmapFilename = '' } = result;
+        const { bitmapFilename: bfn = '' } = result;
         getBase64(file, url => {
-          setBitmapName(bitmapFilename);
+          setBitmapFilename(bfn);
           setImageUrl(url);
         });
       } finally {
@@ -112,6 +112,7 @@ const EditMapModal: React.FC<CreateModalProps> = ({ editId, success }) => {
   };
 
   const normFile = (e: any) => {
+    console.log('normFile', e);
     if (Array.isArray(e)) {
       return e;
     }
@@ -170,15 +171,10 @@ const EditMapModal: React.FC<CreateModalProps> = ({ editId, success }) => {
           components: (
             <Form.Item
               key="bitmap"
-              name={'bitmapFilename'}
+              name="bitmapFilename"
               valuePropName="fileList"
               getValueFromEvent={normFile}
               label={t('Upload Bitmap')}
-              rules={[
-                {
-                  message: t('Please upload a Bitmap image'),
-                },
-              ]}
             >
               <Upload
                 name="avatar"
@@ -212,8 +208,8 @@ const EditMapModal: React.FC<CreateModalProps> = ({ editId, success }) => {
         if (mapData) {
           values.data = mapData;
         }
-        if (bitmapName) {
-          values.bitmapFilename = bitmapName;
+        if (bitmapFilename) {
+          values.bitmapFilename = bitmapFilename;
         }
         await updateMapDetail(editId, values);
         success();
