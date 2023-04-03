@@ -42,9 +42,11 @@ const SiderLayout: FC = () => {
 
   return (
     <Layout className={styles['layout-container']}>
-      <div className={styles['header-container']}>
-        <GlobalHeader navItems={[]} isAdminPage={false} />
-      </div>
+      {!window.__POWERED_BY_QIANKUN__ && (
+        <div className={styles['header-container']}>
+          <GlobalHeader navItems={[]} isAdminPage={false} />
+        </div>
+      )}
       <Layout className={styles['box-container']}>
         <Sider
           className={styles['menu-container']}
