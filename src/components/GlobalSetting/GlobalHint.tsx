@@ -55,7 +55,7 @@ const GlobalHint: React.FC = () => {
       title: t('Config the map'),
       content: t('Config the map Hint'),
       bottom: (
-        <Button danger onClick={() => handleGo('system/site')}>
+        <Button danger onClick={() => handleGo('maintenance/map')}>
           {t('Config Now')}
         </Button>
       ),
@@ -64,7 +64,7 @@ const GlobalHint: React.FC = () => {
       title: t('Traffic screen'),
       content: t('Traffic screen Hint'),
       bottom: (
-        <Button danger onClick={() => handleGo('center/site')}>
+        <Button danger onClick={() => handleGo('traffic/map')}>
           {t('Have Try')}
         </Button>
       ),

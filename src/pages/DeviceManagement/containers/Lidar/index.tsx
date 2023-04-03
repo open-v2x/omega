@@ -120,6 +120,11 @@ const Lidar: React.FC = () => {
           ),
           moreActions: moreActions,
         }}
+        columnsState={{
+          defaultValue: {
+            wsUrl: { show: false },
+          },
+        }}
       />
     </BaseContainer>
   );

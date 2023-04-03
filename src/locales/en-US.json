@@ -549,5 +549,7 @@
   "Not authenticated": "Not authenticated",
   "version error": "Version {{v}} already exist",
   "Select": "Select",
-  "value is not a valid dict": "value is not a valid dict"
+  "value is not a valid dict": "value is not a valid dict",
+  "Map Details": "Map Details",
+  "Config": "Config"
 }
