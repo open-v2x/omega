@@ -36,7 +36,7 @@ class ServerResponseFailedManager {
     const { msg, code } = isArray(detail) ? detail[0] : detail;
     const parser = {
       '403': () => this.handleCodeIs403(),
-      '1062': () => this.handleShowErrorWithDetailKey(code, detail.detail),
+      '1062': () => this.handleCodeIs1062(detail.detail),
       '1406': () => this.handleShowErrorWithDetailKey(code, detail.detail),
       '1116': () => this.handleCodeIs1116(detail.detail),
       '404': () => this.handleCodeIs404(msg),
@@ -81,6 +81,11 @@ class ServerResponseFailedManager {
     if (msg === 'User not found.') {
       this.handleCodeIs403();
     }
+  }
+
+  handleCodeIs1062(detail: any) {
+    const { version } = detail;
+    message.error(t(`error.1062`, { msg: version }));
   }
 
   handleCodeIs1116(detail: any) {
