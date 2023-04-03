@@ -117,7 +117,7 @@ const AlgorithmConfig: FC = () => {
                 });
               }}
             >
-              {editStatus ? 'Disabled' : 'Enable'}
+              {editStatus ? t('Disabled') : t('Enable')}
             </a>,
           ],
           onChange: setEditableRowKeys,
@@ -129,7 +129,7 @@ const AlgorithmConfig: FC = () => {
         }}
         recordCreatorProps={false}
         pagination={{ pageSize: 10 }}
-        toolBarRender={() => [<Button onClick={handleConfig}>配置</Button>]}
+        toolBarRender={() => [<Button onClick={handleConfig}>{t('Config')}</Button>]}
         options={{
           setting: {
             checkable: true,

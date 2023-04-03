@@ -87,7 +87,19 @@ const RSMList: React.FC = () => {
   ];
   return (
     <BaseContainer>
-      <BaseProTable columns={columns} actionRef={actionRef} request={roadSideMessageList} />
+      <BaseProTable
+        columns={columns}
+        actionRef={actionRef}
+        request={roadSideMessageList}
+        columnsState={{
+          defaultValue: {
+            speed: { show: false },
+            heading: { show: false },
+            lon: { show: false },
+            lat: { show: false },
+          },
+        }}
+      />
     </BaseContainer>
   );
 };

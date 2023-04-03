@@ -51,7 +51,17 @@ const SensorDataSharing: React.FC = () => {
   ];
   return (
     <BaseContainer>
-      <BaseProTable columns={columns} actionRef={actionRef} request={sensorDataSharingList} />
+      <BaseProTable
+        columns={columns}
+        actionRef={actionRef}
+        request={sensorDataSharingList}
+        columnsState={{
+          defaultValue: {
+            'sensorPos,lon': { show: false },
+            'sensorPos,lat': { show: false },
+          },
+        }}
+      />
     </BaseContainer>
   );
 };

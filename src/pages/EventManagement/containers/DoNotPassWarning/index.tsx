@@ -63,7 +63,18 @@ const DnNotPassWarning: React.FC = () => {
   ];
   return (
     <BaseContainer>
-      <BaseProTable columns={columns} actionRef={actionRef} request={overtakingWarningList} />
+      <BaseProTable
+        columns={columns}
+        actionRef={actionRef}
+        request={overtakingWarningList}
+        columnsState={{
+          defaultValue: {
+            'driveSuggestion,suggestion': { show: false },
+            'driveSuggestion,lifeTime': { show: false },
+            info: { show: false },
+          },
+        }}
+      />
     </BaseContainer>
   );
 };
