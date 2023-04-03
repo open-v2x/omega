@@ -51,7 +51,18 @@ const CooperativeLaneChange: React.FC = () => {
   ];
   return (
     <BaseContainer>
-      <BaseProTable columns={columns} actionRef={actionRef} request={cooperativeLaneChangeList} />
+      <BaseProTable
+        columns={columns}
+        actionRef={actionRef}
+        request={cooperativeLaneChangeList}
+        columnsState={{
+          defaultValue: {
+            info: { show: false },
+            'driveSuggestion,suggestion': { show: false },
+            'driveSuggestion,lifeTime': { show: false },
+          },
+        }}
+      />
     </BaseContainer>
   );
 };

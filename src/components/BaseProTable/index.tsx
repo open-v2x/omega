@@ -5,6 +5,7 @@ import type { OptionConfig, ToolBarProps } from '@ant-design/pro-table/es/compon
 import type { ExpandableConfig } from 'antd/lib/table/interface';
 import { ProFormInstance, ProTable } from '@ant-design/pro-components';
 import { ProColumns } from '#/typings/pro-component';
+import type { ColumnsStateType } from '@ant-design/pro-table/es/typing';
 import { DownOutlined } from '@ant-design/icons';
 
 type BaseProTableType = {
@@ -33,6 +34,7 @@ type BaseProTableType = {
     firstAction?: (row: any) => React.ReactNode;
     moreActions?: (row: any) => MenuProps['items'];
   };
+  columnsState?: ColumnsStateType;
 };
 
 const BaseProTable: React.FC<BaseProTableType> = props => {
@@ -55,6 +57,7 @@ const BaseProTable: React.FC<BaseProTableType> = props => {
     formRef,
     onDataSourceChange,
     rowActions,
+    columnsState,
   } = props;
 
   const [isScroll, setIsScroll] = useState(false);
@@ -116,6 +119,10 @@ const BaseProTable: React.FC<BaseProTableType> = props => {
       columns={getColumns()}
       actionRef={actionRef}
       dataSource={dataSource}
+      columnsState={columnsState}
+      onColumnsStateChange={map => {
+        console.log('columnsStateChanged', map);
+      }}
       request={async (param, { createTime }) => {
         if (createTime) {
           param.sortDir = createTime === 'ascend' ? 'asc' : 'desc';
