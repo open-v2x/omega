@@ -80,7 +80,19 @@ const RSIList: React.FC = () => {
   ];
   return (
     <BaseContainer>
-      <BaseProTable columns={columns} actionRef={actionRef} request={eventInfoList} />
+      <BaseProTable
+        columns={columns}
+        actionRef={actionRef}
+        request={eventInfoList}
+        columnsState={{
+          defaultValue: {
+            duration: { show: false },
+            eventRadius: { show: false },
+            eventDescription: { show: false },
+            eventPriority: { show: false },
+          },
+        }}
+      />
     </BaseContainer>
   );
 };
