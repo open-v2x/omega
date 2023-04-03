@@ -5,13 +5,11 @@ import { statusOptionFormat } from '#/utils';
 import { ActionType, EditableFormInstance, EditableProTable } from '@ant-design/pro-components';
 import React, { FC, useRef, useState } from 'react';
 import { fetchAlgorithmList, updateAlgorithm } from '#/services/api/algorithm';
-import styles from './index.module.less';
-import { Button, message } from 'antd';
+import { Button, Select, message } from 'antd';
 
 const AlgorithmConfig: FC = () => {
   const actionRef = useRef<ActionType>();
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
-  const [editStatus, setEditStatus] = useState(false);
   const editorFormRef = useRef<EditableFormInstance<Algorithm.AlgorithmListItem>>();
 
   const [data, setData] = useState<readonly Algorithm.AlgorithmListItem[]>([]);
@@ -50,8 +48,12 @@ const AlgorithmConfig: FC = () => {
       valueType: 'select',
       valueEnum: statusOptionFormat(DeviceStatusOptions),
       search: false,
-      //   @ts-ignore
-      renderFormItem: row => <div>{row.valueEnum[editStatus].text}</div>,
+      renderFormItem: row => (
+        <Select defaultValue={row.enable}>
+          <Option value={true}>{t('Enable')}</Option>
+          <Option value={false}>{t('Disabled')}</Option>
+        </Select>
+      ),
     },
     {
       title: t('Update Time'),
@@ -70,7 +72,6 @@ const AlgorithmConfig: FC = () => {
           key="editable"
           onClick={() => {
             action?.startEditable?.(record.id);
-            setEditStatus(record.enable);
           }}
         >
           {t('Edit')}
@@ -105,21 +106,7 @@ const AlgorithmConfig: FC = () => {
         editable={{
           type: 'single',
           editableKeys,
-          actionRender: (row, config, defaultDoms) => [
-            defaultDoms.save,
-            <a
-              key="set"
-              className={editStatus ? styles.disabled : null}
-              onClick={() => {
-                setEditStatus(!editStatus);
-                editorFormRef.current?.setRowData?.(`${config.recordKey}`, {
-                  enable: !row.enable,
-                });
-              }}
-            >
-              {editStatus ? t('Disabled') : t('Enable')}
-            </a>,
-          ],
+          actionRender: (row, config, defaultDoms) => [defaultDoms.save],
           onChange: setEditableRowKeys,
         }}
         request={async params => {
