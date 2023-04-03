@@ -32,7 +32,7 @@ export default class BaseService {
 
   getFullPath = (path: string, config: any = {}) => {
     const { isCenter = false, params = undefined } = config;
-    const ip = useRootStore.getState().edgeSite.ip;
+    const ip = useRootStore.getState().getNodeIp();
     if (isCenter || !ip) return `${this.baseUrl}/center/${path}`;
     const edge = `${this.baseUrl}/edge/${ip}:28300/api/${path}`;
     const url = this.handleGetUrl('', params);

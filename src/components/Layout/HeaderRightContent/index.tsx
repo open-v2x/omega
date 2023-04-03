@@ -9,7 +9,7 @@ import { useRootStore } from '#/store/root';
 
 export default function RightContent() {
   const [siteList, setSiteList] = useState([]);
-  const ip = useRootStore(state => state.edgeSite.ip);
+  const ip = useRootStore().getNodeIp();
   const rootStore = useRootStore();
 
   const handleChange = (selectIP: string) => {
@@ -53,7 +53,9 @@ export default function RightContent() {
       rootStore.setState({
         edgeSite: data[0],
       });
-      rootStore.setNode(data[0]);
+      const curNodeIp = rootStore.getNodeIp();
+      const findOut = data.find(node => node.ip === curNodeIp);
+      rootStore.setNode(findOut || data[0] || undefined);
     }
     rootStore.setState({
       inited: true,
