@@ -12,6 +12,7 @@ import Sider from 'antd/lib/layout/Sider';
 import { Content } from 'antd/lib/layout/layout';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { PageLoading } from '@ant-design/pro-components';
+import classNames from 'classnames';
 
 const SiderLayout: FC = () => {
   const menuStore = useMenuStore();
@@ -47,7 +48,12 @@ const SiderLayout: FC = () => {
           <GlobalHeader navItems={[]} isAdminPage={false} />
         </div>
       )}
-      <Layout className={styles['box-container']}>
+      <Layout
+        className={classNames(
+          styles['box-container'],
+          window.__POWERED_BY_QIANKUN__ ? styles['mt-50'] : '',
+        )}
+      >
         <Sider
           className={styles['menu-container']}
           collapsed={toggle}
