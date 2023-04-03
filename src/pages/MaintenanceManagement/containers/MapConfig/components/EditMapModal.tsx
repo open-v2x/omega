@@ -186,7 +186,11 @@ const EditMapModal: React.FC<CreateModalProps> = ({ editId, success }) => {
                 onChange={handleChange}
               >
                 {imageUrl ? (
-                  <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
+                  <img
+                    src={imageUrl}
+                    alt="avatar"
+                    style={{ width: '100%', height: '100px', overflow: 'hidden' }}
+                  />
                 ) : (
                   uploadButton
                 )}
