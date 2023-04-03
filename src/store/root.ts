@@ -49,14 +49,13 @@ const useRootStore = create<IRootStore>((set, get) => ({
     return edge.id || undefined;
   },
   getNodeIp: () => {
-    if (get().edgeSite.ip) {
-      return get().edgeSite.ip;
+    const enode = Cookies.get('enode');
+    if (enode) {
+      const edge = JSON.parse(decodeURIComponent(enode));
+      return edge.ip;
     }
 
-    const enode = Cookies.get('enode');
-    const edge = JSON.parse(decodeURIComponent(enode));
-
-    return edge.ip || undefined;
+    return undefined;
   },
 }));
 
