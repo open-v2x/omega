@@ -65,6 +65,10 @@ export const checkDetaillWindow = async (page: Page) => {
   return await expect(page.locator('.ant-modal-content')).toBeVisible();
 };
 
+export const checkDetailPage = async (page: Page) => {
+  return await expect(page.locator('.ant-row').first()).toBeVisible();
+};
+
 export const closePopWindow = async (page: Page) => {
   await page.locator('.ant-modal-close-x').click();
 };

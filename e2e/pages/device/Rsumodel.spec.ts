@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 import { generateNumLetter } from '../../utils';
 import { globalModalSubmitBtn, setModalFormItemValue } from '../../utils/form';
-import { checkSuccessMsg, gotoPageAndExpectUrl, useUserStorageState } from '../../utils/global';
+import { checkSuccessMsg, useUserStorageState } from '../../utils/global';
 import {
   checkTableItemContainValue,
   clickConfirmModalOkBtn,
@@ -9,6 +9,7 @@ import {
   clickDeleteTextBtn,
   clickEditBtn,
   searchItemAndQuery,
+  clickMoreBtn,
 } from '../../utils/table';
 
 test.describe('The RsuModel Page', () => {
@@ -58,6 +59,7 @@ test.describe('The RsuModel Page', () => {
 
   test('successfully delete rsumodel', async ({ page }) => {
     await searchItemAndQuery(page, '#name', `update_${rsumodelNameVal}`);
+    await clickMoreBtn(page);
     await clickDeleteTextBtn(page);
     await clickConfirmModalOkBtn(page);
     await checkSuccessMsg(page);
