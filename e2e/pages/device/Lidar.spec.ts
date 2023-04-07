@@ -1,5 +1,6 @@
 import { test } from '@playwright/test';
 import { generateIntNum, generateNumLetter, generatePureNumber } from '../../utils';
+import { clickBackToListBtn } from '../../utils/detail';
 import {
   globalModalSubmitBtn,
   setModalFormItemValue,
@@ -10,7 +11,7 @@ import {
   setCascaderValue,
 } from '../../utils/form';
 import {
-  checkDetaillWindow,
+  checkDetailPage,
   checkSuccessMsg,
   closePopWindow,
   useUserStorageState,
@@ -21,12 +22,12 @@ import {
   clickConfirmModalOkBtn,
   clickCreateBtn,
   clickDeleteTextBtn,
-  clickDetailTextBtn,
+  clickNameBtn,
   clickEditBtn,
   clickEnableDisableTextBtn,
   searchItemAndQuery,
   checkTableItemContainValue,
-  checkTableItemEqualValue,
+  clickMoreBtn,
 } from '../../utils/table';
 
 test.describe('The Lidar Page', () => {
@@ -66,7 +67,6 @@ test.describe('The Lidar Page', () => {
     await setModalFormItemValue(page, '#wsUrl', randomNumLetter);
     await setModalFormItemValue(page, '#desc', descVal);
     await setSelectValue(page, 'rsuId', '#rsuId_list');
-    await setCascaderValue(page, 'province', provinceNameVal);
 
     await globalModalSubmitBtn(page);
     await checkSuccessMsg(page);
@@ -80,13 +80,6 @@ test.describe('The Lidar Page', () => {
   test('successfully query via lidar sn', async ({ page }) => {
     await searchItemAndQuery(page, '#sn', lidarnSnVal);
     await checkTableItemContainValue(page, lidarnSnVal, 2);
-  });
-
-  test('successfully query via lidar address', async ({ page }) => {
-    await clickUnfoldBtn(page);
-    const address: any = await setQueryCascaderValue(page, queryprovinceNameVal);
-    const res = address.replace(/[\s\/]/g, ''); // 去掉空格和斜杠
-    await checkTableItemEqualValue(page, res, 5);
   });
 
   test('successfully query via associated rsu', async ({ page }) => {
@@ -107,13 +100,14 @@ test.describe('The Lidar Page', () => {
 
   test('successfully view  lidar detail', async ({ page }) => {
     await searchItemAndQuery(page, '#name', `update_${lidarNameVal}`);
-    await clickDetailTextBtn(page);
-    await checkDetaillWindow(page);
-    await closePopWindow(page);
+    await clickNameBtn(page);
+    await checkDetailPage(page);
+    await clickBackToListBtn(page);
   });
 
   test('successfully enable and disable lidar', async ({ page }) => {
     await searchItemAndQuery(page, '#name', `update_${lidarNameVal}`);
+    await clickMoreBtn(page);
     await clickEnableDisableTextBtn(page, 'text="禁用"');
     await clickConfirmModalOkBtn(page);
     await checkSuccessMsg(page);
@@ -121,6 +115,7 @@ test.describe('The Lidar Page', () => {
 
   test('successfully delete lidar', async ({ page }) => {
     await searchItemAndQuery(page, '#name', `update_${lidarNameVal}`);
+    await clickMoreBtn(page);
     await clickDeleteTextBtn(page);
     await clickConfirmModalOkBtn(page);
     await checkSuccessMsg(page);
