@@ -1,5 +1,6 @@
 import { test } from '@playwright/test';
 import { generateIntNum, generateNumLetter, generatePureNumber } from '../../utils';
+import { clickBackToListBtn } from '../../utils/detail';
 import {
   globalModalSubmitBtn,
   setModalFormItemValue,
@@ -10,7 +11,7 @@ import {
   setCascaderValue,
 } from '../../utils/form';
 import {
-  checkDetaillWindow,
+  checkDetailPage,
   checkSuccessMsg,
   closePopWindow,
   useUserStorageState,
@@ -21,11 +22,11 @@ import {
   clickConfirmModalOkBtn,
   clickCreateBtn,
   clickDeleteTextBtn,
-  clickDetailTextBtn,
+  clickNameBtn,
   clickEditBtn,
   searchItemAndQuery,
   checkTableItemContainValue,
-  checkTableItemEqualValue,
+  clickMoreBtn,
 } from '../../utils/table';
 
 test.describe('The Ladar Page', () => {
@@ -61,7 +62,6 @@ test.describe('The Ladar Page', () => {
     await setModalFormItemValue(page, '#radarIP', ladarIPVal);
     await setModalFormItemValue(page, '#desc', descVal);
     await setSelectValue(page, 'rsuId', '#rsuId_list');
-    await setCascaderValue(page, 'province', provinceNameVal);
 
     await globalModalSubmitBtn(page);
     await checkSuccessMsg(page);
@@ -75,13 +75,6 @@ test.describe('The Ladar Page', () => {
   test('successfully query via ladar sn', async ({ page }) => {
     await searchItemAndQuery(page, '#sn', ladarnSnVal);
     await checkTableItemContainValue(page, ladarnSnVal, 2);
-  });
-
-  test('successfully query via ladar address', async ({ page }) => {
-    await clickUnfoldBtn(page);
-    const address: any = await setQueryCascaderValue(page, queryprovinceNameVal);
-    const res = address.replace(/[\s\/]/g, ''); // 去掉空格和斜杠
-    await checkTableItemEqualValue(page, res, 4);
   });
 
   test('successfully query via associated rsu', async ({ page }) => {
@@ -102,13 +95,14 @@ test.describe('The Ladar Page', () => {
 
   test('successfully view  ladar detail', async ({ page }) => {
     await searchItemAndQuery(page, '#name', `update_${ladarNameVal}`);
-    await clickDetailTextBtn(page);
-    await checkDetaillWindow(page);
-    await closePopWindow(page);
+    await clickNameBtn(page);
+    await checkDetailPage(page);
+    await clickBackToListBtn(page);
   });
 
   test('successfully delete ladar', async ({ page }) => {
     await searchItemAndQuery(page, '#name', `update_${ladarNameVal}`);
+    await clickMoreBtn(page);
     await clickDeleteTextBtn(page);
     await clickConfirmModalOkBtn(page);
     await checkSuccessMsg(page);

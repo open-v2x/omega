@@ -30,10 +30,9 @@ const config = {
     hot: true,
     proxy: {
       '/api/omega': {
-        target: 'http://47.100.126.13:28300/api',
+        target: 'http://47.100.126.13:2288',
         changeOrigin: true,
         logLevel: 'debug',
-        pathRewrite: { '^/api/omega': '' },
       },
     },
     devMiddleware: {

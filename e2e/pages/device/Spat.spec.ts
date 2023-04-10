@@ -1,38 +1,30 @@
 import { test } from '@playwright/test';
 import { generateIntNum, generateNumLetter } from '../../utils';
+import { clickBackToListBtn } from '../../utils/detail';
 import {
   globalModalSubmitBtn,
   setModalFormItemValue,
   setSelectValue,
   clickUnfoldBtn,
-  setQueryCascaderValue,
   setQuerySelectValue,
-  setCascaderValue,
 } from '../../utils/form';
-import {
-  checkDetaillWindow,
-  checkSuccessMsg,
-  closePopWindow,
-  useUserStorageState,
-  provinceNameVal,
-  queryprovinceNameVal,
-} from '../../utils/global';
+import { checkDetailPage, checkSuccessMsg, useUserStorageState } from '../../utils/global';
 import {
   clickConfirmModalOkBtn,
   clickCreateBtn,
   clickDeleteTextBtn,
-  clickDetailTextBtn,
+  clickNameBtn,
   clickEditBtn,
   clickEnableDisableTextBtn,
   searchItemAndQuery,
   checkTableItemContainValue,
-  checkTableItemEqualValue,
+  clickMoreBtn,
 } from '../../utils/table';
 
 test.describe('The Spat Page', () => {
   const randomNumLetter = generateNumLetter();
   const spatNameVal = `spat_name_${1}`;
-  const spatSnVal = `C_${randomNumLetter}`;
+  const spatSnVal = 'SpatSn';
   const phaseId = generateIntNum({ max: 255 });
   const descVal = 'test description info';
   const pageUrl = '/device/spat';
@@ -60,7 +52,6 @@ test.describe('The Spat Page', () => {
     await setModalFormItemValue(page, '#desc', descVal);
     await setSelectValue(page, 'rsuId', '#rsuId_list');
     await setSelectValue(page, 'light', '#light_list');
-    await setCascaderValue(page, 'province', provinceNameVal);
 
     await globalModalSubmitBtn(page);
     await checkSuccessMsg(page);
@@ -74,13 +65,6 @@ test.describe('The Spat Page', () => {
   test('successfully query via spat sn', async ({ page }) => {
     await searchItemAndQuery(page, '#intersectionId', spatSnVal);
     await checkTableItemContainValue(page, spatSnVal, 2);
-  });
-
-  test('successfully query via spat address', async ({ page }) => {
-    await clickUnfoldBtn(page);
-    const address: any = await setQueryCascaderValue(page, queryprovinceNameVal);
-    const res = address.replace(/[\s\/]/g, ''); // 去掉空格和斜杠
-    await checkTableItemEqualValue(page, res, 4);
   });
 
   test('successfully query via associated rsu', async ({ page }) => {
@@ -101,13 +85,14 @@ test.describe('The Spat Page', () => {
 
   test('successfully view  spat detail', async ({ page }) => {
     await searchItemAndQuery(page, '#name', `update_${spatNameVal}`);
-    await clickDetailTextBtn(page);
-    await checkDetaillWindow(page);
-    await closePopWindow(page);
+    await clickNameBtn(page);
+    await checkDetailPage(page);
+    await clickBackToListBtn(page);
   });
 
   test('successfully enable and disable spat', async ({ page }) => {
     await searchItemAndQuery(page, '#name', `update_${spatNameVal}`);
+    await clickMoreBtn(page);
     await clickEnableDisableTextBtn(page, 'text="禁用"');
     await clickConfirmModalOkBtn(page);
     await checkSuccessMsg(page);
@@ -115,6 +100,7 @@ test.describe('The Spat Page', () => {
 
   test('successfully delete spat', async ({ page }) => {
     await searchItemAndQuery(page, '#name', `update_${spatNameVal}`);
+    await clickMoreBtn(page);
     await clickDeleteTextBtn(page);
     await clickConfirmModalOkBtn(page);
     await checkSuccessMsg(page);

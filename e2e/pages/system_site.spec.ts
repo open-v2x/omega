@@ -7,7 +7,7 @@ import {
 import { password } from '../utils/road_simulator'
 test.describe('The Camera Page', () => {
   const pageUrl = '/system/site';
-  const center_site_url = '/center/site';
+  const center_site_url = '/traffic/site';
   const site_name = 'testmqtt';
   const mqtt_pwd = password;
 

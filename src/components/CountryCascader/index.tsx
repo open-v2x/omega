@@ -1,10 +1,11 @@
-import { countries } from '#/services/api/center/site';
+import { areas } from '#/services/api/center/site';
 import { fetchCrossingList } from '#/services/api/config/crossing';
 import { ProFormCascader } from '@ant-design/pro-components';
 import React from 'react';
 import { useEffect, useState } from 'react';
 
 type CountryCascaderProps = {
+  colon?: boolean;
   defaultValue?: string[];
   mapChange: (data?: {
     type: 1 | 2;
@@ -12,9 +13,15 @@ type CountryCascaderProps = {
     code: string;
     lngLat: [number, number] | [];
   }) => void;
+  labelClass?: string;
 };
 
-const CountryCascader: React.FC<CountryCascaderProps> = ({ defaultValue, mapChange }) => {
+const CountryCascader: React.FC<CountryCascaderProps> = ({
+  colon = true,
+  defaultValue,
+  mapChange,
+  labelClass,
+}) => {
   const [areaCode, setAreaCode] = useState<string>();
   const [crossing, setCrossing] = useState([]);
   const fetchData = async () => {
@@ -54,13 +61,14 @@ const CountryCascader: React.FC<CountryCascaderProps> = ({ defaultValue, mapChan
           allowClear: false,
           fieldNames: { label: 'name', value: 'code' },
           defaultValue,
-          onChange: ([, , , , code]: (string | number)[]) => setAreaCode(code as string),
+          onChange: ([, code]: (string | number)[]) => setAreaCode(code as string),
         }}
         request={async () => {
-          const res = await countries();
+          const res = await areas();
           return res;
         }}
-        label={t('Address')}
+        colon={colon}
+        label={<div className={labelClass}>{t('Address')}</div>}
       />
     </div>
   );

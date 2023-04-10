@@ -242,3 +242,10 @@ export const LightStateOptions = [
   t('Yellow'),
   t('Yellow flashing'),
 ];
+
+export const CongestionLevel = {
+  0: t('Congestion Clear'),
+  1: t('Congestion Level One'),
+  2: t('Congestion Level Two'),
+  3: t('Congestion Level Three'),
+};

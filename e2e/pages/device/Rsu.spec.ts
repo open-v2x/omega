@@ -3,47 +3,38 @@ import { generateIntNum, generateNumLetter, generatePureNumber } from '../../uti
 import { clickBackToListBtn } from '../../utils/detail';
 import {
   globalModalSubmitBtn,
-  setCascaderValue,
   setModalFormItemValue,
   setQuerySelectValue,
   setSelectValue,
-  setQueryCascaderValue,
   clickUnfoldBtn,
 } from '../../utils/form';
 import {
-  checkDetailUrl,
+  checkDetailPage,
   checkSuccessMsg,
   useUserStorageState,
   gotoRoadSimulator,
-  provinceNameVal,
-  queryprovinceNameVal,
 } from '../../utils/global';
 import {
   checkTableItemContainValue,
-  checkTableItemEqualValue,
+  clickNameBtn,
   clickConfirmModalOkBtn,
   clickCreateBtn,
   clickDeleteBtn,
-  clickDetailBtn,
+  clickMoreBtn,
   clickEditBtn,
-  clickEnableDisableBtn,
+  clickEnableDisableTextBtn,
   searchItemAndQuery,
   checkTableRowLength,
   clickDeleteTextBtn,
 } from '../../utils/table';
-import {
-  checkDataset,
-  connectMqtt,
-  addListenTopic,
-  sendTopicPublic,
-} from '../../utils/road_simulator';
+import { connectMqtt, addListenTopic, sendTopicPublic } from '../../utils/road_simulator';
 
 test.describe('The Rsu Page', () => {
   const randomNumLetter = generateNumLetter();
   const randomNum = generatePureNumber();
   const rsuNameVal = `rsu_name_${1}`;
   const queryRsuEsn = 'R328328';
-  const rsuEsnVal = `R_${randomNumLetter}`;
+  const rsuEsnVal = 'R123123';
   const rsuIdVal = `${randomNum}`;
   const rsuIPVal = [
     generateIntNum({ max: 256 }),
@@ -116,7 +107,6 @@ test.describe('The Rsu Page', () => {
     await setModalFormItemValue(page, '#lat', String(lat));
     await setModalFormItemValue(page, '#desc', descVal);
     await setSelectValue(page, 'rsuModelId', '#rsuModelId_list');
-    await setCascaderValue(page, 'province', provinceNameVal);
 
     await globalModalSubmitBtn(page);
     await checkSuccessMsg(page);
@@ -124,12 +114,12 @@ test.describe('The Rsu Page', () => {
 
   test('successfully query via rsuName', async ({ page }) => {
     await searchItemAndQuery(page, '#rsuName', rsuNameVal);
-    await checkTableItemContainValue(page, rsuNameVal, 2);
+    await checkTableItemContainValue(page, rsuNameVal, 1);
   });
 
   test('successfully query via rsuEsn', async ({ page }) => {
     await searchItemAndQuery(page, '#rsuEsn', queryRsuEsn);
-    await checkTableItemContainValue(page, queryRsuEsn, 3);
+    await checkTableItemContainValue(page, queryRsuEsn, 2);
   });
 
   test('successfully query via status', async ({ page }) => {
@@ -138,15 +128,8 @@ test.describe('The Rsu Page', () => {
     await checkTableItemContainValue(page, '启用', 7);
   });
 
-  test('successfully query via address', async ({ page }) => {
-    await clickUnfoldBtn(page);
-    const address: any = await setQueryCascaderValue(page, queryprovinceNameVal);
-    const res = address.replace(/[\s\/]/g, ''); // 去掉空格和斜杠
-    await checkTableItemEqualValue(page, res, 5);
-  });
-
   test('successfully edit rsu', async ({ page }) => {
-    await searchItemAndQuery(page, '#rsuName', rsuNameVal);
+    await searchItemAndQuery(page, '#rsuEsn', rsuEsnVal);
     await clickEditBtn(page);
 
     await setModalFormItemValue(page, '#rsuName', `update_${rsuNameVal}`);
@@ -155,29 +138,30 @@ test.describe('The Rsu Page', () => {
     await setModalFormItemValue(page, '#rsuIP', rsuIPVal);
     await setModalFormItemValue(page, '#desc', `update ${descVal}`);
     await setSelectValue(page, 'rsuModelId', '#rsuModelId_list');
-    await setCascaderValue(page, 'province', queryprovinceNameVal);
 
     await globalModalSubmitBtn(page);
     await checkSuccessMsg(page);
   });
 
   test('successfully view detail', async ({ page }) => {
-    await searchItemAndQuery(page, '#rsuName', rsuNameVal);
-    await clickDetailBtn(page);
-    await checkDetailUrl(page, pageUrl);
+    await searchItemAndQuery(page, '#rsuEsn', rsuEsnVal);
+    await clickNameBtn(page);
+    await checkDetailPage(page);
     await clickBackToListBtn(page);
   });
 
   test('successfully enable and disable rsu', async ({ page }) => {
-    await searchItemAndQuery(page, '#rsuName', rsuNameVal);
-    await clickEnableDisableBtn(page);
+    await searchItemAndQuery(page, '#rsuEsn', rsuEsnVal);
+    await clickMoreBtn(page);
+    await clickEnableDisableTextBtn(page, 'text="禁用"');
     await clickConfirmModalOkBtn(page);
     await checkSuccessMsg(page);
   });
 
   test('successfully delete rsu', async ({ page }) => {
-    await searchItemAndQuery(page, '#rsuName', rsuNameVal);
-    await clickDeleteBtn(page);
+    await searchItemAndQuery(page, '#rsuEsn', rsuEsnVal);
+    await clickMoreBtn(page);
+    await clickDeleteTextBtn(page);
     await clickConfirmModalOkBtn(page);
     await checkSuccessMsg(page);
   });

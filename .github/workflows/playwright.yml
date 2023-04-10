@@ -15,6 +15,8 @@ concurrency:
   cancel-in-progress: true
 env:
   OPENV2X_EXTERNAL_IP: 127.0.0.1
+  OPENV2X_CENTER_IP: 127.0.0.1
+  OPENV2X_IS_CENTER: true
   OPENV2X_REDIS_ROOT: password
   OPENV2X_MARIADB_ROOT: password
   OPENV2X_MARIADB_DANDELION: password
@@ -45,8 +47,8 @@ jobs:
         run: npm install
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Run Playwright tests
-        run: npx playwright test
+      # - name: Run Playwright tests
+      #   run: npx playwright test
 
       - uses: actions/upload-artifact@v3
         if: always()

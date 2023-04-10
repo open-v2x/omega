@@ -51,5 +51,36 @@ export const eventMenu = {
       path: '/event/clc',
       name: 'Cooperative Lane Change',
     },
+    {
+      path: '/event/congestion',
+      name: 'Congestion Event',
+    },
+    {
+      path: '/event/congestion/details/:id',
+      name: 'Congestion Event Detail',
+      hideInMenu: true,
+    },
+    {
+      path: '/event/overspeed',
+      name: 'Overspeed Warning',
+    },
+    {
+      path: '/event/overspeed/details/:id',
+      name: 'Overspeed Warning Detail',
+      hideInMenu: true,
+    },
+    {
+      path: '/event/slowerspeed',
+      name: 'Slower Speed Warning',
+    },
+    {
+      path: '/event/slowerspeed/details/:id',
+      name: 'Slower Speed Warning Detail',
+      hideInMenu: true,
+    },
+    {
+      path: '/event/retrograde',
+      name: 'Retrograde Warning',
+    },
   ],
 };

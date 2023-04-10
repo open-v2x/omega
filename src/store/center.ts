@@ -5,9 +5,6 @@ import create from 'zustand';
 
 interface ICenterStore {
   setState: (params: any) => void;
-  // 大屏路口
-  intersectionCode: string;
-  setIntersectionCode: (code: string) => void;
   // 路口下所有 rsu
   rsus: any[];
   // 获取路口下所有 rsu
@@ -17,17 +14,14 @@ interface ICenterStore {
   setCurrentRsuByRsuId: (id: string | number | undefined) => void;
   // 路口下所有摄像头
   cameras: any[];
-  showCamera: boolean;
-  cameraUrl: string;
+  liveStreamUrl: string;
+  isLiveStreamFullscreen: boolean;
   fetchCameras: () => void;
-  setShowCamera: (url: string) => void;
-
   //   路口下所有激光雷达
   lidars: any[];
   cloudPointUrl: string;
-  showCloudPoint: boolean;
+  isCloudPointFullscreen: boolean;
   fetchLidars: () => void;
-  setShowCloudPoint: (url: string) => void;
 }
 
 const useCenterStore = create<ICenterStore>((set, get) => ({
@@ -36,15 +30,12 @@ const useCenterStore = create<ICenterStore>((set, get) => ({
       ...params,
     });
   },
-  intersectionCode: '',
-  setIntersectionCode: code => set({ intersectionCode: code }),
   rsus: [],
   currentRSU: undefined,
   fetchRsus: async () => {
     const { data } = await deviceList({
       pageNum: 1,
       pageSize: -1,
-      intersectionCode: get().intersectionCode,
     });
     if (data.length !== get().rsus.length) {
       set({
@@ -64,12 +55,11 @@ const useCenterStore = create<ICenterStore>((set, get) => ({
   },
 
   cameras: [],
-  showCamera: false,
-  cameraUrl: undefined,
+  isLiveStreamFullscreen: false,
+  liveStreamUrl: undefined,
   fetchCameras: async () => {
-    const intersectionCode = get().intersectionCode;
     const rsuId = get().currentRSU?.rsuId || undefined;
-    const { data } = await cameraList({ intersectionCode, rsuId });
+    const { data } = await cameraList({ rsuId });
     const result = data.map(d => ({
       id: d.id,
       sn: d.sn,
@@ -80,28 +70,15 @@ const useCenterStore = create<ICenterStore>((set, get) => ({
       cameras: result,
     });
   },
-  setShowCamera: url => {
-    set({
-      showCamera: url ? true : false,
-      cameraUrl: url,
-    });
-  },
 
   lidars: [],
   cloudPointUrl: undefined,
-  showCloudPoint: false,
+  isCloudPointFullscreen: false,
   fetchLidars: async () => {
-    const intersectionCode = get().intersectionCode;
     const rsuId = get().currentRSU?.rsuId || undefined;
-    const { data } = await lidarList({ intersectionCode, rsuId });
+    const { data } = await lidarList({ rsuId });
     set({
       lidars: data,
-    });
-  },
-  setShowCloudPoint: url => {
-    set({
-      showCloudPoint: url ? true : false,
-      cloudPointUrl: url,
     });
   },
 }));

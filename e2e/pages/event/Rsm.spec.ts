@@ -3,7 +3,7 @@ import { clickBackToListBtn } from '../../utils/detail';
 import { setQuerySelectValue } from '../../utils/form';
 import { checkDetailUrl, useUserStorageState, gotoRoadSimulator } from '../../utils/global';
 import { checkDataset, connectMqtt } from '../../utils/road_simulator';
-import { clickDetailTextBtn, getTableTotal } from '../../utils/table';
+import { clickDetailTextBtn, getTableTotal,waitUntilTableHavedata } from '../../utils/table';
 test.describe('The Rsm Page', () => {
   const pageUrl = '/event/rsm';
 
@@ -32,9 +32,7 @@ test.describe('The Rsm Page', () => {
     await simulatorPage.locator('#loading-video_track').waitFor({ state: 'hidden' });
     await simulatorPage.locator('#loading-radar_track').waitFor({ state: 'hidden' });
     await simulatorPage.click('#publishDataSetButton');
-    await simulatorPage.waitForTimeout(15000);
-
-    await deviceContextPage.reload();
+    await waitUntilTableHavedata(deviceContextPage,pageUrl,6000,rows_init);
     const rows_after = await getTableTotal(deviceContextPage); // 经过模拟器发送后表格数据应该比原来多
     expect(Number(rows_init)).toBeLessThan(Number(rows_after));
     await deviceContextPage.close();

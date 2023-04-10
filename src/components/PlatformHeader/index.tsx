@@ -25,7 +25,7 @@ const PlatformHeader: React.FC<PlatformHeaderProps> = ({
   <div className={classNames(styles.header, styles[`header-${position}`])}>
     <img className={styles['header-image']} src={imgHead} alt="" />
     <div className={classNames(styles['f-middle'], styles['header-title'])}>
-      {t('OpenV2X Central Portal')}
+      {t('Traffic screen')}
     </div>
     <div className={styles['header-left']}>{children}</div>
     <div className={styles['header-right']}>{back && <BackButton />}</div>

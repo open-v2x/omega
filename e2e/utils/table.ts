@@ -38,6 +38,24 @@ export const getTabelVal = async (page: Page, row: number, clo: number) => {
     .textContent();
   return res;
 };
+// 循环等待，直到表格出现数据
+export const waitUntilTableHavedata = async (
+  page: Page,
+  pageUrl: string,
+  interval: number,
+  init_data_number: number = 0,
+) => {
+  var i: number;
+  for (i = 0; i <= 10; i++) {
+    await page.goto(pageUrl);
+    await page.waitForTimeout(interval);
+    page.reload();
+    const res = await getTableTotal(page);
+    if (res > init_data_number) {
+      break;
+    }
+  }
+};
 // 筛选框筛选后，判断表格的某个字段全部等于输入的 value 值
 export const checkTableItemEqualValue = async (page: Page, value: string, index: number) => {
   let rows = await getTableTotal(page);
@@ -92,7 +110,7 @@ export const clickCreateBtn = async (page: Page, delay = 1000) => {
   await createBtn.click({ delay });
 };
 
-export const clickEditBtn = async (page: Page, selecor: string = '#editButton', delay = 1000) => {
+export const clickEditBtn = async (page: Page, selecor: string = 'text="编辑"', delay = 1000) => {
   await tableOperationBtn(page, selecor).click({ delay });
 };
 
@@ -115,6 +133,20 @@ export const clickDetailBtn = async (
 // 点击有id的button
 export const clickIDBtn = async (page: Page, selecor: string, delay = 1000) => {
   await tableOperationBtn(page, selecor).click({ delay });
+};
+
+// 点击列表中的名称，一般是进入详情
+export const clickNameBtn = async (
+  page: Page,
+  selecor: string = 'xpath=//span[starts-with(@class,"column-name-text")]',
+  delay = 1000,
+) => {
+  await page.click(selecor, { delay });
+};
+
+// 点击列表中的更多
+export const clickMoreBtn = async (page: Page, delay = 1000) => {
+  page.click('.ant-table-container .ant-dropdown-trigger .ant-space-item', { delay });
 };
 
 export const clickDetailTextBtn = async (

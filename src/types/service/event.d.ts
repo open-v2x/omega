@@ -81,4 +81,30 @@ declare namespace Event {
     egoId: string;
     egoPos: LonLat;
   };
+
+  type CGWListItem = {
+    id: number;
+    cgwLevel: number;
+    laneID: number;
+    avgSpeed: number;
+    sensorPos: LonLat;
+    startPoint: LonLat;
+    endPoint: LonLat;
+    secMark: number;
+    createTime: string;
+  };
+
+  type SpeedWarningListItem = {
+    id: number;
+    egoID: string;
+    egoPos: LonLat;
+    sensorPos: LonLat;
+    speed: number;
+    heading: number;
+    width: number;
+    height: number;
+    length: number;
+    secMark: number;
+    createTime: string;
+  };
 }

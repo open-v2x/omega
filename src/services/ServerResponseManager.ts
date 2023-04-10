@@ -1,6 +1,7 @@
 import { clearStorage } from '#/utils/storage';
 import { AxiosResponse, AxiosError } from 'axios';
 import { message } from 'antd';
+import { isArray } from 'lodash';
 
 /**
  * 针对请求成功：返回的 code 码做不同的响应处理
@@ -31,10 +32,11 @@ class ServerResponseFailedManager {
   getErrorMessage(error: AxiosError) {
     const { detail } = error.response.data;
     console.error('error.response==', detail);
-    const { msg, code } = detail;
+
+    const { msg, code } = isArray(detail) ? detail[0] : detail;
     const parser = {
       '403': () => this.handleCodeIs403(),
-      '1062': () => this.handleShowErrorWithDetailKey(code, detail.detail),
+      '1062': () => this.handleCodeIs1062(detail.detail),
       '1406': () => this.handleShowErrorWithDetailKey(code, detail.detail),
       '1116': () => this.handleCodeIs1116(detail.detail),
       '404': () => this.handleCodeIs404(msg),
@@ -81,14 +83,25 @@ class ServerResponseFailedManager {
     }
   }
 
+  handleCodeIs1062(detail: any) {
+    const { version } = detail;
+    message.error(t(`error.1062`, { msg: version }));
+  }
+
   handleCodeIs1116(detail: any) {
     const { phase_id: phaseId, intersection_id: intersectionId } = detail;
     message.error(t(`error.1116`, { phaseId, intersectionId }));
   }
 
   handleCodeIsDefault(msg: string) {
-    console.log('报错', msg);
-    message.error(msg);
+    const regex = /^Version .* already exist$/;
+    const match = msg?.match(regex);
+    if (match) {
+      const v = match[0].replace(/^Version (.*) already exist$/, '$1');
+      message.error(t('version error', { v }));
+    } else {
+      message.error(t(msg));
+    }
   }
 }
 

@@ -3,7 +3,6 @@ import { centerMenu } from './center';
 import { deviceMenu } from './device';
 import { eventMenu } from './event';
 import { maintenanceMenu } from './maintenance';
-import { systemMenu } from './system';
 
 export const DeviceMenu = {
   ...deviceMenu,
@@ -12,7 +11,7 @@ export const DeviceMenu = {
 
 export const CenterMenu = {
   ...centerMenu,
-  related: [deviceMenu, systemMenu],
+  related: [deviceMenu],
 };
 
 export const MaintenanceMenu = {
@@ -22,7 +21,7 @@ export const MaintenanceMenu = {
 
 export const EventMenu = {
   ...eventMenu,
-  related: [systemMenu],
+  related: [centerMenu],
 };
 
 export const AlgorithmMenu = {
@@ -30,16 +29,4 @@ export const AlgorithmMenu = {
   related: [eventMenu],
 };
 
-export const SystemMenu = {
-  ...systemMenu,
-  related: [centerMenu],
-};
-
-export const menuList = [
-  AlgorithmMenu,
-  CenterMenu,
-  DeviceMenu,
-  EventMenu,
-  MaintenanceMenu,
-  SystemMenu,
-];
+export const menuList = [AlgorithmMenu, CenterMenu, DeviceMenu, EventMenu, MaintenanceMenu];

@@ -6,8 +6,9 @@ declare namespace Center {
   };
 
   type EdgeSiteItem = {
-    id: number;
+    id: number | string;
     name: string;
+    ip: string;
   };
 
   type DeviceListItem = {
@@ -52,5 +53,11 @@ declare namespace Center {
     averageSpeed: number;
     pedestrianTotal: number;
     congestion: string;
+  };
+
+  type ModelDefault = {
+    intersectionCode: string;
+    intersectionID: number;
+    nodeID: number;
   };
 }
