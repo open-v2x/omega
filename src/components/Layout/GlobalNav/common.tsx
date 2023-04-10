@@ -17,7 +17,7 @@ import PropTypes from 'prop-types';
 export const menuItemPropType = PropTypes.shape({
   name: PropTypes.string.isRequired,
   path: PropTypes.string,
-  children: PropTypes.arrayOf(menuItemPropType),
+  children: PropTypes.arrayOf(PropTypes.object),
   key: PropTypes.string.isRequired,
   level: PropTypes.number,
   icon: PropTypes.node,
