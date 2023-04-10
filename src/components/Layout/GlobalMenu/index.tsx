@@ -27,7 +27,7 @@ const GlobalMenu: React.FC = () => {
 
   return (
     <Menu
-      defaultOpenKeys={[currentMenu.path]}
+      defaultOpenKeys={[currentMenu?.path]}
       defaultSelectedKeys={[location.pathname]}
       mode="inline"
       onClick={handleClick}
