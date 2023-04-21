@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ProFormText, LoginForm } from '@ant-design/pro-components';
 import { setToken } from '#/utils/storage';
 import { SelectLang } from '#/components/SelectLang';
@@ -13,19 +13,26 @@ import classNames from 'classnames';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 const Login: React.FC = () => {
-  const { fetchUserInfo } = useUserStore();
+  const { fetchUserInfo, clearCookies } = useUserStore();
   const navigate = useNavigate();
   const location = useLocation();
+  const [routing, setRouting] = useState(false);
 
-  const handleSubmit = async (values: LoginParams) => {
+  useEffect(() => {
+    if (routing) {
+      const { redirect } = getUrlSearch(location.search);
+      navigate(redirect || '/', { replace: true });
+    }
+  }, [routing]);
+
+  const handleSubmit = useCallback(async (values: LoginParams) => {
+    clearCookies();
     const { access_token: accessToken, token_type: tokenType } = await login(values);
     const token = `${tokenType} ${accessToken}`;
     setToken(token);
     await fetchUserInfo();
-    if (!navigate) return;
-    const { redirect } = getUrlSearch(location.search);
-    navigate(redirect || '/', { replace: true });
-  };
+    setRouting(true);
+  }, []);
 
   return (
     <div className={classNames(styles.container)}>

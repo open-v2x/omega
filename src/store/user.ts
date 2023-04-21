@@ -1,13 +1,15 @@
 import { getUserInfo } from '#/services/api/user';
+import Cookies from 'js-cookie';
 import create from 'zustand';
 
 interface IUserStore {
   userInfo: any;
-  fetchUserInfo: () => void;
+  fetchUserInfo: () => Promise<any>;
   logout: () => void;
+  clearCookies: () => void;
 }
 
-const useUserStore = create<IUserStore>(set => ({
+const useUserStore = create<IUserStore>((set, get) => ({
   userInfo: {},
   logged: false,
   fetchUserInfo: async () => {
@@ -15,11 +17,16 @@ const useUserStore = create<IUserStore>(set => ({
     if (response) {
       set({ userInfo: response });
     }
+    return response;
+  },
+  clearCookies: () => {
+    Cookies.remove('enode');
   },
   logout: () => {
     set({
       userInfo: {},
     });
+    get().clearCookies();
   },
 }));
 

@@ -48,7 +48,11 @@ const Left: FC<LeftProps> = props => {
       return null;
     }
     return (
-      <div onClick={e => onChangeFavorite(e, item)} className={styles['favorite-icon-left']}>
+      <div
+        key={`favo_${favoriteId}`}
+        onClick={e => onChangeFavorite(e, item)}
+        className={styles['favorite-icon-left']}
+      >
         <PushpinFilled />
       </div>
     );
@@ -57,7 +61,7 @@ const Left: FC<LeftProps> = props => {
   const renderItem = item => {
     const icon = renderFavoriteIcon(item);
     return (
-      <div className={styles.item} key={item.key}>
+      <div className={styles.item} key={`left_${item.key}`}>
         <Link
           onClick={() => props.onClose(item)}
           to={getSecondLevelNavItemLink(item)}
@@ -71,7 +75,9 @@ const Left: FC<LeftProps> = props => {
   };
 
   return favoriteMenuInit ? (
-    <div id="global-nav-left">{getAllSecondLevels().map(renderItem)}</div>
+    <div id="global-nav-left" key="left">
+      {getAllSecondLevels().map(renderItem)}
+    </div>
   ) : (
     <Spin />
   );
