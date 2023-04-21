@@ -81,7 +81,7 @@ const BaseProTable: React.FC<BaseProTableType> = props => {
         }
         if (moreActions?.length > 0) {
           result.push(
-            <Dropdown menu={{ items: moreActions(record) }}>
+            <Dropdown menu={{ items: moreActions(record) }} key="more">
               <a onClick={e => e.preventDefault()}>
                 <Space style={{ paddingRight: 4 }}>{t('More')}</Space>
                 <DownOutlined />
