@@ -42,6 +42,12 @@ const RegisteredList: FC = () => {
         renderNameAndNo(row.rsuName, row.rsuId, () => navigate(`/device/rsu/details/${row.id}`)),
     },
     {
+      title: t('RSU Name'),
+      dataIndex: 'rsuName',
+      search: true,
+      hiddenInTable: true,
+    },
+    {
       title: t('Serial Number'),
       dataIndex: 'rsuEsn',
       search: true,
