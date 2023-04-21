@@ -5,6 +5,7 @@ import { isString } from 'lodash';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { ItemType } from 'rc-menu/lib/interface';
+import styles from './index.module.less';
 
 const GlobalMenu: React.FC = () => {
   const menus = useMenuStore(state => state.menus);
@@ -24,11 +25,11 @@ const GlobalMenu: React.FC = () => {
     }
   };
 
-  const formatMenus = menu => {
+  const formatMenus = (menu, hideChildren?: boolean) => {
     if (menu.hideInMenu) {
       return null;
     }
-    if (menu.children?.length > 0) {
+    if (menu.children?.length > 0 && !hideChildren) {
       return {
         key: 'submenu',
         label: t(menu.name),
@@ -49,11 +50,14 @@ const GlobalMenu: React.FC = () => {
     {
       type: 'divider',
     },
-    {
-      type: 'group',
-      label: t('Related Links'),
-    },
-    ...relatedMenu.map(relate => formatMenus(relate)),
+    toggle
+      ? null
+      : {
+          type: 'group',
+          label: t('Related Links'),
+          className: styles['related-link'],
+        },
+    ...relatedMenu.map(relate => formatMenus(relate, true)),
   ];
 
   return (

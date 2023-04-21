@@ -12,9 +12,11 @@ import CongestionWarning from '#/pages/TrafficScreen/components/Events/Congestio
 import OverSpeedWarning from '#/pages/TrafficScreen/components/Events/OverSpeedWarning';
 import SlowerSpeedWarning from '#/pages/TrafficScreen/components/Events/SlowerSpeedWarning';
 import { useRootStore } from '#/store/root';
+import { getMqttConfig } from '#/services/api/system/edge';
 
-const RoadImage: React.FC = () => {
+const RoadImage: React.FC<{ username: string; password: string }> = ({ username, password }) => {
   const nodeId = useRootStore().getNodeId();
+  const nodeIp = useRootStore().getNodeIp({ onlyHost: true });
   // 参与者信息
   const [trackData, setTrackData] = useState<any[]>([]);
   const clearTrackData = debounce(() => setTrackData([]), 1000);
@@ -95,7 +97,13 @@ const RoadImage: React.FC = () => {
     mqtt.set_message_callback(mqttTopic, messageCallback);
   };
 
+  const initConfig = async () => {
+    const result = await getMqttConfig();
+    console.log('mqtt config', result);
+  };
+
   useEffect(() => {
+    initConfig();
     const protocol = window.location.protocol === 'https:' ? 'mqtts:' : 'mqtt:';
     const host = window.location.host;
     const mqtt = new MQTT(
@@ -104,10 +112,11 @@ const RoadImage: React.FC = () => {
 
     mqtt.connect({
       path:
-        process.env.NODE_ENV === 'development' ? '/mqtt' : `/mqtt-proxy${process.env.MQTT_PATH}`,
-      username: process.env.MQTT_USERNAME,
-      password: process.env.MQTT_PASSWORD,
-      clientId: `v2x_mqtt_${new Date().getTime()}_nodeId_${nodeId}`,
+        process.env.NODE_ENV === 'development'
+          ? '/mqtt'
+          : `/mqtt-proxy${process.env.MQTT_PATH}?edgeSiteIP=${nodeIp}`,
+      username: username,
+      password: password,
       keepalive: 10,
       clean: true,
     });

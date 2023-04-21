@@ -13,7 +13,7 @@ export default function RightContent() {
   const rootStore = useRootStore();
 
   const handleChange = (selectIP: string) => {
-    const edge = siteList.find(e => e.ip === selectIP);
+    const edge = siteList.find(e => e.edgeSiteDandelionEndpoint === selectIP);
     rootStore.setState({
       edgeSite: edge,
       reload: true,
@@ -31,7 +31,7 @@ export default function RightContent() {
         }}
         fieldNames={{
           label: 'name',
-          value: 'ip',
+          value: 'edgeSiteDandelionEndpoint',
         }}
         options={siteList}
         onChange={handleChange}
@@ -54,7 +54,7 @@ export default function RightContent() {
         edgeSite: data[0],
       });
       const curNodeIp = rootStore.getNodeIp();
-      const findOut = data.find(node => node.ip === curNodeIp);
+      const findOut = data.find(node => node.edgeSiteDandelionEndpoint === curNodeIp);
       rootStore.setNode(findOut || data[0] || undefined);
     }
     rootStore.setState({

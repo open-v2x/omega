@@ -3,10 +3,12 @@ import styles from './index.module.less';
 import RoadImage from './RoadImage';
 import { PageLoading } from '@ant-design/pro-components';
 import { getBitmap } from '#/services/api/config/crossing';
+import { getMqttConfig } from '#/services/api/system/edge';
 
 const RoadMap: React.FC = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [loading, setLoading] = useState(true);
+  const [mqtt, setMqtt] = useState<{ username: string; password: string }>();
 
   const fetchMapBg = async () => {
     try {
@@ -24,7 +26,13 @@ const RoadMap: React.FC = () => {
     }
   };
 
+  const getConfig = async () => {
+    const result = await getMqttConfig();
+    setMqtt(result);
+  };
+
   useEffect(() => {
+    getConfig();
     fetchMapBg();
   }, []);
 
@@ -34,7 +42,7 @@ const RoadMap: React.FC = () => {
     <div className={styles['map-wrapper']}>
       <div className={styles.box}>
         {imageUrl && <img className={styles['box-map']} src={imageUrl} alt="" />}
-        <RoadImage />
+        {mqtt && <RoadImage username={mqtt.username} password={mqtt.password} />}
       </div>
     </div>
   );
