@@ -12,6 +12,7 @@ import Sider from 'antd/lib/layout/Sider';
 import { Content } from 'antd/lib/layout/layout';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { PageLoading } from '@ant-design/pro-components';
+import classNames from 'classnames';
 
 const SiderLayout: FC = () => {
   const menuStore = useMenuStore();
@@ -52,17 +53,21 @@ const SiderLayout: FC = () => {
           width={240}
           collapsedWidth={56}
           theme={'light'}
+          style={{ overflowY: 'auto' }}
         >
           <GlobalMenu />
-          <div
-            className={styles['menu-toggle']}
-            onClick={() => useMenuStore.setState({ toggle: !toggle })}
-          >
-            <div className={styles['menu-toggle-c']}>
-              {toggle ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            </div>
-          </div>
         </Sider>
+        <div
+          className={classNames([
+            styles['menu-toggle'],
+            toggle ? styles['menu-toggle-56'] : styles['menu-toggle-240'],
+          ])}
+          onClick={() => useMenuStore.setState({ toggle: !toggle })}
+        >
+          <div className={styles['menu-toggle-c']}>
+            {toggle ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          </div>
+        </div>
         <Content className={styles['content-container']}>
           {inited && reload ? <PageLoading /> : <Outlet />}
         </Content>

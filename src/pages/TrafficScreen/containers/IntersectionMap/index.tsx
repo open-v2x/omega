@@ -22,7 +22,6 @@ const IntersectionMap: React.FC = () => {
   const [searchParams] = useSearchParams();
   const type = searchParams.get('type');
   const { getNodeId } = useRootStore();
-  console.log('获取当前nodeId', getNodeId());
 
   const [showRight, setShowRight] = useState(true);
   const [showLeft, setShowLeft] = useState(true);

@@ -12,7 +12,7 @@ interface IRootStore {
   inited: boolean;
   setNode: (edge: Center.EdgeSiteItem) => void;
   getNodeId: () => string | number;
-  getNodeIp: () => string | undefined;
+  getNodeIp: (params?: { noProtocol?: boolean; onlyHost?: boolean }) => string | undefined;
 }
 
 const useRootStore = create<IRootStore>((set, get) => ({
@@ -26,8 +26,10 @@ const useRootStore = create<IRootStore>((set, get) => ({
   },
   edgeSite: {
     name: '',
-    ip: '',
+    edgeSiteDandelionEndpoint: '',
     id: undefined,
+    areaCode: '',
+    desc: '',
   },
   reload: false,
   inited: false,
@@ -37,7 +39,9 @@ const useRootStore = create<IRootStore>((set, get) => ({
     });
   },
   setNode: edge => {
-    Cookies.set('enode', encodeURIComponent(JSON.stringify(edge)));
+    Cookies.set('enode', encodeURIComponent(JSON.stringify(edge)), {
+      expires: 1,
+    });
   },
   getNodeId: () => {
     if (get().edgeSite.id) {
@@ -48,11 +52,22 @@ const useRootStore = create<IRootStore>((set, get) => ({
 
     return edge.id || undefined;
   },
-  getNodeIp: () => {
+  getNodeIp: ({ noProtocol, onlyHost }) => {
     const enode = Cookies.get('enode');
     if (enode) {
       const edge = JSON.parse(decodeURIComponent(enode));
-      return edge.ip;
+      const ip = edge.edgeSiteDandelionEndpoint;
+      if (onlyHost) {
+        const regex = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n]+)/im;
+        const match = ip.match(regex);
+        if (match) return match[1];
+      }
+      if (noProtocol) {
+        const regex = /\/\/(.+)/;
+        const match = ip.match(regex);
+        if (match) return match[1];
+      }
+      return ip;
     }
 
     return undefined;
