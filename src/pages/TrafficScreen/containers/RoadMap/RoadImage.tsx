@@ -12,7 +12,6 @@ import CongestionWarning from '#/pages/TrafficScreen/components/Events/Congestio
 import OverSpeedWarning from '#/pages/TrafficScreen/components/Events/OverSpeedWarning';
 import SlowerSpeedWarning from '#/pages/TrafficScreen/components/Events/SlowerSpeedWarning';
 import { useRootStore } from '#/store/root';
-import { getMqttConfig } from '#/services/api/system/edge';
 
 const RoadImage: React.FC<{ username: string; password: string }> = ({ username, password }) => {
   const nodeId = useRootStore().getNodeId();
@@ -97,13 +96,7 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
     mqtt.set_message_callback(mqttTopic, messageCallback);
   };
 
-  const initConfig = async () => {
-    const result = await getMqttConfig();
-    console.log('mqtt config', result);
-  };
-
   useEffect(() => {
-    initConfig();
     const protocol = window.location.protocol === 'https:' ? 'mqtts:' : 'mqtt:';
     const host = window.location.host;
     const mqtt = new MQTT(
