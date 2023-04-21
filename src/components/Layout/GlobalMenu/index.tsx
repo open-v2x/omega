@@ -1,11 +1,10 @@
 import { useMenuStore } from '#/store/menu';
 import { createFromIconfontCN } from '@ant-design/icons';
-import { Divider, Menu } from 'antd';
+import { Menu } from 'antd';
 import { isString } from 'lodash';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router';
-const { SubMenu } = Menu;
-import styles from './index.module.less';
+import { ItemType } from 'rc-menu/lib/interface';
 
 const GlobalMenu: React.FC = () => {
   const menus = useMenuStore(state => state.menus);
@@ -25,6 +24,38 @@ const GlobalMenu: React.FC = () => {
     }
   };
 
+  const formatMenus = menu => {
+    if (menu.hideInMenu) {
+      return null;
+    }
+    if (menu.children?.length > 0) {
+      return {
+        key: 'submenu',
+        label: t(menu.name),
+        children: menu.children.map(c => formatMenus(c)),
+        icon: isString(menu.icon) ? <IconFont type={menu.icon} /> : menu.icon,
+      };
+    }
+
+    return {
+      key: menu.path,
+      label: t(menu.name),
+      icon: isString(menu.icon) ? <IconFont type={menu.icon} /> : menu.icon,
+    };
+  };
+
+  const items: ItemType[] = [
+    ...menus.map(menu => formatMenus(menu)),
+    {
+      type: 'divider',
+    },
+    {
+      type: 'group',
+      label: t('Related Links'),
+    },
+    ...relatedMenu.map(relate => formatMenus(relate)),
+  ];
+
   return (
     <Menu
       defaultOpenKeys={[currentMenu?.path]}
@@ -32,50 +63,8 @@ const GlobalMenu: React.FC = () => {
       mode="inline"
       onClick={handleClick}
       inlineCollapsed={toggle}
-    >
-      {menus.map(menu => {
-        if (menu.children.length > 0) {
-          return (
-            <SubMenu
-              key={`${menu.path}`}
-              title={t(menu.name)}
-              icon={isString(menu.icon) ? <IconFont type={menu.icon} /> : menu.icon}
-            >
-              {menu.children.map(node =>
-                node.hideInMenu ? null : (
-                  <Menu.Item key={`${node.path}`} className={styles['menu-item']}>
-                    {t(node.name)}
-                  </Menu.Item>
-                ),
-              )}
-            </SubMenu>
-          );
-        }
-        return (
-          <Menu.Item
-            className={styles['menu-item']}
-            key={`${menu.path}`}
-            icon={isString(menu.icon) ? <IconFont type={menu.icon} /> : menu.icon}
-          >
-            {t(menu.name)}
-          </Menu.Item>
-        );
-      })}
-
-      <Divider key={'menu-divider'} />
-
-      {!toggle && <div className={styles['related-link']}>{t('Related Links')}</div>}
-
-      {relatedMenu.map(relate => (
-        <Menu.Item
-          key={`${relate.path}`}
-          className={styles['menu-item']}
-          icon={isString(relate.icon) ? <IconFont type={relate.icon} /> : relate.icon}
-        >
-          {t(relate.name)}
-        </Menu.Item>
-      ))}
-    </Menu>
+      items={items}
+    />
   );
 };
 
