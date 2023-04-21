@@ -52,7 +52,8 @@ const useRootStore = create<IRootStore>((set, get) => ({
 
     return edge.id || undefined;
   },
-  getNodeIp: ({ noProtocol, onlyHost }) => {
+  getNodeIp: params => {
+    const { noProtocol = false, onlyHost = false } = params || {};
     const enode = Cookies.get('enode');
     if (enode) {
       const edge = JSON.parse(decodeURIComponent(enode));

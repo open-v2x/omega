@@ -25,7 +25,7 @@ export default function RightContent() {
     <div className={styles.region}>
       <span className={styles['region-area']}>{t('Edge Site')}</span>
       <Select
-        value={ip}
+        value={ip || ''}
         style={{
           width: '200px',
         }}
