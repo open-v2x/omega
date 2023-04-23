@@ -45,7 +45,7 @@ const RegisteredList: FC = () => {
       title: t('RSU Name'),
       dataIndex: 'rsuName',
       search: true,
-      hiddenInTable: true,
+      hideInTable: true,
     },
     {
       title: t('Serial Number'),

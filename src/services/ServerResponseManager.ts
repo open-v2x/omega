@@ -41,6 +41,7 @@ class ServerResponseFailedManager {
       '1116': () => this.handleCodeIs1116(detail.detail),
       '404': () => this.handleCodeIs404(msg),
       '499': () => this.handleShowErrorRepeat(msg, detail.detail),
+      // '500': () => this.handleCodeIs403(),
       default: () => this.handleCodeIsDefault(msg || detail || error.message),
     };
     return parser[code] ? parser[code]() : parser.default();

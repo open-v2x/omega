@@ -554,5 +554,6 @@
   "Map Details": "MAP 详情",
   "Config": "配置",
   "version": "版本",
-  "sn": "序列号"
+  "sn": "序列号",
+  "Edge Site Address": "边缘站点位置"
 }

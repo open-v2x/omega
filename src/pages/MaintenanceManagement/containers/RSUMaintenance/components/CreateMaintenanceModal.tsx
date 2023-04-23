@@ -49,7 +49,7 @@ const CreateMaintenanceModal: React.FC<CreateModalProps> = ({ editInfo, success 
       children: [
         {
           name: ['addressChg', 'cssUrl'],
-          label: t('Address'),
+          label: t('Edge Site Address'),
         },
         {
           type: 'digit',

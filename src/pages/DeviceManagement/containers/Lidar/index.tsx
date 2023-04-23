@@ -51,7 +51,7 @@ const Lidar: React.FC = () => {
       title: t('Lidar Name'),
       dataIndex: 'name',
       search: true,
-      hiddenInTable: true,
+      hideInTable: true,
     },
     {
       title: t('Lidar IP'),
