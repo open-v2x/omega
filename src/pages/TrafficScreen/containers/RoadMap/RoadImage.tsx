@@ -85,6 +85,8 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
     SSW: `V2X/DEVICE/APPLICATION/SSW/NODE${nodeId}`,
   };
 
+  console.log('边缘id', nodeId);
+
   const subscribeMQTT = (mqtt, mqttTopic, setData, clearData) => {
     mqtt.subscribe(mqttTopic, 0);
     const messageCallback = (topic: string, payload: unknown) => {

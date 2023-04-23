@@ -14,10 +14,10 @@ import { useRootStore } from '#/store/root';
 const Crossing: FC = () => {
   const actionRef = useRef<ActionType>();
   const navigate = useNavigate();
-  const edgeSite = useRootStore(state => state.edgeSite);
+  const edgeId = useRootStore().getNodeId();
 
   const goToIntersection = row =>
-    navigate(`/traffic/map?type=1&code=${row.code}&id=${row.id}&nodeId=${edgeSite.id}`);
+    navigate(`/traffic/map?type=1&code=${row.code}&id=${row.id}&nodeId=${edgeId}`);
 
   const columns: ProColumns<Config.CrossingItem>[] = [
     {

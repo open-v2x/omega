@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import imgLocation from '#/assets/images/location.png';
 import styles from './index.module.less';
 import { Card, Dropdown } from 'antd';
-import BgContainer from '../components/BgContainer';
+import BgContainer from '../../components/BgContainer';
 import classNames from 'classnames';
 import { useRootStore } from '#/store/root';
 
@@ -31,7 +31,7 @@ const CloudPlatform: React.FC = () => {
   const [markerList, setMarkerList] = useState<MarkerType>();
   const { AMap: AM } = useMapContext();
 
-  const edgeSite = useRootStore(state => state.edgeSite);
+  const edgeId = useRootStore().getNodeId();
 
   const mapLngLat = (data?: MarkerType) => {
     setMarkerList(data);
@@ -52,7 +52,7 @@ const CloudPlatform: React.FC = () => {
           offset={new AMap.Pixel(-18, -36)}
           position={new AMap.LngLat(...markerList.lngLat)}
           onClick={() => {
-            navigate(`/traffic/map?type=${markerList.type}&nodeId=${edgeSite.id}`);
+            navigate(`/traffic/map?type=${markerList.type}&nodeId=${edgeId}`);
           }}
         />
       ) : (
