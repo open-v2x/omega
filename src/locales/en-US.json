@@ -551,5 +551,6 @@
   "Select": "Select",
   "value is not a valid dict": "value is not a valid dict",
   "Map Details": "Map Details",
-  "Config": "Config"
+  "Config": "Config",
+  "Edge Site Address": "Edge Site Address"
 }

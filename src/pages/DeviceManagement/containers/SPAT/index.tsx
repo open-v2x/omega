@@ -54,7 +54,7 @@ const SpatManagement: React.FC = () => {
       title: t('SPAT Name'),
       dataIndex: 'name',
       search: true,
-      hiddenInTable: true,
+      hideInTable: true,
     },
     {
       title: t('SPAT IP'),

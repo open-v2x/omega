@@ -45,7 +45,7 @@ const RSUMaintenance: React.FC = () => {
       valueEnum: statusOptionFormat(RebootOptions),
     },
     {
-      title: t('Address'),
+      title: t('Edge Site Address'),
       dataIndex: ['addressChg', 'cssUrl'],
     },
     {
