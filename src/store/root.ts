@@ -6,7 +6,6 @@ interface IRootStore {
   history: BrowserHistory;
   showHint: boolean;
   reverseShowHint: () => void;
-  edgeSite: Center.EdgeSiteItem;
   reload: boolean;
   setState: (params: any) => void;
   inited: boolean;
@@ -24,13 +23,6 @@ const useRootStore = create<IRootStore>((set, get) => ({
       showHint: !get().showHint,
     });
   },
-  edgeSite: {
-    name: '',
-    edgeSiteDandelionEndpoint: '',
-    id: undefined,
-    areaCode: '',
-    desc: '',
-  },
   reload: false,
   inited: false,
   setState: params => {
@@ -44,9 +36,6 @@ const useRootStore = create<IRootStore>((set, get) => ({
     });
   },
   getNodeId: () => {
-    if (get().edgeSite.id) {
-      return get().edgeSite.id;
-    }
     const enode = Cookies.get('enode');
     const edge = JSON.parse(decodeURIComponent(enode));
 

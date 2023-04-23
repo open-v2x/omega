@@ -9,7 +9,6 @@ const pathToRegexp = require('path-to-regexp');
 import routes from '#/router/routes';
 interface IMenuStore {
   toggle: boolean;
-  currentMenu: MenuDataItem;
   menus: MenuDataItem[];
   rightMenus: [];
   relatedMenus: MenuDataItem[];
@@ -26,7 +25,6 @@ interface IMenuStore {
 
 const useMenuStore = create<IMenuStore>((set, get) => ({
   toggle: false,
-  currentMenu: undefined,
   menus: [],
   rightMenus: [],
   relatedMenus: [],
@@ -46,15 +44,15 @@ const useMenuStore = create<IMenuStore>((set, get) => ({
   favoriteMenuInit: false,
   fetchMenus: path => {
     const pPath = `/${path.split('/')[1]}`;
-    if (get().currentMenu?.path === pPath) {
+
+    const currentMenu = menuList.find(m => m.path.startsWith(pPath));
+    if (get().menus[0]?.name === currentMenu?.name) {
       return;
     }
-    const currentMenu = menuList.find(m => m.path.startsWith(pPath));
 
     set({
       menus: formatMenus(currentMenu),
       relatedMenus: formatMenus(currentMenu?.related || []),
-      currentMenu: currentMenu,
     });
   },
   fetchFavoriteMenus: () => {

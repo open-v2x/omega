@@ -41,7 +41,7 @@ const CameraManagement: FC = () => {
       title: t('Camera Name'),
       dataIndex: 'name',
       search: true,
-      hiddenInTable: true,
+      hideInTable: true,
     },
     {
       title: t('Video Stream URL'),

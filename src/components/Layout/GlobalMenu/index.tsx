@@ -6,6 +6,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { ItemType } from 'rc-menu/lib/interface';
 import styles from './index.module.less';
+import routes from '#/router/routes';
 
 const GlobalMenu: React.FC = () => {
   const menus = useMenuStore(state => state.menus);
@@ -13,7 +14,6 @@ const GlobalMenu: React.FC = () => {
   const toggle = useMenuStore(state => state.toggle);
   const location = useLocation();
   const navigate = useNavigate();
-  const currentMenu = useMenuStore(state => state.currentMenu);
 
   const IconFont = createFromIconfontCN({
     scriptUrl: '/assets/font/iconfont.js',
@@ -31,7 +31,7 @@ const GlobalMenu: React.FC = () => {
     }
     if (menu.children?.length > 0 && !hideChildren) {
       return {
-        key: 'submenu',
+        key: menu.path,
         label: t(menu.name),
         children: menu.children.map(c => formatMenus(c)),
         icon: isString(menu.icon) ? <IconFont type={menu.icon} /> : menu.icon,
@@ -60,9 +60,17 @@ const GlobalMenu: React.FC = () => {
     ...relatedMenu.map(relate => formatMenus(relate, true)),
   ];
 
+  const openKeysSet = new Set();
+  routes.forEach(r => {
+    if (r.path.length < 2 || !r.path.startsWith('/') || openKeysSet.has(r.path)) return;
+    openKeysSet.add(r.path);
+  });
+
+  const openKeys = Array.from(openKeysSet) as string[];
+
   return (
     <Menu
-      defaultOpenKeys={[currentMenu?.path]}
+      openKeys={openKeys}
       defaultSelectedKeys={[location.pathname]}
       mode="inline"
       onClick={handleClick}
