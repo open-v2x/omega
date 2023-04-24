@@ -47,12 +47,12 @@ const useRootStore = create<IRootStore>((set, get) => ({
     if (enode) {
       const edge = JSON.parse(decodeURIComponent(enode));
       const ip = edge.edgeSiteDandelionEndpoint;
-      if (onlyHost) {
+      if (onlyHost && ip) {
         const regex = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n]+)/im;
         const match = ip.match(regex);
         if (match) return match[1];
       }
-      if (noProtocol) {
+      if (noProtocol && ip) {
         const regex = /\/\/(.+)/;
         const match = ip.match(regex);
         if (match) return match[1];
