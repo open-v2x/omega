@@ -5,14 +5,22 @@ import classNames from 'classnames';
 import { ProCard } from '@ant-design/pro-components';
 import { Button, Steps } from 'antd';
 import { useNavigate } from 'react-router';
+import { getLocale } from '#/utils/storage';
 
 const GlobalHint: React.FC = () => {
   const { reverseShowHint } = useRootStore();
   const showHint = useRootStore(state => state.showHint);
   const navigate = useNavigate();
 
+  const locale = getLocale();
+
   const HintCard = ({ title, number, content, bottom }) => (
-    <div className={styles['global-hint-card']}>
+    <div
+      className={classNames([
+        styles['global-hint-card'],
+        locale === 'en-US' ? styles['card-en'] : styles['card-cn'],
+      ])}
+    >
       <div className={styles['global-hint-card-number-container']}>
         <div className={styles['global-hint-card-number']}>{number}</div>
       </div>
