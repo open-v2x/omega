@@ -96,6 +96,10 @@ class ServerResponseFailedManager {
   }
 
   handleCodeIsDefault(msg: string) {
+    if (!msg) {
+      this.handleCodeIs403();
+      return;
+    }
     const regex = /^Version .* already exist$/;
     const match = msg?.match(regex);
     if (match) {
