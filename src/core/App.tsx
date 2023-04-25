@@ -7,7 +7,12 @@ import { BrowserRouter, useRoutes } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import { getLocale } from '#/utils/storage';
 import { useTranslation } from 'react-i18next';
+import { createFromIconfontCN } from '@ant-design/icons';
 window.t = i18n.t;
+
+export const IconFont = createFromIconfontCN({
+  scriptUrl: '/assets/font/iconfont.js',
+});
 
 const App = () => {
   const [t] = useTranslation();
