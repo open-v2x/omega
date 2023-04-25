@@ -4,13 +4,16 @@ import AvatarDropdown from './AvatarDropDown';
 import styles from './index.module.less';
 
 import { edgeSiteList } from '#/services/api/center/site';
-import { Select } from 'antd';
+import { Select, Space } from 'antd';
 import { useRootStore } from '#/store/root';
+import { IconFont } from '#/core/App';
+import { useNavigate } from 'react-router';
 
 export default function RightContent() {
   const [siteList, setSiteList] = useState([]);
   const ip = useRootStore().getNodeIp();
   const rootStore = useRootStore();
+  const navigate = useNavigate();
 
   const handleChange = (selectIP: string) => {
     const edge = siteList.find(e => e.edgeSiteDandelionEndpoint === selectIP);
@@ -36,6 +39,15 @@ export default function RightContent() {
         onChange={handleChange}
         key={'edge-site'}
       />
+    </div>
+  );
+
+  const renderEdgeSite = () => (
+    <div className={styles['edge-site']} onClick={() => navigate('/system/edgeSiteConfig?hs=1')}>
+      <Space>
+        <IconFont type={'icon-location'} />
+      </Space>
+      <div className={styles['edge-site-text']}>{t('Site Config')}</div>
     </div>
   );
 
@@ -67,6 +79,7 @@ export default function RightContent() {
     <div className={styles['header-content']}>
       {renderRegion()}
       <div className={styles['header-right']}>
+        {renderEdgeSite()}
         <AvatarDropdown />
         <div className={styles.action}>
           <SelectLang />

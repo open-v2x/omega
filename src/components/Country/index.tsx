@@ -3,7 +3,7 @@ import { ProFormCascader } from '@ant-design/pro-form';
 import React from 'react';
 
 const Country: React.FC<any> = props => {
-  const { params, ...values } = props;
+  const { params, filter, ...values } = props;
   return (
     <ProFormCascader
       {...values}
@@ -12,7 +12,7 @@ const Country: React.FC<any> = props => {
         const countries = await fetchCountries({
           ...params,
         });
-        return countries;
+        return filter?.country ? countries : countries[0]?.children;
       }}
     />
   );

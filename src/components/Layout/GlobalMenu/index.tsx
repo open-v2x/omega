@@ -1,5 +1,4 @@
 import { useMenuStore } from '#/store/menu';
-import { createFromIconfontCN } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { isString } from 'lodash';
 import React from 'react';
@@ -7,6 +6,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { ItemType } from 'rc-menu/lib/interface';
 import styles from './index.module.less';
 import routes from '#/router/routes';
+import { IconFont } from '#/core/App';
 
 const GlobalMenu: React.FC = () => {
   const menus = useMenuStore(state => state.menus);
@@ -14,10 +14,6 @@ const GlobalMenu: React.FC = () => {
   const toggle = useMenuStore(state => state.toggle);
   const location = useLocation();
   const navigate = useNavigate();
-
-  const IconFont = createFromIconfontCN({
-    scriptUrl: '/assets/font/iconfont.js',
-  });
 
   const handleClick = props => {
     if (props.key !== location.pathname) {

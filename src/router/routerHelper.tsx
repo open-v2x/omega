@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { NavigateFunction, useLocation, useNavigate, useParams } from 'react-router';
 
 export interface RoutedProps<Params = any, State = any> {

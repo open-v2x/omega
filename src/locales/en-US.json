@@ -552,5 +552,14 @@
   "value is not a valid dict": "value is not a valid dict",
   "Map Details": "Map Details",
   "Config": "Config",
-  "Edge Site Address": "Edge Site Address"
+  "Edge Site Address": "Edge Site Address",
+  "Site Config": "Edge Site Config",
+  "Edge Site Name": "Edge Site Name",
+  "Edge Site Endpoint": "Edge Site Endpoint",
+  "Edge Site Endpoint Tip": "Please enter the edge site url，e.g: 47.100.126.13:2288. endpoint should keep unique.",
+  "Register {{type}}": "Register {{type}}",
+  "Center Site Endpoint": "Center Site Endpoint",
+  "delete edge site":"Are you sure you want to delete this edge site?",
+  "Edge Site Re Info": "register information for edge site",
+  "Edge Site Detail": "Edge Site Detail"
 }

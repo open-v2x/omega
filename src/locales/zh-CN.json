@@ -539,7 +539,7 @@
   "Register Now": "立即注册",
   "Config the map": "配置地图",
   "Config the map Hint": "进入 MAP 配置页面，上传路口地图和对应的 JSON 文件。",
-  "Traffic screen Hint": "进入交通大屏，查看交通预警信息、车辆状态信息、路测设备状态信息",
+  "Traffic screen Hint": "进入交通大屏，查看交通预警信息、车辆状态信息、路侧设备状态信息",
   "Config Now": "立即配置",
   "Have Try": "立即查看",
   "Service guidance": "服务指引",
@@ -555,5 +555,14 @@
   "Config": "配置",
   "version": "版本",
   "sn": "序列号",
-  "Edge Site Address": "边缘站点位置"
+  "Edge Site Address": "边缘站点位置",
+  "Site Config": "站点管理",
+  "Edge Site Name": "边缘站点名称",
+  "Edge Site Endpoint": "边缘站点网络地址",
+  "Edge Site Endpoint Tip": "填写边缘站点网络地址，例如： 47.100.126.13:2288。endpoint 保持唯一性，不可重复",
+  "Register {{type}}": "注册{{type}}",
+  "Center Site Endpoint": "中心站点网络地址",
+  "delete edge site": "确认要删除边缘站点吗?点击确认，删除站点。",
+  "Edge Site Re Info": "边缘站点注册信息",
+  "Edge Site Detail": "边缘站点详情"
 }
