@@ -7,6 +7,7 @@ declare namespace API {
 
   type CountryParams = {
     cascade: boolean;
+    // 是否展示路口
     needIntersection?: boolean;
   };
 }
