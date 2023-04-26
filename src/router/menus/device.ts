@@ -32,5 +32,9 @@ export const deviceMenu = {
       path: '/device/spat',
       name: 'SPAT Device',
     },
+    {
+      path: '/device/thunder-vision',
+      name: 'Thunder Vision',
+    },
   ],
 };

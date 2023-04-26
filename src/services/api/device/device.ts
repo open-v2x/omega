@@ -8,6 +8,11 @@ export async function deviceList(params: API.PageParams) {
   });
 }
 
+export const fetchDeviceList = async () => {
+  const { data } = await deviceList({ pageNum: 1, pageSize: -1 });
+  return data.map(({ id, rsuName }: Device.DeviceListItem) => ({ label: rsuName, value: id }));
+};
+
 // 未注册 RSU 设备列表
 export async function notRegisterDeviceList(params: API.PageParams) {
   return apiService.get<IResponseListData<Device.DeviceListItem>>(`v1/rsu_tmps`, {

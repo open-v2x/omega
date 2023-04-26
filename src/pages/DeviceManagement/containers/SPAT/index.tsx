@@ -8,18 +8,13 @@ import { statusOptionFormat } from '#/utils';
 import { ActionType } from '@ant-design/pro-components';
 import React, { useRef } from 'react';
 import CreateSpatModal from './components/CreateSpatModal';
-import { deviceList } from '#/services/api/device/device';
 import {
   renderDeleteBtn,
   renderEnableBtn,
   renderNameAndNo,
 } from '#/components/BaseProTable/components/TableHelper';
 import { useNavigate } from 'react-router';
-
-const fetchDeviceList = async () => {
-  const { data } = await deviceList({ pageNum: 1, pageSize: -1 });
-  return data.map(({ id, rsuName }: Device.DeviceListItem) => ({ label: rsuName, value: id }));
-};
+import { fetchDeviceList } from '#/services/api/device/device';
 
 const SpatManagement: React.FC = () => {
   const actionRef = useRef<ActionType>();

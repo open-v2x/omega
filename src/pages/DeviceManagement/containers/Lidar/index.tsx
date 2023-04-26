@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { deviceList } from '#/services/api/device/device';
+import { fetchDeviceList } from '#/services/api/device/device';
 import { ActionType } from '@ant-design/pro-components';
 import { ProColumns } from '#/typings/pro-component';
 import { statusOptionFormat } from '#/utils';
@@ -14,10 +14,6 @@ import {
   renderNameAndNo,
 } from '#/components/BaseProTable/components/TableHelper';
 import { useNavigate } from 'react-router-dom';
-const fetchDeviceList = async () => {
-  const { data } = await deviceList({ pageNum: 1, pageSize: -1 });
-  return data.map(({ id, rsuName }: Device.DeviceListItem) => ({ label: rsuName, value: id }));
-};
 
 const Lidar: React.FC = () => {
   const actionRef = useRef<ActionType>();

@@ -1,6 +1,6 @@
 import BaseContainer from '#/components/BaseContainer';
 import BaseProTable from '#/components/BaseProTable';
-import { deviceList } from '#/services/api/device/device';
+import { fetchDeviceList } from '#/services/api/device/device';
 import { deleteRadar, radarList } from '#/services/api/device/radar';
 import { ProColumns } from '#/typings/pro-component';
 import { ActionType } from '@ant-design/pro-components';
@@ -8,11 +8,6 @@ import React, { FC, useRef } from 'react';
 import CreateRadarModal from './components/CreateRadarModal';
 import { renderDeleteBtn, renderNameAndNo } from '#/components/BaseProTable/components/TableHelper';
 import { useNavigate } from 'react-router';
-
-const fetchDeviceList = async () => {
-  const { data } = await deviceList({ pageNum: 1, pageSize: -1 });
-  return data.map(({ id, rsuName }: Device.DeviceListItem) => ({ label: rsuName, value: id }));
-};
 
 const Radar: FC = () => {
   const actionRef = useRef<ActionType>();

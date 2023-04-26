@@ -564,5 +564,9 @@
   "Center Site Endpoint": "中心站点网络地址",
   "delete edge site": "确认要删除边缘站点吗?点击确认，删除站点。",
   "Edge Site Re Info": "边缘站点注册信息",
-  "Edge Site Detail": "边缘站点详情"
+  "Edge Site Detail": "边缘站点详情",
+  "Thunder Vision Name": "雷视一体机名称",
+  "Thunder Vision": "雷视一体机",
+  "Thunder Vision IP": "雷视一体机 IP",
+  "Video Stream Address": "视频流地址"
 }
