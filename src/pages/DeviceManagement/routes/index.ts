@@ -64,7 +64,7 @@ const routes = [
         component: lazy(
           () =>
             import(
-              /* webpackChunkName: "edge_device_camera",webpackPrefetch: true */
+              /* webpackChunkName: "edge_device_camera_detail",webpackPrefetch: true */
               '#/pages/DeviceManagement/containers/Camera/Detail'
             ),
         ),
@@ -86,7 +86,7 @@ const routes = [
         component: lazy(
           () =>
             import(
-              /* webpackChunkName: "edge_device_radar",webpackPrefetch: true */
+              /* webpackChunkName: "edge_device_radar_detail",webpackPrefetch: true */
               '#/pages/DeviceManagement/containers/Radar/Detail'
             ),
         ),
@@ -108,7 +108,7 @@ const routes = [
         component: lazy(
           () =>
             import(
-              /* webpackChunkName: "edge_device_lidar",webpackPrefetch: true */
+              /* webpackChunkName: "edge_device_lidar_detail",webpackPrefetch: true */
               '#/pages/DeviceManagement/containers/Lidar/Detail'
             ),
         ),
@@ -130,8 +130,30 @@ const routes = [
         component: lazy(
           () =>
             import(
-              /* webpackChunkName: "edge_device_spat",webpackPrefetch: true */
+              /* webpackChunkName: "edge_device_spat_detail",webpackPrefetch: true */
               '#/pages/DeviceManagement/containers/SPAT/Detail'
+            ),
+        ),
+      },
+      {
+        path: `${PATH}/thunder-vision`,
+        breadcrumbName: 'Thunder Vision',
+        component: lazy(
+          () =>
+            import(
+              /* webpackChunkName: "edge_device_thunder_vision",webpackPrefetch: true */
+              '#/pages/DeviceManagement/containers/ThunderVision/List'
+            ),
+        ),
+      },
+      {
+        path: `${PATH}/thunder-vision/details/:id`,
+        breadcrumbName: 'Thunder Vision',
+        component: lazy(
+          () =>
+            import(
+              /* webpackChunkName: "edge_device_thunder_vision",webpackPrefetch: true */
+              '#/pages/DeviceManagement/containers/ThunderVision/Detail'
             ),
         ),
       },

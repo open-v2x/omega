@@ -561,5 +561,9 @@
   "Center Site Endpoint": "Center Site Endpoint",
   "delete edge site":"Are you sure you want to delete this edge site?",
   "Edge Site Re Info": "register information for edge site",
-  "Edge Site Detail": "Edge Site Detail"
+  "Edge Site Detail": "Edge Site Detail",
+  "Thunder Vision Name": "Thunder Vision Name",
+  "Thunder Vision": "Thunder Vision",
+  "Thunder Vision IP": "Thunder Vision IP",
+  "Video Stream Address": "Video Stream Address"
 }

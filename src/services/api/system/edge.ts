@@ -5,8 +5,9 @@ export async function getMqttConfig() {
   return apiService.get<System.EdgeSite>(`v1/system_configs/edge/mqtt_config`);
 }
 
-export async function getEdgeSiteList() {
+export async function getEdgeSiteList(params: API.PageParams) {
   return apiService.get<IResponseListData<System.EdgeSite>>(`v1/edge_site`, {
+    params,
     isCenter: true,
   });
 }

@@ -159,4 +159,23 @@ declare namespace Device {
     timing: string;
     rsuName: string;
   };
+
+  type ThunderVisionItem = {
+    name: string;
+    sn: string;
+    lng: string;
+    lat: string;
+    elevation: string;
+    towards: string;
+    point: string;
+    pole: string;
+    radarCameraIP: string;
+    videoStreamAddress: string;
+    rsuID: number;
+    desc: string;
+    id: number;
+    status: true;
+    rsuName: string;
+    createTime: string;
+  };
 }

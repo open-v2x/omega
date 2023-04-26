@@ -1,18 +1,13 @@
 import BaseContainer from '#/components/BaseContainer';
 import BaseProTable from '#/components/BaseProTable';
 import { cameraList, deleteCamera } from '#/services/api/device/camera';
-import { deviceList } from '#/services/api/device/device';
 import { ProColumns } from '#/typings/pro-component';
 import { ActionType } from '@ant-design/pro-components';
 import React, { useRef, FC } from 'react';
 import CreateCameraModal from './components/CreateCameraModal';
 import { renderDeleteBtn, renderNameAndNo } from '#/components/BaseProTable/components/TableHelper';
 import { useNavigate } from 'react-router';
-
-const fetchDeviceList = async () => {
-  const { data } = await deviceList({ pageNum: 1, pageSize: -1 });
-  return data.map(({ id, rsuName }: Device.DeviceListItem) => ({ label: rsuName, value: id }));
-};
+import { fetchDeviceList } from '#/services/api/device/device';
 
 const CameraManagement: FC = () => {
   const actionRef = useRef<ActionType>();

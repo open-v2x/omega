@@ -50,6 +50,7 @@ const AlgorithmConfig: FC = () => {
       search: false,
       renderFormItem: row => (
         <Select defaultValue={row.enable}>
+          // eslint-disable-next-line react/jsx-boolean-value
           <Option value={true}>{t('Enable')}</Option>
           <Option value={false}>{t('Disabled')}</Option>
         </Select>
