@@ -9,7 +9,7 @@ interface IRootStore {
   reload: boolean;
   setState: (params: any) => void;
   inited: boolean;
-  setNode: (edge: Center.EdgeSiteItem) => void;
+  setNode: (edge: Center.EdgeSiteItem | undefined) => void;
   getNodeId: () => string | number;
   getNodeIp: (params?: { noProtocol?: boolean; onlyHost?: boolean }) => string | undefined;
 }
@@ -31,15 +31,22 @@ const useRootStore = create<IRootStore>((set, get) => ({
     });
   },
   setNode: edge => {
-    Cookies.set('enode', encodeURIComponent(JSON.stringify(edge)), {
-      expires: 1,
-    });
+    if (edge) {
+      Cookies.set('enode', encodeURIComponent(JSON.stringify(edge)), {
+        expires: 1,
+      });
+    } else {
+      Cookies.remove('enode');
+    }
   },
   getNodeId: () => {
     const enode = Cookies.get('enode');
-    const edge = JSON.parse(decodeURIComponent(enode));
+    if (enode) {
+      const edge = JSON.parse(decodeURIComponent(enode));
 
-    return edge.id || undefined;
+      return edge.id || undefined;
+    }
+    return undefined;
   },
   getNodeIp: params => {
     const { noProtocol = false, onlyHost = false } = params || {};

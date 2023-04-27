@@ -9,11 +9,12 @@ const Country: React.FC<any> = props => {
       {...values}
       fieldProps={{ fieldNames: { label: 'name', value: 'code' } }}
       request={async () => {
-        const countries = await fetchCountries({
-          ...params,
+        const countries = await fetchCountries(params, {
+          isCenter: filter?.isCenter,
         });
         return filter?.country ? countries : countries[0]?.children;
       }}
+      onChange={v => console.log('change', v)}
     />
   );
 };

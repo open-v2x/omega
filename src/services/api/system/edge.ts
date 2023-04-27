@@ -34,5 +34,7 @@ export async function createEdgeSite(data: System.EdgeSite) {
 }
 
 export async function getEdgeSiteById(id: string) {
-  return apiService.get<System.EdgeSite>(`v1/edge_site/${id}`);
+  return apiService.get<System.EdgeSite>(`v1/edge_site/${id}`, {
+    isCenter: true,
+  });
 }

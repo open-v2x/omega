@@ -37,6 +37,7 @@ const SiteConfigList: React.FC = () => {
   return (
     <BaseContainer>
       <BaseProTable
+        actionRef={actionRef}
         columns={columns}
         request={getEdgeSiteList}
         toolBarRender={() => [

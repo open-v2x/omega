@@ -568,5 +568,9 @@
   "Thunder Vision Name": "雷视一体机名称",
   "Thunder Vision": "雷视一体机",
   "Thunder Vision IP": "雷视一体机 IP",
-  "Video Stream Address": "视频流地址"
+  "Video Stream Address": "视频流地址",
+  "Something is Error": "报错了",
+  "No Node Id": "您没有选择边缘站点，请先添加并选择边缘站点",
+  "Got it": "知道了"
+  
 }

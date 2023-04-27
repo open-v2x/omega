@@ -1,4 +1,5 @@
 import { apiService } from '#/services/BaseService';
+import { MyAxiosRequestConfig } from '#/types/service/axios';
 import { IResponseListData } from '#/types/service/responseData';
 
 // RSU 设备列表
@@ -20,9 +21,10 @@ export async function notRegisterDeviceList(params: API.PageParams) {
   });
 }
 
-export async function fetchCountries(params: API.CountryParams) {
+export async function fetchCountries(params: API.CountryParams, config?: MyAxiosRequestConfig) {
   return apiService.get<any>(`v1/countries`, {
     params,
+    ...config,
   });
 }
 
