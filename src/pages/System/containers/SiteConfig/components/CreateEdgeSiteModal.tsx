@@ -31,7 +31,7 @@ const CreateEdgeSiteModal: React.FC<CreateModalProps> = ({ editInfo, success }) 
               width="lg"
               label={t('Installation Area')}
               name="province"
-              filter={{ country: false }}
+              filter={{ country: false, isCenter: true }}
               params={{ cascade: true, needIntersection: false }}
             />
           ),

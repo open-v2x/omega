@@ -8,19 +8,22 @@ import { Select, Space } from 'antd';
 import { useRootStore } from '#/store/root';
 import { IconFont } from '#/core/App';
 import { useNavigate } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
 
 export default function RightContent() {
   const [siteList, setSiteList] = useState([]);
   const ip = useRootStore().getNodeIp();
   const rootStore = useRootStore();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const hideSelect = searchParams.get('hs');
 
   const handleChange = (selectIP: string) => {
     const edge = siteList.find(e => e.edgeSiteDandelionEndpoint === selectIP);
     rootStore.setState({
       reload: true,
     });
-    rootStore.setNode(edge);
+    rootStore.setNode(edge || undefined);
   };
 
   const renderRegion = () => (
@@ -64,6 +67,8 @@ export default function RightContent() {
       const curNodeIp = rootStore.getNodeIp();
       const findOut = data.find(node => node.edgeSiteDandelionEndpoint === curNodeIp);
       rootStore.setNode(findOut || data[0] || undefined);
+    } else {
+      rootStore.setNode(undefined);
     }
     rootStore.setState({
       inited: true,
@@ -77,7 +82,7 @@ export default function RightContent() {
 
   return (
     <div className={styles['header-content']}>
-      {renderRegion()}
+      {!hideSelect && renderRegion()}
       <div className={styles['header-right']}>
         {renderEdgeSite()}
         <AvatarDropdown />
