@@ -16,12 +16,9 @@ const CreateEdgeSiteModal: React.FC<CreateModalProps> = ({ editInfo, success }) 
           required: true,
           name: 'name',
           label: t('Edge Site Name'),
-          tooltip: t('RSU_NAME_TIP'),
+          tooltip: t('EDGE_NAME_TIP'),
           fieldProps: { maxLength: 64 },
-          rules: [
-            { required: true, message: t('Please enter a {{type}} name', { type: title }) },
-            { pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_\-\.]+$/, message: t('RSU_NAME_VALIDATE_MSG') },
-          ],
+          rules: [{ required: true, message: t('Please enter a {{type}} name', { type: title }) }],
         },
         {
           name: 'province',
@@ -84,14 +81,10 @@ const CreateEdgeSiteModal: React.FC<CreateModalProps> = ({ editInfo, success }) 
       }}
       editId={editInfo?.id}
       request={async () => {
-        const { areaCode } = editInfo;
-        if (areaCode) {
-          const provinceCode = `${areaCode[0]}${areaCode[1]}0000`;
-          const cityCode = `${areaCode[0]}${areaCode[1]}${areaCode[2]}${areaCode[3]}00`;
-          const province = [provinceCode!, cityCode!, areaCode!];
-          return { province, ...editInfo };
-        }
-        return editInfo;
+        const { provinceCode, cityCode, areaCode } = editInfo;
+
+        const province = [provinceCode!, cityCode!, areaCode!];
+        return { province, ...editInfo };
       }}
     >
       <FormItem items={formItems} />

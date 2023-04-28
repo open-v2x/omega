@@ -17,7 +17,10 @@ export const renderAreaFormItem = (
   return defaultRender(_);
 };
 
-export const renderAreaFormatName = (data: any, hideIntersection?: boolean) => {
+export const renderAreaFormatName = (
+  data: any,
+  filter?: { hideCountry?: boolean; hideIntersection?: boolean },
+) => {
   const {
     countryName = '',
     provinceName = '',
@@ -25,23 +28,23 @@ export const renderAreaFormatName = (data: any, hideIntersection?: boolean) => {
     areaName = '',
     intersectionName = '',
   } = data || {};
-  return `${countryName}${provinceName}${cityName}${areaName}${
-    hideIntersection ? '' : intersectionName
+  return `${filter?.hideCountry ? '' : countryName}${provinceName}${cityName}${areaName}${
+    filter?.hideIntersection ? '' : intersectionName
   }`;
 };
 
-export const formatAreaByAreaCode = (countries, code) => {
-  let result = '';
-  const countryList = countries[0].children.filter(
-    country => country.code[0] === code[0] && country.code[1] === code[1],
-  );
-  result += countryList[0].name;
-  console.log(countryList);
-  const provinceList = countryList[0].children.filter(
-    province => province.code[2] === code[2] && province.code[3] === code[3],
-  );
-  result += provinceList[0].name;
-  const area = provinceList[0].children.find(p => p.code === code);
-  result += area.name;
-  return result;
-};
+// export const formatAreaByAreaCode = (countries, code) => {
+//   let result = '';
+//   const countryList = countries[0].children.filter(
+//     country => country.code[0] === code[0] && country.code[1] === code[1],
+//   );
+//   result += countryList[0].name;
+//   console.log(countryList);
+//   const provinceList = countryList[0].children.filter(
+//     province => province.code[2] === code[2] && province.code[3] === code[3],
+//   );
+//   result += provinceList[0].name;
+//   const area = provinceList[0].children.find(p => p.code === code);
+//   result += area.name;
+//   return result;
+// };

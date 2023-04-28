@@ -556,10 +556,10 @@
   "Site Config": "Edge Site Config",
   "Edge Site Name": "Edge Site Name",
   "Edge Site Endpoint": "Edge Site Endpoint",
-  "Edge Site Endpoint Tip": "Please enter the edge site url，e.g: 47.100.126.13:2288. endpoint should keep unique",
+  "Edge Site Endpoint Tip": "Please enter the edge site url，e.g: 47.100.126.13:28300. endpoint should keep unique",
   "Register {{type}}": "Register {{type}}",
   "Center Site Endpoint": "Center Site Endpoint",
-  "delete edge site":"Are you sure you want to delete this edge site?",
+  "delete edge site": "Are you sure you want to delete this edge site?",
   "Edge Site Re Info": "register information for edge site",
   "Edge Site Detail": "Edge Site Detail",
   "Thunder Vision Name": "Thunder Vision Name",
@@ -568,5 +568,6 @@
   "Video Stream Address": "Video Stream Address",
   "Some Error": "Something is Error",
   "No Node Id": "You have not selected any edge site， please add and select edge site first",
-  "Got it": "Got it"
+  "Got it": "Got it",
+  "EDGE_NAME_TIP": "the length threshold is 64 characters"
 }
