@@ -5,14 +5,11 @@ import { ProCard } from '@ant-design/pro-components';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import styles from './index.module.less';
-import { fetchCountries } from '#/services/api/device/device';
-import { formatAreaByAreaCode } from '#/components/Country/renderHelper';
 
 const SiteConfigDetail: React.FC = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [data, setData] = useState<System.EdgeSite>();
-  const [countries, setCountries] = useState([]);
 
   if (!params.id) {
     navigate(-1);
@@ -31,7 +28,7 @@ const SiteConfigDetail: React.FC = () => {
       block: true,
       render: () => (
         <span className={styles['detail-text']}>
-          {formatAreaByAreaCode(countries, data.areaCode)}
+          {/* {formatAreaByAreaCode(countries, data.areaCode)} */}
         </span>
       ),
     },
@@ -50,11 +47,6 @@ const SiteConfigDetail: React.FC = () => {
   ];
 
   const getData = async () => {
-    const country = await fetchCountries({
-      cascade: true,
-      needIntersection: false,
-    });
-    setCountries(country);
     const result = await getEdgeSiteById(params.id);
     setData(result);
   };

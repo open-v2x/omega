@@ -3,29 +3,15 @@ import BaseProTable from '#/components/BaseProTable';
 import { renderDeleteBtn, renderNameAndNo } from '#/components/BaseProTable/components/TableHelper';
 import { deleteEdgeSite, getEdgeSiteList } from '#/services/api/system/edge';
 import { ActionType } from '@ant-design/pro-components';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useNavigate } from 'react-router';
 import CreateEdgeSiteModal from '../components/CreateEdgeSiteModal';
 import { Space } from 'antd';
-import { formatAreaByAreaCode } from '#/components/Country/renderHelper';
-import { fetchCountries } from '#/services/api/device/device';
+import { renderAreaFormatName } from '#/components/Country/renderHelper';
 
 const SiteConfigList: React.FC = () => {
   const actionRef = useRef<ActionType>();
   const navigate = useNavigate();
-  const [countries, setCountries] = useState([]);
-
-  const getCountries = async () => {
-    const country = await fetchCountries({
-      cascade: true,
-      needIntersection: false,
-    });
-    setCountries(country);
-  };
-
-  useEffect(() => {
-    getCountries();
-  }, []);
 
   const columns = [
     {
@@ -51,7 +37,10 @@ const SiteConfigList: React.FC = () => {
     {
       title: t('Installation Area'),
       dataIndex: 'areaCode',
-      render: areaCode => (countries.length ? formatAreaByAreaCode(countries, areaCode) : ''),
+      render: (_, row) =>
+        renderAreaFormatName(row, {
+          hideCountry: true,
+        }),
     },
     {
       title: t('Creation Time'),

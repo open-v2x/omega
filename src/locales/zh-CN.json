@@ -559,7 +559,7 @@
   "Site Config": "站点管理",
   "Edge Site Name": "边缘站点名称",
   "Edge Site Endpoint": "边缘站点网络地址",
-  "Edge Site Endpoint Tip": "填写边缘站点网络地址，例如： 47.100.126.13:2288。endpoint 保持唯一性，不可重复",
+  "Edge Site Endpoint Tip": "填写边缘站点网络地址，例如： 47.100.126.13:28300。endpoint 保持唯一性，不可重复",
   "Register {{type}}": "注册{{type}}",
   "Center Site Endpoint": "中心站点网络地址",
   "delete edge site": "确认要删除边缘站点吗?点击确认，删除站点。",
@@ -571,6 +571,6 @@
   "Video Stream Address": "视频流地址",
   "Something is Error": "报错了",
   "No Node Id": "您没有选择边缘站点，请先添加并选择边缘站点",
-  "Got it": "知道了"
-  
+  "Got it": "知道了",
+  "EDGE_NAME_TIP": "长度阈值为64个字符"
 }
