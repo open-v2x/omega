@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import styles from './index.module.less';
 import { fetchCountries } from '#/services/api/device/device';
+import { formatAreaByAreaCode } from '#/components/Country/renderHelper';
 
 const SiteConfigDetail: React.FC = () => {
   const params = useParams();
@@ -16,22 +17,6 @@ const SiteConfigDetail: React.FC = () => {
   if (!params.id) {
     navigate(-1);
   }
-
-  const formatArea = code => {
-    let result = '';
-    const countryList = countries[0].children.filter(
-      country => country.code[0] === code[0] && country.code[1] === code[1],
-    );
-    result += countryList[0].name;
-    console.log(countryList);
-    const provinceList = countryList[0].children.filter(
-      province => province.code[2] === code[2] && province.code[3] === code[3],
-    );
-    result += provinceList[0].name;
-    const area = provinceList[0].children.find(p => p.code === code);
-    result += area.name;
-    return result;
-  };
 
   const infoMap = [
     {
@@ -44,7 +29,11 @@ const SiteConfigDetail: React.FC = () => {
       key: 'areaCode',
       label: t('Installation Area'),
       block: true,
-      render: () => <span className={styles['detail-text']}>{formatArea(data.areaCode)}</span>,
+      render: () => (
+        <span className={styles['detail-text']}>
+          {formatAreaByAreaCode(countries, data.areaCode)}
+        </span>
+      ),
     },
     {
       key: 'edgeSiteDandelionEndpoint',
@@ -75,7 +64,7 @@ const SiteConfigDetail: React.FC = () => {
   }, []);
 
   return (
-    <BaseContainer>
+    <BaseContainer back>
       <ProCard title={t('Edge Site')}>
         {data && <CardList infoMap={infoMap} info={data} xl={8} />}
       </ProCard>
