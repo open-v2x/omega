@@ -28,9 +28,13 @@ export const renderAreaFormatName = (
     areaName = '',
     intersectionName = '',
   } = data || {};
-  return `${filter?.hideCountry ? '' : countryName}${provinceName}${cityName}${areaName}${
-    filter?.hideIntersection ? '' : intersectionName
-  }`;
+  if (provinceName || cityName || areaName) {
+    return `${filter?.hideCountry ? '' : countryName}${provinceName}${cityName}${areaName}${
+      filter?.hideIntersection ? '' : intersectionName
+    }`;
+  } else {
+    return '';
+  }
 };
 
 // export const formatAreaByAreaCode = (countries, code) => {

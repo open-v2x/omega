@@ -71,7 +71,9 @@ const CreateEdgeSiteModal: React.FC<CreateModalProps> = ({ editInfo, success }) 
       editTrigger={''}
       modalProps={{ className: 'overflow' }}
       submitForm={async ({ province, ...values }) => {
-        values.areaCode = province.pop();
+        if (province) {
+          values.areaCode = province.pop();
+        }
         if (editInfo) {
           await updateEdgeSite(editInfo.id, values);
         } else {

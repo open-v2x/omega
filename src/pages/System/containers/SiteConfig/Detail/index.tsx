@@ -5,6 +5,7 @@ import { ProCard } from '@ant-design/pro-components';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import styles from './index.module.less';
+import { renderAreaFormatName } from '#/components/Country/renderHelper';
 
 const SiteConfigDetail: React.FC = () => {
   const params = useParams();
@@ -28,7 +29,9 @@ const SiteConfigDetail: React.FC = () => {
       block: true,
       render: () => (
         <span className={styles['detail-text']}>
-          {/* {formatAreaByAreaCode(countries, data.areaCode)} */}
+          {renderAreaFormatName(data.areaCode, {
+            hideCountry: true,
+          })}
         </span>
       ),
     },
