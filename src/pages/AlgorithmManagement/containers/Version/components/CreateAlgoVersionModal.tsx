@@ -1,8 +1,11 @@
+import FormField from '#/components/FormField';
 import FormItem from '#/components/FormItem';
 import Modal from '#/components/Modal';
 import { fetchCreateVersion, fetchModule } from '#/services/api/algorithm';
+import { getEndpoints } from '#/services/api/system/service';
 import { CreateModalProps, FormGroupType } from '#/typings/pro-component';
 import React, { useCallback, useEffect, useState } from 'react';
+import { Trans } from 'react-i18next';
 
 const CreateAlgoVersionModal: React.FC<CreateModalProps> = ({
   editInfo,
@@ -12,6 +15,7 @@ const CreateAlgoVersionModal: React.FC<CreateModalProps> = ({
   const [data, setData] = useState<any[]>();
   const [modules, setModules] = useState<string[]>([]);
   const [algos, setAlgos] = useState<string[]>([]);
+  const [endpoints, setEndpoints] = useState<string[]>([]);
 
   const formItems: FormGroupType[] = [
     {
@@ -65,6 +69,46 @@ const CreateAlgoVersionModal: React.FC<CreateModalProps> = ({
         },
       ],
     },
+    {
+      key: 'endpoint',
+      children: [
+        {
+          components: (
+            <div>
+              <FormField
+                items={[
+                  {
+                    type: 'select',
+                    required: true,
+                    name: 'endpointID',
+                    label: t('Algorithum Service Url'),
+                    tooltip: t('ENDPOINT_TIP'),
+                    disabled: isDetails && endpoints.length > 0,
+                    options: endpoints,
+                    fieldProps: {
+                      fieldNames: {
+                        label: 'url',
+                        value: 'id',
+                      },
+                    },
+                  },
+                ]}
+                key="endpoint"
+              />
+              <span>
+                <Trans i18nKey={'Endpoint Hint'}>
+                  text
+                  <a target="_blank" href="http://127.0.0.1:28302/over_speed">
+                    text
+                  </a>
+                  text
+                </Trans>
+              </span>
+            </div>
+          ),
+        },
+      ],
+    },
   ];
 
   const getModule = useCallback(async () => {
@@ -74,8 +118,14 @@ const CreateAlgoVersionModal: React.FC<CreateModalProps> = ({
     setModules(ms);
   }, []);
 
-  useEffect(() => {
+  const getData = useCallback(async () => {
     getModule();
+    const endpointResult = await getEndpoints();
+    setEndpoints(endpointResult?.data || []);
+  }, []);
+
+  useEffect(() => {
+    getData();
   }, []);
 
   return (

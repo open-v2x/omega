@@ -572,5 +572,8 @@
   "Something is Error": "报错了",
   "No Node Id": "您没有选择边缘站点，请先添加并选择边缘站点",
   "Got it": "知道了",
-  "EDGE_NAME_TIP": "长度阈值为64个字符"
+  "EDGE_NAME_TIP": "长度阈值为64个字符",
+  "Algorithum Service Url": "算法服务网络地址",
+  "ENDPOINT_TIP": "算法服务网络地址：填写调用的算法服务网络地址，例如：47.100.126.13:2288。",
+  "Endpoint Hint": "填写调用的算法服务网络地址，可参考<1>帮助文档<1>"
 }
