@@ -10,17 +10,20 @@ import classNames from 'classnames';
 import styles from './index.module.less';
 import { onlineRate } from '#/services/api/center/site';
 import { useCenterStore } from '#/store/center';
+import { IconFont } from '#/core/App';
+import { isString } from 'lodash';
 
 const DeviceOnlineRate: React.FC<{ className: string }> = ({ className: cName }) => {
-  const { fetchRsus, fetchCameras, fetchLidars } = useCenterStore();
+  const { fetchRsus, fetchCameras, fetchLidars, fetchThunderVisions } = useCenterStore();
   const currentRSU = useCenterStore(state => state.currentRSU);
-  const [showFooterIndex, setShowFooterIndex] = useState(-1);
+  const [showFooterTag, setShowFooterTag] = useState('');
   const [rateInfo, setRateInfo] = useState<Center.OnlineRateItem>({
     rsu: { online: 0, offline: 0, notRegister: 0 },
     camera: { online: 0, offline: 0, notRegister: 0 },
     radar: { online: 0, offline: 0, notRegister: 0 },
     lidar: { online: 0, offline: 0, notRegister: 0 },
     spat: { online: 0, offline: 0, notRegister: 0 },
+    radarCamera: { online: 0, offline: 0, notRegister: 0 },
   });
 
   const fetchOnlineRate = async (rsuId?: number) => {
@@ -34,6 +37,7 @@ const DeviceOnlineRate: React.FC<{ className: string }> = ({ className: cName })
     fetchRsus();
     fetchCameras();
     fetchLidars();
+    fetchThunderVisions();
     fetchOnlineRate();
     const id = setInterval(() => {
       fetchRsus();
@@ -45,10 +49,11 @@ const DeviceOnlineRate: React.FC<{ className: string }> = ({ className: cName })
   useEffect(() => {
     fetchCameras();
     fetchLidars();
+    fetchThunderVisions();
   }, [currentRSU]);
 
-  const handleClickItem = (index: number) => {
-    setShowFooterIndex(index === showFooterIndex ? -1 : index);
+  const handleClickItem = (tag: string) => {
+    setShowFooterTag(tag === showFooterTag ? '' : tag);
   };
 
   const handleClickCamera = params => {
@@ -65,15 +70,31 @@ const DeviceOnlineRate: React.FC<{ className: string }> = ({ className: cName })
     });
   };
 
-  const footerMap = {
-    0: <ControlRsu />,
-    1: (
-      <ControlTable title={t('Camera Name')} dataName={'cameras'} onCallback={handleClickCamera} />
-    ),
-    2: <ControlTable title={t('Lidar Name')} dataName={'lidars'} onCallback={handleClickLidar} />,
+  const handleClickRadarCamera = params => {
+    useCenterStore.setState({
+      liveStreamUrl: params.videoStreamAddress,
+      cloudPointUrl: undefined,
+    });
   };
 
-  const showFooter = () => footerMap[showFooterIndex];
+  const footerMap = {
+    rsu: <ControlRsu />,
+    camera: (
+      <ControlTable title={t('Camera Name')} dataName={'cameras'} onCallback={handleClickCamera} />
+    ),
+    lidar: (
+      <ControlTable title={t('Lidar Name')} dataName={'lidars'} onCallback={handleClickLidar} />
+    ),
+    radarCamera: (
+      <ControlTable
+        title={t('Thunder Vision Name')}
+        dataName={'thunderVisions'}
+        onCallback={handleClickRadarCamera}
+      />
+    ),
+  };
+
+  const showFooter = () => footerMap[showFooterTag];
 
   const onlineMaps = [
     {
@@ -107,6 +128,13 @@ const DeviceOnlineRate: React.FC<{ className: string }> = ({ className: cName })
       icon: imgSpat,
       tag: 'spat',
     },
+    {
+      title: t('Thunder Vision'),
+      icon: <IconFont type="icon-leishiyitiji" />,
+      isClick: true,
+      showBadge: true,
+      tag: 'radarCamera',
+    },
   ];
   return (
     <div className={classNames([styles.device, cName])}>
@@ -126,9 +154,13 @@ const DeviceOnlineRate: React.FC<{ className: string }> = ({ className: cName })
                       map.isClick ? styles['device-image-click'] : null,
                       map.showBadge && online + offline > 0 ? 'online' : 'offline',
                     )}
-                    onClick={() => map.isClick && handleClickItem(index)}
+                    onClick={() => map.isClick && handleClickItem(map.tag)}
                   >
-                    <img className={styles['device-image-icon']} src={map.icon} alt="" />
+                    {isString(map.icon) ? (
+                      <img className={styles['device-image-icon']} src={map.icon} alt="" />
+                    ) : (
+                      map.icon
+                    )}
                   </div>
                 </div>
                 <div>
@@ -148,7 +180,7 @@ const DeviceOnlineRate: React.FC<{ className: string }> = ({ className: cName })
           })}
         </div>
       </div>
-      {showFooterIndex > -1 && <div className={styles['control-container']}>{showFooter()}</div>}
+      {showFooterTag && <div className={styles['control-container']}>{showFooter()}</div>}
     </div>
   );
 };
