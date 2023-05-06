@@ -1,6 +1,7 @@
 import { cameraList } from '#/services/api/device/camera';
 import { deviceList } from '#/services/api/device/device';
 import { lidarList } from '#/services/api/device/lidar';
+import { getThunderVisionList } from '#/services/api/device/thunderVision';
 import create from 'zustand';
 
 interface ICenterStore {
@@ -22,6 +23,10 @@ interface ICenterStore {
   cloudPointUrl: string;
   isCloudPointFullscreen: boolean;
   fetchLidars: () => void;
+  // 雷视一体机
+  thunderVisions: any[];
+  thunderVisionUrl: string;
+  fetchThunderVisions: () => void;
 }
 
 const useCenterStore = create<ICenterStore>((set, get) => ({
@@ -79,6 +84,15 @@ const useCenterStore = create<ICenterStore>((set, get) => ({
     const { data } = await lidarList({ rsuId });
     set({
       lidars: data,
+    });
+  },
+  thunderVisions: [],
+  thunderVisionUrl: undefined,
+  fetchThunderVisions: async () => {
+    const rsuId = get().currentRSU?.rsuId || undefined;
+    const { data } = await getThunderVisionList({ rsuID: rsuId });
+    set({
+      thunderVisions: data,
     });
   },
 }));

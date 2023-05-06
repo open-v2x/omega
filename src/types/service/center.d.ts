@@ -48,6 +48,7 @@ declare namespace Center {
     radar: OnlineType;
     lidar: OnlineType;
     spat: OnlineType;
+    radarCamera: OnlineType;
   };
 
   type RouteInfoItem = {

@@ -1,6 +1,6 @@
 import { IResponseListData } from '#/types/service/responseData';
 import { apiService } from '#/services/BaseService';
-export async function getThunderVisionList(params: API.PageParams) {
+export async function getThunderVisionList(params?: API.PageParams & { rsuID: string | number }) {
   return apiService.get<IResponseListData<Device.ThunderVisionItem>>(`v1/radar_cameras`, {
     params,
   });
