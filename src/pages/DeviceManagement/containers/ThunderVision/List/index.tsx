@@ -72,6 +72,13 @@ const ThunderVisionList: React.FC = () => {
       valueType: 'select',
       request: fetchDeviceList,
       width: 100,
+    },
+    {
+      title: t('Associate RSU'),
+      dataIndex: 'rsuId',
+      valueType: 'select',
+      request: fetchDeviceList,
+      hideInTable: true,
       search: true,
     },
     {
