@@ -130,6 +130,7 @@ const CreateThunderVisionModal: React.FC<CreateModalProps> = ({ editInfo, succes
           required: true,
           name: 'videoStreamAddress',
           label: t('Video Stream Address'),
+          rules: [{ required: true, message: t('Please enter Thunder Vision Url') }],
         },
       ],
     },

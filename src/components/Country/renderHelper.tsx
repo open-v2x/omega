@@ -33,6 +33,6 @@ export const renderAreaFormatName = (
       filter?.hideIntersection ? '' : intersectionName
     }`;
   } else {
-    return '';
+    return '-';
   }
 };
