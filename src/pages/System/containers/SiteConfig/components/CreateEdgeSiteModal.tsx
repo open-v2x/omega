@@ -5,7 +5,11 @@ import { createEdgeSite, updateEdgeSite } from '#/services/api/system/edge';
 import { CreateModalProps, FormGroupType } from '#/typings/pro-component';
 import React from 'react';
 
-const CreateEdgeSiteModal: React.FC<CreateModalProps> = ({ editInfo, success }) => {
+const CreateEdgeSiteModal: React.FC<CreateModalProps> = ({
+  editInfo,
+  isDetails = false,
+  success,
+}) => {
   const title = t('Edge Site');
 
   const formItems: FormGroupType[] = [
@@ -44,6 +48,7 @@ const CreateEdgeSiteModal: React.FC<CreateModalProps> = ({ editInfo, success }) 
           label: t('Edge Site Endpoint'),
           tooltip: t('Edge Site Endpoint Tip'),
           fieldProps: { maxLength: 64 },
+          disabled: isDetails,
           rules: [{ required: true, message: t('Please enter a {{type}} url', { type: title }) }],
         },
       ],

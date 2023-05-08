@@ -63,6 +63,7 @@ const SiteConfigList: React.FC = () => {
                 <CreateEdgeSiteModal
                   key="edit"
                   editInfo={row}
+                  isDetails
                   success={() => actionRef.current?.reload()}
                 />
               </Space>

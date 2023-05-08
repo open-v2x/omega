@@ -559,7 +559,7 @@
   "Site Config": "站点管理",
   "Edge Site Name": "边缘站点名称",
   "Edge Site Endpoint": "边缘站点网络地址",
-  "Edge Site Endpoint Tip": "填写边缘站点网络地址，例如： 47.100.126.13:28300。endpoint 保持唯一性，不可重复",
+  "Edge Site Endpoint Tip": "填写边缘站点网络地址，例如：http://47.100.126.13:28300。endpoint 保持唯一性，不可重复",
   "Register {{type}}": "注册{{type}}",
   "Center Site Endpoint": "中心站点网络地址",
   "delete edge site": "确认要删除边缘站点吗?点击确认，删除站点。",
@@ -575,5 +575,8 @@
   "EDGE_NAME_TIP": "长度阈值为64个字符",
   "Algorithum Service Url": "算法服务网络地址",
   "ENDPOINT_TIP": "算法服务网络地址：填写调用的算法服务网络地址，例如：47.100.126.13:2288。",
-  "Endpoint Hint": "填写调用的算法服务网络地址，可参考<1>帮助文档<1>"
+  "Endpoint Hint": "填写调用的算法服务网络地址，可参考<1>帮助文档<1>",
+  "Incorrect Thunder Vision format": "雷视一体机 IP 格式不正确",
+  "Please enter Thunder Vision IP": "请输入雷视一体机 IP",
+  "Please enter Thunder Vision Url": "请输入雷视一体机视频流地址"
 }

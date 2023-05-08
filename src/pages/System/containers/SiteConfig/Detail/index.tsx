@@ -29,7 +29,7 @@ const SiteConfigDetail: React.FC = () => {
       block: true,
       render: () => (
         <span className={styles['detail-text']}>
-          {renderAreaFormatName(data.areaCode, {
+          {renderAreaFormatName(data, {
             hideCountry: true,
           })}
         </span>
