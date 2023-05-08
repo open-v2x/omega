@@ -489,7 +489,6 @@
   "Please select a algorithm name": "请选择一个算法名称",
   "Please enter the intersection name": "请输入路口名",
   "Please enter the intersection code": "请输入路口编号",
-  "rsu_esn": "rsu 序列号",
   "Upload Bitmap": "上传位图（支持png、jpg格式图片）",
   "Please upload a Bitmap image": "请上传位图",
   "Please enter a algorithm version name": "请输入算法版本名称",
@@ -578,5 +577,6 @@
   "Endpoint Hint": "填写调用的算法服务网络地址，可参考<1>帮助文档<1>",
   "Incorrect Thunder Vision format": "雷视一体机 IP 格式不正确",
   "Please enter Thunder Vision IP": "请输入雷视一体机 IP",
-  "Please enter Thunder Vision Url": "请输入雷视一体机视频流地址"
+  "Please enter Thunder Vision Url": "请输入雷视一体机视频流地址",
+  "OR": "或"
 }
