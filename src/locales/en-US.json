@@ -488,7 +488,6 @@
   "Please select a algorithm name": "Please select a algorithm name",
   "Please enter the intersection name": "Please enter the intersection name",
   "Please enter the intersection code": "Please enter the intersection code",
-  "rsu_esn": "rsu esnumber",
   "Upload Bitmap": "Upload Bitmap(support png、jpg)",
   "Please upload a Bitmap image": "Please upload a Bitmap image",
   "Please enter a algorithm version name": "Please enter a algorithm version name",
@@ -575,5 +574,6 @@
   "Endpoint Hint": "Please fill in the network address of the algorithm service to be called. You can refer to the <1>help document<1> for more information.",
   "Incorrect Thunder Vision format": "The Thunder Vision IP format is wrong",
   "Please enter Thunder Vision IP": "Please enter Thunder Vision IP",
-  "Please enter Thunder Vision Url": "Please enter Thunder Vision Video Url"
+  "Please enter Thunder Vision Url": "Please enter Thunder Vision Video Url",
+  "OR": "or"
 }

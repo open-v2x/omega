@@ -85,9 +85,9 @@ class ServerResponseFailedManager {
   }
 
   handleCodeIs1062(detail: any) {
-    const keys = Object.keys(detail).map(k => t(k.toString()));
-    console.log(keys);
-    message.error(t(`error.1062`, { msg: keys }));
+    const values = Object.values(detail).map(k => t(k.toString()));
+    console.log(values);
+    message.error(t(`error.1062`, { msg: values.join(t('OR')) }));
   }
 
   handleCodeIs1116(detail: any) {
