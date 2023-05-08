@@ -8,7 +8,7 @@ const FormItem: React.FC<{ items: FormGroupType[] }> = ({ items }) => (
     {items.map(({ key, title, children, components, hidden }, index) =>
       hidden ? null : (
         <ProForm.Group key={`${key}_${index}`} title={title}>
-          {children?.map(({ components: comp, hidden: hid, ...item }) =>
+          {children?.map(({ components: comp, hidden: hid, footer, ...item }) =>
             hid ? null : (
               <div className={`antd-form-item-${item.name}`} key={item.name}>
                 {comp || <FormField items={[item]} key={key} />}

@@ -567,7 +567,10 @@
   "Thunder Vision IP": "Thunder Vision IP",
   "Video Stream Address": "Video Stream Address",
   "Some Error": "Something is Error",
-  "No Node Id": "You have not selected any edge site， please add and select edge site first",
+  "No Node Id": "You have not selected any edge site, please add and select edge site first",
   "Got it": "Got it",
-  "EDGE_NAME_TIP": "the length threshold is 64 characters"
+  "EDGE_NAME_TIP": "the length threshold is 64 characters",
+  "Algorithum Service Url": "Algorithum Service Url",
+  "ENDPOINT_TIP": "Algorithum service url: please enter the url of algorithm service. e.g: 47.100.126.13:2288",
+  "Endpoint Hint": "Please fill in the network address of the algorithm service to be called. You can refer to the <1>help document<1> for more information."
 }

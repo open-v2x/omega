@@ -15,18 +15,26 @@ const AlgorithmVersion: FC = () => {
     {
       title: t('Algorithm Module'),
       dataIndex: 'module',
+      width: 200,
     },
     {
       title: t('Algorithm Name'),
       dataIndex: 'algo',
+      width: 200,
     },
     {
       title: t('Version Name'),
       dataIndex: 'version',
       search: true,
+      width: 200,
+    },
+    {
+      title: t('Algorithum Service Url'),
+      dataIndex: 'endpointUrl',
     },
     {
       title: t('Operate'),
+      width: 200,
       render: (_, row) => [
         <Button
           type="link"
