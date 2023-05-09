@@ -17,6 +17,7 @@ export default function RightContent() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const hideSelect = searchParams.get('hs');
+  const globalConfig = useRootStore(state => state.globalConfig);
 
   const handleChange = (selectIP: string) => {
     const edge = siteList.find(e => e.edgeSiteDandelionEndpoint === selectIP);
@@ -82,9 +83,9 @@ export default function RightContent() {
 
   return (
     <div className={styles['header-content']}>
-      {!hideSelect && renderRegion()}
+      {globalConfig?.v2x_position_center && !hideSelect && renderRegion()}
       <div className={styles['header-right']}>
-        {renderEdgeSite()}
+        {globalConfig?.v2x_position_center && renderEdgeSite()}
         <AvatarDropdown />
         <div className={styles.action}>
           <SelectLang />
