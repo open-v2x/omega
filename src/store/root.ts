@@ -12,6 +12,7 @@ interface IRootStore {
   setNode: (edge: Center.EdgeSiteItem | undefined) => void;
   getNodeId: () => string | number;
   getNodeIp: (params?: { noProtocol?: boolean; onlyHost?: boolean }) => string | undefined;
+  globalConfig: any;
 }
 
 const useRootStore = create<IRootStore>((set, get) => ({
@@ -69,6 +70,7 @@ const useRootStore = create<IRootStore>((set, get) => ({
 
     return undefined;
   },
+  globalConfig: undefined,
 }));
 
 export { useRootStore };

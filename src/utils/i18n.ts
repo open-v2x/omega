@@ -4,10 +4,14 @@ import zhCN from '#/locales/zh-CN.json';
 import enUS from '#/locales/en-US.json';
 import axios from 'axios';
 import yaml from 'js-yaml';
+import { useRootStore } from '#/store/root';
 
 const getResource = async () => {
   const { data } = await axios.get('/assets/file/globals.yml');
   const ymlData = yaml.load(data);
+  useRootStore.setState({
+    globalConfig: ymlData,
+  });
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { v2x_info_title = { en: 'OpenV2X', zh: 'OpenV2X' } } = ymlData;
   i18n.addResources('en-US', 'translation', {
