@@ -1,6 +1,6 @@
 import React, { MutableRefObject, useState } from 'react';
 import type { ActionType } from '@ant-design/pro-table';
-import { Dropdown, MenuProps, Space, TableProps } from 'antd';
+import { Dropdown, Empty, MenuProps, Space, TableProps } from 'antd';
 import type { OptionConfig, ToolBarProps } from '@ant-design/pro-table/es/components/ToolBar';
 import type { ExpandableConfig } from 'antd/lib/table/interface';
 import { ProFormInstance, ProTable } from '@ant-design/pro-components';
@@ -120,14 +120,12 @@ const BaseProTable: React.FC<BaseProTableType> = props => {
       actionRef={actionRef}
       dataSource={dataSource}
       columnsState={columnsState}
-      onColumnsStateChange={map => {
-        console.log('columnsStateChanged', map);
-      }}
       request={async (param, { createTime }) => {
         if (createTime) {
           param.sortDir = createTime === 'ascend' ? 'asc' : 'desc';
         }
-        const res = await request?.(param);
+        const { current, ...p } = param;
+        const res = await request?.({ ...p, pageNum: current });
         setIsScroll(res?.total > 5 ? true : false);
         return { data: res?.data, total: res?.total, success: true };
       }}
@@ -144,6 +142,9 @@ const BaseProTable: React.FC<BaseProTableType> = props => {
       formRef={formRef}
       scroll={isScroll ? { x: 'max-content', y: '50vh' } : { x: 'max-content' }}
       onDataSourceChange={onDataSourceChange}
+      locale={{
+        emptyText: <Empty description={t('No data')} />,
+      }}
     />
   );
 };
