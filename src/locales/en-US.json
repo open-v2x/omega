@@ -570,7 +570,6 @@
   "Got it": "Got it",
   "EDGE_NAME_TIP": "the length threshold is 64 characters",
   "Algorithum Service Url": "Algorithum Service Url",
-  "ENDPOINT_TIP": "Algorithum service url: please enter the url of algorithm service. e.g: http://47.100.126.13:2288",
   "Endpoint Hint": "Please fill in the network address of the algorithm service to be called. e.g: http://127.0.0.1:28302/over_speed. You can refer to the <1>help document<1> for more information.",
   "Incorrect Thunder Vision format": "The Thunder Vision IP format is wrong",
   "Please enter Thunder Vision IP": "Please enter Thunder Vision IP",

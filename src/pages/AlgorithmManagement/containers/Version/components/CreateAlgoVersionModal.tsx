@@ -82,7 +82,6 @@ const CreateAlgoVersionModal: React.FC<CreateModalProps> = ({
                     required: true,
                     name: 'endpointID',
                     label: t('Algorithum Service Url'),
-                    tooltip: t('ENDPOINT_TIP'),
                     disabled: isDetails && endpoints.length > 0,
                     options: endpoints,
                     fieldProps: {
