@@ -64,6 +64,25 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
     setSSWData([]);
   }, 500);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [ThunderVisionData, setThunderVisionData] = useState<any>({
+    bboxes: [
+      [
+        52.306396484375, -3.8543567657470703, -0.9755262136459351, 4.930385589599609,
+        1.9643192291259766, 1.835266351699829, -3.116776943206787,
+      ],
+      [
+        -7.154396057128906, -14.632840156555176, -1.12397038936615, 1.6177178621292114,
+        0.825324296951294, 1.343012809753418, -0.020962459966540337,
+      ],
+      [
+        -11.085601806640625, -9.72700500488281, -1.1102557182312012, 2.685312271118164,
+        1.387906551361084, 1.4035226106643677, -0.15506576001644135,
+      ],
+    ],
+    labels: [1, 4, 4],
+  });
+
   const MQTT_TOPIC = {
     // 参与者
     PARTICIPANT: `V2X/DEVICE/PARTICIPANT/NODE${nodeId}`,
@@ -183,6 +202,9 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
         ))}
         {SSWData.map(({ ego, ego_current_point }) => (
           <SlowerSpeedWarning key={ego} point={ego_current_point} />
+        ))}
+        {ThunderVisionData.bboxes.map((box, index) => (
+          <ThunderVisionTrack box={box} label={ThunderVisionData.labels[index]} />
         ))}
       </Layer>
     </Stage>
