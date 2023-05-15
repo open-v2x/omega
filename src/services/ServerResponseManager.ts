@@ -37,6 +37,7 @@ class ServerResponseFailedManager {
     const parser = {
       '403': () => this.handleCodeIs403(),
       '1062': () => this.handleCodeIs1062(detail.detail),
+      '1063': () => this.handleCodeIs1063(detail.detail),
       '1406': () => this.handleShowErrorWithDetailKey(code, detail.detail),
       '1116': () => this.handleCodeIs1116(detail.detail),
       '404': () => this.handleCodeIs404(msg),
@@ -88,6 +89,11 @@ class ServerResponseFailedManager {
     const values = Object.values(detail).map(k => t(k.toString()));
     console.log(values);
     message.error(t(`error.1062`, { msg: values.join(t('OR')) }));
+  }
+
+  handleCodeIs1063(detail: any) {
+    const values = Object.entries(detail).map(e => `${t(e[0].toString())}: ${e[1]}`);
+    message.error(t(`error.1062`, { msg: values.join(t('And')) }));
   }
 
   handleCodeIs1116(detail: any) {
