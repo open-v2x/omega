@@ -574,5 +574,9 @@
   "Incorrect Thunder Vision format": "The Thunder Vision IP format is wrong",
   "Please enter Thunder Vision IP": "Please enter Thunder Vision IP",
   "Please enter Thunder Vision Url": "Please enter Thunder Vision Video Url",
-  "OR": "or"
+  "OR": "or",
+  "And": "And",
+  "Please enter a {{type}} url": "Please enter a {{type}} url",
+  "intersection_id": "intersection id",
+  "phase_id": "phase id"
 }

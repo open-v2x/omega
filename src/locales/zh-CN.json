@@ -578,5 +578,9 @@
   "Please enter Thunder Vision IP": "请输入雷视一体机 IP",
   "Please enter Thunder Vision Url": "请输入雷视一体机视频流地址",
   "OR": "或",
-  "No data": "无数据"
+  "And": "和",
+  "No data": "无数据",
+  "Please enter a {{type}} url": "请输入{{ type }}网络地址",
+  "intersection_id": "序列号id",
+  "phase_id": "相位id"
 }

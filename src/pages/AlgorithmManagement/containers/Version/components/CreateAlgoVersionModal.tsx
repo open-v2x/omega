@@ -99,7 +99,7 @@ const CreateAlgoVersionModal: React.FC<CreateModalProps> = ({
                   text
                   <a
                     target="_blank"
-                    href="https://github.com/open-v2x/cerebrum/blob/master/docs/cerebrum_add_external_service/cerebrum%20%E6%B7%BB%E5%8A%A0%E5%A4%96%E9%83%A8%E7%AE%97%E6%B3%95.md"
+                    href="https://gitee.com/open-v2x/cerebrum/blob/master/docs/cerebrum_add_external_service/cerebrum 添加外部算法.md"
                   >
                     text
                   </a>
