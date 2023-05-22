@@ -1,5 +1,6 @@
 import BaseContainer from '#/components/BaseContainer';
 import BaseProTable from '#/components/BaseProTable';
+import LonLatUnit from '#/components/LonLatUnit';
 import { getRDWList } from '#/services/api/event/rdw';
 import { ProColumns } from '#/typings/pro-component';
 import { ActionType } from '@ant-design/pro-components';
@@ -17,12 +18,12 @@ const RetrogradeWarning: React.FC = () => {
     {
       title: t('Retrograde Lat'),
       dataIndex: 'egoPos',
-      render: item => <div>{item.lat}</div>,
+      render: item => <LonLatUnit data={item.lat} />,
     },
     {
       title: t('Retrograde Lon'),
       dataIndex: 'egoPos',
-      render: item => <div>{item.lon}</div>,
+      render: item => <LonLatUnit data={item.lat} />,
     },
     { title: t('Idea ID'), dataIndex: 'egoID' },
     { title: t('Millisecond Time'), dataIndex: 'secMark' },
