@@ -20,5 +20,5 @@ export async function updateLogConfig(id: number, data: Config.CreateLogConfigPa
 
 // 删除 RSU 日志下发配置
 export async function deleteLogConfig(id: number) {
-  return apiService.delete(`/v1/rsu_logs/${id}`);
+  return apiService.delete(`v1/rsu_logs/${id}`);
 }
