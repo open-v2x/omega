@@ -4,7 +4,7 @@ import { useUserStorageState, gotoRoadSimulator } from '../../utils/global';
 import { checkDataset, connectMqtt,addListenTopic,ReceiveMessageHaveData } from '../../utils/road_simulator';
 
 test.describe('Rsm 下发 Rsu', () => {
-  const topic = 'V2X/RSU/32011501/RSM/DOWN'
+  const topic = 'V2X/RSU/R328328/RSM/DOWN'
 
   // Use signed-in state of 'userStorageState.json'.
   useUserStorageState();

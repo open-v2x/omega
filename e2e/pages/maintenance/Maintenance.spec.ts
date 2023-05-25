@@ -13,7 +13,7 @@ import {
 } from '../../utils/table';
 
 test.describe('The Maintenance Page', () => {
-  const M_NameVal = 'RSU01';
+  const M_NameVal = 'demoRsu';
   const M_rsuEsn = 'R328328';
   const randomNum = generatePureNumber();
   const pageUrl = '/maintenance/maintenance';

@@ -92,7 +92,7 @@ export const checkTableItemContainValue = async (page: Page, value: string, inde
 };
 // 校验表格内容为空
 export const checkEmptyTable = (page: Page) => {
-  expect(page.locator('.ant-empty-normal')).toBeVisible();
+  expect(page.locator('.ant-empty')).toBeVisible();
 };
 
 export const tableOperationBtn = (page: Page, selecor: string) => {

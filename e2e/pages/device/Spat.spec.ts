@@ -62,15 +62,9 @@ test.describe('The Spat Page', () => {
     await checkTableItemContainValue(page, spatNameVal, 1);
   });
 
-  test('successfully query via spat sn', async ({ page }) => {
-    await searchItemAndQuery(page, '#intersectionId', spatSnVal);
-    await checkTableItemContainValue(page, spatSnVal, 2);
-  });
-
   test('successfully query via associated rsu', async ({ page }) => {
-    await clickUnfoldBtn(page);
     const res_v: any = await setQuerySelectValue(page, '#rsuName');
-    await checkTableItemContainValue(page, res_v, 5);
+    await checkTableItemContainValue(page, res_v, 3);
   });
 
   test('successfully edit spat', async ({ page }) => {

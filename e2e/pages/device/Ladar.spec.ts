@@ -72,15 +72,9 @@ test.describe('The Ladar Page', () => {
     await checkTableItemContainValue(page, ladarNameVal, 1);
   });
 
-  test('successfully query via ladar sn', async ({ page }) => {
-    await searchItemAndQuery(page, '#sn', ladarnSnVal);
-    await checkTableItemContainValue(page, ladarnSnVal, 2);
-  });
-
   test('successfully query via associated rsu', async ({ page }) => {
-    await clickUnfoldBtn(page);
     const res_v: any = await setQuerySelectValue(page, '#rsuId');
-    await checkTableItemContainValue(page, res_v, 9);
+    await checkTableItemContainValue(page, res_v, 5);
   });
 
   test('successfully edit ladar', async ({ page }) => {

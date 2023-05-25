@@ -64,6 +64,8 @@ omega 项目设备管理前端自动化测试用例覆盖度
 - RSE Simulator 发送数据
 - 查看 RSU 设备界面
 
+## 1.8 [操作路侧雷视一体机设备](./pages/device/Rv.spec.ts)
+
 # 2. 事件管理
 
 ## 2.1. 查看历史数据统计分析结果
@@ -75,6 +77,10 @@ omega 项目设备管理前端自动化测试用例覆盖度
 - [查看逆向超车预警 (DNPW) 消息的历史数据](./pages/event/Dnpw.spec.ts)
 - [查看感知数据共享 (SDS) 消息的历史数据](./pages/event/Sds.spec.ts)
 - [查看协作式变道 (CLC) 消息的历史数据](./pages/event/Clc.spec.ts)
+- [查看拥堵预警（Congestion）消息的历史数据](./pages/event/Congestion.spec.ts)
+- [查看超速预警（OSW）消息的历史数据](./pages/event/Osw.spec.ts)
+- [查看慢行预警（SSW）消息的历史数据](./pages/event/Ssw.spec.ts)
+- [查看逆行预警（RDW）消息的历史数据](./pages/event/Rdw.spec.ts)
 
 ## 2.2. RSM 上报云控中心
 
@@ -144,6 +150,8 @@ omega 项目设备管理前端自动化测试用例覆盖度
 
 ## 3.9. [路口管理](./pages/maintenance/crossing.spec.ts)
 
+_已删除_
+
 - 创建路口
 - 创建同编号的路口
 - 对路口名和路口编号进行校验,错误输入无法提交
@@ -154,14 +162,9 @@ omega 项目设备管理前端自动化测试用例覆盖度
 
 ## 3.10. [算法配置与算法版本](./pages/maintenance/algorithm.spec.ts)
 
-- 创建算法版本
-- 创建同名算法版本
-- 通过算法版本查询
-- 编辑算法配置
-- 无法删除正在使用中的算法版本
-- 成功删除算法版本
-
 # 4. 系统配置
+
+_已删除_
 
 ## 4.1 添加边缘站点
 

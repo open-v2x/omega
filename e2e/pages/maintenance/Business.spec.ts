@@ -22,7 +22,7 @@ import {
   clickDetailTextBtn,
   clickEditBtn,
   searchItemAndQuery,
-  getTabelVal,
+  checkTableItemEqualValue,
 } from '../../utils/table';
 
 test.describe('The Business Page', () => {
@@ -82,8 +82,7 @@ test.describe('The Business Page', () => {
     await clickDetailTextBtn(page);
     await checkDetailUrl(page, pageUrl);
     // 确认下发状态为下发成功
-    const status = await getTabelVal(page, 1, 6);
-    expect(status).toEqual('下发成功');
+    await checkTableItemEqualValue(page, '下发成功', 6);
     await clickBackToListBtn(page);
   });
 
