@@ -12,6 +12,7 @@ import CongestionWarning from '#/pages/TrafficScreen/components/Events/Congestio
 import OverSpeedWarning from '#/pages/TrafficScreen/components/Events/OverSpeedWarning';
 import SlowerSpeedWarning from '#/pages/TrafficScreen/components/Events/SlowerSpeedWarning';
 import { useRootStore } from '#/store/root';
+import ThunderVisionTrack from '#/pages/TrafficScreen/components/Events/ThunderVisionTrack';
 
 const RoadImage: React.FC<{ username: string; password: string }> = ({ username, password }) => {
   const nodeId = useRootStore().getNodeId();
@@ -64,23 +65,12 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
     setSSWData([]);
   }, 500);
 
-  // const [ThunderVisionData, setThunderVisionData] = useState<any>({
-  //   bboxes: [
-  //     [
-  //       52.306396484375, -3.8543567657470703, -0.9755262136459351, 4.930385589599609,
-  //       1.9643192291259766, 1.835266351699829, -3.116776943206787,
-  //     ],
-  //     [
-  //       -7.154396057128906, -14.632840156555176, -1.12397038936615, 1.6177178621292114,
-  //       0.825324296951294, 1.343012809753418, -0.020962459966540337,
-  //     ],
-  //     [
-  //       -11.085601806640625, -9.72700500488281, -1.1102557182312012, 2.685312271118164,
-  //       1.387906551361084, 1.4035226106643677, -0.15506576001644135,
-  //     ],
-  //   ],
-  //   labels: [1, 4, 4],
-  // });
+  const [ThunderVisionData, setThunderVisionData] = useState<any>();
+  const clearThunderVisionData = debounce(() => {
+    setThunderVisionData(undefined);
+  }, 500);
+
+  console.log('ThunderVision', ThunderVisionData);
 
   const MQTT_TOPIC = {
     // 参与者
@@ -101,9 +91,9 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
     OSW: `V2X/DEVICE/APPLICATION/OSW/NODE${nodeId}`,
     // 慢行
     SSW: `V2X/DEVICE/APPLICATION/SSW/NODE${nodeId}`,
+    // 雷视一体机数据
+    LIDAR: `V2X/DEVICE/LIDAR/PARTICIPANT`,
   };
-
-  console.log('边缘id', nodeId);
 
   const subscribeMQTT = (mqtt, mqttTopic, setData, clearData) => {
     mqtt.subscribe(mqttTopic, 0);
@@ -160,6 +150,9 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
 
     // 订阅主题-慢行数据
     subscribeMQTT(mqtt, MQTT_TOPIC.SSW, setSSWData, clearSSWData);
+
+    // 订阅主题-雷视一体机
+    subscribeMQTT(mqtt, MQTT_TOPIC.LIDAR, setThunderVisionData, clearThunderVisionData);
     return () => mqtt.disconnect();
   }, []);
 
@@ -202,9 +195,10 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
         {SSWData.map(({ ego, ego_current_point }) => (
           <SlowerSpeedWarning key={ego} point={ego_current_point} />
         ))}
-        {/* {ThunderVisionData.bboxes.map((box, index) => (
-          <ThunderVisionTrack box={box} label={ThunderVisionData.labels[index]} />
-        ))} */}
+        {ThunderVisionData &&
+          ThunderVisionData.bboxes.map((box, index) => (
+            <ThunderVisionTrack box={box} label={ThunderVisionData.labels[index]} />
+          ))}
       </Layer>
     </Stage>
   );
