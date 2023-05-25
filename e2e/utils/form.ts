@@ -34,14 +34,17 @@ export const setQuerySelectValue = async (page: Page, selector: string, nthchild
 // 编辑算法配置：替换算法和禁用/启用算法
 export const editAlgoConfigSelectValue = async (
   page: Page,
-  status: string,
-  nthchild: number = 1,
+  status: string, //算法状态
+  nthchild: number = 1, 
 ) => {
   await page.click('text="编辑"');
-  await page.click('.ant-select-selector');
-  await page.locator(`.rc-virtual-list-holder-inner > div:nth-child(${nthchild})`).click();
+  await page.click('.ant-form-item .ant-select-selector');
+  await page.locator(`.rc-virtual-list-holder-inner > div:nth-child(${nthchild})`).click(); //算法选择下拉框，选择第几个选项
   await page.waitForTimeout(500);
-  await page.click(`text="${status}"`);
+  await page.click('.ant-table-tbody > tr:nth-child(2) > td:nth-child(4) .ant-select-selector');//启用禁用的下拉框
+
+  await page.click(`div[title="${status}"]`);
+  
   await page.click('text="保存"');
   await page.click('.ant-pro-table-list-toolbar-right button'); // 点击配置;
 };

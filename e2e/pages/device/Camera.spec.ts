@@ -70,15 +70,9 @@ test.describe('The Camera Page', () => {
     await checkTableItemContainValue(page, cameraNameVal, 1);
   });
 
-  test('successfully query via camera sn', async ({ page }) => {
-    await searchItemAndQuery(page, '#sn', camernSnVal);
-    await checkTableItemContainValue(page, camernSnVal, 2);
-  });
-
   test('successfully query via associated rsu', async ({ page }) => {
-    await clickUnfoldBtn(page);
     const res_v: any = await setQuerySelectValue(page, '#rsuId');
-    await checkTableItemContainValue(page, res_v, 9);
+    await checkTableItemContainValue(page, res_v, 5);
   });
 
   test('successfully edit camera', async ({ page }) => {

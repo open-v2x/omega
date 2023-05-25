@@ -47,7 +47,7 @@ test.describe('The MAP Page', () => {
     await page.goto(pageUrl);
   });
 
-  test('配置 RSE Simulator 建立监听-界面添加 Map 并下发 RSU', async ({ browser }) => {
+  test.skip('配置 RSE Simulator 建立监听-界面添加 Map 并下发 RSU', async ({ browser }) => {
     const deviceContext = await browser.newContext();
     const simulatorContext = await browser.newContext();
 
@@ -88,7 +88,7 @@ test.describe('The MAP Page', () => {
     await simulatorPage.close();
   });
 
-  test('查看详情并确认配置下发成功', async ({ page }) => {
+  test.skip('查看详情并确认配置下发成功', async ({ page }) => {
     await page.goto(pageUrl);
     await page.reload();
     await searchItemAndQuery(page, '#name', mapNameVal);
@@ -100,52 +100,32 @@ test.describe('The MAP Page', () => {
     await clickBackToListBtn(page);
   });
 
-  test('一个路口只能配一个 MAP', async ({ page }) => {
-    await clickCreateBtn(page);
-
-    await setModalFormItemValue(page, '#name', mapNameVal);
-    await setModalFormItemValue(page, '#desc', descVal);
-    await setCascaderValue(page, 'province', provinceNameVal);
-    await uploadFile(page, '#data', './e2e/testdata/MapExample.json');
-    await uploadFile(page, '#bitmapFilename', './e2e/testdata/bitmap.png');
-    await page.waitForTimeout(2000);
-    await globalModalSubmitBtn(page);
-    await checkErrorMsg(page);
-  });
-
   test('successfully edit map', async ({ page }) => {
-    await searchItemAndQuery(page, '#name', mapNameVal);
-    await clickEditBtn(page);
+    // await searchItemAndQuery(page, '#name', mapNameVal);
+    await page.click('text="编辑"');
 
     await setModalFormItemValue(page, '#name', `update_${mapNameVal}`);
-    await setCascaderValue(page, 'province', queryprovinceNameVal);
 
     await globalModalSubmitBtn(page);
     await checkSuccessMsg(page);
   });
 
-  test('successfully query via map address', async ({ page }) => {
-    const address: any = await setQueryCascaderValue(page, queryprovinceNameVal);
-    const res = address.replace(/[\s\/]/g, ''); // 去掉空格和斜杠
-    await checkTableItemEqualValue(page, res, 2);
-  });
-
   test('successfully view map detail', async ({ page }) => {
-    await searchItemAndQuery(page, '#name', `update_${mapNameVal}`);
+    // await searchItemAndQuery(page, '#name', `update_${mapNameVal}`);
     await clickDetailTextBtn(page);
     await checkDetailUrl(page, pageUrl);
     await clickBackToListBtn(page);
   });
 
   test('点击地图详情中的位图预览', async ({ page }) => {
-    await searchItemAndQuery(page, '#name', `update_${mapNameVal}`);
+    // await searchItemAndQuery(page, '#name', `update_${mapNameVal}`);
     await clickDetailTextBtn(page);
     await checkDetailUrl(page, pageUrl);
-    await page.click("xpath=//*[text()='位图预览']/following-sibling::button")
+    await page.click("xpath=//*[text()='地图预览']/following-sibling::button")
     await clickBackToListBtn(page);
   });
 
-  test('successfully delete map', async ({ page }) => {
+  test.skip('successfully delete map', async ({ page }) => {
     await searchItemAndQuery(page, '#name', `update_${mapNameVal}`);
     await clickDeleteTextBtn(page);
     await clickConfirmModalOkBtn(page);

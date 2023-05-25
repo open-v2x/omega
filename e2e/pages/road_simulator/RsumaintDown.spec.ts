@@ -6,7 +6,7 @@ import { searchItemAndQuery, clickDownTextBtn } from '../../utils/table';
 test.describe('下发运维配置至 RSU 设备', () => {
   const topic = 'V2X/RSU/R328328/MNG/DOWN';
   const pageUrl = '/maintenance/maintenance';
-  const M_NameVal = 'RSU01';
+  const M_NameVal = 'demoRsu';
 
   // Use signed-in state of 'userStorageState.json'.
   useUserStorageState();

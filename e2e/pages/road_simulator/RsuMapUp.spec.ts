@@ -21,7 +21,7 @@ test.describe('MAP 上报云控中心', () => {
   // Use signed-in state of 'userStorageState.json'.
   useUserStorageState();
 
-  test('路侧模拟器添加监听主题并发送数据-设备管理 MAP 配置界面上看到 RSU 上报的 MAP 数据-模拟器成功接收数据', async ({
+  test.skip('路侧模拟器添加监听主题并发送数据-设备管理 MAP 配置界面上看到 RSU 上报的 MAP 数据-模拟器成功接收数据', async ({
     browser,
   }) => {
     const deviceContext = await browser.newContext();

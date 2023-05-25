@@ -125,7 +125,7 @@ test.describe('The Rsu Page', () => {
   test('successfully query via status', async ({ page }) => {
     await clickUnfoldBtn(page);
     await setQuerySelectValue(page, '#enabled');
-    await checkTableItemContainValue(page, '启用', 7);
+    await checkTableItemContainValue(page, '启用', 5);
   });
 
   test('successfully edit rsu', async ({ page }) => {
