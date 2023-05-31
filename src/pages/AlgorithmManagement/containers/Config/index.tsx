@@ -41,7 +41,7 @@ const AlgorithmConfig: FC = () => {
       search: false,
     },
     {
-      title: t('Device Status'),
+      title: t('Status'),
       dataIndex: 'enable',
       key: 'enable',
       editable: true,

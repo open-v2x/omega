@@ -5,10 +5,10 @@ import React from 'react';
 
 const FormItem: React.FC<{ items: FormGroupType[] }> = ({ items }) => (
   <>
-    {items.map(({ key, title, children, components, hidden }, index) =>
+    {items.map(({ key, title, children, components, hidden, groupProps }, index) =>
       hidden ? null : (
-        <ProForm.Group key={`${key}_${index}`} title={title}>
-          {children?.map(({ components: comp, hidden: hid, footer, ...item }) =>
+        <ProForm.Group key={`${key}_${index}`} title={title} {...groupProps}>
+          {children?.map(({ components: comp, hidden: hid, ...item }) =>
             hid ? null : (
               <div className={`antd-form-item-${item.name}`} key={item.name}>
                 {comp || <FormField items={[item]} key={key} />}

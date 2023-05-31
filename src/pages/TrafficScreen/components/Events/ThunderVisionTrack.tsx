@@ -17,7 +17,9 @@ const ThunderVisionTrack: React.FC<{ box: any; label: number }> = ({ box, label 
   image.src = imageMap[label - 1];
   const imageWidth = 20;
 
-  const imageRotation = angle * (180 / Math.PI);
+  const imageRotation = angle * 57.29578 + (angle > 0 ? -90 : 0);
+
+  // angle * (180 / Math.PI);
 
   return (
     <Group x={x} y={y} offset={{ x, y }} rotation={imageRotation}>

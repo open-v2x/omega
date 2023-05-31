@@ -582,5 +582,6 @@
   "No data": "无数据",
   "Please enter a {{type}} url": "请输入{{ type }}网络地址",
   "intersection_id": "序列号id",
-  "phase_id": "相位id"
+  "phase_id": "相位id",
+  "Status": "状态"
 }
