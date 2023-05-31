@@ -205,7 +205,6 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
           required: true,
           name: 'name',
           label: t('Configuration Name'),
-          fieldProps: { maxLength: 64 },
           rules: [{ required: true, message: t('Please enter a configuration name') }],
         },
       ],
@@ -222,6 +221,11 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
     },
     {
       key: 'device',
+      groupProps: {
+        spaceProps: {
+          className: styles['device-container'],
+        },
+      },
       components: (
         <ParameterDeviceList
           dataSource={deviceList}
@@ -256,7 +260,7 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
       className={styles.template}
       title={editId ? t('Edit configuration') : t('Add configuration')}
       createTrigger={t('Add configuration')}
-      width={1200}
+      width={1100}
       layout="horizontal"
       omitNil={false}
       modalProps={{ className: 'overflow' }}
@@ -311,14 +315,14 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
         return { name, ...values };
       }}
     >
-      <ResizeObserver
+      {/* <ResizeObserver
         key="resize-observer"
         onResize={offset => {
           setResponsive(offset.width < 800);
         }}
-      >
-        <FormItem items={formItems} />
-      </ResizeObserver>
+      > */}
+      <FormItem items={formItems} />
+      {/* </ResizeObserver> */}
     </Modal>
   );
 };

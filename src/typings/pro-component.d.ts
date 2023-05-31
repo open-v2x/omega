@@ -7,6 +7,7 @@ export declare type ProColumns<T = any, ValueType = 'text'> = Omit<
 };
 
 import type { FieldType } from './FormField';
+import type { GroupProps } from '@ant-design/pro-form/es/typing.d.ts';
 
 type FormItemType = {
   type?: FieldType;
@@ -43,6 +44,7 @@ type FormGroupType = {
   children?: FormItemType[];
   components?: React.ReactNode | React.ReactNode[];
   hidden?: boolean;
+  groupProps?: GroupProps;
 };
 
 type CreateModalProps = {

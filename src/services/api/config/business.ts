@@ -25,5 +25,5 @@ export async function updateParameterConfig(id: number, data: any) {
 
 // 删除 RSU 参数配置
 export async function deleteParameterConfig(id: number) {
-  return apiService.delete(`/v1/rsu_configs/${id}`);
+  return apiService.delete(`v1/rsu_configs/${id}`);
 }
