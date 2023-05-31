@@ -315,14 +315,14 @@ const CreateRSUConfigModal: React.FC<CreateModalProps> = ({ editId, success }) =
         return { name, ...values };
       }}
     >
-      {/* <ResizeObserver
+      <ResizeObserver
         key="resize-observer"
         onResize={offset => {
           setResponsive(offset.width < 800);
         }}
-      > */}
-      <FormItem items={formItems} />
-      {/* </ResizeObserver> */}
+      >
+        <FormItem items={formItems} />
+      </ResizeObserver>
     </Modal>
   );
 };
