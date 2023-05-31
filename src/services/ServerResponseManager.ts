@@ -86,7 +86,9 @@ class ServerResponseFailedManager {
   }
 
   handleCodeIs1062(detail: any) {
-    const values = Object.values(detail).map(k => t(k.toString()));
+    const values = Object.values(detail).map(k =>
+      k.toString().startsWith('http') ? k.toString() : t(k.toString()),
+    );
     console.log(values);
     message.error(t(`error.1062`, { msg: values.join(t('OR')) }));
   }
