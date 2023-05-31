@@ -30,7 +30,7 @@ const AlgorithmVersion: FC = () => {
     },
     {
       title: t('Algorithum Service Url'),
-      dataIndex: 'endpointUrl',
+      dataIndex: 'endpoint_url',
     },
     {
       title: t('Operate'),
