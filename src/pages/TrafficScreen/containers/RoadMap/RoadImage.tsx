@@ -12,7 +12,7 @@ import CongestionWarning from '#/pages/TrafficScreen/components/Events/Congestio
 import OverSpeedWarning from '#/pages/TrafficScreen/components/Events/OverSpeedWarning';
 import SlowerSpeedWarning from '#/pages/TrafficScreen/components/Events/SlowerSpeedWarning';
 import { useRootStore } from '#/store/root';
-import ThunderVisionTrack from '#/pages/TrafficScreen/components/Events/ThunderVisionTrack';
+// import ThunderVisionTrack from '#/pages/TrafficScreen/components/Events/ThunderVisionTrack';
 
 const RoadImage: React.FC<{ username: string; password: string }> = ({ username, password }) => {
   const nodeId = useRootStore().getNodeId();
@@ -65,12 +65,10 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
     setSSWData([]);
   }, 500);
 
-  const [ThunderVisionData, setThunderVisionData] = useState<any>();
-  const clearThunderVisionData = debounce(() => {
-    setThunderVisionData(undefined);
-  }, 500);
-
-  console.log('ThunderVision', ThunderVisionData);
+  // const [ThunderVisionData, setThunderVisionData] = useState<any>();
+  // const clearThunderVisionData = debounce(() => {
+  //   setThunderVisionData(undefined);
+  // }, 500);
 
   const MQTT_TOPIC = {
     // 参与者
@@ -92,7 +90,7 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
     // 慢行
     SSW: `V2X/DEVICE/APPLICATION/SSW/NODE${nodeId}`,
     // 雷视一体机数据
-    LIDAR: `V2X/DEVICE/LIDAR/PARTICIPANT`,
+    // LIDAR: `V2X/DEVICE/LIDAR/PARTICIPANT`,
   };
 
   const subscribeMQTT = (mqtt, mqttTopic, setData, clearData) => {
@@ -152,8 +150,8 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
     subscribeMQTT(mqtt, MQTT_TOPIC.SSW, setSSWData, clearSSWData);
 
     // 订阅主题-雷视一体机
-    subscribeMQTT(mqtt, MQTT_TOPIC.LIDAR, setThunderVisionData, clearThunderVisionData);
-    return () => mqtt.disconnect();
+    // subscribeMQTT(mqtt, MQTT_TOPIC.LIDAR, setThunderVisionData, clearThunderVisionData);
+    // return () => mqtt.disconnect();
   }, []);
 
   return (
@@ -195,10 +193,10 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
         {SSWData.map(({ ego, ego_current_point }) => (
           <SlowerSpeedWarning key={ego} point={ego_current_point} />
         ))}
-        {ThunderVisionData &&
+        {/* {ThunderVisionData &&
           ThunderVisionData.bboxes.map((box, index) => (
             <ThunderVisionTrack box={box} label={ThunderVisionData.labels[index]} />
-          ))}
+          ))} */}
       </Layer>
     </Stage>
   );
