@@ -17,12 +17,14 @@ const ThunderVisionTrack: React.FC<{ box: any; label: number }> = ({ box, label 
   image.src = imageMap[label - 1];
   const imageWidth = 20;
 
-  // const imageRotation = angle * 57.29578 + (angle > 0 ? -90 : 0);
+  const imageRotation = angle * 57.3;
 
-  // angle * (180 / Math.PI);
+  const rotation = imageRotation > 0 ? imageRotation % 360 : imageRotation + 360;
+
+  console.log('转化后的角度', rotation);
 
   return (
-    <Group x={x} y={y} offset={{ x, y }} rotation={angle}>
+    <Group x={x} y={y} offset={{ x, y }} rotation={rotation + 90}>
       <KonvaImage
         image={image}
         x={x - imageWidth}

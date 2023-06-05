@@ -66,6 +66,7 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
   }, 500);
 
   const [ThunderVisionData, setThunderVisionData] = useState<any>();
+
   const clearThunderVisionData = debounce(() => {
     setThunderVisionData(undefined);
   }, 500);
