@@ -9,22 +9,32 @@ const ThunderVisionTrack: React.FC<{ box: any; label: number }> = ({ box, label 
   const y = box[1];
   const angle = box[2];
 
-  console.log('展示', angle, x, y, label);
+  // console.log('展示', x, y, angle, label);
 
-  const imageMap = [imgMotor, imgPedestrian, imgPedestrian, imgNonMotor];
+  const imageMap = [
+    imgMotor,
+    imgPedestrian,
+    imgPedestrian,
+    imgNonMotor,
+    imgMotor,
+    imgMotor,
+    imgMotor,
+    imgMotor,
+  ];
 
   const image = new Image();
   image.src = imageMap[label - 1];
   const imageWidth = 20;
 
-  const imageRotation = angle * 57.3;
+  const initRotation = 90;
+  const rotationAngle = angle * 57.3;
 
-  const rotation = imageRotation > 0 ? imageRotation % 360 : imageRotation + 360;
+  const imageRotation = label === 1 ? initRotation - rotationAngle : 0;
 
-  console.log('转化后的角度', rotation);
+  // console.log('转化后的角度', imageRotation);
 
   return (
-    <Group x={x} y={y} offset={{ x, y }} rotation={rotation + 90}>
+    <Group x={x} y={y} offset={{ x, y }} rotation={imageRotation}>
       <KonvaImage
         image={image}
         x={x - imageWidth}
