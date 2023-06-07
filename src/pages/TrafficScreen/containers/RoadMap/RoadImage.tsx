@@ -66,11 +66,23 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
   }, 500);
 
   const [ThunderVisionData, setThunderVisionData] = useState<any>();
+  // {
+  // bboxes: [
+  //   // [723.6987495422363, 712.0454104741415, 0.019433915615081787],
+  //   [1083.7700271606445, 307.42993672688806, 1.3489878177642822],
+  //   // [926.8586540222168, 306.4095528920492, -1.6318910121917725],
+  //   // [430.9208297729492, 41.30716641743978, 2.911046028137207],
+  //   // [1268.639793395996, 351.5715630849203, 1.8725433349609375],
+  //   // [258.7912940979004, 139.47668393452963, -0.7186400294303894],
+  // ],
+  // labels: [1, 1, 1, 1, 1, 1],
+  // }
+
   const clearThunderVisionData = debounce(() => {
     setThunderVisionData(undefined);
   }, 500);
 
-  console.log('ThunderVision', ThunderVisionData);
+  // console.log('ThunderVision', ThunderVisionData);
 
   const MQTT_TOPIC = {
     // 参与者
@@ -99,7 +111,7 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
     mqtt.subscribe(mqttTopic, 0);
     const messageCallback = (topic: string, payload: unknown) => {
       const data = JSON.parse(payload as string);
-      console.log(`mqtt_message ${topic}:`, data);
+      // console.log(`mqtt_message ${topic}:`, data);
       setData(data || []);
       clearData();
     };
