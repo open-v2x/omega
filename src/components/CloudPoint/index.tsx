@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import './index.module.less';
 import React from 'react';
 import { OrbitControls } from './OrbitControls';
-
+import pako from 'pako';
 export interface CloudPointProps {
   width: number;
   height: number;
@@ -40,13 +40,40 @@ const CloudPoint: React.FC<CloudPointProps> = (props: CloudPointProps) => {
   const cloud = new THREE.Points(geometry, materials);
   scene.add(cloud);
 
+  function decompressData(compressedData) {
+    const uint8Array = new Uint8Array(compressedData);
+    const decompressedData = pako.inflate(uint8Array, { to: 'string' });
+    return decompressedData;
+  }
+
+  function blobToUint8Array(blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        if (reader.readyState === FileReader.DONE) {
+          const uint8Array = new Uint8Array(reader.result);
+          resolve(uint8Array);
+        } else {
+          reject(new Error('Failed to read Blob as Uint8Array.'));
+        }
+      };
+
+      reader.onerror = () => {
+        reject(new Error('Failed to read Blob as Uint8Array.'));
+      };
+
+      reader.readAsArrayBuffer(blob);
+    });
+  }
+
   // 更新云点数据
   const updatePoint = useCallback(
-    (pointJson: string) => {
+    (points: number[]) => {
       const point = [];
-      const pointsArr = JSON.parse(pointJson);
-      for (let i = 0; i < pointsArr.length; i += 3) {
-        point.push(new THREE.Vector3(pointsArr[i], pointsArr[i + 1], pointsArr[i + 2]));
+
+      for (let i = 0; i < points.length; i += 3) {
+        point.push(new THREE.Vector3(points[i], points[i + 1], points[i + 2]));
       }
       geometry.setFromPoints(point);
     },
@@ -69,7 +96,15 @@ const CloudPoint: React.FC<CloudPointProps> = (props: CloudPointProps) => {
         }
       };
       ws.current.onmessage = e => {
-        updatePoint(e.data);
+        blobToUint8Array(e.data)
+          .then(compressedDataUint8Array => {
+            const decompressedData = decompressData(compressedDataUint8Array);
+            const points = JSON.parse(decompressedData);
+            updatePoint(points);
+          })
+          .catch(error => {
+            console.error(error);
+          });
       };
       ws.current.onclose = () => {
         clearInterval(timerRef.current);
