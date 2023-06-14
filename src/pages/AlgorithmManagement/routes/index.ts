@@ -24,6 +24,11 @@ const routes = [
         breadcrumbName: 'Algorithm Version',
         component: lazy(() => import('#/pages/AlgorithmManagement/containers/Version')),
       },
+      {
+        path: `${PATH}/service`,
+        breadcrumbName: 'Algorithm Service',
+        component: lazy(() => import('#/pages/AlgorithmManagement/containers/Service')),
+      },
     ],
   },
 ];

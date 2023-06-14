@@ -583,5 +583,16 @@
   "Please enter a {{type}} url": "请输入{{ type }}网络地址",
   "intersection_id": "序列号id",
   "phase_id": "相位id",
-  "Status": "状态"
+  "Status": "状态",
+  "Algorithm Service": "算法服务",
+  "Algorithm Service Type": "算法服务类型",
+  "Algorithm Service Urls": "算法服务网络地址",
+  "delete {{type}}": "确认删除该{{type}}么",
+  "Add {{value}}": "添加{{value}}",
+  "Create {{value}}": "创建{{value}}",
+  "{{value}} ID": "{{value}} ID",
+  "{{value}} Name": "{{value}}名称",
+  "Algorithm Service Support": "算法服务提供商",
+  "Algo Service Type Hint": "https://github.com/open-v2x/dandelion/blob/master/dandelion/constants.py 在该链接中，查看 DEFAULT_ALGO 变量 ,查看算法支持的service_type",
+  "Please enter {{value}}": "请输入{{value}}"
 }
