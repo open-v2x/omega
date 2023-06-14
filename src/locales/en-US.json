@@ -578,5 +578,12 @@
   "And": "And",
   "Please enter a {{type}} url": "Please enter a {{type}} url",
   "intersection_id": "intersection id",
-  "phase_id": "phase id"
+  "phase_id": "phase id",
+  "delete {{type}}": "Do you want delete this {{type}}",
+  "Add {{value}}": "Add {{value}}",
+  "Create {{value}}": "Create {{value}}",
+  "{{value}} ID": "{{value}} ID",
+  "{{value}} Name": "{{value}} Name",
+  "Algo Service Type Hint": "https://github.com/open-v2x/dandelion/blob/master/dandelion/constants.py. Please check the DEFAULT_ALGO variable in the provided link to see the supported service_type for the algorithm.",
+  "Please enter {{value}}": "Please enter {{value}}"
 }

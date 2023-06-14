@@ -27,4 +27,22 @@ declare namespace Algorithm {
     enable: boolean;
     inUse: string;
   };
+
+  type ServiceType = {
+    id: number;
+    name: string;
+    description: string;
+  };
+
+  type ServiceItem = ServiceType & {
+    type_id: number;
+    vendor: string;
+  };
+
+  type ServiceEndpoint = {
+    id: number;
+    service_id: number;
+    enabled: boolean;
+    url: string;
+  };
 }
