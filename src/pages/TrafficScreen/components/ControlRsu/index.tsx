@@ -21,10 +21,10 @@ const ControlRsu: React.FC = () => {
           onChange={handleChangeRSU}
           onClear={handleChangeRSU}
           bordered={false}
-          defaultValue={currentRsu?.rsuId}
+          defaultValue={currentRsu?.id}
         >
           {rsus.map(rsu => (
-            <Select.Option key={rsu.rsuId} value={rsu.rsuId}>
+            <Select.Option key={rsu.id} value={rsu.id}>
               {rsu.rsuName}
             </Select.Option>
           ))}
