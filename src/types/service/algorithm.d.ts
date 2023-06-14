@@ -38,4 +38,11 @@ declare namespace Algorithm {
     type_id: number;
     vendor: string;
   };
+
+  type ServiceEndpoint = {
+    id: number;
+    service_id: number;
+    enabled: boolean;
+    url: string;
+  };
 }

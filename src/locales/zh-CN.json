@@ -586,7 +586,7 @@
   "Status": "状态",
   "Algorithm Service": "算法服务",
   "Algorithm Service Type": "算法服务类型",
-  "Algorithm Service Urls": "算法服务网络地址",
+  "Algorithm Service Endpoints": "算法服务网络地址",
   "delete {{type}}": "确认删除该{{type}}么",
   "Add {{value}}": "添加{{value}}",
   "Create {{value}}": "创建{{value}}",

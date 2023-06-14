@@ -9,7 +9,7 @@ import ServiceEndpoint from './components/ServiceEndpoint';
 const items = [
   { label: t('Algorithm Service Type'), key: '1', children: <ServiceType /> },
   { label: t('Algorithm Service'), key: '2', children: <ServiceList /> },
-  { label: t('Algorithm Service Urls'), key: '3', children: <ServiceEndpoint /> },
+  { label: t('Algorithm Service Endpoints'), key: '3', children: <ServiceEndpoint /> },
 ];
 
 const AlgorithmService: FC = () => (

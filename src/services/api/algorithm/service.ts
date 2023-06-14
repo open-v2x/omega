@@ -29,7 +29,28 @@ export async function fetchUpdateServiceList(id: number, data: Algorithm.Service
   return apiService.put(`v1/services/${id}`, data);
 }
 
+export async function fetchDeleteServiceEndpoint(id: number) {
+  return apiService.delete(`v1/endpoints/${id}`);
+}
+
+export async function fetchEndpointList(params: API.PageParams) {
+  return apiService.get('v1/endpoints', { params });
+}
+
+export async function fetchUpdateEndpoint(id: number, data: Algorithm.ServiceEndpoint) {
+  return apiService.put(`v1/endpoints/${id}`, data);
+}
+
+export async function fetchCreateEndpoint(data: Algorithm.ServiceEndpoint) {
+  return apiService.post('v1/endpoints', data);
+}
+
 export const getServiceTypes = async () => {
   const { data } = await fetchServiceTypes({ pageNum: 1, pageSize: -1 });
   return data.map(({ id, name }: Algorithm.ServiceType) => ({ label: name, value: id }));
+};
+
+export const getServiceListWithSelect = async () => {
+  const { data } = await fetchServiceList({ pageNum: 1, pageSize: -1 });
+  return data.map(({ id, name }: Algorithm.ServiceItem) => ({ label: name, value: id }));
 };
