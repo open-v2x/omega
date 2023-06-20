@@ -25,7 +25,6 @@ const CreateServiceList: FC<CreateModalProps> = ({ editId, editInfo, success }) 
                 value: t('{{value}} Name', { value: t('Algorithm Service') }),
               }),
             },
-            { pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_\-]+$/, message: t('RSU_NAME_VALIDATE_MSG') },
           ],
         },
         {
@@ -44,6 +43,9 @@ const CreateServiceList: FC<CreateModalProps> = ({ editId, editInfo, success }) 
           label: t('Algorithm Service Support'),
           fieldProps: { maxLength: 64 },
           tooltip: t('RSU_NAME_TIP'),
+          rules: [
+            { pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_\-]+$/, message: t('RSU_NAME_VALIDATE_MSG') },
+          ],
         },
       ],
     },
