@@ -22,7 +22,6 @@ const CreateServiceType: FC<CreateModalProps> = ({ success }) => {
                 value: t('{{value}} Name', { value: t('Algorithm Service Type') }),
               }),
             },
-            { pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_\-]+$/, message: t('RSU_NAME_VALIDATE_MSG') },
           ],
         },
       ],
