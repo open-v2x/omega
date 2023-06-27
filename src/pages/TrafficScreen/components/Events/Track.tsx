@@ -9,15 +9,19 @@ const Track: React.FC<{
   y: number;
   type: 'motor' | 'non-motor' | 'pedestrian';
   rotation: number;
-}> = ({ type, x, y, rotation }) => {
+  size: {
+    width: number;
+    height: number;
+  };
+}> = ({ type, x, y, rotation, size }) => {
   const imageMap = {
     motor: imgMotor,
     'non-motor': imgNonMotor,
     pedestrian: imgPedestrian,
   };
+  const { width, height } = size;
   const image = new Image();
   image.src = imageMap[type];
-  const imageWidth = 20;
 
   const imageRotation = type === 'motor' ? rotation * 0.0125 : 0;
 
@@ -25,10 +29,10 @@ const Track: React.FC<{
     <Group x={x} y={y} offset={{ x, y }} rotation={imageRotation}>
       <KonvaImage
         image={image}
-        x={x - imageWidth}
-        y={y - imageWidth}
-        width={imageWidth * 2}
-        height={imageWidth * 2}
+        x={x - width}
+        y={y - height}
+        width={width * 2}
+        height={height * 2}
       />
     </Group>
   );

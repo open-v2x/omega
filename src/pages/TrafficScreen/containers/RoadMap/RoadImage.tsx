@@ -66,23 +66,21 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
   }, 500);
 
   const [ThunderVisionData, setThunderVisionData] = useState<any>();
-  // {
-  // bboxes: [
-  //   // [723.6987495422363, 712.0454104741415, 0.019433915615081787],
-  //   [1083.7700271606445, 307.42993672688806, 1.3489878177642822],
-  //   // [926.8586540222168, 306.4095528920492, -1.6318910121917725],
-  //   // [430.9208297729492, 41.30716641743978, 2.911046028137207],
-  //   // [1268.639793395996, 351.5715630849203, 1.8725433349609375],
-  //   // [258.7912940979004, 139.47668393452963, -0.7186400294303894],
-  // ],
-  // labels: [1, 1, 1, 1, 1, 1],
-  // }
+
+  const [carSize, setCarSize] = useState<any>({
+    height: 20,
+    width: 20,
+  });
+  const resetCarSize = () => {
+    setCarSize({
+      height: 20,
+      width: 20,
+    });
+  };
 
   const clearThunderVisionData = debounce(() => {
     setThunderVisionData(undefined);
   }, 500);
-
-  // console.log('ThunderVision', ThunderVisionData);
 
   const MQTT_TOPIC = {
     // 参与者
@@ -105,6 +103,7 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
     SSW: `V2X/DEVICE/APPLICATION/SSW/NODE${nodeId}`,
     // 雷视一体机数据
     LIDAR: `V2X/DEVICE/LIDAR/PARTICIPANT`,
+    SIZE: `V2X/CAR/SIZE`,
   };
 
   const subscribeMQTT = (mqtt, mqttTopic, setData, clearData) => {
@@ -165,6 +164,9 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
 
     // 订阅主题-雷视一体机
     subscribeMQTT(mqtt, MQTT_TOPIC.LIDAR, setThunderVisionData, clearThunderVisionData);
+
+    // 订阅主题 修改小车大小
+    subscribeMQTT(mqtt, MQTT_TOPIC.SIZE, setCarSize, resetCarSize);
     return () => mqtt.disconnect();
   }, []);
 
@@ -188,7 +190,7 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
           <DataSharing key={`${type}${index}`} egoPoint={ego_point} points={other_cars} />
         ))}
         {trackData.map(({ ptcId, ptcType, x, y, heading }) => (
-          <Track key={ptcId} type={ptcType} x={x} y={y} rotation={heading} />
+          <Track key={ptcId} type={ptcType} x={x} y={y} rotation={heading} size={carSize} />
         ))}
         {RWData.map(({ ego, ego_current_point }) => (
           <RetrogradeWarning key={ego} point={ego_current_point} />
