@@ -71,12 +71,6 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
     height: 20,
     width: 20,
   });
-  const resetCarSize = () => {
-    setCarSize({
-      height: 20,
-      width: 20,
-    });
-  };
 
   const clearThunderVisionData = debounce(() => {
     setThunderVisionData(undefined);
@@ -110,7 +104,6 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
     mqtt.subscribe(mqttTopic, 0);
     const messageCallback = (topic: string, payload: unknown) => {
       const data = JSON.parse(payload as string);
-      // console.log(`mqtt_message ${topic}:`, data);
       setData(data || []);
       clearData();
     };
@@ -166,7 +159,7 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
     subscribeMQTT(mqtt, MQTT_TOPIC.LIDAR, setThunderVisionData, clearThunderVisionData);
 
     // 订阅主题 修改小车大小
-    subscribeMQTT(mqtt, MQTT_TOPIC.SIZE, setCarSize, resetCarSize);
+    subscribeMQTT(mqtt, MQTT_TOPIC.SIZE, setCarSize, () => {});
     return () => mqtt.disconnect();
   }, []);
 
