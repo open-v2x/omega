@@ -20,6 +20,8 @@ const Track: React.FC<{
     pedestrian: imgPedestrian,
   };
   const { width, height } = size;
+  const picWidth = type === 'motor' ? width : 20;
+  const picHeight = type === 'motor' ? height : 20;
   const image = new Image();
   image.src = imageMap[type];
 
@@ -29,10 +31,10 @@ const Track: React.FC<{
     <Group x={x} y={y} offset={{ x, y }} rotation={imageRotation}>
       <KonvaImage
         image={image}
-        x={x - width}
-        y={y - height}
-        width={width * 2}
-        height={height * 2}
+        x={x - picWidth}
+        y={y - picHeight}
+        width={picWidth * 2}
+        height={picHeight * 2}
       />
     </Group>
   );
