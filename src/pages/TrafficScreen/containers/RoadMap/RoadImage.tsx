@@ -128,6 +128,8 @@ const RoadImage: React.FC<{ username: string; password: string }> = ({ username,
       clean: true,
     });
 
+    mqtt.publish('V2X/GET/CAR/SIZE', 'connect', 0);
+
     // 订阅主题-参与者信息
     subscribeMQTT(mqtt, MQTT_TOPIC.PARTICIPANT, setTrackData, clearTrackData);
 
