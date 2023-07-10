@@ -123,7 +123,13 @@ const CreateAlgoVersionModal: React.FC<CreateModalProps> = ({
   const getData = useCallback(async () => {
     getModule();
     const endpointResult = await getEndpoints();
-    setEndpoints(endpointResult?.data || []);
+    const results = endpointResult?.data;
+    if (results) {
+      const result = endpoints.filter(item => item?.enabled);
+      setEndpoints(result);
+    } else {
+      setEndpoints([]);
+    }
   }, []);
 
   useEffect(() => {
