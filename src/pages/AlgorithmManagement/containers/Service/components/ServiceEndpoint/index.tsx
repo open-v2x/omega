@@ -45,7 +45,7 @@ const ServiceEndpoint: FC = () => {
       search: true,
     },
     {
-      title: t('Enabled'),
+      title: t('Status'),
       dataIndex: 'enabled',
       valueType: 'select',
       valueEnum: statusOptionFormat(DeviceStatusOptions),

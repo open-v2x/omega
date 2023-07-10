@@ -20,8 +20,16 @@ const CreateServiceEndpoint: FC<CreateModalProps> = ({ editId, editInfo, success
           required: true,
           name: 'service_id',
           label: t('{{value}} Name', { value: t('Algorithm Service') }),
-          tooltip: t('Algo Service Type Hint'),
           request: getServiceListWithSelect,
+          rules: [
+            {
+              required: true,
+              message: t('Please enter {{value}}', {
+                value: t('{{value}} Name', { value: t('Algorithm Service') }),
+              }),
+            },
+          ],
+          disabled: !!editId,
         },
       ],
     },
@@ -29,9 +37,10 @@ const CreateServiceEndpoint: FC<CreateModalProps> = ({ editId, editInfo, success
       key: 'enabled',
       children: [
         {
+          required: true,
           type: 'select',
           name: 'enabled',
-          label: t('Enabled'),
+          label: t('Status'),
           options: [
             {
               label: t('Enabled'),
@@ -42,6 +51,14 @@ const CreateServiceEndpoint: FC<CreateModalProps> = ({ editId, editInfo, success
               value: false,
             },
           ],
+          rules: [
+            {
+              required: true,
+              message: t('Please select {{value}}', {
+                value: t('Status'),
+              }),
+            },
+          ],
         },
       ],
     },
@@ -49,9 +66,18 @@ const CreateServiceEndpoint: FC<CreateModalProps> = ({ editId, editInfo, success
       key: 'endpoint',
       children: [
         {
+          required: true,
           name: 'url',
           label: TITLE,
           fieldProps: { maxLength: 100 },
+          rules: [
+            {
+              required: true,
+              message: t('Please enter {{value}}', {
+                value: TITLE,
+              }),
+            },
+          ],
         },
       ],
     },

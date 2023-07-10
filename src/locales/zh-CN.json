@@ -590,9 +590,11 @@
   "delete {{type}}": "确认删除该{{type}}么",
   "Add {{value}}": "添加{{value}}",
   "Create {{value}}": "创建{{value}}",
+  "Edit {{value}}": "编辑{{value}}",
   "{{value}} ID": "{{value}} ID",
   "{{value}} Name": "{{value}}名称",
   "Algorithm Service Support": "算法服务提供商",
   "Algo Service Type Hint": "https://github.com/open-v2x/dandelion/blob/master/dandelion/constants.py 在该链接中，查看 DEFAULT_ALGO 变量 ,查看算法支持的service_type",
-  "Please enter {{value}}": "请输入{{value}}"
+  "Please enter {{value}}": "请输入{{value}}",
+  "Please select {{value}}": "请选择{{value}}"
 }

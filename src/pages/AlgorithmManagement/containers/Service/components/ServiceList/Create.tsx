@@ -28,10 +28,19 @@ const CreateServiceList: FC<CreateModalProps> = ({ editId, editInfo, success }) 
           ],
         },
         {
+          required: true,
           type: 'select',
           name: 'type_id',
           label: t('{{value}} Name', { value: t('Algorithm Service Type') }),
           request: getServiceTypes,
+          rules: [
+            {
+              required: true,
+              message: t('Please enter {{value}}', {
+                value: t('{{value}} Name', { value: t('Algorithm Service Type') }),
+              }),
+            },
+          ],
         },
       ],
     },
